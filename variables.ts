@@ -3,6 +3,8 @@ export const Colors = {
     blackSec: '#2A2B3B',
 
     textWhite: '#FFFFFF',
+    textGrey: '#8688A7',
+    textGreyBlack: '#68697C',
     textBlack: '#131313',
 
     whitePri: '#ECECF0',

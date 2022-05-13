@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Link from 'next/link';
 import styled from 'styled-components';
 import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
+import { useRouter } from 'next/router';
 
 import { Colors } from '../../variables';
 
@@ -29,7 +30,6 @@ const NavigationList = styled.ul`
             transition: all 0.2s ease-in-out;
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            padding-right: 2rem;
             display: flex;
             align-items: center;
             
@@ -39,10 +39,6 @@ const NavigationList = styled.ul`
                 font-weight: 500;
                 margin-left: 1rem;
             }
-
-            &:hover {
-                background: ${Colors.primaryDark};
-            }
         }
 
         &:last-of-type {
@@ -51,34 +47,48 @@ const NavigationList = styled.ul`
     }
 `
 
+interface LinkTextProps {
+    pathName: string;
+}
+
+const LinkText = styled.a<LinkTextProps>`
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primaryDark : 'transparent'};
+
+    &:hover {
+        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primaryDark : Colors.blackSec};
+    }
+`
+
 const Navigation: NextPage = () => {
+    const router = useRouter();
+
     return (
         <Container>
             <NavigationList>
                 <li>
-                    <Link href={"/"}>
-                        <a>
+                    <Link href={"/"} passHref>
+                        <LinkText pathName={router.pathname}>
                             <FiHome fontSize={18} strokeWidth={2.5}/>
                             <span>Dashboard</span>
-                        </a>
+                        </LinkText>
                     </Link>
                 </li>
 
                 <li>
-                    <Link href={"/statistics"}>
-                        <a>
+                    <Link href={"/statistics"} passHref>
+                        <LinkText pathName={router.pathname}>
                             <FiBarChart2 fontSize={20} strokeWidth={3}/>
                             <span>Statistieken</span>
-                        </a>
+                        </LinkText>
                     </Link>
                 </li>
 
                 <li>
-                    <Link href={"/categories"}>
-                        <a>
+                    <Link href={"/categories"} passHref>
+                        <LinkText pathName={router.pathname}>
                             <FiGrid fontSize={20} strokeWidth={2.25}/>
                             <span>Categorieën</span>
-                        </a>
+                        </LinkText>
                     </Link>
                 </li>
             </NavigationList>

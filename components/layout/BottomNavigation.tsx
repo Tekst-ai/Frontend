@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import { Colors } from '../../variables'
+import { useRouter } from 'next/router'
 
 const Container = styled.div`
     margin-top: auto;
@@ -32,10 +33,10 @@ const NavigationContainer = styled.div`
         }
 
         &:hover {
-            color: ${Colors.primary};
+            color: ${Colors.textWhite};
 
             svg {
-                stroke: ${Colors.primary};
+                stroke: ${Colors.textWhite};
             }
         }
 
@@ -49,6 +50,14 @@ const NavigationContainer = styled.div`
             }
         }
     }
+`
+
+interface LinkTextProps {
+    pathName: string;
+}
+
+const LinkText = styled.a<LinkTextProps>`
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primary : Colors.textGreyBlack};
 `
 
 const Collapse = styled.button`
@@ -79,24 +88,25 @@ const Collapse = styled.button`
 `
 
 const BottomNavigation: NextPage = () => {
+    const router = useRouter()
+
     return (
         <Container>
             <NavigationContainer>
-                <Link href={"/login"}>
-                    <a>
+                <Link href={"/login"} passHref>
+                    <LinkText pathName={router.pathname}>
                         <IoPowerOutline fontSize={18}/>
                         
                         <span>Afmelden</span>
-
-                    </a>
+                    </LinkText>
                 </Link>
 
-                <Link href={"/configuration"}>
-                    <a>
+                <Link href={"/configuration"} passHref>
+                    <LinkText pathName={router.pathname}>
                         <IoSettingsOutline fontSize={18}/>
                         
                         <span>Configuratie</span>
-                    </a>
+                    </LinkText>
                 </Link>
             </NavigationContainer>
 

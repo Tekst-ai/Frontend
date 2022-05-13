@@ -5,6 +5,7 @@ import { FiHelpCircle } from 'react-icons/fi'
 import { IoChevronDownOutline } from 'react-icons/io5'
 
 import { Colors } from '../../variables';
+import { useRouter } from 'next/router';
 
 const Container = styled.div`
     padding: 0 1rem;
@@ -35,17 +36,27 @@ const Container = styled.div`
     }
 `
 
+interface LinkTextProps {
+    pathName: string;
+}
+
+const LinkText = styled.a<LinkTextProps>`
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primary : Colors.textWhite};
+`
+
 const HelpNavigation: NextPage = () => {
+    const router = useRouter()
+
     return (
         <Container>
-            <Link href={"/help-center"}>
-                <a>
+            <Link href={"/help-center"} passHref>
+                <LinkText pathName={router.pathname}>
                     <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
                     <span>Helpcentrum</span>
 
                     <IoChevronDownOutline fontSize={16}/>
-                </a>
+                </LinkText>
             </Link>
         </Container>
     )
