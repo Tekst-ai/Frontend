@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import useStore from '../../store'
@@ -11,43 +12,53 @@ import HelpNavigation from './HelpNavigation'
 
 import Navigation from './Navigation'
 
-const Container = styled.div`
+interface ContainerProps {
+    isOpen: boolean
+}
+
+const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
-    width: 25rem;
+    width: ${(ContainerProps) => ContainerProps.isOpen ? "25rem" : "5rem"};
     display: flex;
     flex-direction: column;
 `
 
-const ImageContainer = styled.a`
-    padding: 0 1rem;
+interface ImageContainerProps {
+    isOpen: boolean
+}
+
+const ImageContainer = styled.a<ImageContainerProps>`
+    padding: ${(ImageContainerProps) => ImageContainerProps.isOpen ? "1rem" : "0 0.5rem"};
 `
 
 interface ProfileContainerProps {
     pathName: string;
+    isOpen: boolean
 }
 
 const ProfileContainer = styled.a<ProfileContainerProps>`
-    padding: 0.5rem 1rem;
+    padding: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0.5rem 1rem" : "0" };
     margin-top: 1.5rem;
     display: flex;
+    justify-content: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "flex-start" : "center" };;
     margin-bottom: 1.125rem;
     transition: all 0.2s ease-in-out;
     border-radius: 6px;
-    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href ? Colors.primaryDark : 'transparent'};
+    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? Colors.primaryDark : 'transparent'};
 
     &:hover {
-        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href ? Colors.primaryDark : Colors.blackSec};
+        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? Colors.primaryDark : ProfileContainerProps.isOpen ? Colors.blackSec : Colors.blackPri};
     }
 
     div:first-of-type {
-        width: 3.125rem;
-        height: 3.125rem;
+        width: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
+        height: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
         border-radius: 8px;
         overflow: hidden;
     }
 
     div:last-of-type {
-        margin-left: 1.25rem;
+        margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "1.25rem" : "0" };
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -63,37 +74,42 @@ const Menu: NextPage = () => {
     const theme = useStore((s: any) => s.theme);
     const router = useRouter();
     
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
-        <Container>
+        <Container isOpen={isOpen}>
             <Link href={"/"} passHref>
-                <ImageContainer>
+                <ImageContainer isOpen={isOpen}>
                     <Image
-                        src={theme === "dark" ? "/static/images/logo-white.png" : "/static/images/logo-black.png"} 
-                        width={75}
+                        src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
+                        width={isOpen ? 75 : 31}
                         height={41}
                         alt="Logo of Tekst.ai"/>
                 </ImageContainer>
             </Link>
 
             <Link href={"/account"} passHref>
-                <ProfileContainer pathName={router.pathname}>
+                <ProfileContainer pathName={router.pathname} isOpen={isOpen}>
                     <div>
-                        <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                        <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} objectFit={'cover'} />
                     </div>
 
-                    <div>
-                        <p>Janine jacobs</p>
+                    { isOpen ? 
+                        <div>
+                            <p>Janine jacobs</p>
 
-                        <p>Vals Bedrijf</p>
-                    </div>
+                            <p>Vals Bedrijf</p>
+                        </div>:
+                        ""
+                    }
                 </ProfileContainer>
             </Link>
 
-            <Navigation/>
+            <Navigation isOpen={isOpen}/>
 
-            <HelpNavigation/>
+            <HelpNavigation isOpen={isOpen}/>
 
-            <BottomNavigation/>
+            <BottomNavigation isOpen={isOpen}/>
         </Container>
     )
 }

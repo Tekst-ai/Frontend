@@ -6,6 +6,10 @@ import { useRouter } from 'next/router';
 
 import { Colors } from '../../variables';
 
+interface NavigationProps {
+    isOpen: boolean
+}
+
 const Container = styled.nav`
     display: flex;
     flex-direction: column;
@@ -20,17 +24,23 @@ const Container = styled.nav`
     }
 `
 
-const NavigationList = styled.ul`
+interface NavigationListProps {
+    isOpen: boolean
+}
+
+const NavigationList = styled.ul<NavigationListProps>`
     li {
         margin-bottom: 0.375rem;
         display: flex;
         
         a {
             width: 100%;
+            height: auto;
             transition: all 0.2s ease-in-out;
-            padding: 0.5rem 1rem;
+            padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.75rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
+            justify-content: ${(NavigationListProps) => NavigationListProps.isOpen ? "flex-start" : "center"};;
             align-items: center;
             
             span {
@@ -59,17 +69,17 @@ const LinkText = styled.a<LinkTextProps>`
     }
 `
 
-const Navigation: NextPage = () => {
+const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
     const router = useRouter();
 
     return (
         <Container>
-            <NavigationList>
+            <NavigationList isOpen={isOpen}>
                 <li>
                     <Link href={"/"} passHref>
                         <LinkText pathName={router.pathname}>
                             <FiHome fontSize={18} strokeWidth={2.5}/>
-                            <span>Dashboard</span>
+                            { isOpen ? <span>Dashboard</span> : ""}
                         </LinkText>
                     </Link>
                 </li>
@@ -78,7 +88,7 @@ const Navigation: NextPage = () => {
                     <Link href={"/statistics"} passHref>
                         <LinkText pathName={router.pathname}>
                             <FiBarChart2 fontSize={20} strokeWidth={3}/>
-                            <span>Statistieken</span>
+                            { isOpen ? <span>Statistieken</span> : ""}
                         </LinkText>
                     </Link>
                 </li>
@@ -87,7 +97,7 @@ const Navigation: NextPage = () => {
                     <Link href={"/categories"} passHref>
                         <LinkText pathName={router.pathname}>
                             <FiGrid fontSize={20} strokeWidth={2.25}/>
-                            <span>Categorieën</span>
+                            { isOpen ? <span>Categorieën</span> : ""}
                         </LinkText>
                     </Link>
                 </li>

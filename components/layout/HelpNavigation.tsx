@@ -7,6 +7,10 @@ import { IoChevronDownOutline } from 'react-icons/io5'
 import { Colors } from '../../variables';
 import { useRouter } from 'next/router';
 
+interface HelpNavigationProps {
+    isOpen: boolean
+}
+
 const Container = styled.div`
     padding: 0 1rem;
     margin-top: 1.25rem;
@@ -44,7 +48,7 @@ const LinkText = styled.a<LinkTextProps>`
     color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primary : Colors.textWhite};
 `
 
-const HelpNavigation: NextPage = () => {
+const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const router = useRouter()
 
     return (
@@ -53,9 +57,14 @@ const HelpNavigation: NextPage = () => {
                 <LinkText pathName={router.pathname}>
                     <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
-                    <span>Helpcentrum</span>
+                    { isOpen ? 
+                        <>
+                            <span>Helpcentrum</span>
+                            <IoChevronDownOutline fontSize={16}/>
+                        </>:
+                        ""
+                    }
 
-                    <IoChevronDownOutline fontSize={16}/>
                 </LinkText>
             </Link>
         </Container>
