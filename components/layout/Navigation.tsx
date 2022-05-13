@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Link from 'next/link';
 import styled from 'styled-components';
+import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
+
 import { Colors } from '../../variables';
 
 const Container = styled.nav`
@@ -28,11 +30,14 @@ const NavigationList = styled.ul`
             padding: 0.5rem 1rem;
             border-radius: 6px;
             padding-right: 2rem;
+            display: flex;
+            align-items: center;
             
             span {
                 display: block;
                 font-size: 1.125rem;
                 font-weight: 500;
+                margin-left: 1rem;
             }
 
             &:hover {
@@ -53,6 +58,7 @@ const Navigation: NextPage = () => {
                 <li>
                     <Link href={"/"}>
                         <a>
+                            <FiHome fontSize={18} strokeWidth={2.5}/>
                             <span>Dashboard</span>
                         </a>
                     </Link>
@@ -61,6 +67,7 @@ const Navigation: NextPage = () => {
                 <li>
                     <Link href={"/statistics"}>
                         <a>
+                            <FiBarChart2 fontSize={20} strokeWidth={3}/>
                             <span>Statistieken</span>
                         </a>
                     </Link>
@@ -69,6 +76,7 @@ const Navigation: NextPage = () => {
                 <li>
                     <Link href={"/categories"}>
                         <a>
+                            <FiGrid fontSize={20} strokeWidth={2.25}/>
                             <span>Categorieën</span>
                         </a>
                     </Link>

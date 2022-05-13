@@ -1,10 +1,53 @@
 import type { NextPage } from 'next'
+import Link from 'next/link';
+import styled from 'styled-components';
+import { FiHelpCircle } from 'react-icons/fi'
+import { IoChevronDownOutline } from 'react-icons/io5'
+
+import { Colors } from '../../variables';
+
+const Container = styled.div`
+    padding: 0 1rem;
+    margin-top: 1.25rem;
+    
+    a {
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+
+        span {
+            margin-left: 1rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        svg:last-of-type {
+            margin-left: auto;
+
+            path {
+                stroke-width: 70px;
+            }
+        }
+
+        &:hover {
+            color: ${Colors.primary};
+        }
+    }
+`
 
 const HelpNavigation: NextPage = () => {
     return (
-        <div>
-            Help center
-        </div>
+        <Container>
+            <Link href={"/help-center"}>
+                <a>
+                    <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
+
+                    <span>Helpcentrum</span>
+
+                    <IoChevronDownOutline fontSize={16}/>
+                </a>
+            </Link>
+        </Container>
     )
 }
 
