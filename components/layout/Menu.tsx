@@ -8,13 +8,18 @@ import HelpNavigation from './HelpNavigation'
 import Navigation from './Navigation'
 
 const Container = styled.div`
-    padding: 2rem;
+    padding: 2rem 1rem;
     width: 25rem;
     display: flex;
     flex-direction: column;
 `
 
+const ImageContainer = styled.div`
+    padding: 0 1rem;
+`
+
 const ProfileContainer = styled.div`
+    padding: 0 1rem;
     margin-top: 2rem;
     display: flex;
     margin-bottom: 1.625rem;
@@ -44,13 +49,13 @@ const Menu: NextPage = () => {
     
     return (
         <Container>
-            <div>
+            <ImageContainer>
                 <Image
                     src={theme === "dark" ? "/static/images/logo-white.png" : "/static/images/logo-black.png"} 
                     width={75}
                     height={41}
                     alt="Logo of Tekst.ai"/>
-            </div>
+            </ImageContainer>
 
             <ProfileContainer>
                 <div>

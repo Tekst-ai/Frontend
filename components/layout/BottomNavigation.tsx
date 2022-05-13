@@ -8,6 +8,7 @@ const Container = styled.div`
     margin-top: auto;
     display: flex;
     justify-content: space-between;
+    padding: 0 1rem;
 `
 
 const NavigationContainer = styled.div`
@@ -43,7 +44,7 @@ const NavigationContainer = styled.div`
 
             svg {
                 path{
-                    stroke-width: 75px;
+                    stroke-width: 65px;
                 }
             }
         }
