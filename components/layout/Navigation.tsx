@@ -37,7 +37,7 @@ const NavigationList = styled.ul<NavigationListProps>`
             width: 100%;
             height: auto;
             transition: all 0.2s ease-in-out;
-            padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.75rem 1rem" : "0.75rem"};
+            padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.5rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
             justify-content: ${(NavigationListProps) => NavigationListProps.isOpen ? "flex-start" : "center"};;

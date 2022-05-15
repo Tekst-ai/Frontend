@@ -18,6 +18,7 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
+    padding-bottom: calc(2rem - 0.34375rem);
     width: ${(ContainerProps) => ContainerProps.isOpen ? "25rem" : "5rem"};
     display: flex;
     flex-direction: column;
@@ -28,7 +29,7 @@ interface ImageContainerProps {
 }
 
 const ImageContainer = styled.a<ImageContainerProps>`
-    padding: ${(ImageContainerProps) => ImageContainerProps.isOpen ? "1rem" : "0 0.5rem"};
+    padding: ${(ImageContainerProps) => ImageContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
 `
 
 interface ProfileContainerProps {
@@ -41,7 +42,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     margin-top: 1.5rem;
     display: flex;
     justify-content: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "flex-start" : "center" };;
-    margin-bottom: 1.125rem;
+    margin-bottom: 1.625rem;
     transition: all 0.2s ease-in-out;
     border-radius: 6px;
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? Colors.primaryDark : 'transparent'};

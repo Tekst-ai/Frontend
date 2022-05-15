@@ -31,6 +31,7 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         transition: all 0.2s ease-in-out;
         justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"};
         align-items: center;
+        margin-bottom: 1rem;
         
         svg {
             transition: all 0.2s ease-in-out;
@@ -55,13 +56,15 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         }
 
         &:first-of-type {
-            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "1rem" : "1.5rem" };
-
             svg {
                 path{
                     stroke-width: 65px;
                 }
             }
+        }
+
+        &:last-of-type {
+            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "calc(1rem - 0.34375rem)"};
         }
     }
 `
@@ -79,7 +82,7 @@ interface CollapseProps {
 }
 
 const Collapse = styled.button<CollapseProps>`
-    margin-top: ${(CollapseProps) => CollapseProps.isOpen ? "auto" : "calc(1.5rem - 0.34375rem)"};;
+    margin-top: auto;
     transition: all 0.2s ease-in-out;
     display: flex;
     padding: 0.34375rem 0;
@@ -97,11 +100,11 @@ const Collapse = styled.button<CollapseProps>`
         }
 
         &:first-of-type {
-            transform: translateX(5.5px);
+            transform: translateX(4.5px);
         }
 
         &:last-of-type {
-            transform: translateX(-5.5px);
+            transform: translateX(-4.5px);
         }
     }
 `
@@ -118,7 +121,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
             <NavigationContainer isOpen={isOpen}>
                 <Link href={"/login"} passHref>
                     <LinkText pathName={router.pathname}>
-                        <IoPowerOutline fontSize={isOpen ? 18 : 20}/>
+                        <IoPowerOutline fontSize={18}/>
 
                         { isOpen ? <span>Afmelden</span> : "" }
                     </LinkText>
@@ -126,7 +129,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
 
                 <Link href={"/configuration"} passHref>
                     <LinkText pathName={router.pathname}>
-                        <IoSettingsOutline fontSize={isOpen ? 18 : 20}/>
+                        <IoSettingsOutline fontSize={18}/>
                         
                         { isOpen ? <span>Configuratie</span> : "" }
                     </LinkText>
@@ -134,7 +137,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick}>
-                <IoChevronBackOutline fontSize={20} color={Colors.primary}/> <IoChevronBackOutline fontSize={20} color={Colors.primary}/>
+                <IoChevronBackOutline fontSize={16} color={Colors.primary}/> <IoChevronBackOutline fontSize={16} color={Colors.primary}/>
             </Collapse>
         </Container>
     )
