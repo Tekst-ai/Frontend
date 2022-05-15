@@ -75,7 +75,7 @@ const Menu: NextPage = () => {
     const theme = useStore((s: any) => s.theme);
     const router = useRouter();
     
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
 
     return (
         <Container isOpen={isOpen}>
