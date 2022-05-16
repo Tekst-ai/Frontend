@@ -1,6 +1,6 @@
 import { Colors } from './variables'
 
-interface Theme {
+export interface Theme {
     light: {
         name: string,
         background: string,
@@ -8,6 +8,12 @@ interface Theme {
         text: string,
     },
     dark: {
+        name: string,
+        background: string,
+        backgroundSec: string
+        text: string,
+    }
+    auto: {
         name: string,
         background: string,
         backgroundSec: string
@@ -24,6 +30,12 @@ const themes: Theme = {
     },
     dark: {
         name: 'dark',
+        background: Colors.blackPri,
+        backgroundSec: Colors.blackSec,
+        text: Colors.textWhite,
+    },
+    auto: {
+        name: 'auto',
         background: Colors.blackPri,
         backgroundSec: Colors.blackSec,
         text: Colors.textWhite,

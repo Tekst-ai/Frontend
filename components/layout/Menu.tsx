@@ -22,6 +22,7 @@ const Container = styled.div<ContainerProps>`
     width: ${(ContainerProps) => ContainerProps.isOpen ? "25rem" : "5rem"};
     display: flex;
     flex-direction: column;
+    transition: all 0.2s ease-in-out;
 `
 
 interface ImageContainerProps {

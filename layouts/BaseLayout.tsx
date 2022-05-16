@@ -1,7 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import useStore from '../store';
-import themes from '../ThemeConfig';
+import themes, { Theme } from '../ThemeConfig';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Menu } from '../components/layout';
 
@@ -30,6 +30,7 @@ const Main = styled.main<MainProps>`
     padding: 1.25rem;
     padding-left: 0;
     width: 100%;
+    transition: all 0.2s ease-in-out;
 `
 
 interface SubContainerProps {
@@ -42,14 +43,15 @@ const SubContainer = styled.div<SubContainerProps>`
     border-radius: 15px;
     width: 100%;
     height: calc(100vh - 2.5rem);
+    transition: all 0.2s ease-in-out;
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
-    const theme = useStore((s: any) => s.theme);
-      
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+
     return (
         <>
-            <GlobalStyle theme={theme === 'dark' ? themes.dark : themes.light } />
+            <GlobalStyle theme={themes[theme]} />
 
             <Container>
                 <Menu/>

@@ -5,6 +5,7 @@ import { FiCheck } from 'react-icons/fi'
 import { Colors } from '../../variables'
 import { accentColors } from '../../ThemeConfig'
 import { useAccent } from '../../store'
+import { ThemeSwitcher } from '../../components/configuration'
 
 const TitleContainer = styled.div`
     margin-bottom: 2.5rem;
@@ -20,6 +21,10 @@ const SubContainer = styled.div`
     
     h2 {
         margin-bottom: 1.5rem;
+    }
+
+    form {
+        display: flex;
     }
 `
 
@@ -51,7 +56,6 @@ const ColorListItemActive = styled(ColorListItem)`
 
 const Configuration: NextPage = () => {
     const accentColor: any = useAccent();
-    console.log(accentColor.theme);
 
     return (
         <div>
@@ -79,6 +83,14 @@ const Configuration: NextPage = () => {
 
             <SubContainer>
                 <h2>Thema</h2>
+                
+                <form>
+                    <ThemeSwitcher id="dark" value="donker"/>
+
+                    <ThemeSwitcher id="light" value="licht"/>
+
+                    <ThemeSwitcher id="auto" value="automatisch"/>
+                </form>
             </SubContainer>
         </div>
     )
