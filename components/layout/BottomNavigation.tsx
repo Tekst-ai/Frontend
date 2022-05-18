@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Colors } from '../../variables'
+import { useAccent } from '../../store'
+import { accentColors } from '../../ThemeConfig'
 
 interface BottomNavigationProps {
     isOpen: boolean
@@ -47,14 +49,6 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
             font-weight: 400;
         }
 
-        &:hover {
-            color: ${Colors.textWhite};
-
-            svg {
-                stroke: ${Colors.textWhite};
-            }
-        }
-
         &:first-of-type {
             svg {
                 path{
@@ -70,11 +64,16 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
 `
 
 interface LinkTextProps {
-    pathName: string;
+    pathName: string,
+    accent: any
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primary : Colors.textGrey};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.textGrey};
+    
+    &:hover {
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.textWhite};
+    }
 `
 
 interface CollapseProps {
@@ -111,6 +110,7 @@ const Collapse = styled.button<CollapseProps>`
 
 const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
     const router = useRouter()
+    const accent = useAccent((s: any) => s.accent)
 
     const handleClick = () => {
         console.log("Click")
@@ -120,7 +120,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
                 <Link href={"/login"} passHref>
-                    <LinkText pathName={router.pathname}>
+                    <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoPowerOutline fontSize={18}/>
 
                         { isOpen ? <span>Afmelden</span> : "" }
@@ -128,7 +128,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
                 </Link>
 
                 <Link href={"/configuration"} passHref>
-                    <LinkText pathName={router.pathname}>
+                    <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoSettingsOutline fontSize={18}/>
                         
                         { isOpen ? <span>Configuratie</span> : "" }
@@ -137,7 +137,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick}>
-                <IoChevronBackOutline fontSize={16} color={Colors.primary}/> <IoChevronBackOutline fontSize={16} color={Colors.primary}/>
+                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
+                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
             </Collapse>
         </Container>
     )

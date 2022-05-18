@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 export const useAccent = create(set => ({
-  theme: 'default',
+  accent: 'default',
   setAccent: (accent: any) => set({ accent }),
 }));
 

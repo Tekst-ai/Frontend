@@ -5,7 +5,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import useStore from '../../store'
+import useStore, { useAccent } from '../../store'
+import { accentColors } from '../../ThemeConfig'
 import { Colors } from '../../variables'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
@@ -34,8 +35,9 @@ const ImageContainer = styled.a<ImageContainerProps>`
 `
 
 interface ProfileContainerProps {
-    pathName: string;
-    isOpen: boolean
+    pathName: string,
+    isOpen: boolean,
+    accent: any
 }
 
 const ProfileContainer = styled.a<ProfileContainerProps>`
@@ -46,10 +48,11 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     margin-bottom: 1.625rem;
     transition: all 0.2s ease-in-out;
     border-radius: 6px;
-    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? Colors.primaryDark : 'transparent'};
+    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : 'transparent'};
+    color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.text : 'inherit'};
 
     &:hover {
-        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? Colors.primaryDark : ProfileContainerProps.isOpen ? Colors.blackSec : Colors.blackPri};
+        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ProfileContainerProps.isOpen ? Colors.blackSec : Colors.blackPri};
     }
 
     div:first-of-type {
@@ -74,6 +77,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
 
 const Menu: NextPage = () => {
     const theme = useStore((s: any) => s.theme);
+    const accent = useAccent((s: any) => s.accent);
     const router = useRouter();
     
     const [isOpen, setIsOpen] = useState(true)
@@ -91,7 +95,7 @@ const Menu: NextPage = () => {
             </Link>
 
             <Link href={"/account"} passHref>
-                <ProfileContainer pathName={router.pathname} isOpen={isOpen}>
+                <ProfileContainer pathName={router.pathname} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
                     <div>
                         <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={isOpen ? 50 : 40} height={isOpen ? 50 : 40} objectFit={'cover'} />
                     </div>

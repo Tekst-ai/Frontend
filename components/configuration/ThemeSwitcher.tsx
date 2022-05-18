@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
-import useStore from '../../store'
+import useStore, { useAccent } from '../../store'
+import { accentColors } from '../../ThemeConfig'
 import ThemeItem from './ThemeItem'
 
 interface ThemeSwitcherProps {
@@ -9,7 +10,11 @@ interface ThemeSwitcherProps {
     value: string
 }
 
-export const ThemeContainer = styled.label`
+interface ThemeContainerProps {
+    accent: any
+}
+
+const ThemeContainer = styled.label<ThemeContainerProps>`
     display: flex;
     flex-direction: column;
     margin-right: 1.5rem;
@@ -17,6 +22,12 @@ export const ThemeContainer = styled.label`
     
     input {
         appearance: none;
+
+        &:checked + div {
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 3px 12px ${({ accent }: any ) => accent + "99"};
+            border: 2px solid ${({ accent }: any ) => accent.color};
+        }
     }
 
     span {
@@ -31,6 +42,7 @@ export const ThemeContainer = styled.label`
 const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     const theme = useStore((s: any) => s.theme);
     const store = useStore((s: any) => s.setTheme);
+    const accent = useAccent((s: any) => s.accent);
 
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
@@ -39,7 +51,7 @@ const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     }
 
     return (
-        <ThemeContainer htmlFor={id}>
+        <ThemeContainer htmlFor={id} accent={accentColors[accent as keyof typeof accentColors]}>
             <input type="radio" id={id} value={id} name="modeSelector" checked={theme === id ? true : false} onChange={handleChange}/>
 
             <ThemeItem theme={id}/>

@@ -26,7 +26,7 @@ const themes: Theme = {
         name: 'light',
         background: Colors.whitePri,
         backgroundSec: Colors.whiteSec,
-        text: Colors.textBlack,
+        text: Colors.blackPri,
     },
     dark: {
         name: 'dark',
@@ -42,60 +42,47 @@ const themes: Theme = {
     },
 };
 
-// export const accentColors = {
-//     default: Colors.accentDefault,
-//     yellow: Colors.accentYellow,
-//     orange: Colors.accentOrange,
-//     red: Colors.accentRed,
-//     pink: Colors.accentPink,
-//     purple: Colors.accentPurple,
-//     darkBlue: Colors.accentDarkBlue,
-//     lightBlue: Colors.accentLightBlue,
-//     teal: Colors.accentTeal,
-//     green: Colors.accentGreen,
-// }
-
-export const accentColors = [
-    {
-        name: 'default',
+export const accentColors = {
+    default: {
         color: Colors.accentDefault,
+        text: Colors.textWhite,
     },
-    {
-        name: 'yellow',
+    yellow: {
         color: Colors.accentYellow,
+        text: Colors.blackPri,
     },
-    {
-        name: 'orange',
+    orange: {
         color: Colors.accentOrange,
+        text: Colors.textWhite,
     },
-    {
-        name: 'red',
+    red: {
         color: Colors.accentRed,
+        text: Colors.textWhite,
     },
-    {
-        name: 'pink',
+    pink: {
         color: Colors.accentPink,
+        text: Colors.textWhite,
     },
-    {
-        name: 'purple',
+    purple: {
         color: Colors.accentPurple,
+        text: Colors.textWhite,
     },
-    {
-        name: 'darkBlue',
+    darkBlue: {
         color: Colors.accentDarkBlue,
+        text: Colors.textWhite,
     },
-    {
-        name: 'lightBlue',
+    lightBlue: {
         color: Colors.accentLightBlue,
+        text: Colors.blackPri,
     },
-    {
-        name: 'teal',
+    teal: {
         color: Colors.accentTeal,
+        text: Colors.blackPri,
     },
-    {
-        name: 'green',
+    green: {
         color: Colors.accentGreen,
-    }
-]
+        text: Colors.blackPri,
+    },
+}
 
 export default themes;

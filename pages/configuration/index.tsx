@@ -1,11 +1,8 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
-import { FiCheck } from 'react-icons/fi'
 
 import { Colors } from '../../variables'
-import { accentColors } from '../../ThemeConfig'
-import { useAccent } from '../../store'
-import { ThemeSwitcher } from '../../components/configuration'
+import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 
 const TitleContainer = styled.div`
     margin-bottom: 2.5rem;
@@ -28,35 +25,7 @@ const SubContainer = styled.div`
     }
 `
 
-const ColorList = styled.ul`
-    display: flex;
-    align-items: center;
-`
-
-interface ColorListItemProps {
-    color: string
-}
-
-const ColorListItem = styled.li<ColorListItemProps>`
-    margin-right: 1.25rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: ${(ColorListItemProps) => ColorListItemProps.color};
-    border-radius: 50%;
-`
-
-const ColorListItemActive = styled(ColorListItem)`
-    width: 3.5rem;
-    height: 3.5rem;
-    box-shadow: 0 3px 12px #EF1E6E99;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
 const Configuration: NextPage = () => {
-    const accentColor: any = useAccent();
-
     return (
         <div>
             <TitleContainer>
@@ -68,17 +37,7 @@ const Configuration: NextPage = () => {
             <SubContainer>
                 <h2>Kleurenthema</h2>
 
-                <ColorList>
-                    {
-                        accentColors.map((color: any, index: number) => (
-                            color.name === accentColor.theme ?
-                            <ColorListItemActive key={index} color={color.color}>
-                                <FiCheck fontSize={32} strokeWidth={2.5} color={Colors.textWhite}/>
-                            </ColorListItemActive>:
-                            <ColorListItem key={index} color={color.color}/>
-                        ))
-                    }
-                </ColorList>
+                <AccentSwitcher/>
             </SubContainer>
 
             <SubContainer>

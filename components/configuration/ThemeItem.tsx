@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import { FiCheck } from 'react-icons/fi'
 
 import { Colors } from '../../variables'
-import themes, { Theme } from '../../ThemeConfig'
-import useStore from '../../store'
+import themes, { accentColors, Theme } from '../../ThemeConfig'
+import useStore, { useAccent } from '../../store'
 
 interface ThemeItemProps {
-    theme: string
+    theme: string,
 }
 
 interface ThemeItemContainerProps {
     theme: string,
-    store: any
+    store: any,
 }
 
 const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
@@ -24,37 +24,15 @@ const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
     transition: all 0.2s ease-in-out;
     position: relative;
     display: flex;
-    
-    div:last-of-type {
-        visibility: hidden;
-        background: ${Colors.primary};
-        position: absolute;
-        width: 1.25rem;
-        height: 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        bottom: 10px;
-        left: 10px;
-    }
-
-    input:checked + & {
-        box-shadow: 0 3px 12px #EF1E6E99;
-        border: 2px solid ${Colors.primary};
-
-        div:last-of-type {
-            visibility: visible;
-        }
-    }
 `
 
 interface NavigationList {
     theme: string,
+    accent: any
 }
 
 const NavigationList = styled.ul<NavigationList>`
-    padding: 1rem 0.75rem;
+    padding: 1rem 0.5rem;
     display: flex;
     flex-direction: column;
     width: auto;
@@ -65,9 +43,10 @@ const NavigationList = styled.ul<NavigationList>`
         background: ${(NavigationList) => themes[NavigationList.theme as keyof typeof themes].text};
         margin-bottom: 0.5rem;
         border-radius: 2px;
+        transition: all 0.2s ease-in-out;
 
         &:first-of-type {
-            background: ${Colors.primary};
+            background: ${({ accent }: any ) => accent.color};
         }
     }
 `
@@ -78,31 +57,102 @@ interface ContentProps {
 
 const Content = styled.div<ContentProps>`
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: calc(100% - 1rem);
     background: ${(ContentProps) => themes[ContentProps.theme as keyof typeof themes].backgroundSec};
     margin: 0.5rem 0.5rem 0.5rem 0;
     border-radius: 5px;
+    padding: 0.625rem 0.75rem;
+
+    span {
+        background: ${(ContentProps) => themes[ContentProps.theme as keyof typeof themes].background};
+        border-radius: 5px;
+        
+        &:first-of-type {
+            width: 100%;
+            height: 40%;
+            margin: 0;
+            margin-bottom: 0.625rem;
+        }
+        
+        &:last-of-type {
+            width: 100%;
+            height: 20%;
+            margin: 0;
+            margin-top: 0.625rem;
+        }
+    }
+
+    div {
+        width: 100%;
+        height: 40%;
+        display: flex;
+                    
+        span:first-of-type {
+            width: 60%;
+            height: 100%;
+            margin: 0;
+            margin-right: 0.625rem;
+        }
+
+        span:last-of-type {
+            width: 40%;
+            height: 100%;
+            margin: 0;
+        }
+    }
+`
+
+interface IconContainerProps {
+    accent: any
+}
+
+const IconContainer = styled.div<IconContainerProps>`
+    visibility: hidden;
+    background: ${({ accent }: any ) => accent.color};
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 10px;
+    left: 10px;
+    transition: all 0.2s ease-in-out;
+
+    input:checked + div & {
+        visibility: visible;
+    }
 `
 
 const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
     const store: keyof Theme = useStore((s: any) => s.theme);
+    const accent = useAccent((s: any) => s.accent);
 
     return (
         <ThemeItemContainer theme={theme} store={themes[store]}>
-            <NavigationList theme={theme}>
+            <NavigationList theme={theme} accent={accentColors[accent as keyof typeof accentColors]}>
                 <li></li>
                 <li></li>
                 <li></li>
             </NavigationList>
 
             <Content theme={theme}>
+                <span></span>
+                
+                <div>
+                    <span></span>
+                    <span></span>
+                </div>
 
+                <span></span>
             </Content>
 
-            <div>
-                <FiCheck strokeWidth={3} fontSize={14} color={Colors.textWhite}/>
-            </div>
+            <IconContainer accent={accentColors[accent as keyof typeof accentColors]}>
+                <FiCheck strokeWidth={3} fontSize={14} color={accentColors[accent as keyof typeof accentColors].text}/>
+            </IconContainer>
         </ThemeItemContainer>
     )
 }

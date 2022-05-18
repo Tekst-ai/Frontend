@@ -5,6 +5,8 @@ import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
 import { useRouter } from 'next/router';
 
 import { Colors } from '../../variables';
+import { useAccent } from '../../store';
+import { accentColors } from '../../ThemeConfig';
 
 interface NavigationProps {
     isOpen: boolean
@@ -25,7 +27,7 @@ const Container = styled.nav`
 `
 
 interface NavigationListProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 const NavigationList = styled.ul<NavigationListProps>`
@@ -36,7 +38,6 @@ const NavigationList = styled.ul<NavigationListProps>`
         a {
             width: 100%;
             height: auto;
-            transition: all 0.2s ease-in-out;
             padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.5rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
@@ -59,25 +60,29 @@ const NavigationList = styled.ul<NavigationListProps>`
 
 interface LinkTextProps {
     pathName: string;
+    accent: any
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primaryDark : 'transparent'};
+    transition: all 0.2s ease-in-out;
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : 'transparent'};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.text : "inherit"};
 
     &:hover {
-        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? Colors.primaryDark : Colors.blackSec};
+        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.blackSec};
     }
 `
 
 const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
     const router = useRouter();
+    const accent = useAccent((s: any) => s.accent);
 
     return (
         <Container>
             <NavigationList isOpen={isOpen}>
                 <li>
                     <Link href={"/"} passHref>
-                        <LinkText pathName={router.pathname}>
+                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                             <FiHome fontSize={18} strokeWidth={2.5}/>
                             { isOpen ? <span>Dashboard</span> : ""}
                         </LinkText>
@@ -86,7 +91,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={"/statistics"} passHref>
-                        <LinkText pathName={router.pathname}>
+                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                             <FiBarChart2 fontSize={20} strokeWidth={3}/>
                             { isOpen ? <span>Statistieken</span> : ""}
                         </LinkText>
@@ -95,7 +100,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={"/categories"} passHref>
-                        <LinkText pathName={router.pathname}>
+                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                             <FiGrid fontSize={20} strokeWidth={2.25}/>
                             { isOpen ? <span>Categorieën</span> : ""}
                         </LinkText>
