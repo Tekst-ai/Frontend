@@ -59,6 +59,7 @@ const AccentSwitcher: NextPage = () => {
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
             store(e.currentTarget.value);
+            localStorage.setItem('accent', e.currentTarget.value);
         }
     }
 

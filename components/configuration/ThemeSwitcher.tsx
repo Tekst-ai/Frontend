@@ -47,6 +47,7 @@ const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
             store(e.currentTarget.value);
+            localStorage.setItem('theme', e.currentTarget.value);
         }
     }
 

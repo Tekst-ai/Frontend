@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { NextPage } from 'next'
-import useStore from '../store';
+import useStore, { useAccent } from '../store';
 import themes, { Theme } from '../ThemeConfig';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Menu } from '../components/layout';
@@ -48,6 +48,18 @@ const SubContainer = styled.div<SubContainerProps>`
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
+    const setTheme = useStore((s: any) => s.setTheme);
+    const setAccent = useAccent((s: any) => s.setAccent);
+
+    useEffect(() => {
+        const rememberedTheme = localStorage.getItem('theme');
+        const rememberedAccent = localStorage.getItem('accent');
+        if (rememberedTheme && rememberedAccent) {
+            setTheme(rememberedTheme);
+            setAccent(rememberedAccent);
+        }
+
+    }, [setTheme, setAccent]);
 
     return (
         <>
