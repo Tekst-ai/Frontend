@@ -42,7 +42,7 @@ const themes: Theme = {
         textSec: Colors.textGreyBlack,
         boxShadow: `0px 3px 12px ${Colors.blackPri}26`,
         lineDark: Colors.whitePri,
-        lineLight: Colors.whitePriDarker
+        lineLight: Colors.whitePriDarker,
     },
     dark: {
         name: 'dark',
@@ -101,11 +101,11 @@ export const accentColors = {
     },
     teal: {
         color: Colors.accentTeal,
-        text: Colors.blackPri,
+        text: Colors.whitePri,
     },
     green: {
         color: Colors.accentGreen,
-        text: Colors.blackPri,
+        text: Colors.whitePri,
     },
 }
 

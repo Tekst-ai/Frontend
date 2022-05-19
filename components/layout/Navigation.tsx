@@ -81,21 +81,24 @@ interface LinkTextProps {
     pathName: string,
     accent: any,
     open: boolean,
+    theme: any
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    transition: all 0.3s ease-in-out;
-    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : 'transparent'};
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.text : "inherit"};
-
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : "transparent"};
+    
     & span {
-        transition: all 0.3s ease-in-out;
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.text : "inherit"};
         opacity: ${(LinkTextProps) => LinkTextProps.open ? 1 : 0};
         position: absolute;
     }
+    
+    & svg {
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.text : "inherit"};
+    }
 
     &:hover {
-        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.blackSec};
+        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight};
     }
 `
 
@@ -109,7 +112,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
             <NavigationList isOpen={isOpen}>
                 <li>
                     <Link href={"/"} passHref>
-                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
                             <FiHome fontSize={18} strokeWidth={2.5}/>
 
                             <span>Dashboard</span>
@@ -119,7 +122,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={"/statistics"} passHref>
-                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
                             <FiBarChart2 fontSize={20} strokeWidth={3}/>
 
                             <span>Statistieken</span>
@@ -129,7 +132,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={"/categories"} passHref>
-                        <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
                             <FiGrid fontSize={20} strokeWidth={2.25}/>
 
                             <span>Categorieën</span>

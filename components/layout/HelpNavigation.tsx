@@ -6,8 +6,8 @@ import { IoChevronDownOutline } from 'react-icons/io5'
 
 import { Colors } from '../../variables';
 import { useRouter } from 'next/router';
-import { useAccent } from '../../store';
-import { accentColors } from '../../ThemeConfig';
+import useStore, { useAccent } from '../../store';
+import themes, { accentColors, Theme } from '../../ThemeConfig';
 
 interface HelpNavigationProps {
     isOpen: boolean
@@ -53,25 +53,27 @@ const Container = styled.div<HelpNavigationListProps>`
 
 interface LinkTextProps {
     pathName: string,
-    accent: any
+    accent: any,
+    theme: any
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.textWhite};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
 
     &:hover {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : ({ accent }: any ) => accent.color};
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ accent }) => accent.color};
     }
 `
 
 const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const router = useRouter();
     const accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container isOpen={isOpen}>
             <Link href={"/help-center"} passHref>
-                <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
+                <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                     <FiHelpCircle fontSize={22} strokeWidth={2.25}/>
 
                     <span>Helpcentrum</span>

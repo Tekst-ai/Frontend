@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import type { NextPage } from 'next'
-import useStore, { useAccent, useMenu } from '../store';
-import themes, { Theme } from '../ThemeConfig';
 import styled, { createGlobalStyle } from 'styled-components';
+
+import themes, { Theme } from '../ThemeConfig';
+import useStore, { useAccent, useMenu } from '../store';
 import { Menu } from '../components/layout';
 
 interface LayoutProps {
@@ -26,7 +27,7 @@ interface MainProps {
 }
 
 const Main = styled.main<MainProps>`
-    background: ${(MainProps) => MainProps.theme === 'dark' ? themes.dark.background : themes.light.background };
+    background: ${({ theme }) =>theme.background};
     padding: 1.25rem;
     padding-left: 0;
     width: 100%;
@@ -39,7 +40,7 @@ interface SubContainerProps {
 }
 
 const SubContainer = styled.div<SubContainerProps>`
-    background: ${(SubContainerProps) => SubContainerProps.theme === 'dark' ? themes.dark.backgroundSec : themes.light.backgroundSec };
+    background: ${({ theme }) => theme.backgroundSec};
     padding: 2rem 3rem;
     border-radius: 15px;
     width: 100%;
@@ -72,8 +73,8 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             <Container>
                 <Menu/>
 
-                <Main theme={theme}>
-                    <SubContainer theme={theme}>
+                <Main theme={themes[theme]}>
+                    <SubContainer theme={themes[theme]}>
                         {children}
                     </SubContainer>
                 </Main>

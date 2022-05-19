@@ -6,7 +6,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
-import { accentColors } from '../../ThemeConfig'
+import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { Colors } from '../../variables'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
@@ -39,7 +39,8 @@ const ImageContainer = styled.a<ImageContainerProps>`
 interface ProfileContainerProps {
     pathName: string,
     isOpen: boolean,
-    accent: any
+    accent: any,
+    theme: any
 }
 
 const ProfileContainer = styled.a<ProfileContainerProps>`
@@ -52,11 +53,10 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : 'transparent'};
-    color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.text : 'inherit'};
     position: relative;
-
+    
     &:hover {
-        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ProfileContainerProps.isOpen ? Colors.blackSec : Colors.blackPri};
+        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight};
     }
 
     div:first-of-type {
@@ -74,17 +74,22 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         left: 4.375rem;
         opacity: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? 1 : 0 };
         white-space: nowrap;
-
-        p:first-of-type {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        
+        p {
+            transition: all 0.3s ease-in-out;
+            color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.text : 'inherit'};
+            
+            &:first-of-type {
+                font-size: 1.125rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
         }
     }
 `
 
 const Menu: NextPage = () => {
-    const theme = useStore((s: any) => s.theme);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
     const router = useRouter();
     
@@ -109,7 +114,7 @@ const Menu: NextPage = () => {
             </Link>
 
             <Link href={"/account"} passHref>
-                <ProfileContainer pathName={router.pathname} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
+                <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
                     <div>
                         <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
                     </div>

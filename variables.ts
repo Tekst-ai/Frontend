@@ -24,8 +24,8 @@ export const Colors = {
     accentPurple: '#9D3BFF',
     accentDarkBlue: '#3B52FF',
     accentLightBlue: '#3BBBFF',
-    accentTeal: '#3BFFBB',
-    accentGreen: '#43FF3B',
+    accentTeal: '#12D18F',
+    accentGreen: '#4DCF48',
 }
 
 export const Shadow = {

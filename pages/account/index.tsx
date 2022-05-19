@@ -6,6 +6,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { TitleContainer } from '../configuration'
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
+import { Colors } from '../../variables'
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ interface LeftContainerProps {
 }
 
 const LeftContainer = styled.div<LeftContainerProps>`
-    margin-right: 2.5rem;
+    margin-right: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,7 +100,7 @@ const Account: NextPage = () => {
 
                     <div>
                         <p>
-                            <FiCheckCircle fontSize={16} color={"#43FF3B"}/>
+                            <FiCheckCircle fontSize={16} color={Colors.accentGreen} strokeWidth={2.5}/>
 
                             <span>Synced</span>
                         </p>

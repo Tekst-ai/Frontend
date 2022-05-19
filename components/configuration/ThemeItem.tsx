@@ -15,8 +15,8 @@ interface ThemeItemContainerProps {
 }
 
 const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
-    background: ${(ThemeItemContainerProps) => themes[ThemeItemContainerProps.theme as keyof typeof themes].background};
-    border: 2px solid ${({ store }: any ) => store.backgroundSec};
+    background: ${({ theme }) => themes[theme as keyof typeof themes].background};
+    border: 2px solid ${({ store }) => store.backgroundSec};
     width: 8rem;
     height: 8rem;
     border-radius: 10px;
@@ -39,13 +39,13 @@ const NavigationList = styled.ul<NavigationList>`
     li {
         width: 1.8rem;
         height: 0.375rem;
-        background: ${(NavigationList) => themes[NavigationList.theme as keyof typeof themes].text};
+        background: ${({ theme }) => themes[theme as keyof typeof themes].text};
         margin-bottom: 0.5rem;
         border-radius: 2px;
         transition: all 0.3s ease-in-out;
 
         &:first-of-type {
-            background: ${({ accent }: any ) => accent.color};
+            background: ${({ accent }) => accent.color};
         }
     }
 `
@@ -59,13 +59,13 @@ const Content = styled.div<ContentProps>`
     flex-direction: column;
     width: 100%;
     height: calc(100% - 1rem);
-    background: ${(ContentProps) => themes[ContentProps.theme as keyof typeof themes].backgroundSec};
+    background: ${({ theme }) => themes[theme as keyof typeof themes].backgroundSec};
     margin: 0.5rem 0.5rem 0.5rem 0;
     border-radius: 5px;
     padding: 0.625rem 0.75rem;
 
     span {
-        background: ${(ContentProps) => themes[ContentProps.theme as keyof typeof themes].background};
+        background: ${({ theme }) => themes[theme as keyof typeof themes].background};
         border-radius: 5px;
         
         &:first-of-type {
@@ -108,7 +108,7 @@ interface IconContainerProps {
 }
 
 const IconContainer = styled.div<IconContainerProps>`
-    background: ${({ accent }: any ) => accent.color};
+    background: ${({ accent }) => accent.color};
     position: absolute;
     width: 1.25rem;
     height: 1.25rem;

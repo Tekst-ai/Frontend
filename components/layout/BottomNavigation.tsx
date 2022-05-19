@@ -53,7 +53,7 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
 
         span {
             font-size: 1.125rem;
-            font-weight: 400;
+            font-weight: 500;
             transition: all 0.3s ease-in-out;
             opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
             position: absolute;
