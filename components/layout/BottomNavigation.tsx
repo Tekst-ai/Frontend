@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Colors } from '../../variables'
-import { useAccent } from '../../store'
-import { accentColors } from '../../ThemeConfig'
+import useStore, { useAccent } from '../../store'
+import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 
 interface BottomNavigationProps {
@@ -76,14 +76,15 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
 
 interface LinkTextProps {
     pathName: string,
-    accent: any
+    accent: any,
+    theme: any
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.textGrey};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec};
     
     &:hover {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }: any ) => accent.color : Colors.textWhite};
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
     }
 `
 
@@ -126,6 +127,7 @@ const Collapse = styled.button<CollapseProps>`
 const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) => {
     const router = useRouter()
     const accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme)
 
     const [open, setOpen] = useState(false)
 
@@ -142,7 +144,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
                 <Link href={"/login"} passHref>
-                    <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoPowerOutline fontSize={18}/>
 
                         <span>Afmelden</span>
@@ -150,7 +152,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
                 </Link>
 
                 <Link href={"/configuration"} passHref>
-                    <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoSettingsOutline fontSize={18}/>
                         
                         <span>Configuratie</span>

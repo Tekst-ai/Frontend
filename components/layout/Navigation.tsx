@@ -5,24 +5,29 @@ import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
 import { useRouter } from 'next/router';
 
 import { Colors } from '../../variables';
-import { useAccent } from '../../store';
-import { accentColors } from '../../ThemeConfig';
+import useStore, { useAccent } from '../../store';
+import themes, { accentColors, Theme } from '../../ThemeConfig';
 
 interface NavigationProps {
-    isOpen: boolean
+    isOpen: boolean,
+}
+
+interface ContainerProps {
+    theme: any
 }
 
 const Container = styled.nav`
     display: flex;
     flex-direction: column;
 
-    &::after {
+    &:after {
         content: '';
         width: calc(100% - 20px);
         transform: translateX(10px);
         height: 2px;
-        background: ${Colors.blackSec};
+        background: ${({ theme }) => theme.lineLight};
         margin-top: 0.8125rem;
+        transition: all 0.3s ease-in-out;
     }
 `
 
@@ -97,9 +102,10 @@ const LinkText = styled.a<LinkTextProps>`
 const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
     const router = useRouter();
     const accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
-        <Container>
+        <Container theme={themes[theme]}>
             <NavigationList isOpen={isOpen}>
                 <li>
                     <Link href={"/"} passHref>

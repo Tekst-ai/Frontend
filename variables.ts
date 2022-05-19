@@ -29,5 +29,5 @@ export const Colors = {
 }
 
 export const Shadow = {
-    
+    default: `0px 3px 12px ${Colors.blackPri}26`,
 }

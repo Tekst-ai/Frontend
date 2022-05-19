@@ -20,7 +20,7 @@ const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
     width: 8rem;
     height: 8rem;
     border-radius: 10px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     position: relative;
     display: flex;
 `
@@ -42,7 +42,7 @@ const NavigationList = styled.ul<NavigationList>`
         background: ${(NavigationList) => themes[NavigationList.theme as keyof typeof themes].text};
         margin-bottom: 0.5rem;
         border-radius: 2px;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.3s ease-in-out;
 
         &:first-of-type {
             background: ${({ accent }: any ) => accent.color};
@@ -118,7 +118,7 @@ const IconContainer = styled.div<IconContainerProps>`
     border-radius: 50%;
     bottom: 10px;
     left: 10px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 0;
     
     input:checked + div & {

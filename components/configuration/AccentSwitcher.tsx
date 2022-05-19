@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import { useAccent } from "../../store";
 import { accentColors } from "../../ThemeConfig";
-import { Colors } from "../../variables";
 
 const ColorList = styled.form`
     display: flex;
