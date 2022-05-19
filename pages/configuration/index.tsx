@@ -29,7 +29,7 @@ const Configuration: NextPage = () => {
     return (
         <div>
             <TitleContainer>
-                <h1>Configuration</h1>
+                <h1>Configuratie</h1>
 
                 <p>Kies een accent kleur of verander het thema</p>
             </TitleContainer>

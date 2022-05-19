@@ -5,6 +5,11 @@ export const useAccent = create(set => ({
   setAccent: (accent: any) => set({ accent }),
 }));
 
+export const useMenu = create(set => ({
+  menu: 'true',
+  setMenu: (menu: any) => set({ menu }),
+}));
+
 export default create(set => ({
   theme: 'dark',
   setTheme: (theme: any) => set({ theme }),

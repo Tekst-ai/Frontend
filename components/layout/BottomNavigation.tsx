@@ -7,9 +7,11 @@ import { useRouter } from 'next/router'
 import { Colors } from '../../variables'
 import { useAccent } from '../../store'
 import { accentColors } from '../../ThemeConfig'
+import { useEffect, useState } from 'react'
 
 interface BottomNavigationProps {
-    isOpen: boolean
+    isOpen: boolean,
+    onOpen: (isOpen: boolean) => void,
 }
 
 interface ContainerProps {
@@ -18,9 +20,11 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
     margin-top: auto;
-    display: ${(ContainerProps) => ContainerProps.isOpen ? "flex" : "block"};
+    display: flex;
     justify-content: space-between;
     padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
+    transition: all 0.3s ease-in-out;
+    position: relative;
 `
 
 interface NavigationContainerProps {
@@ -30,13 +34,17 @@ interface NavigationContainerProps {
 const NavigationContainer = styled.div<NavigationContainerProps>`
     a {
         display: flex;
-        transition: all 0.2s ease-in-out;
-        justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"};
+        transition: all 0.3s ease-in-out;
+        /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
+        justify-content: flex-start;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
+        margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.25rem"};
+        position: relative;
+        /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
         
         svg {
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
 
             path {
                 stroke-width: 50px
@@ -44,9 +52,12 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         }
 
         span {
-            margin-left: 1rem;
             font-size: 1.125rem;
             font-weight: 400;
+            transition: all 0.3s ease-in-out;
+            opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
+            position: absolute;
+            left: 2.25rem
         }
 
         &:first-of-type {
@@ -58,7 +69,7 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         }
 
         &:last-of-type {
-            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "calc(1rem - 0.34375rem)"};
+            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"};
         }
     }
 `
@@ -82,18 +93,22 @@ interface CollapseProps {
 
 const Collapse = styled.button<CollapseProps>`
     margin-top: auto;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     display: flex;
     padding: 0.34375rem 0;
     border-radius: 5px;
-    transform: translateY(4px);
     transform: ${(CollapseProps) => CollapseProps.isOpen ? "" : "rotate(-180deg)"};
+    position: absolute;
+    right: ${(CollapseProps) => CollapseProps.isOpen ? 0 : "0.45rem"};
+    bottom: -4px;
 
     &:hover {
         background: ${Colors.blackSec};
     }
-
+    
     svg {
+        transition: all 0.3s ease-in-out;
+
         path {
             stroke-width: 70px;
         }
@@ -108,13 +123,20 @@ const Collapse = styled.button<CollapseProps>`
     }
 `
 
-const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
+const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) => {
     const router = useRouter()
     const accent = useAccent((s: any) => s.accent)
 
+    const [open, setOpen] = useState(false)
+
     const handleClick = () => {
-        console.log("Click")
+        setOpen(!open)
+        localStorage.setItem("open menu", open.toString())
     }
+
+    useEffect(() => {
+        onOpen(!open)
+    }, [open, onOpen])
 
     return (
         <Container isOpen={isOpen}>
@@ -123,7 +145,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
                     <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoPowerOutline fontSize={18}/>
 
-                        { isOpen ? <span>Afmelden</span> : "" }
+                        <span>Afmelden</span>
                     </LinkText>
                 </Link>
 
@@ -131,7 +153,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen }) => {
                     <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
                         <IoSettingsOutline fontSize={18}/>
                         
-                        { isOpen ? <span>Configuratie</span> : "" }
+                        <span>Configuratie</span>
                     </LinkText>
                 </Link>
             </NavigationContainer>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import type { NextPage } from 'next'
-import useStore, { useAccent } from '../store';
+import useStore, { useAccent, useMenu } from '../store';
 import themes, { Theme } from '../ThemeConfig';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Menu } from '../components/layout';
@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
-    transition: background-color 0.25s, color 0.25s;
+    transition: all 0.2s ease-in-out;
   }
 `;
 
@@ -31,6 +31,7 @@ const Main = styled.main<MainProps>`
     padding-left: 0;
     width: 100%;
     transition: all 0.2s ease-in-out;
+    z-index: 1;
 `
 
 interface SubContainerProps {
@@ -50,20 +51,23 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const setTheme = useStore((s: any) => s.setTheme);
     const setAccent = useAccent((s: any) => s.setAccent);
+    const setMenu = useMenu((s: any) => s.setMenu);
 
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
         const rememberedAccent = localStorage.getItem('accent');
-        if (rememberedTheme && rememberedAccent) {
+        const rememberedMenu = localStorage.getItem('open menu');
+        if (rememberedTheme && rememberedAccent && rememberedMenu) {
             setTheme(rememberedTheme);
             setAccent(rememberedAccent);
+            setMenu(rememberedMenu)
         }
 
-    }, [setTheme, setAccent]);
+    }, [setTheme, setAccent, setMenu]);
 
     return (
         <>
-            <GlobalStyle theme={themes[theme]} />
+            <GlobalStyle theme={themes[theme]}/>
 
             <Container>
                 <Menu/>

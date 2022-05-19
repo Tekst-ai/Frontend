@@ -27,7 +27,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
         &:checked + div {
             width: 3.5rem;
             height: 3.5rem;
-            box-shadow: 0 3px 12px ${(ColorListItemProps) => ColorListItemProps.color + "99"};
+            box-shadow: 0 3px 12px ${(ColorListItemProps) => ColorListItemProps.color + "80"};
             
             svg {
                 transform: scale(1) rotate(0deg);

@@ -13,23 +13,36 @@ interface HelpNavigationProps {
     isOpen: boolean
 }
 
-const Container = styled.div`
-    padding: 0 1rem;
+interface HelpNavigationListProps {
+    isOpen: boolean,
+}
+
+const Container = styled.div<HelpNavigationListProps>`
+    padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0 0.5rem"};
     margin-top: 1.25rem;
+    transition: all 0.3s ease-in-out;
     
     a {
         display: flex;
         align-items: center;
-        transition: all 0.2s ease-in-out;
-
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.2rem"};
+        
         span {
-            margin-left: 1rem;
             font-size: 1.125rem;
             font-weight: 500;
+            position: absolute;
+            transition: all 0.3s ease-in-out;
+            left: 2.25rem;
+            opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
         }
-
+        
         svg:last-of-type {
-            margin-left: auto;
+            position: absolute;
+            transition: all 0.3s ease-in-out;
+            right: 0;
+            opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
 
             path {
                 stroke-width: 70px;
@@ -56,19 +69,14 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const accent = useAccent((s: any) => s.accent);
 
     return (
-        <Container>
+        <Container isOpen={isOpen}>
             <Link href={"/help-center"} passHref>
                 <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]}>
-                    <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
+                    <FiHelpCircle fontSize={22} strokeWidth={2.25}/>
 
-                    { isOpen ? 
-                        <>
-                            <span>Helpcentrum</span>
-                            <IoChevronDownOutline fontSize={16}/>
-                        </>:
-                        ""
-                    }
+                    <span>Helpcentrum</span>
 
+                    <IoChevronDownOutline fontSize={16}/>
                 </LinkText>
             </Link>
         </Container>

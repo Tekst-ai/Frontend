@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { FiCheck } from 'react-icons/fi'
 
-import { Colors } from '../../variables'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 
@@ -109,7 +108,6 @@ interface IconContainerProps {
 }
 
 const IconContainer = styled.div<IconContainerProps>`
-    visibility: hidden;
     background: ${({ accent }: any ) => accent.color};
     position: absolute;
     width: 1.25rem;
@@ -121,9 +119,10 @@ const IconContainer = styled.div<IconContainerProps>`
     bottom: 10px;
     left: 10px;
     transition: all 0.2s ease-in-out;
-
+    opacity: 0;
+    
     input:checked + div & {
-        visibility: visible;
+        opacity: 1;
     }
 `
 

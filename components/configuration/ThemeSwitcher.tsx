@@ -25,7 +25,7 @@ const ThemeContainer = styled.label<ThemeContainerProps>`
 
         &:checked + div {
             transition: all 0.2s ease-in-out;
-            box-shadow: 0 3px 12px ${({ accent }: any ) => accent + "99"};
+            box-shadow: 0 3px 10px ${({ accent }: any ) => accent.color + "80"};
             border: 2px solid ${({ accent }: any ) => accent.color};
         }
     }
