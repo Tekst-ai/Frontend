@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 `;
 
@@ -30,7 +30,7 @@ const Main = styled.main<MainProps>`
     padding: 1.25rem;
     padding-left: 0;
     width: 100%;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     z-index: 1;
 `
 
@@ -44,7 +44,7 @@ const SubContainer = styled.div<SubContainerProps>`
     border-radius: 15px;
     width: 100%;
     height: calc(100vh - 2.5rem);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {

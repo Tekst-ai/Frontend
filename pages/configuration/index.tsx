@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Colors } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
     margin-bottom: 2.5rem;
 
     p {

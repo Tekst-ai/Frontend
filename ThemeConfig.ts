@@ -4,20 +4,32 @@ export interface Theme {
     light: {
         name: string,
         background: string,
-        backgroundSec: string
+        backgroundSec: string,
         text: string,
+        textSec: string,
+        boxShadow: string,
+        lineDark: string,
+        lineLight: string
     },
     dark: {
         name: string,
         background: string,
-        backgroundSec: string
+        backgroundSec: string,
         text: string,
+        textSec: string,
+        boxShadow: string,
+        lineDark: string,
+        lineLight: string
     }
     auto: {
         name: string,
         background: string,
-        backgroundSec: string
+        backgroundSec: string,
         text: string,
+        textSec: string,
+        boxShadow: string,
+        lineDark: string,
+        lineLight: string
     }
 }
 
@@ -27,18 +39,30 @@ const themes: Theme = {
         background: Colors.whitePri,
         backgroundSec: Colors.whiteSec,
         text: Colors.blackPri,
+        textSec: Colors.textGreyBlack,
+        boxShadow: `0px 3px 12px ${Colors.blackPri}26`,
+        lineDark: Colors.whitePri,
+        lineLight: Colors.whitePriDarker
     },
     dark: {
         name: 'dark',
         background: Colors.blackPri,
         backgroundSec: Colors.blackSec,
         text: Colors.textWhite,
+        textSec: Colors.textGrey,
+        boxShadow: `0px 3px 12px ${Colors.blackPri}66`,
+        lineDark: Colors.blackPri,
+        lineLight: Colors.blackSec
     },
     auto: {
         name: 'auto',
         background: Colors.blackPri,
         backgroundSec: Colors.blackSec,
         text: Colors.textWhite,
+        textSec: Colors.textGrey,
+        boxShadow: `0px 3px 12px ${Colors.blackPri}66`,
+        lineDark: Colors.blackPri,
+        lineLight: Colors.blackSec
     },
 };
 
