@@ -41,17 +41,28 @@ const NavigationList = styled.ul<NavigationListProps>`
             padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.5rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             position: relative;
             transition: all 0.3s ease-in-out;
             
+            svg {
+                margin-right: auto;
+                transition: all 0.3s ease-in-out;
+            }
+
             span {
                 transition: all 0.3s ease-in-out;
                 font-size: 1.125rem;
                 font-weight: 500;
                 margin-left: 1rem;
                 left: 2.25rem
+            }
+        }
+
+        &:first-of-type {
+            svg {
+                margin-left: 0.11rem;
             }
         }
 
@@ -94,7 +105,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                     <Link href={"/"} passHref>
                         <LinkText pathName={router.pathname} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
                             <FiHome fontSize={18} strokeWidth={2.5}/>
-                            
+
                             <span>Dashboard</span>
                         </LinkText>
                     </Link>
