@@ -33,6 +33,7 @@ const Main = styled.main<MainProps>`
     width: 100%;
     transition: all 0.3s ease-in-out;
     z-index: 1;
+    /* position: fixed; */
 `
 
 interface SubContainerProps {
@@ -46,6 +47,7 @@ const SubContainer = styled.div<SubContainerProps>`
     width: 100%;
     height: calc(100vh - 2.5rem);
     transition: all 0.3s ease-in-out;
+    overflow-y: auto;
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {

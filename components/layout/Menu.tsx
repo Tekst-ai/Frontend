@@ -7,7 +7,6 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
 
@@ -24,6 +23,8 @@ const Container = styled.div<ContainerProps>`
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease-in-out;
+    height: 100vh;
+    /* position: fixed; */
 `
 
 interface ImageContainerProps {
