@@ -6,7 +6,7 @@ export const useAccent = create(set => ({
 }));
 
 export const useMenu = create(set => ({
-  menu: 'true',
+  menu: true,
   setMenu: (menu: any) => set({ menu }),
 }));
 

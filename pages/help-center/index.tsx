@@ -1,79 +1,63 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { IoRocket, IoChatbubbles, IoHelpBuoy } from "react-icons/io5"
+
+import { HelpCard, SupportCard } from '../../components/helpCenter'
+import { Colors } from '../../variables'
 
 const Container = styled.div`
     background-image: url("/static/images/logo_abstract.svg");
     background-repeat: no-repeat;
-    background-position: 2rem  -10.43rem;
-    background-attachment: local;
+    background-position: center -20rem;
     /* background-size: 1087.33px 1754.78px; */
-    background-size: cover;
+    background-size: 68rem;
+    /* background-size: cover; */
     width: calc(100% + 6rem);
     height: calc(100% + 4rem);
     transform: translate(-3rem, -2rem);
+    border-radius: 15px;
+    position: relative;
 `
 
-// const Background = styled.div`
-//     position: absolute;
-//     background-position: center -10.43rem;
-//     background-repeat: no-repeat;
-//     /* background-size: 1087.33px 1754.78px; */
-//     /* background-size: cover; */
-//     width: 1087.33px;
-//     height: 1754.78px;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     top: 0;
-//     /* z-index: 0; */
-// `
-
 const Title = styled.div`
-    padding-top: 6rem;
-    padding-bottom: 5rem;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
     text-align: center;
+    color: ${Colors.textWhite};
 
     h1 {
         font-size: 4rem;
     }
 
     p {
-        margin-top: 1.25rem;
+        margin-top: 1rem;
         font-size: 1.375rem;
     }
+`
+
+const CardList = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 `
 
 const HelpCenter: NextPage = () => {
     return (
         <>
-            {/* <Background/> */}
-
             <Container>
                 <Title>
                     <h1>Helpcentrum</h1>
 
                     <p>Hoe kunnen we u helpen?</p>
                 </Title>
-                <Title>
-                    <h1>Helpcentrum</h1>
 
-                    <p>Hoe kunnen we u helpen?</p>
-                </Title>
-                <Title>
-                    <h1>Helpcentrum</h1>
+                <CardList>
+                    <HelpCard icon={<IoRocket fontSize={50}/>} title={"Aan de slag"} link={"/help-center/getting-started"}/>
+                    <HelpCard icon={<IoChatbubbles fontSize={50}/>} title={"Veelgestelde vragen"} link={"/help-center/faq"}/>
+                    <HelpCard icon={<IoHelpBuoy fontSize={50}/>} title={"Support"} link={"/help-center#support"}/>
+                </CardList>
 
-                    <p>Hoe kunnen we u helpen?</p>
-                </Title>
-                <Title>
-                    <h1>Helpcentrum</h1>
-
-                    <p>Hoe kunnen we u helpen?</p>
-                </Title>
-
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+                <SupportCard/>
             </Container>
         </>
     )

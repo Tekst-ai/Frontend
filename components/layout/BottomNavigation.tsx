@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Colors } from '../../variables'
-import useStore, { useAccent } from '../../store'
+import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 
@@ -39,7 +39,7 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 1.25rem;
-        margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.25rem"};
+        margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.45rem"};
         position: relative;
         /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
         
@@ -89,7 +89,8 @@ const LinkText = styled.a<LinkTextProps>`
 `
 
 interface CollapseProps {
-    isOpen: boolean
+    isOpen: boolean,
+    theme: any
 }
 
 const Collapse = styled.button<CollapseProps>`
@@ -104,7 +105,7 @@ const Collapse = styled.button<CollapseProps>`
     bottom: -4px;
 
     &:hover {
-        background: ${Colors.blackSec};
+        background: ${({ theme }) => theme.lineLight};
     }
     
     svg {
@@ -128,12 +129,15 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const router = useRouter()
     const accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
+    const menu = useMenu((s: any) => s.menu)
+    const setMenu = useMenu((s: any) => s.setMenu)
 
     const [open, setOpen] = useState(false)
 
     const handleClick = () => {
         setOpen(!open)
         localStorage.setItem("open menu", open.toString())
+        setMenu(!menu)
     }
 
     useEffect(() => {
@@ -160,7 +164,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
                 </Link>
             </NavigationContainer>
 
-            <Collapse isOpen={isOpen} onClick={handleClick}>
+            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
                 <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
                 <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
             </Collapse>

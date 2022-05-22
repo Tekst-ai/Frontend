@@ -27,7 +27,7 @@ const Container = styled.div<HelpNavigationListProps>`
         align-items: center;
         transition: all 0.3s ease-in-out;
         position: relative;
-        margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.2rem"};
+        margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.35rem"};
         
         span {
             font-size: 1.125rem;

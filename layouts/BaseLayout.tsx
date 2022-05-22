@@ -20,10 +20,12 @@ const GlobalStyle = createGlobalStyle`
 
 const Container = styled.div`
     display: flex;
+    position: relative;
 `
 
 interface MainProps {
-    theme: any
+    theme: any,
+    menu: boolean
 }
 
 const Main = styled.main<MainProps>`
@@ -33,6 +35,7 @@ const Main = styled.main<MainProps>`
     width: 100%;
     transition: all 0.3s ease-in-out;
     z-index: 1;
+    margin-left: ${(MainProps) => MainProps.menu ? "20rem" : "5rem"};
     /* position: fixed; */
 `
 
@@ -44,10 +47,10 @@ const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
     padding: 2rem 3rem;
     border-radius: 15px;
-    width: 100%;
-    height: calc(100vh - 2.5rem);
+    min-height: calc(100vh - 2.5rem);
+    height: 100%;
     transition: all 0.3s ease-in-out;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
@@ -55,15 +58,17 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     const setTheme = useStore((s: any) => s.setTheme);
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
+    const menu = useMenu((s: any) => s.menu);
+    console.log(menu)
 
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
         const rememberedAccent = localStorage.getItem('accent');
-        const rememberedMenu = localStorage.getItem('open menu');
-        if (rememberedTheme && rememberedAccent && rememberedMenu) {
+        // const rememberedMenu = localStorage.getItem('open menu');
+        if (rememberedTheme && rememberedAccent) {
             setTheme(rememberedTheme);
             setAccent(rememberedAccent);
-            setMenu(rememberedMenu)
+            // setMenu(rememberedMenu)
         }
 
     }, [setTheme, setAccent, setMenu]);
@@ -75,7 +80,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             <Container>
                 <Menu/>
 
-                <Main theme={themes[theme]}>
+                <Main menu={menu} theme={themes[theme]}>
                     <SubContainer theme={themes[theme]}>
                         {children}
                     </SubContainer>

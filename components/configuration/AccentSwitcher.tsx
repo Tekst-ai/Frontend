@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
 

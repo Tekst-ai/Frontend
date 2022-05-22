@@ -54,6 +54,7 @@ const NavigationList = styled.ul<NavigationListProps>`
             svg {
                 margin-right: auto;
                 transition: all 0.3s ease-in-out;
+                margin-left: 0.15rem;
             }
 
             span {
@@ -67,7 +68,7 @@ const NavigationList = styled.ul<NavigationListProps>`
 
         &:first-of-type {
             svg {
-                margin-left: 0.11rem;
+                margin-left: 0.26rem;
             }
         }
 
