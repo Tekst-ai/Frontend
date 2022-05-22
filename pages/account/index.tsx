@@ -27,7 +27,7 @@ const LeftContainer = styled.div<LeftContainerProps>`
         overflow: hidden;
         width: 12rem;
         height: 12rem;
-        box-shadow: ${({ theme }) => theme.boxShadow};
+        box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     }
 
     div:last-of-type {

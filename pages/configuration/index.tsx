@@ -15,6 +15,10 @@ export const TitleContainer = styled.div`
 
 const SubContainer = styled.div`
     margin-bottom: 2.5rem;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
     
     h2 {
         margin-bottom: 1.5rem;

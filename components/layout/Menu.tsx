@@ -2,12 +2,11 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-import useStore, { useAccent } from '../../store'
+import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
 
@@ -20,10 +19,12 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
     padding-bottom: calc(2rem - 0.34375rem);
-    width: ${(ContainerProps) => ContainerProps.isOpen ? "25rem" : "5rem"};
+    width: ${(ContainerProps) => ContainerProps.isOpen ? "20rem" : "5rem"};
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-out;
+    height: 100vh;
+    position: fixed;
 `
 
 interface ImageContainerProps {
@@ -92,12 +93,18 @@ const Menu: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
     const router = useRouter();
+    // const menu = useMenu((s: any) => s.menu);
     
     const [isOpen, setIsOpen] = useState(true)
 
     const handleOpen = (open: boolean) => {
         setIsOpen(open)
     }
+
+    // useEffect(() => {
+    //     setIsOpen(menu)
+    // }, [menu])
+    
 
     return (
         <Container isOpen={isOpen}>
