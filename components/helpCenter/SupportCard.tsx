@@ -73,7 +73,7 @@ const SupportCard: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container>
+        <Container id="support">
             <SubContainer theme={themes[theme]}>
                 <h2>Niet gevonden wat je zocht?</h2>
                 <p>Klanten komen bij ons op de eerste plaats. We helpen je graag verder, aarzel niet om ons te mailen of bellen! Groeten van team tekst.ai 💙</p>

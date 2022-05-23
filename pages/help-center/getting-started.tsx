@@ -1,20 +1,25 @@
 import type { NextPage } from 'next'
 
-import { HelpNavigation } from '../../components/helpCenter'
+import { HelpNavigation, SupportCard } from '../../components/helpCenter'
+import { StepListing } from '../../components/helpCenter/gettingStarted'
+import HelpTitle from '../../components/helpCenter/HelpTitle'
 
 const GettingStarted: NextPage = () => {
     return (
-      <div>
-          <div></div>
+        <div>
+            <div></div>
 
-          <HelpNavigation/>
+            <HelpNavigation/>
 
-          <div>
-              <h1>Aan de slag</h1>
+            <HelpTitle
+                title="Aan de slag"
+                text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
+            />
 
-              <p>Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder</p>
-          </div>
-      </div>
+            <StepListing/>
+
+            <SupportCard/>
+        </div>
     )
   }
   
