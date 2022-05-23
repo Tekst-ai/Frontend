@@ -16,7 +16,9 @@ const GettingStarted: NextPage = () => {
                 text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
             />
 
-            <StepListing/>
+            <StepListing title="Installatie"/>
+
+            <StepListing title="Gebruik"/>
 
             <SupportCard/>
         </div>

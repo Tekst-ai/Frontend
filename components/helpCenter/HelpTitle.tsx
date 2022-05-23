@@ -14,8 +14,12 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60rem;
 
     h1 {
         font-size: 2.5rem;
