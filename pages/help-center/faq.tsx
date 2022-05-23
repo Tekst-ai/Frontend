@@ -1,12 +1,19 @@
 import type { NextPage } from 'next'
+import styled from 'styled-components'
+
 import { HelpNavigation, SupportCard } from '../../components/helpCenter'
 import { QuestionList } from '../../components/helpCenter/faq'
+import HelpBackgroundSmall from '../../components/helpCenter/HelpBackgroundSmall'
 import HelpTitle from '../../components/helpCenter/HelpTitle'
+
+const Container = styled.div`
+    position: relative;
+`
 
 const Faq: NextPage = () => {
     return (
-        <div>
-            <div></div>
+        <Container>
+            <HelpBackgroundSmall/>
 
             <HelpNavigation/>
 
@@ -18,7 +25,7 @@ const Faq: NextPage = () => {
             <QuestionList/>
 
             <SupportCard/>
-        </div>
+        </Container>
     )
   }
   

@@ -13,11 +13,11 @@ const Container = styled.ul`
 const HelpNavigation: NextPage = () => {
     return (
         <Container>
-            <HelpNavigationCard icon={ <IoRocket fontSize={40}/> } link="/help-center/getting-started" title="Aan de slag"/>
+            <HelpNavigationCard icon={ <IoRocket fontSize={40}/> } link="/help-center/getting-started" title="Aan de slag" type="link"/>
             
-            <HelpNavigationCard icon={ <IoChatbubbles fontSize={40}/> } link="/help-center/faq" title="Veelgestelde vragen"/>
+            <HelpNavigationCard icon={ <IoChatbubbles fontSize={40}/> } link="/help-center/faq" title="Veelgestelde vragen" type="link"/>
            
-            <HelpNavigationCard icon={ <IoHelpBuoy fontSize={40}/> } link="#support" title="Support"/>
+            <HelpNavigationCard icon={ <IoHelpBuoy fontSize={40}/> } link="#support" title="Support" type="button"/>
         </Container>
     )
 }

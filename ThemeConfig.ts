@@ -107,11 +107,11 @@ export const accentColors = {
     },
     teal: {
         color: Colors.accentTeal,
-        text: Colors.whitePri,
+        text: Colors.blackPri,
     },
     green: {
         color: Colors.accentGreen,
-        text: Colors.whitePri,
+        text: Colors.blackPri,
     },
 }
 

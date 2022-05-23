@@ -1,13 +1,19 @@
 import type { NextPage } from 'next'
+import styled from 'styled-components'
 
 import { HelpNavigation, SupportCard } from '../../components/helpCenter'
 import { StepListing } from '../../components/helpCenter/gettingStarted'
+import HelpBackgroundSmall from '../../components/helpCenter/HelpBackgroundSmall'
 import HelpTitle from '../../components/helpCenter/HelpTitle'
+
+const Container = styled.div`
+    position: relative;
+`
 
 const GettingStarted: NextPage = () => {
     return (
-        <div>
-            <div></div>
+        <Container>
+            <HelpBackgroundSmall/>
 
             <HelpNavigation/>
 
@@ -21,7 +27,7 @@ const GettingStarted: NextPage = () => {
             <StepListing title="Gebruik"/>
 
             <SupportCard/>
-        </div>
+        </Container>
     )
   }
   
