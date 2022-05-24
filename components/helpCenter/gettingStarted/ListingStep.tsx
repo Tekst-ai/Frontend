@@ -87,33 +87,6 @@ const Step = styled.div<StepProps>`
         transform: translateX(-50%);
         box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
     }
-
-
-    /* width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    position: absolute;
-    left: 0;
-    box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
-    
-    span {
-        font-size: 1.125rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    &::after {
-        content: '';
-        width: 4px;
-        height: 100%;
-        background: ${({ accent }) => accent.color};
-        position: absolute;
-        left: calc(0.875rem - 2px);
-        top: calc(1.75rem + 0.25rem);
-        box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
-    } */
 `
 
 const ListingStep: NextPage<ListingStepProps> = ({ step, title, text }) => {

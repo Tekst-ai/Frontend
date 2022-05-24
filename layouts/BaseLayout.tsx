@@ -59,7 +59,6 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
     const menu = useMenu((s: any) => s.menu);
-    console.log(menu)
 
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');

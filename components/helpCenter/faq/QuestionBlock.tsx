@@ -15,7 +15,7 @@ interface ContainerProps {
     theme: any
 }
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.li<ContainerProps>`
     div:last-child {
         div:last-of-type {
             padding-bottom: 0.5rem;

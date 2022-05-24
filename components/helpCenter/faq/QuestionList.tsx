@@ -3,7 +3,11 @@ import styled from 'styled-components'
 
 import QuestionBlock from './QuestionBlock'
 
-const Container = styled.div`
+interface QuestionListProps {
+    data: any
+}
+
+const Container = styled.ul`
     padding-left: 1.8rem;
     padding-right: 1.8rem;
     margin-left: auto;
@@ -11,14 +15,12 @@ const Container = styled.div`
     max-width: 60rem;
 `
 
-const QuestionList: NextPage = () => {
+const QuestionList: NextPage<QuestionListProps> = ({ data }) => {
     return (
         <Container>
-            <QuestionBlock question="Mijn synchronisatie status is gedeeltelijk?" answer="Als u zich pas een paar uur geleden voor het eerste aanmeldde is dit gebruikelijk. Wacht maximaal 24 uur voordat de applicatie gesynchroniseerd is met uw e-mails.
-Als dit niet het geval is dan kan dit komen door een grote hoeveelheid e-mails die binnenkomen. Dit zou zichzelf na een paar uur moeten oplossen.
-Als het dan nog steeds niet synchroniseert, naam dan contact met ons op."/>
-            <QuestionBlock question="Welke betaalmethoden zijn er mogelijk?" answer="Short answer Short answer Short answer Short answer Short answer Short answer Short answer"/>
-            <QuestionBlock question="Hoe werkt het?" answer="Short answer Short answer Short answer Short answer Short answer Short answer Short answer"/>
+            {data.map((item: any) => (
+                <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.answer}/>
+            ))}
         </Container>
     )
 }
