@@ -7,12 +7,17 @@ import { Colors } from '../../variables'
 import useStore from '../../store'
 
 interface ErrorProps {
-    message: string
+    message: string,
+    padding: number,
 }
 
-const Container = styled.div`
-    padding-left: 3rem;
-    padding-right: 3rem;
+interface ContainerProps {
+    padding: number,
+}
+
+const Container = styled.div<ContainerProps>`
+    padding-left: ${({ padding }) => padding}rem;
+    padding-right: ${({ padding }) => padding}rem;
     max-width: 60rem;
     margin-left: auto;
     margin-right: auto;
@@ -75,7 +80,7 @@ const Message = styled.p<MessageProps>`
     display: ${({ open }) => open ? 'block' : 'none'};
 `
 
-const Error: NextPage<ErrorProps> = ({ message }) => {
+const Error: NextPage<ErrorProps> = ({ message, padding }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     const [open, setOpen] = useState(false)
@@ -85,7 +90,7 @@ const Error: NextPage<ErrorProps> = ({ message }) => {
     }
 
     return (
-        <Container>
+        <Container padding={padding}>
             <SubContainer open={open} theme={themes[theme]}>
                 <div>
                     <FiAlertTriangle color={Colors.error} strokeWidth={2.5} fontSize={28}/>

@@ -34,7 +34,7 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {
                 data.map((item: any) => (
                     <StepListing key={item.id} title={item.attributes.title} steps={item.attributes.step}/>
                 )):
-                <Error message={error}/>
+                <Error message={error} padding={3}/>
             }
 
             <SupportCard/>

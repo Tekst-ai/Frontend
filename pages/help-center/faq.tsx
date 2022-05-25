@@ -14,10 +14,11 @@ const Container = styled.div`
 `
 
 interface FaqProps {
-    data: any
+    data: any,
+    error: string
 }
 
-const Faq: NextPage<FaqProps> = ({ data }) => {
+const Faq: NextPage<FaqProps> = ({ data, error }) => {
     return (
         <Container>
             <HelpBackgroundSmall/>
@@ -29,7 +30,7 @@ const Faq: NextPage<FaqProps> = ({ data }) => {
                 text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
             />
 
-            <QuestionList data={data}/>
+            <QuestionList data={data} error={error}/>
 
             <SupportCard/>
         </Container>
@@ -37,13 +38,12 @@ const Faq: NextPage<FaqProps> = ({ data }) => {
 }
 
     export async function getStaticProps() {
-        const { data } = await client.query({query: GET_FAQ_ITEMS});
-
-        return {
-            props: {
-                data: data.faqs.data,
-            },
-        };
+        try {
+            const { data } = await client.query({query: GET_FAQ_ITEMS});
+            return { props: { data: data.faqs.data } };
+        } catch (error: any) {
+            return { props: { data: null, error: error.message } };
+        }
     }
   
 export default Faq

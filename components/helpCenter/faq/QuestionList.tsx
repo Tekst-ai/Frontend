@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { Error } from '../../alerts'
 
 import QuestionBlock from './QuestionBlock'
 
 interface QuestionListProps {
-    data: any
+    data: any,
+    error: string
 }
 
 const Container = styled.ul`
@@ -15,12 +17,15 @@ const Container = styled.ul`
     max-width: 60rem;
 `
 
-const QuestionList: NextPage<QuestionListProps> = ({ data }) => {
+const QuestionList: NextPage<QuestionListProps> = ({ data, error }) => {
     return (
         <Container>
-            {data.map((item: any) => (
-                <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.answer}/>
-            ))}
+            { data !== undefined && data !== null? 
+                data.map((item: any) => (
+                    <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.answer}/>
+                )):
+                <Error message={error} padding={1.2}/>
+            }
         </Container>
     )
 }
