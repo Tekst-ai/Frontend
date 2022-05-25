@@ -5,10 +5,18 @@ import { IoCall, IoMail } from "react-icons/io5";
 import themes, { Theme } from "../../ThemeConfig";
 import useStore from "../../store";
 
-const Container = styled.div`
+interface SupportCardProps {
+    small?: boolean
+}
+
+interface Containerprops {
+    small: boolean
+}
+
+const Container = styled.div<Containerprops>`
     display: flex;
     justify-content: center;
-    margin-top: 8rem;
+    margin-top: ${({ small }) => small ? "6rem" : "8rem"};
 `
 
 interface SubContainerProps {
@@ -69,11 +77,11 @@ const SupportList = styled.ul<SupportListProps>`
     }
 `
 
-const SupportCard: NextPage = () => {
+const SupportCard: NextPage<SupportCardProps> = ({ small = false }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container id="support">
+        <Container small={small}>
             <SubContainer theme={themes[theme]}>
                 <h2>Niet gevonden wat je zocht?</h2>
                 <p>Klanten komen bij ons op de eerste plaats. We helpen je graag verder, aarzel niet om ons te mailen of bellen! Groeten van team tekst.ai 💙</p>

@@ -4,6 +4,7 @@ import ListingStep from './ListingStep'
 
 interface StepListingProps {
     title: string,
+    steps: any
 }
 
 const Container = styled.div`
@@ -20,16 +21,15 @@ const Container = styled.div`
     }
 `
 
-const StepListing: NextPage<StepListingProps> = ({ title }) => {
+const StepListing: NextPage<StepListingProps> = ({ title, steps }) => {
     return (
         <Container>
             <h2>{ title }</h2>
 
             <ul>
-                <ListingStep step={1} title="Inloggen" text="Ga naar app.tekst.ai/login en login met het e-mailadres die je gekregen hebt van je werk."/>
-                <ListingStep step={2} title="Inloggen" text="Ga naar app.tekst.ai/login en login met het e-mailadres die je gekregen hebt van je werk."/>
-                <ListingStep step={3} title="Inloggen" text="Ga naar app.tekst.ai/login en login met het e-mailadres die je gekregen hebt van je werk."/>
-                <ListingStep step={4} title="Inloggen" text="Ga naar app.tekst.ai/login en login met het e-mailadres die je gekregen hebt van je werk."/>
+                {steps.map((step: any, index: number) => (
+                    <ListingStep key={step.id} step={index + 1} title={step.title} text={step.content}/>
+                ))}
             </ul>
         </Container>
     )
