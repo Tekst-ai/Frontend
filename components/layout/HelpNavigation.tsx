@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Link from 'next/link';
 import styled from 'styled-components';
 import { FiHelpCircle } from 'react-icons/fi'
-import { IoChevronDownOutline } from 'react-icons/io5'
+import { IoChevronDownOutline, IoRocket, IoChatbubbles } from 'react-icons/io5'
 
 import { Colors } from '../../variables';
 import { useRouter } from 'next/router';
@@ -38,7 +38,7 @@ const Container = styled.div<HelpNavigationListProps>`
             opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
         }
         
-        svg:last-of-type {
+        /* svg:last-of-type {
             position: absolute;
             transition: all 0.3s ease-in-out;
             right: 0;
@@ -47,7 +47,7 @@ const Container = styled.div<HelpNavigationListProps>`
             path {
                 stroke-width: 70px;
             }
-        }
+        } */
     }
 `
 
@@ -65,6 +65,42 @@ const LinkText = styled.a<LinkTextProps>`
     }
 `
 
+interface SubNavigationProps {
+    isOpen: boolean,
+    accent: any,
+    theme: any
+}
+
+const SubNavigation = styled.ul<SubNavigationProps>`
+    margin-top: 1rem;
+    margin-left: ${({ isOpen }) => isOpen ? "2.25rem" : "0"};
+    opacity: ${({ isOpen }) => isOpen ? "1" : "0"};
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    width: 100%;
+    
+    li {
+        a {
+            span {
+                font-size: 1rem;
+                left: 1.75rem;
+            }   
+        }
+
+        &:first-of-type {
+            margin-bottom: 1rem;
+        }
+    }
+`
+
+const LinkTextAlt = styled(LinkText)`
+    color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent.color : pathName.includes("/help-center") ? ({ theme }) => theme.text : ({ theme }) => theme.textSec};
+    
+    &:hover {
+        color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent.color : pathName.includes("/help-center") ? ({ accent }) => accent.color : ({ theme }) => theme.text};
+    }
+`
+
 const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const router = useRouter();
     const accent = useAccent((s: any) => s.accent);
@@ -78,9 +114,32 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
                     <span>Helpcentrum</span>
 
-                    <IoChevronDownOutline fontSize={16}/>
+                    {/* <IoChevronDownOutline fontSize={16}/> */}
                 </LinkText>
+
             </Link>
+
+            <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                <li>
+                    <Link href={"/help-center/getting-started"} passHref>
+                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            <IoRocket fontSize={16} strokeWidth={2.25}/>
+
+                            <span>Aan de slag</span>
+                        </LinkTextAlt>
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href={"/help-center/faq"} passHref>
+                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            <IoChatbubbles fontSize={16} strokeWidth={2.25}/>
+
+                            <span>Veelgestelde vragen</span>
+                        </LinkTextAlt>
+                    </Link>
+                </li>
+            </SubNavigation>
         </Container>
     )
 }
