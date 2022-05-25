@@ -1,3 +1,4 @@
+import { useAccent } from './store';
 import { Colors } from './variables'
 
 export interface Theme {

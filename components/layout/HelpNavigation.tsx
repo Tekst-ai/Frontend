@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { FiHelpCircle } from 'react-icons/fi'
 import { IoChevronDownOutline, IoRocket, IoChatbubbles } from 'react-icons/io5'
 
-import { Colors } from '../../variables';
 import { useRouter } from 'next/router';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
@@ -72,7 +71,7 @@ interface SubNavigationProps {
 }
 
 const SubNavigation = styled.ul<SubNavigationProps>`
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     margin-left: ${({ isOpen }) => isOpen ? "2.25rem" : "0"};
     opacity: ${({ isOpen }) => isOpen ? "1" : "0"};
     transition: all 0.2s ease-in-out;
@@ -88,7 +87,7 @@ const SubNavigation = styled.ul<SubNavigationProps>`
         }
 
         &:first-of-type {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
     }
 `

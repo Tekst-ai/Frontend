@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
 
-import themes, { Theme } from '../ThemeConfig';
+import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu } from '../components/layout';
 
@@ -15,6 +15,11 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
     transition: all 0.3s ease-in-out;
+
+    & ::selection {
+        color: ${({ accent }) => accent.text};
+        background: ${({ accent }) => accent.color};
+    }
   }
 `;
 
@@ -55,6 +60,7 @@ const SubContainer = styled.div<SubContainerProps>`
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
+    const accent = useAccent((s: any) => s.accent);
     const setTheme = useStore((s: any) => s.setTheme);
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
@@ -74,7 +80,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 
     return (
         <>
-            <GlobalStyle theme={themes[theme]}/>
+            <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}/>
 
             <Container>
                 <Menu/>
