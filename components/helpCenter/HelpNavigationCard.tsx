@@ -61,7 +61,7 @@ interface ButtonContentProps {
 }
 
 const ButtonContent = styled.button<ButtonContentProps>`
-    background: ${({ theme }) => theme.background};
+    background: ${({ theme }) => theme.backgroundAlt};
     padding: 2rem 0 1.5rem 0;
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};

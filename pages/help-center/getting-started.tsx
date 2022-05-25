@@ -7,16 +7,18 @@ import HelpBackgroundSmall from '../../components/helpCenter/HelpBackgroundSmall
 import HelpTitle from '../../components/helpCenter/HelpTitle'
 import { GET_STEP_ITEMS } from '../../graphql/stepItems'
 import client from '../../helpers/apollo-client'
+import { Error } from '../../components/alerts'
 
 interface GettingStartedProps {
-    data: any
+    data: any,
+    error: string
 }
 
 const Container = styled.div`
     position: relative;
 `
 
-const GettingStarted: NextPage<GettingStartedProps> = ({ data }) => {
+const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {    
     return (
         <Container>
             <HelpBackgroundSmall/>
@@ -28,11 +30,12 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data }) => {
                 text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
             />
 
-            {data.map((item: any) => (
-                <StepListing key={item.id} title={item.attributes.title} steps={item.attributes.step}/>
-            ))}
-
-            {/* <StepListing title="Gebruik"/> */}
+            { data !== undefined && data !== null ?
+                data.map((item: any) => (
+                    <StepListing key={item.id} title={item.attributes.title} steps={item.attributes.step}/>
+                )):
+                <Error message={error}/>
+            }
 
             <SupportCard/>
         </Container>
@@ -40,13 +43,12 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data }) => {
 }
 
     export async function getStaticProps() {
-        const { data } = await client.query({query: GET_STEP_ITEMS});
-
-        return {
-            props: {
-                data: data.steplists.data,
-            },
-        };
+        try {
+            const { data } = await client.query({query: GET_STEP_ITEMS});
+            return { props: { data: data.steplists.data } };
+        } catch (error: any) {
+            return ({ props: { data: null, error: error.message } });
+        }
     }
   
   export default GettingStarted

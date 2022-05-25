@@ -10,7 +10,7 @@ export interface Theme {
         textSec: string,
         boxShadow: string,
         lineDark: string,
-        lineLight: string
+        lineLight: string,
     },
     dark: {
         name: string,
@@ -21,7 +21,7 @@ export interface Theme {
         textSec: string,
         boxShadow: string,
         lineDark: string,
-        lineLight: string
+        lineLight: string,
     }
     auto: {
         name: string,
@@ -32,7 +32,7 @@ export interface Theme {
         textSec: string,
         boxShadow: string,
         lineDark: string,
-        lineLight: string
+        lineLight: string,
     }
 }
 
@@ -57,7 +57,7 @@ const themes: Theme = {
         textSec: Colors.textGrey,
         boxShadow: `${Colors.blackPri}66`,
         lineDark: Colors.blackPri,
-        lineLight: Colors.blackSec
+        lineLight: Colors.blackSec,
     },
     auto: {
         name: 'auto',
@@ -68,7 +68,7 @@ const themes: Theme = {
         textSec: Colors.textGrey,
         boxShadow: `${Colors.blackPri}66`,
         lineDark: Colors.blackPri,
-        lineLight: Colors.blackSec
+        lineLight: Colors.blackSec,
     },
 };
 
