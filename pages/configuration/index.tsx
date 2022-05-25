@@ -6,6 +6,7 @@ import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 
 export const TitleContainer = styled.div`
     margin-bottom: 2.5rem;
+    /* width: 100%; */
 
     p {
         margin-top: 0.625rem;

@@ -18,6 +18,9 @@ export const Colors = {
 
     error: '#f52727',
 
+    positive: '#10D064',
+    negative: '#E22649',
+
     accentDefault: '#EF1E6E',
     accentYellow: '#FDBA2C',
     accentOrange: '#FF7F00',
