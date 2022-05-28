@@ -111,10 +111,10 @@ const Menu: NextPage = () => {
             <Link href={"/"} passHref>
                 <ImageContainer isOpen={isOpen}>
                     <Image
-                        // src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
-                        src={"/static/images/logo-no-text.png"} 
-                        // width={isOpen ? 75 : 31}
-                        width={31}
+                        src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
+                        // src={"/static/images/logo-no-text.png"} 
+                        width={isOpen ? 75 : 31}
+                        // width={31}
                         height={41}
                         alt="Logo of Tekst.ai"/>
                 </ImageContainer>

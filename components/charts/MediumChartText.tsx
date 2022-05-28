@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { PercentageCalculator } from '../../services/calculations'
-import { useEffect, useState } from 'react'
 import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
 

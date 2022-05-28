@@ -23,7 +23,6 @@ const Table = styled.table<ContainerProps>`
     border-collapse: collapse;
 
     th {
-        // TODO accent color
         text-align: left;
         color: ${({ accent }) => accent.color};
         font-weight: 500;
