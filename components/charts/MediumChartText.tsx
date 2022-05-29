@@ -6,6 +6,8 @@ import useStore, { useAccent } from '../../store'
 import { PercentageCalculator } from '../../services/calculations'
 import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
+import MediumLineChart from './MediumLineChart'
+import { useCallback, useRef, useState } from 'react'
 
 interface MediumChartTextProps {
     marginRight?: boolean,
@@ -26,7 +28,6 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
     background: ${({ theme }) => theme.background};
     width: 33.333%;
-    /* height: 30%; */
     margin-right: ${({ marginRight }) => marginRight ? '1.25rem' : '0'};
     margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
     border-radius: 10px;
@@ -93,9 +94,27 @@ const NumberContainer = styled.div<NumberContainerProps>`
 
 `
 
+interface ChartContainerProps {
+    height: number
+}
+
+const ChartContainer = styled.div<ChartContainerProps>`
+    margin-top: 0.5rem;
+    width: 100%;
+    height: calc(100% - 0.5rem - ${({ height }) => height}px);
+`
+
 const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, marginBottom = false, icon, data, oldData, title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
+
+    const [height, setHeight] = useState(0)
+
+    const refContainer = useCallback((node: any) => {
+        if (node !== null) {
+            setHeight(node.clientHeight);
+        }
+    }, [])
 
     return (
         <Container
@@ -104,7 +123,7 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, 
             marginRight={marginRight}
             marginBottom={marginBottom}
         >
-            <HeaderContainer>
+            <HeaderContainer ref={refContainer}>
                 <IconContainer accent={accentColors[accent as keyof typeof accentColors]}>
                     { icon }
                 </IconContainer>
@@ -122,9 +141,9 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, 
                 </NumberContainer>
             </HeaderContainer>
 
-            {/* <div>
-                Chart
-            </div> */}
+            <ChartContainer height={height}>
+                <MediumLineChart/>
+            </ChartContainer>
         </Container>
     )
 }

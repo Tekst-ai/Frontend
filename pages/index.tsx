@@ -50,7 +50,9 @@ const Dashboard: NextPage = () => {
             <StatsContainer height={height}>
                 <TopContainer>
                     <MediumChartText marginRight={true} icon={<IoMailOpen fontSize={26}/>} data={5462} oldData={4987} title={"E-mails"}/>
+                    
                     <MediumChartText marginRight={true} icon={<IoGrid fontSize={26}/>} data={12} oldData={16} title={"Categorieën"}/>
+                    
                     <CategoryListSmall/>
                 </TopContainer>
 
