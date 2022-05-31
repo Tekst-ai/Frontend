@@ -20,40 +20,101 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-    )
+)
     
-import { Colors } from "../../variables";
 import styled from "styled-components";
-import { useAccent } from "../../store";
-import { accentColors } from "../../ThemeConfig";
+import useStore, { useAccent } from "../../store";
+import themes, { accentColors, Theme } from "../../ThemeConfig";
+import { Colors } from "../../variables";
+import { useCallback, useRef, useState } from "react";
 
 const Container = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
+    /* height: calc(100% + 0.5rem);
+    transform: translateY(-0.5rem); */
 
     canvas {
         position: absolute;
     }
 `
 
+interface FadeProps {
+    theme: any,
+}
+
+const Fade = styled.div<FadeProps>`
+    position: absolute;
+    background: linear-gradient(90deg, ${({ theme }) => theme.background} 0%, ${({ theme }) => theme.background} 30%, ${({ theme }) => theme.background}00 100%);
+    width: 10%;
+    height: 100%;
+`
+
 const MediumLineChart: NextPage = () => {
     const accent = useAccent((s: any) => s.accent);
     const color = accentColors[accent as keyof typeof accentColors]
+    const theme: keyof Theme = useStore((s: any) => s.theme)
+
+    // const ctx: any = useRef(null)
+
+    // let gradient;
+    // if (ctx.current !== null) {
+    //     let ctx2: CanvasRenderingContext2D = ctx.current.canvas.getContext('2d')
+    //     gradient = ctx2.createLinearGradient(0, 0, 0, 0);
+    //     gradient.addColorStop(0, color.color);
+    //     gradient.addColorStop(1, color.text);
+    //     // gradient = color.color
+    // }
+    // console.log(gradient)
+
+
+    
+    
+    // const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+
+    // const ctx = useCallback((node: any) => {
+    //     if (node !== null && node.firstChild !== undefined) {
+    //         let ctx2: CanvasRenderingContext2D = node.firstChild.getContext('2d')
+    //         const gradient = ctx2.createLinearGradient(0, 0, 300, 300);
+    //         gradient.addColorStop(0, color.color);
+    //         gradient.addColorStop(1, color.color);
+    //         return gradient
+    //     }
+    // }, [color])
+
+    // const gradient = useCallback((ctx: CanvasRenderingContext2D) => {
+    //     const gradient = ctx.createLinearGradient(0, 0, 0, 500);
+    //     gradient.addColorStop(0, color.color);
+    //     gradient.addColorStop(1, color.text);
+    //     return gradient;
+    // }, [color])
 
     const data = {
         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         datasets: [
             {
                 data: [1000, 4000, 5000, 2000, 7000, 4000, 2000],
+                pointRadius: [0, 0, 0, 0, 0, 0, 5]
             }
         ]
     }
+
+    // const canvas : any = document?.getElementById("canvas")
+
+    // const ctx = canvas?.getContext("2d");
+    // const gradient = ctx?.createLinearGradient(0, 0, 0, 500);
+    // gradient?.addColorStop(0, color.color);
+    // gradient?.addColorStop(1, color.text);
+
 
     const options = {
         plugins: {
             legend: {
                 display: false
+            },
+            tooltip: {
+                enabled: false
             },
         },
         elements: {
@@ -61,8 +122,15 @@ const MediumLineChart: NextPage = () => {
                 tension: 0.5,
                 borderWidth: 3,
                 borderColor: color.color,
-                fill: "start",
-                // backgroundColor: ,
+                fill: true,
+                backgroundColor: color.color + "26",
+            },
+            point: {
+                backgroundColor: color.text,
+                borderWidth: 2,
+                borderColor: color.color,
+                hoverBorderWidth: 2,
+                hoverRadius: 5,
             }
         },
         scales: {
@@ -71,6 +139,7 @@ const MediumLineChart: NextPage = () => {
             },
             YAxis: {
                 display: false,
+                beginAtZero: true,
             }
         },
         // responsive: false,
@@ -80,7 +149,9 @@ const MediumLineChart: NextPage = () => {
 
     return (
         <Container>
-            <Line data={data} options={options}/>
+            <Line id="canvas" data={data} options={options}/>
+
+            <Fade theme={themes[theme]} />
         </Container>
     )
 }

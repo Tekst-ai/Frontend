@@ -1,5 +1,9 @@
 import MediumChartText from "./MediumChartText";
+import BigChartNoText from "./BigChartNoText";
+import BigChartDonut from "./BigChartDonut";
 
 export {
-    MediumChartText
+    MediumChartText,
+    BigChartNoText,
+    BigChartDonut
 }

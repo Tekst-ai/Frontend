@@ -12,7 +12,7 @@ interface LayoutProps {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${({ theme }: any ) => theme.background};
+    background: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
     transition: all 0.3s ease-in-out;
 

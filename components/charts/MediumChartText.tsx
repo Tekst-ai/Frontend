@@ -7,7 +7,7 @@ import { PercentageCalculator } from '../../services/calculations'
 import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
 import MediumLineChart from './MediumLineChart'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 interface MediumChartTextProps {
     marginRight?: boolean,
@@ -32,12 +32,14 @@ const Container = styled.div<ContainerProps>`
     margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
     border-radius: 10px;
     padding: 1.25rem;
+    padding-bottom: 0.5rem;
     box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
 `
 
 const HeaderContainer = styled.div`
     display: flex;
     align-items: flex-start;
+    /* margin-bottom: 0.5rem; */
 `
 
 interface IconContainerProps {
@@ -87,8 +89,8 @@ const NumberContainer = styled.div<NumberContainerProps>`
 
     div:last-of-type {
         p {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 500;
         }
     }
 
@@ -99,9 +101,8 @@ interface ChartContainerProps {
 }
 
 const ChartContainer = styled.div<ChartContainerProps>`
-    margin-top: 0.5rem;
     width: 100%;
-    height: calc(100% - 0.5rem - ${({ height }) => height}px);
+    height: calc(100% - ${({ height }) => height}px);
 `
 
 const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, marginBottom = false, icon, data, oldData, title }) => {

@@ -2,10 +2,10 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { IoMailOpen, IoGrid } from 'react-icons/io5'
 
-import { MediumChartText } from '../components/charts'
+import { BigChartNoText, BigChartDonut, MediumChartText } from '../components/charts'
 import { TitleContainer } from './configuration'
 import { CategoryListSmall } from '../components/lists'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const Container = styled.div`
     height: 100%;
@@ -16,18 +16,19 @@ interface StatsContainerProps {
 }
 
 const StatsContainer = styled.div<StatsContainerProps>`
-    height: calc(100% - 2.5rem - ${({ height }) => height}px);
+    height: calc(100% - 2rem - ${({ height }) => height}px);
 `
 
 const TopContainer = styled.div`
     display: flex;
-    height: 40%;
+    height: 37%;
 `
 
 const BottomContainer = styled.div`
     width: 100%;
-    height: calc(60% - 1.25rem);
+    height: calc(63% - 1.25rem);
     margin-top: 1.25rem;
+    display: flex;
 `
 
 const Dashboard: NextPage = () => {
@@ -57,7 +58,9 @@ const Dashboard: NextPage = () => {
                 </TopContainer>
 
                 <BottomContainer>
+                    <BigChartNoText marginRight={true} title="E-mail overzicht"/>
 
+                    <BigChartDonut/>
                 </BottomContainer>
             </StatsContainer>
         </Container>
