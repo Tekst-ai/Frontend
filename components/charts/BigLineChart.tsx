@@ -22,9 +22,9 @@ ChartJS.register(
     Legend,
     Filler
 )
+
 import themes, { accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
-import moment from "moment";
 import { last7Days } from "../../services/date";
 import { Colors } from "../../variables";
 
@@ -58,6 +58,7 @@ const BigLineChart: NextPage = () => {
         labels: last7Days().reverse(),
         datasets: [
             {
+                label: "dataset 1",
                 data: [1264, 1987, 1024, 511, 805, 1547, 1235],
                 pointRadius: [0, 0, 0, 0, 0, 0, 5]
             }
