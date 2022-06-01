@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     & ::selection {
         color: ${({ accent }) => accent.text};
@@ -38,9 +38,9 @@ const Main = styled.main<MainProps>`
     padding: 1.25rem;
     padding-left: 0;
     width: 100%;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: 1;
-    margin-left: ${(MainProps) => MainProps.menu ? "20rem" : "5rem"};
+    margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
     /* position: fixed; */
 `
 
@@ -54,7 +54,7 @@ const SubContainer = styled.div<SubContainerProps>`
     border-radius: 15px;
     min-height: calc(100vh - 2.5rem);
     height: 100%;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     /* overflow-y: auto; */
 `
 

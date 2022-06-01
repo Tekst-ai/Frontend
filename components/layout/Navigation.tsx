@@ -16,18 +16,18 @@ interface ContainerProps {
     theme: any
 }
 
-const Container = styled.nav`
+const Container = styled.nav<ContainerProps>`
     display: flex;
     flex-direction: column;
 
     &:after {
         content: '';
-        width: calc(100% - 20px);
-        transform: translateX(10px);
+        width: 100%;
+        /* transform: translateX(8px); */
         height: 2px;
         background: ${({ theme }) => theme.lineLight};
         margin-top: 0.8125rem;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 `
 
@@ -37,31 +37,35 @@ interface NavigationListProps {
 
 const NavigationList = styled.ul<NavigationListProps>`
     li {
-        margin-bottom: 0.375rem;
+        /* margin-bottom: 0.375rem; */
+        /* margin-bottom: 0.25rem; */
         display: flex;
         
         a {
             width: 100%;
             height: auto;
-            padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.5rem 1rem" : "0.75rem"};
+            /* padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.75rem 1rem" : "0.75rem"}; */
+            padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.875rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* align-items: center; */
             position: relative;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
             
             svg {
                 margin-right: auto;
-                transition: all 0.3s ease-in-out;
+                transition: all 0.2s ease-in-out;
                 margin-left: 0.15rem;
             }
 
             span {
-                transition: all 0.3s ease-in-out;
-                font-size: 1.125rem;
+                transition: all 0.2s ease-in-out;
+                /* font-size: 1.25rem; */
+                font-size: 1rem;
                 font-weight: 500;
                 margin-left: 1rem;
+                /* margin-left: 0.75rem; */
                 left: 2.25rem
             }
         }
@@ -86,20 +90,32 @@ interface LinkTextProps {
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : "transparent"};
-    
+    /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : "transparent"}; */
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : "transparent"};
+    /* box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 1px " + LinkTextProps.theme.boxShadow : "0 1px 1px " + LinkTextProps.theme.background}; */
+
     & span {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.text : "inherit"};
+        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : "inherit"}; */
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.text : ({theme}) => theme.textSec};
         opacity: ${(LinkTextProps) => LinkTextProps.open ? 1 : 0};
         position: absolute;
     }
     
     & svg {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.text : "inherit"};
+        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.text : "inherit"}; */
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({theme}) => theme.textSec};
     }
 
     &:hover {
-        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight};
+        /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight}; */
+        
+        span {
+            color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.text : ({ theme }) => theme.text};
+        }
+        
+        svg {
+            color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
+        }
     }
 `
 
@@ -114,6 +130,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={"/"} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
+                            {/* <FiHome fontSize={18} strokeWidth={2.5}/> */}
                             <FiHome fontSize={18} strokeWidth={2.5}/>
 
                             <span>Dashboard</span>
@@ -124,7 +141,8 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={"/statistics"} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
-                            <FiBarChart2 fontSize={20} strokeWidth={3}/>
+                            {/* <FiBarChart2 fontSize={20} strokeWidth={3}/> */}
+                            <FiBarChart2 fontSize={18} strokeWidth={3}/>
 
                             <span>Statistieken</span>
                         </LinkText>
@@ -134,7 +152,8 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={"/categories"} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} open={isOpen}>
-                            <FiGrid fontSize={20} strokeWidth={2.25}/>
+                            {/* <FiGrid fontSize={20} strokeWidth={2.25}/> */}
+                            <FiGrid fontSize={18} strokeWidth={2.25}/>
 
                             <span>Categorieën</span>
                         </LinkText>
