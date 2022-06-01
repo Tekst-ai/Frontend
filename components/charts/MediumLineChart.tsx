@@ -119,18 +119,19 @@ const MediumLineChart: NextPage = () => {
         },
         elements: {
             line: {
-                tension: 0.5,
+                tension: 0.4,
                 borderWidth: 3,
                 borderColor: color.color,
                 fill: true,
                 backgroundColor: color.color + "26",
             },
             point: {
-                backgroundColor: color.text,
+                backgroundColor: Colors.whiteSec,
                 borderWidth: 2,
                 borderColor: color.color,
                 hoverBorderWidth: 2,
                 hoverRadius: 5,
+                hoverBackgroundColor: Colors.whiteSec,
             }
         },
         scales: {

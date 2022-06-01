@@ -24,12 +24,14 @@ ChartJS.register(
 )
 import themes, { accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
+import moment from "moment";
+import { last7Days } from "../../services/date";
+import { Colors } from "../../variables";
 
 const Container = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
-    /* background: yellow; */
 
     canvas {
         position: absolute;
@@ -53,10 +55,10 @@ const BigLineChart: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     const data = {
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        labels: last7Days().reverse(),
         datasets: [
             {
-                data: [5000, 4000, 7000, 3000, 4000, 2000, 5000],
+                data: [1264, 1987, 1024, 511, 805, 1547, 1235],
                 pointRadius: [0, 0, 0, 0, 0, 0, 5]
             }
         ]
@@ -65,7 +67,7 @@ const BigLineChart: NextPage = () => {
     const options = {
         plugins: {
             legend: {
-                display: false
+                display: false,
             },
             tooltip: {
                 enabled: false
@@ -73,27 +75,55 @@ const BigLineChart: NextPage = () => {
         },
         elements: {
             line: {
-                tension: 0.5,
+                tension: 0.4,
                 borderWidth: 3,
                 borderColor: color.color,
                 fill: true,
                 backgroundColor: color.color + "26",
             },
             point: {
-                backgroundColor: color.text,
+                backgroundColor: Colors.whiteSec,
                 borderWidth: 2,
                 borderColor: color.color,
                 hoverBorderWidth: 2,
                 hoverRadius: 5,
+                hoverBackgroundColor: Colors.whiteSec,
             }
         },
         scales: {
-            xAxis: {
+            x: {
                 display: true,
+                ticks: {
+                    color: themes[theme].textSec,
+                    fontSize: 12,
+                    padding: 12,
+                    family: "Cake",
+                },
+                grid: {
+                    color: themes[theme].background,
+                    drawBorder: false,
+                }
             },
-            YAxis: {
+            y: {
                 display: true,
                 beginAtZero: true,
+                ticks: {
+                    color: themes[theme].textSec,
+                    fontSize: 12,
+                    padding: 12,
+                    family: "Cake",
+                    maxTicksLimit: 5,
+                    autoSkip: true,
+                    // callback: function(value: any, index: number) {
+                    //     return index % 2 === 1 ? value : null;
+                    // },
+                },
+                grid: {
+                    color: themes[theme].lineLight,
+                    drawTicks: false,
+                    drawBorder: false,
+                    borderDash: [4, 4],
+                },
             }
         },
         // responsive: false,
