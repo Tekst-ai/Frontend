@@ -94,7 +94,7 @@ const MediumLineChart: NextPage = () => {
         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         datasets: [
             {
-                data: [1000, 4000, 5000, 2000, 7000, 4000, 2000],
+                data: [154, 124, 54, 120, 32, 10, 23],
                 pointRadius: [0, 0, 0, 0, 0, 0, 5]
             }
         ]

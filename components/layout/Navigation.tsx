@@ -26,7 +26,8 @@ const Container = styled.nav<ContainerProps>`
         /* transform: translateX(8px); */
         height: 2px;
         background: ${({ theme }) => theme.lineLight};
-        margin-top: 0.8125rem;
+        /* margin-top: 0.8125rem; */
+        margin-top: 0.5rem;
         transition: all 0.2s ease-in-out;
     }
 `

@@ -18,7 +18,8 @@ interface HelpNavigationListProps {
 
 const Container = styled.div<HelpNavigationListProps>`
     padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    margin-top: 1.25rem;
+    /* margin-top: 1.25rem; */
+    margin-top: 1rem;
     transition: all 0.2s ease-in-out;
     
     a {
@@ -127,29 +128,33 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
             </Link>
 
-            <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                <li>
-                    <Link href={"/help-center/getting-started"} passHref>
-                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                            {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
-                            <IoRocket fontSize={14} strokeWidth={2.25}/>
+            {
+                router.pathname.includes("/help-center") &&
+                <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <li>
+                        <Link href={"/help-center/getting-started"} passHref>
+                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                                {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
+                                <IoRocket fontSize={14} strokeWidth={2.25}/>
 
-                            <span>Aan de slag</span>
-                        </LinkTextAlt>
-                    </Link>
-                </li>
+                                <span>Aan de slag</span>
+                            </LinkTextAlt>
+                        </Link>
+                    </li>
 
-                <li>
-                    <Link href={"/help-center/faq"} passHref>
-                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                            {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
-                            <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
+                    <li>
+                        <Link href={"/help-center/faq"} passHref>
+                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                                {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
+                                <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 
-                            <span>Veelgestelde vragen</span>
-                        </LinkTextAlt>
-                    </Link>
-                </li>
-            </SubNavigation>
+                                <span>Veelgestelde vragen</span>
+                            </LinkTextAlt>
+                        </Link>
+                    </li>
+                </SubNavigation>
+            }
+
         </Container>
     )
 }

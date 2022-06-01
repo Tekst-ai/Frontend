@@ -21,22 +21,33 @@ const StatsContainer = styled.div<StatsContainerProps>`
 
 const TopContainer = styled.div`
     display: flex;
-    height: 37%;
+    /* height: 37%; */
 `
 
-const BottomContainer = styled.div`
+interface BottomContainerProps {
+    height: number,
+}
+
+const BottomContainer = styled.div<BottomContainerProps>`
     width: 100%;
-    height: calc(63% - 1.25rem);
+    height: calc(100% - 1.25rem - ${({ height }) => height}px);
     margin-top: 1.25rem;
     display: flex;
 `
 
 const Dashboard: NextPage = () => {
     const [height, setHeight] = useState(0)
+    const [chartHeight, setChartHeight] = useState(0)
 
     const refContainer = useCallback((node: any) => {
         if (node !== null) {
             setHeight(node.clientHeight)
+        }
+    }, [])
+
+    const chartContainer = useCallback((node: any) => {
+        if (node !== null) {
+            setChartHeight(node.clientHeight)
         }
     }, [])
 
@@ -49,7 +60,7 @@ const Dashboard: NextPage = () => {
             </TitleContainer>
 
             <StatsContainer height={height}>
-                <TopContainer>
+                <TopContainer ref={chartContainer}>
                     <MediumChartText marginRight={true} icon={<IoMailOpen fontSize={26}/>} data={5462} oldData={4987} title={"E-mails"}/>
                     
                     <MediumChartText marginRight={true} icon={<IoGrid fontSize={26}/>} data={12} oldData={16} title={"Categorieën"}/>
@@ -57,7 +68,7 @@ const Dashboard: NextPage = () => {
                     <CategoryListSmall/>
                 </TopContainer>
 
-                <BottomContainer>
+                <BottomContainer height={chartHeight}>
                     <BigChartNoText marginRight={true} title="E-mail overzicht"/>
 
                     <BigChartDonut/>

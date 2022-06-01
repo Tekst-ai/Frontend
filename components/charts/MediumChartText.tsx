@@ -32,8 +32,8 @@ const Container = styled.div<ContainerProps>`
     margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
     border-radius: 10px;
     padding: 1.25rem;
-    padding-bottom: 0.5rem;
-    box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
+    /* padding-bottom: 0.5rem; */
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
 `
 
 const HeaderContainer = styled.div`
@@ -89,21 +89,21 @@ const NumberContainer = styled.div<NumberContainerProps>`
 
     div:last-of-type {
         p {
-            font-size: 2rem;
-            font-weight: 500;
+            font-size: 2.25rem;
+            font-weight: 700;
         }
     }
 
 `
 
-interface ChartContainerProps {
-    height: number
-}
+// interface ChartContainerProps {
+//     height: number
+// }
 
-const ChartContainer = styled.div<ChartContainerProps>`
-    width: 100%;
-    height: calc(100% - ${({ height }) => height}px);
-`
+// const ChartContainer = styled.div<ChartContainerProps>`
+//     width: 100%;
+//     height: calc(100% - ${({ height }) => height}px);
+// `
 
 const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, marginBottom = false, icon, data, oldData, title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
@@ -142,9 +142,9 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, 
                 </NumberContainer>
             </HeaderContainer>
 
-            <ChartContainer height={height}>
+            {/* <ChartContainer height={height}>
                 <MediumLineChart/>
-            </ChartContainer>
+            </ChartContainer> */}
         </Container>
     )
 }

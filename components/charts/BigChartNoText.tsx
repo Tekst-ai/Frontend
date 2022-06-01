@@ -26,7 +26,7 @@ const Container = styled.div<ContainerProps>`
     border-radius: 10px;
     margin-right: ${({ marginRight }) => marginRight ? '1.25rem' : '0'};
     margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
-    box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
 `
 
 interface TitleContainerProps {

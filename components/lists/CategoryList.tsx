@@ -14,7 +14,7 @@ const Container = styled.div<ContainerProps>`
     width: 100%;
     background: ${({ theme }) => theme.background};
     border-radius: 10px;
-    box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     padding: 1rem 1.25rem;
 `
 

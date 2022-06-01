@@ -14,7 +14,7 @@ const Container = styled.div<ContainerProps>`
     padding: 1rem 1.25rem;
     background: ${({ theme }) => theme.background};
     border-radius: 10px;
-    box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
 `
 
 const Table = styled.table<ContainerProps>`
@@ -36,7 +36,8 @@ const Table = styled.table<ContainerProps>`
         border-bottom: 1px solid ${({ theme }) => theme.lineLight};
 
         &:first-of-type {
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 1.75rem;
         }
 
         &:last-of-type {
@@ -71,24 +72,24 @@ const CategoryListSmall: NextPage = () => {
                 <thead>
                     <tr>
                         <th colSpan={2}>
-                            Top 3 Categorieën
+                            Top categorie
                         </th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
+                        <td>Notificaties</td>
+                        <td>2951</td>
+                    </tr>
+                    {/* <tr>
                         <td>Categorie 1</td>
                         <td>2951</td>
                     </tr>
                     <tr>
                         <td>Categorie 1</td>
                         <td>2951</td>
-                    </tr>
-                    <tr>
-                        <td>Categorie 1</td>
-                        <td>2951</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </Table>
         </Container>

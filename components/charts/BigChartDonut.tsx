@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
-import lodash from 'lodash'
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -13,6 +12,7 @@ import {
     Legend,
     Filler,
     ArcElement,
+    RadialLinearScale,
 } from "chart.js";
 ChartJS.register(
     CategoryScale,
@@ -24,6 +24,7 @@ ChartJS.register(
     Legend,
     Filler,
     ArcElement,
+    RadialLinearScale,
 )
 
 import useStore, { useAccent } from '../../store'
@@ -40,7 +41,7 @@ const Container = styled.div<ContainerProps>`
     border-radius: 10px;
     background: ${({ theme }) => theme.background};
     padding: 1.25rem;
-    box-shadow: 0 3px ${({ theme }) => theme.name === "dark" ? "12px" : "6px"} ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     position: relative;
 
     canvas {
@@ -51,15 +52,6 @@ const Container = styled.div<ContainerProps>`
     }
 `
 
-const Total = styled.p`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: 500;
-`
-
 const BigChartDonut: NextPage = () => {
     const accent = useAccent((s: any) => s.accent);
     const color = accentColors[accent as keyof typeof accentColors]
@@ -67,20 +59,23 @@ const BigChartDonut: NextPage = () => {
 
     const data = {
         labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-          ],
-          datasets: [{
-            label: 'My First Dataset',
-            data: [7, 4, 2],
+            'Inbox',
+            'Notificaties',
+            'Klanten',
+            'Projecten',
+            'Offertes',
+        ],
+        datasets: [{
+            data: [200,  150, 100, 60, 120],
             backgroundColor: [
-              color.color,
-              Colors.secondary,
-              themes[theme].backgroundSec
+                color.color,
+                Colors.secondary,
+                themes[theme].backgroundSec,
+                color.color + 80,
+                Colors.secondaryDark
             ],
-            hoverOffset: 4
-          }]
+            hoverOffset: 10
+        }]
     }
 
     const options = {
@@ -89,27 +84,38 @@ const BigChartDonut: NextPage = () => {
                 display: false,
             },
             tooltip: {
-                enabled: false
-            }
+                enabled: true,
+                intersect: false,
+                backgroundColor: themes[theme].backgroundSec,
+                bodyColor: themes[theme].text, 
+                bodyFont: {
+                    size: 14,
+                    weight: "500",
+                    family: "Cake",
+                },
+                cornerRadius: 7,
+                boxPadding: 8,
+                caretPadding: 12,
+                caretSize: 7,
+                displayColors: false,
+                usePointStyle: true,
+                padding: 8
+            },
         },
         elements: {
             arc: {
                 borderColor: themes[theme].background,
-                borderWidth: 12,
-                hoverBorderWidth: 0,
+                borderWidth: 10,
+                hoverBorderWidth: 10,
                 hoverBorderColor: themes[theme].background,
-            }
+            },
         },
         maintainAspectRatio: false,
     }
 
-    console.log(data.datasets[0].data)
-
     return (
         <Container theme={themes[theme]}>
-            <Doughnut options={options}  data={data}/>
-
-            <Total>{ lodash.sum(data.datasets[0].data) }</Total>
+            <Pie options={options}  data={data}/>
         </Container>
     )
 }
