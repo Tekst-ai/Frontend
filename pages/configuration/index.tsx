@@ -53,7 +53,7 @@ const Configuration: NextPage = () => {
 
                     <ThemeSwitcher id="light" value="licht"/>
 
-                    <ThemeSwitcher id="auto" value="automatisch"/>
+                    {/* <ThemeSwitcher id="auto" value="automatisch"/> */}
                 </form>
             </SubContainer>
         </div>

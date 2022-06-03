@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
-import { useAccent } from '../../store'
-import { accentColors } from '../../ThemeConfig'
+import useStore, { useAccent } from '../../store'
+import { accentColors, Theme } from '../../ThemeConfig'
 import { Colors } from '../../variables'
 
 interface ContainerProps {
-    accent: any,
+    accent: string,
 }
 
 const Container = styled.div<ContainerProps>`
-    background: linear-gradient(90deg, ${({ accent }) => accent.color} 0%, ${Colors.secondary} 100%);
-    /* background: linear-gradient(90deg, ${Colors.secondary}CC 0%, ${({ accent }) => accent.color + "CC"} 100%); */
+    background: linear-gradient(90deg, ${({ accent }) => accent} 0%, ${Colors.secondary} 100%);
+    /* background: linear-gradient(90deg, ${Colors.secondary}CC 0%, ${({ accent }) => accent + "CC"} 100%); */
     position: absolute;
     top: -2rem;
     left: -3rem;
@@ -21,9 +21,10 @@ const Container = styled.div<ContainerProps>`
 
 const HelpBackgroundSmall: NextPage = () => {
     const accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container accent={accentColors[accent as keyof typeof accentColors]}/>
+        <Container accent={accentColors[accent as keyof typeof accentColors][theme]}/>
     )
 }
 

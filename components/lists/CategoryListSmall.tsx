@@ -6,7 +6,6 @@ import themes, { accentColors, Theme } from '../../ThemeConfig'
 
 interface ContainerProps {
     theme: any,
-    accent: any
 }
 
 const Container = styled.div<ContainerProps>`
@@ -17,7 +16,12 @@ const Container = styled.div<ContainerProps>`
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
 `
 
-const Table = styled.table<ContainerProps>`
+interface TableProps {
+    theme: any,
+    accent: string
+}
+
+const Table = styled.table<TableProps>`
     width: 100%;
     text-align: left;
     border-collapse: collapse;
@@ -41,7 +45,7 @@ const Table = styled.table<ContainerProps>`
         }
 
         &:last-of-type {
-            color: ${({ accent }) => accent.color};
+            color: ${({ accent }) => accent};
             text-align: right;
         }
     }
@@ -67,8 +71,8 @@ const CategoryListSmall: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-            <Table theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+        <Container theme={themes[theme]}>
+            <Table theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                 <thead>
                     <tr>
                         <th colSpan={2}>

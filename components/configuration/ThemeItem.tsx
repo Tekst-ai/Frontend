@@ -4,10 +4,10 @@ import { FiCheck } from 'react-icons/fi'
 
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
-import { Transition } from '../../variables'
+import { Colors, Transition } from '../../variables'
 
 interface ThemeItemProps {
-    theme: string,
+    theme: keyof Theme,
 }
 
 interface ThemeItemContainerProps {
@@ -28,7 +28,7 @@ const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
 
 interface NavigationList {
     theme: string,
-    accent: any
+    accent: string
 }
 
 const NavigationList = styled.ul<NavigationList>`
@@ -46,7 +46,7 @@ const NavigationList = styled.ul<NavigationList>`
         transition: ${Transition.fast};
 
         &:first-of-type {
-            background: ${({ accent }) => accent.color};
+            background: ${({ accent }) => accent};
         }
     }
 `
@@ -105,11 +105,11 @@ const Content = styled.div<ContentProps>`
 `
 
 interface IconContainerProps {
-    accent: any
+    accent: string
 }
 
 const IconContainer = styled.div<IconContainerProps>`
-    background: ${({ accent }) => accent.color};
+    background: ${({ accent }) => accent};
     position: absolute;
     width: 1.25rem;
     height: 1.25rem;
@@ -133,7 +133,7 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
 
     return (
         <ThemeItemContainer theme={theme} store={themes[store]}>
-            <NavigationList theme={theme} accent={accentColors[accent as keyof typeof accentColors]}>
+            <NavigationList theme={theme} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -150,8 +150,8 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
                 <span></span>
             </Content>
 
-            <IconContainer accent={accentColors[accent as keyof typeof accentColors]}>
-                <FiCheck strokeWidth={3} fontSize={14} color={accentColors[accent as keyof typeof accentColors].text}/>
+            <IconContainer accent={accentColors[accent as keyof typeof accentColors][store]}>
+                <FiCheck strokeWidth={3} fontSize={14} color={Colors.textWhite}/>
             </IconContainer>
         </ThemeItemContainer>
     )

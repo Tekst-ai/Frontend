@@ -49,13 +49,13 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
             margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.95rem"};
             position: relative;
             /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
-            
+            z-index: 3;
+
             svg {
                 transition: ${Transition.fast};
     
                 path {
-                    /* stroke-width: 50px */
-                    stroke-width: 45px
+                    stroke-width: 50px
                 }
             }
     
@@ -92,20 +92,20 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
 
 interface LinkTextProps {
     pathName: string,
-    accent: any,
+    accent: string,
     theme: any,
     open: boolean,
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.textSec};
     
     span {
         pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
     }
 
     &:hover {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.text};
     }
 `
 
@@ -170,7 +170,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             <NavigationContainer isOpen={isOpen}>
                 <li>
                     <Link href={"/login"} passHref>
-                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                             {/* <IoPowerOutline fontSize={18}/> */}
                             <IoPowerOutline fontSize={16}/>
 
@@ -183,7 +183,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
 
                 <li>
                     <Link href={"/configuration"} passHref>
-                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                             {/* <IoSettingsOutline fontSize={18}/> */}
                             <IoSettingsOutline fontSize={16}/>
                             
@@ -196,8 +196,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
+                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
+                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
             </Collapse>
         </Container>
     )

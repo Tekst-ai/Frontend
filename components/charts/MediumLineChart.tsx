@@ -53,8 +53,8 @@ const Fade = styled.div<FadeProps>`
 
 const MediumLineChart: NextPage = () => {
     const accent = useAccent((s: any) => s.accent);
-    const color = accentColors[accent as keyof typeof accentColors]
     const theme: keyof Theme = useStore((s: any) => s.theme)
+    const color = accentColors[accent as keyof typeof accentColors][theme]
 
     // const ctx: any = useRef(null)
 
@@ -121,14 +121,14 @@ const MediumLineChart: NextPage = () => {
             line: {
                 tension: 0.4,
                 borderWidth: 3,
-                borderColor: color.color,
+                borderColor: color,
                 fill: true,
-                backgroundColor: color.color + "26",
+                backgroundColor: color + "26",
             },
             point: {
                 backgroundColor: Colors.whiteSec,
                 borderWidth: 2,
-                borderColor: color.color,
+                borderColor: color,
                 hoverBorderWidth: 2,
                 hoverRadius: 5,
                 hoverBackgroundColor: Colors.whiteSec,

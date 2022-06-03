@@ -71,7 +71,7 @@ const Dashboard: NextPage = () => {
                 <BottomContainer height={chartHeight}>
                     <BigChartNoText marginRight={true} title="E-mail overzicht"/>
 
-                    <BigDonutChartContainer title="Categorie verdeling"/>
+                    <BigDonutChartContainer title="Top 5 categoriëen"/>
                 </BottomContainer>
             </StatsContainer>
         </Container>

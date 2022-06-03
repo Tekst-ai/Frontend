@@ -7,7 +7,6 @@ import CategoryListItem from './CategoryListItem'
 
 interface ContainerProps {
     theme: any,
-    accent: any
 }
 
 const Container = styled.div<ContainerProps>`
@@ -18,13 +17,17 @@ const Container = styled.div<ContainerProps>`
     padding: 1rem 1.25rem;
 `
 
-const Table = styled.table<ContainerProps>`
+interface TableProps {
+    accent: string
+}
+
+const Table = styled.table<TableProps>`
     width: 100%;
     border-collapse: collapse;
 
     th {
         text-align: left;
-        color: ${({ accent }) => accent.color};
+        color: ${({ accent }) => accent};
         font-weight: 500;
         text-transform: uppercase;
         font-size: 0.875rem;
@@ -45,8 +48,8 @@ const CategoryList: NextPage = () => {
     const accent = useAccent((s: any) => s.accent)
 
     return (
-        <Container theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-            <Table theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+        <Container theme={themes[theme]}>
+            <Table accent={accentColors[accent as keyof typeof accentColors][theme]}>
                 <thead>
                     <tr>
                         <th scope="col">Naam</th>

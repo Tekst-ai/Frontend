@@ -8,6 +8,7 @@ import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
 import MediumLineChart from './MediumLineChart'
 import { useCallback, useState } from 'react'
+import { Colors } from '../../variables'
 
 interface MediumChartTextProps {
     marginRight?: boolean,
@@ -20,7 +21,6 @@ interface MediumChartTextProps {
 
 interface ContainerProps {
     theme: any,
-    accent: any,
     marginRight: boolean,
     marginBottom: boolean,
 }
@@ -43,12 +43,12 @@ const HeaderContainer = styled.div`
 `
 
 interface IconContainerProps {
-    accent: any,
+    accent: string,
 }
 
 const IconContainer = styled.div<IconContainerProps>`
-    background: ${({ accent }) => accent.color};
-    color: ${({ accent }) => accent.text};
+    background: ${({ accent }) => accent};
+    color: ${Colors.textWhite};
     position: relative;
     width: 2.5rem;
     height: 2.5rem;
@@ -120,12 +120,11 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ marginRight = false, 
     return (
         <Container
             theme={themes[theme]}
-            accent={accentColors[accent as keyof typeof accentColors]}
             marginRight={marginRight}
             marginBottom={marginBottom}
         >
             <HeaderContainer ref={refContainer}>
-                <IconContainer accent={accentColors[accent as keyof typeof accentColors]}>
+                <IconContainer accent={accentColors[accent as keyof typeof accentColors][theme]}>
                     { icon }
                 </IconContainer>
 

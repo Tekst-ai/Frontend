@@ -26,7 +26,6 @@ const Container = styled.li<ContainerProps>`
 
 interface QuestionProps {
     theme: any,
-    accent: any,
     open: boolean
 }
 
@@ -76,13 +75,13 @@ const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {
 
     return (
         <Container theme={themes[theme]}>
-            <Question open={open} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} onClick={handleClick}>
+            <Question open={open} theme={themes[theme]} onClick={handleClick}>
                 <div>
                     <p>{ question }</p>
 
                     { open ?
-                        <FiMinus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors].color}/>:
-                        <FiPlus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors].color}/>
+                        <FiMinus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors][theme]}/>:
+                        <FiPlus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors][theme]}/>
                     }
                 </div>
 

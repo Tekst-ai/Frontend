@@ -3,7 +3,7 @@ import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import { accentColors, Theme } from "../../ThemeConfig";
 import { Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
@@ -13,8 +13,7 @@ const ColorList = styled.form`
 `
 
 interface ColorListItemProps {
-    color: any,
-    themeName: string
+    color: string,
 }
 
 const ColorListItem = styled.label<ColorListItemProps>`
@@ -28,7 +27,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
         &:checked + div {
             width: 3.5rem;
             height: 3.5rem;
-            box-shadow: 0 3px 12px ${({ color, themeName }) => color[themeName] + "80"};
+            box-shadow: 0 3px 12px ${({ color }) => color + "80"};
             
             svg {
                 transform: scale(1) rotate(0deg);
@@ -40,7 +39,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
         transition: ${Transition.fast};
         width: 1.5rem;
         height: 1.5rem;
-        background: ${({ color, themeName }) => color[themeName]};
+        background: ${({ color }) => color};
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -72,13 +71,11 @@ const AccentSwitcher: NextPage = () => {
         accentColorList.push(accentColorObject);
     }
 
-    console.log(theme);
-
     return (
         <ColorList>
             {
                 accentColorList.map((color: any, index: number) => (
-                    <ColorListItem themeName={theme} color={color.colors} key={index} htmlFor={color.name}>
+                    <ColorListItem color={color.colors[theme]} key={index} htmlFor={color.name}>
                         <input type="radio" id={color.name} value={color.name} name="AccentSelector" checked={color.name === accentColor ? true : false} onChange={handleChange}/>
                         
                         <div>

@@ -48,7 +48,7 @@ const ImageContainer = styled.a<ImageContainerProps>`
 interface ProfileContainerProps {
     pathName: string,
     isOpen: boolean,
-    accent: any,
+    accent: string,
     theme: any
 }
 
@@ -57,15 +57,17 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     margin-top: 1.5rem;
     display: flex;
     justify-content: flex-start;
-    margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0" : "0.2rem" };
+    margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0" : "0.25rem" };
+    margin-right: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0" : "0.25rem" };
     margin-bottom: 1.625rem;
     transition: ${Transition.fast};
     border-radius: 6px;
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
     position: relative;
+    z-index: 3;
     
     /* &:hover {
-        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight};
+        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent : ({ theme }) => theme.lineLight};
     } */
 
     div:first-of-type {
@@ -91,7 +93,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
                 font-size: 1.125rem;
                 font-weight: 700;
                 margin-bottom: 0.5rem;
-                color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ({ accent }) => accent.color};
+                color: ${({ accent }) => accent};
             }
         }
     }
@@ -124,7 +126,7 @@ const Menu: NextPage = () => {
 
             <TooltipContainer>
                 <Link href={"/account"} passHref>
-                    <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                         <div>
                             <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
                         </div>

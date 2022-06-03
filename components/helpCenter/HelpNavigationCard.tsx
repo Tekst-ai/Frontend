@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
 import themes, { accentColors, Theme } from "../../ThemeConfig";
-import { Transition } from "../../variables";
+import { Colors, Transition } from "../../variables";
 
 interface HelpNavigationCardProps {
     link: string,
@@ -31,11 +31,11 @@ const Container = styled.li`
 interface LinkContentProps {
     theme: any,
     pathName: string,
-    accent: any
+    accent: string
 }
 
 const LinkContent = styled.a<LinkContentProps>`
-    background: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.backgroundAlt};
+    background: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? ({ accent }) => accent : ({ theme }) => theme.backgroundAlt};
     padding: 2rem 0 1.5rem 0;
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
@@ -43,7 +43,7 @@ const LinkContent = styled.a<LinkContentProps>`
     width: 15rem;
     transition: ${Transition.fast};
     transform: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? "translateY(-5px)" : "" };
-    color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? ({ accent }) => accent.text : ({ theme }) => theme.text};
+    color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? Colors.textWhite : ({ theme }) => theme.text};
 
     p {
         margin-top: 1.25rem;
@@ -96,7 +96,7 @@ const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, tit
         <Container>
             {type === "link" ? 
             <Link href={ link } passHref>
-                <LinkContent pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                <LinkContent pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                     { icon }
 
                     <p>{ title }</p>

@@ -61,10 +61,10 @@ const BigChartDonut: NextPage = () => {
         datasets: [{
             data: [200,  150, 100, 60, 120],
             backgroundColor: [
-                color.color,
+                color[theme],
                 Colors.secondary,
                 themes[theme].backgroundSec,
-                color.color + 80,
+                String(theme) === "light" ? color.dark : color.light,
                 Colors.secondaryDark
             ],
             hoverOffset: 15

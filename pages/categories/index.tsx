@@ -7,11 +7,11 @@ import { CategoryList } from '../../components/lists'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { TitleContainer } from '../configuration'
 import useStore, { useAccent } from '../../store'
-import { Transition } from '../../variables'
+import { Colors, Transition } from '../../variables'
 
 interface ButtonContainerProps {
     theme: any,
-    accent: any
+    accent: string
 }
 
 const ButtonContainer = styled.div<ButtonContainerProps>`
@@ -23,7 +23,7 @@ const ButtonContainer = styled.div<ButtonContainerProps>`
         border-radius: 6px;
         font-size: 1rem;
         font-weight: 500;
-        color: ${({ accent }) => accent.color};
+        color: ${({ accent }) => accent};
         display: flex;
         align-items: flex-end;
         text-align: center;
@@ -35,8 +35,8 @@ const ButtonContainer = styled.div<ButtonContainerProps>`
         }
     
         &:hover {
-            background: ${({ accent }) => accent.color};
-            color: ${({ accent }) => accent.text};
+            background: ${({ accent }) => accent};
+            color: ${Colors.textWhite};
         }
     }
 `
@@ -53,7 +53,7 @@ const Categories: NextPage = () => {
 
             <CategoryList/>
 
-            <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+            <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                 <TernaryButton type="button">
                     Meer
 

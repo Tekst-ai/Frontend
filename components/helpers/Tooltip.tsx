@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import useStore, { useAccent, useMenu } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
-import { Transition } from '../../variables';
+import { Colors, Transition } from '../../variables';
 
 interface TooltipProps {
     title: string,
@@ -11,14 +11,13 @@ interface TooltipProps {
 
 interface ContainerProps {
     theme: any,
-    accent: any,
+    accent: string,
     isOpen: boolean,
-    themeName: string,
 }
 
 const Container = styled.div<ContainerProps>`
     position: absolute;
-    background: ${({ accent, themeName }) => accent[themeName]};
+    background: ${({ accent }) => accent};
     left: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -32,7 +31,7 @@ const Container = styled.div<ContainerProps>`
     display: ${({ isOpen }) => isOpen ? 'none' : 'block'};
 
     p {
-        color: ${({ accent }) => accent.text};
+        color: ${Colors.textWhite};
         font-size: 16;
         font-weight: 700;
     }
@@ -49,7 +48,7 @@ const Container = styled.div<ContainerProps>`
         top: 50%;
         transform: translateY(-50%);
         border: 7px solid transparent;
-        border-right-color: ${({ accent }) => accent.color};
+        border-right-color: ${({ accent }) => accent};
     }
 `
 
@@ -59,7 +58,7 @@ const Tooltip: NextPage<TooltipProps> = ({ title }) => {
     const menu = useMenu((s: any) => s.menu);
 
     return (
-        <Container theme={themes[theme]} themeName={theme} accent={accentColors[accent as keyof typeof accentColors]} isOpen={menu}>
+        <Container theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} isOpen={menu}>
             <p>{ title }</p>
         </Container>
     )
