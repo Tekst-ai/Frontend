@@ -27,15 +27,25 @@ export const Colors = {
     negative: '#E22649',
 
     accentDefault: '#EF1E6E',
+    accentDefaultDark: '#A71652',
     accentYellow: '#FDBA2C',
+    accentYellowDark: '#E59F03 ',
     accentOrange: '#FF7F00',
+    accentOrangeDark: '#D5481A',
     accentRed: '#FF2700',
-    accentPink: '#FF3BE9',
-    accentPurple: '#9D3BFF',
-    accentDarkBlue: '#3B52FF',
+    accentRedDark: '#D11F00',
+    accentPink: '#FF52EB',
+    accentPinkDark: '#C700B0',
+    accentPurple: '#BF80FF',
+    accentPurpleDark: '#7000E0',
+    accentDarkBlue: '#576AFF',
+    accentDarkBlueDark: '#0F2BFF',
     accentLightBlue: '#3BBBFF',
+    accentLightBlueDark: '#0077B8',
     accentTeal: '#12D18F',
+    accentTealDark: '#097750',
     accentGreen: '#4DCF48',
+    accentGreenDark: '#278523',
 }
 
 export const Shadow = {

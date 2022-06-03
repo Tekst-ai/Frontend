@@ -2,8 +2,9 @@ import type { NextPage } from "next";
 import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
 
-import { useAccent } from "../../store";
-import { accentColors } from "../../ThemeConfig";
+import useStore, { useAccent } from "../../store";
+import themes, { accentColors, Theme } from "../../ThemeConfig";
+import { Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
     display: flex;
@@ -12,7 +13,8 @@ const ColorList = styled.form`
 `
 
 interface ColorListItemProps {
-    color: any
+    color: any,
+    themeName: string
 }
 
 const ColorListItem = styled.label<ColorListItemProps>`
@@ -26,7 +28,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
         &:checked + div {
             width: 3.5rem;
             height: 3.5rem;
-            box-shadow: 0 3px 12px ${(ColorListItemProps) => ColorListItemProps.color + "80"};
+            box-shadow: 0 3px 12px ${({ color, themeName }) => color[themeName] + "80"};
             
             svg {
                 transform: scale(1) rotate(0deg);
@@ -35,17 +37,17 @@ const ColorListItem = styled.label<ColorListItemProps>`
     }
 
     div {
-        transition: all 0.3s ease-in-out;
+        transition: ${Transition.fast};
         width: 1.5rem;
         height: 1.5rem;
-        background: ${(ColorListItemProps) => ColorListItemProps.color};
+        background: ${({ color, themeName }) => color[themeName]};
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         
         svg {
-            transition: all 0.3s ease-in-out;
+            transition: ${Transition.fast};
             transform: scale(0) rotate(-30deg);
         }
     }
@@ -54,6 +56,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
 const AccentSwitcher: NextPage = () => {
     const accentColor: any = useAccent((s: any) => s.accent);
     const store: any = useAccent((s: any) => s.setAccent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
@@ -69,15 +72,17 @@ const AccentSwitcher: NextPage = () => {
         accentColorList.push(accentColorObject);
     }
 
+    console.log(theme);
+
     return (
         <ColorList>
             {
                 accentColorList.map((color: any, index: number) => (
-                    <ColorListItem color={color.colors.color} key={index} htmlFor={color.name}>
+                    <ColorListItem themeName={theme} color={color.colors} key={index} htmlFor={color.name}>
                         <input type="radio" id={color.name} value={color.name} name="AccentSelector" checked={color.name === accentColor ? true : false} onChange={handleChange}/>
                         
                         <div>
-                            <FiCheck fontSize={32} strokeWidth={2.5} color={color.colors.text}/>
+                            <FiCheck fontSize={32} strokeWidth={2.5} color={Colors.textWhite}/>
                         </div>
                     </ColorListItem>
                 ))

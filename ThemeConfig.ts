@@ -1,4 +1,3 @@
-import { useAccent } from './store';
 import { Colors } from './variables'
 
 export interface Theme {
@@ -77,42 +76,62 @@ export const accentColors = {
     default: {
         color: Colors.accentDefault,
         text: Colors.textWhite,
+        light: Colors.accentDefault,
+        dark: Colors.accentDefaultDark,
     },
     yellow: {
         color: Colors.accentYellow,
         text: Colors.blackPri,
+        light: Colors.accentYellow,
+        dark: Colors.accentYellowDark,
     },
     orange: {
         color: Colors.accentOrange,
         text: Colors.textWhite,
+        light: Colors.accentOrange,
+        dark: Colors.accentOrangeDark,
     },
     red: {
         color: Colors.accentRed,
         text: Colors.textWhite,
+        light: Colors.accentRed,
+        dark: Colors.accentRedDark,
     },
     pink: {
         color: Colors.accentPink,
         text: Colors.textWhite,
+        light: Colors.accentPink,
+        dark: Colors.accentPinkDark,
     },
     purple: {
         color: Colors.accentPurple,
         text: Colors.textWhite,
+        light: Colors.accentPurple,
+        dark: Colors.accentPurpleDark,
     },
     darkBlue: {
         color: Colors.accentDarkBlue,
         text: Colors.textWhite,
+        light: Colors.accentDarkBlue,
+        dark: Colors.accentDarkBlueDark,
     },
     lightBlue: {
         color: Colors.accentLightBlue,
         text: Colors.blackPri,
+        light: Colors.accentLightBlue,
+        dark: Colors.accentLightBlueDark,
     },
     teal: {
         color: Colors.accentTeal,
         text: Colors.blackPri,
+        light: Colors.accentTeal,
+        dark: Colors.accentTealDark,
     },
     green: {
         color: Colors.accentGreen,
         text: Colors.blackPri,
+        light: Colors.accentGreen,
+        dark: Colors.accentGreenDark,
     },
 }
 

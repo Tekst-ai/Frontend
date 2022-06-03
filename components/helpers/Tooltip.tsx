@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import useStore, { useAccent, useMenu } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
+import { Transition } from '../../variables';
 
 interface TooltipProps {
     title: string,
@@ -12,11 +13,12 @@ interface ContainerProps {
     theme: any,
     accent: any,
     isOpen: boolean,
+    themeName: string,
 }
 
 const Container = styled.div<ContainerProps>`
     position: absolute;
-    background: ${({ accent }) => accent.color};
+    background: ${({ accent, themeName }) => accent[themeName]};
     left: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -25,8 +27,8 @@ const Container = styled.div<ContainerProps>`
     padding: 0.375rem 0.75rem;
     border-radius: 6px;
     box-shadow: 0 2px 6px ${({ theme }) => theme.boxShadow};
-    transition: all 0.2s ease-in-out;
-    transition-delay: 0.2s;
+    transition: ${Transition.fast};
+    transition-delay: 0.1s;
     display: ${({ isOpen }) => isOpen ? 'none' : 'block'};
 
     p {
@@ -57,7 +59,7 @@ const Tooltip: NextPage<TooltipProps> = ({ title }) => {
     const menu = useMenu((s: any) => s.menu);
 
     return (
-        <Container theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]} isOpen={menu}>
+        <Container theme={themes[theme]} themeName={theme} accent={accentColors[accent as keyof typeof accentColors]} isOpen={menu}>
             <p>{ title }</p>
         </Container>
     )
