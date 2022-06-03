@@ -2,11 +2,12 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 
-import useStore, { useAccent, useMenu } from '../../store'
+import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
+import { Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
 
@@ -25,6 +26,12 @@ const Container = styled.div<ContainerProps>`
     transition: all 0.2s ease-out;
     height: 100vh;
     position: fixed;
+    z-index: 2;
+`
+
+const TooltipContainer = styled.div`
+    position: relative;
+    z-index: 2;
 `
 
 interface ImageContainerProps {
@@ -93,18 +100,12 @@ const Menu: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
     const router = useRouter();
-    // const menu = useMenu((s: any) => s.menu);
     
     const [isOpen, setIsOpen] = useState(true)
 
     const handleOpen = (open: boolean) => {
         setIsOpen(open)
     }
-
-    // useEffect(() => {
-    //     setIsOpen(menu)
-    // }, [menu])
-    
 
     return (
         <Container isOpen={isOpen}>
@@ -120,19 +121,23 @@ const Menu: NextPage = () => {
                 </ImageContainer>
             </Link>
 
-            <Link href={"/account"} passHref>
-                <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
-                    <div>
-                        <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
-                    </div>
+            <TooltipContainer>
+                <Link href={"/account"} passHref>
+                    <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors]}>
+                        <div>
+                            <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                        </div>
 
-                    <div>
-                        <p>Janine</p>
+                        <div>
+                            <p>Janine</p>
 
-                        <p>Vals Bedrijf</p>
-                    </div>
-                </ProfileContainer>
-            </Link>
+                            <p>Vals Bedrijf</p>
+                        </div>
+                    </ProfileContainer>
+                </Link>
+
+                <Tooltip title="Profiel"/>
+            </TooltipContainer>
 
             <Navigation isOpen={isOpen}/>
 
