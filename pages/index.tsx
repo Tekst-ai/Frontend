@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { IoMailOpen, IoGrid } from 'react-icons/io5'
 
-import { BigChartNoText, BigChartDonut, MediumChartText } from '../components/charts'
+import { BigChartNoText, MediumChartText, BigDonutChartContainer } from '../components/charts'
 import { TitleContainer } from './configuration'
 import { CategoryListSmall } from '../components/lists'
 import { useCallback, useState } from 'react'
@@ -71,7 +71,7 @@ const Dashboard: NextPage = () => {
                 <BottomContainer height={chartHeight}>
                     <BigChartNoText marginRight={true} title="E-mail overzicht"/>
 
-                    <BigChartDonut/>
+                    <BigDonutChartContainer title="Categorie verdeling"/>
                 </BottomContainer>
             </StatsContainer>
         </Container>

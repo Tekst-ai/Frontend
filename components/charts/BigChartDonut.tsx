@@ -31,17 +31,10 @@ import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig';
 import { Colors } from '../../variables';
 
-interface ContainerProps {
-    theme: any;
-}
 
-const Container = styled.div<ContainerProps>`
-    width: calc(33.333% - 0.625rem);
+const Container = styled.div`
+    width: 100%;
     height: 100%;
-    border-radius: 10px;
-    background: ${({ theme }) => theme.background};
-    padding: 1.25rem;
-    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     position: relative;
 
     canvas {
@@ -114,7 +107,7 @@ const BigChartDonut: NextPage = () => {
     }
 
     return (
-        <Container theme={themes[theme]}>
+        <Container>
             <Pie options={options}  data={data}/>
         </Container>
     )
