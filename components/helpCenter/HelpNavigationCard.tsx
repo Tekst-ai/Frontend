@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
 import themes, { accentColors, Theme } from "../../ThemeConfig";
+import { Transition } from "../../variables";
 
 interface HelpNavigationCardProps {
     link: string,
@@ -40,7 +41,7 @@ const LinkContent = styled.a<LinkContentProps>`
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
     width: 15rem;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     transform: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? "translateY(-5px)" : "" };
     color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? ({ accent }) => accent.text : ({ theme }) => theme.text};
 
@@ -67,7 +68,7 @@ const ButtonContent = styled.button<ButtonContentProps>`
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
     width: 15rem;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     color: ${({ theme }) => theme.text};
 
     p {

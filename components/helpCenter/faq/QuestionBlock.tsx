@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../../store'
 import themes, { accentColors, Theme } from '../../../ThemeConfig'
+import { Transition } from '../../../variables'
 
 interface QuestionBlockProps {
     question: string,
@@ -33,7 +34,7 @@ const Question = styled.button<QuestionProps>`
     width: 100%;
     padding: 1rem 1.2rem;
     border-radius: 5px;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     
     div:first-of-type {
         display: flex;
@@ -56,7 +57,7 @@ interface AnswerProps {
 const Answer = styled.button<AnswerProps>`
     color: ${({ theme }) => theme.textSec};
     padding: 0.5rem 2rem;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     display: ${({ open }) => open ? 'block' : 'none'};
     text-align: left;
     font-size: 1.125rem;

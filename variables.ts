@@ -41,3 +41,9 @@ export const Colors = {
 export const Shadow = {
     default: `0px 3px 12px ${Colors.blackPri}26`,
 }
+
+export const Transition = {
+    fast: "all 0.2s ease-in-out",
+    default: "all 0.3s ease-in-out",
+    slow: "all 0.4s ease-in-out",
+}

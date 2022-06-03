@@ -4,6 +4,7 @@ import { FiCheck } from 'react-icons/fi'
 
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
+import { Transition } from '../../variables'
 
 interface ThemeItemProps {
     theme: string,
@@ -20,7 +21,7 @@ const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
     width: 8rem;
     height: 8rem;
     border-radius: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     position: relative;
     display: flex;
 `
@@ -42,7 +43,7 @@ const NavigationList = styled.ul<NavigationList>`
         background: ${({ theme }) => themes[theme as keyof typeof themes].text};
         margin-bottom: 0.5rem;
         border-radius: 2px;
-        transition: all 0.3s ease-in-out;
+        transition: ${Transition.fast};
 
         &:first-of-type {
             background: ${({ accent }) => accent.color};
@@ -118,7 +119,7 @@ const IconContainer = styled.div<IconContainerProps>`
     border-radius: 50%;
     bottom: 10px;
     left: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     opacity: 0;
     
     input:checked + div & {

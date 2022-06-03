@@ -7,6 +7,7 @@ import { CategoryList } from '../../components/lists'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { TitleContainer } from '../configuration'
 import useStore, { useAccent } from '../../store'
+import { Transition } from '../../variables'
 
 interface ButtonContainerProps {
     theme: any,
@@ -18,7 +19,7 @@ const ButtonContainer = styled.div<ButtonContainerProps>`
         margin-top: 1rem;
         padding: 0.5rem 1.25rem;
         background: ${({ theme }) => theme.backgroundSec};
-        transition: all 0.2s ease-in-out;
+        transition: ${Transition.fast};
         border-radius: 6px;
         font-size: 1rem;
         font-weight: 500;

@@ -5,6 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu } from '../components/layout';
+import { Transition } from '../variables';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -14,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
 
     & ::selection {
         color: ${({ accent }) => accent.text};
@@ -38,7 +39,7 @@ const Main = styled.main<MainProps>`
     padding: 1.25rem;
     padding-left: 0;
     width: 100%;
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
     z-index: 1;
     margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
 `
@@ -53,7 +54,7 @@ const SubContainer = styled.div<SubContainerProps>`
     border-radius: 15px;
     min-height: calc(100vh - 2.5rem);
     height: 100%;
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {

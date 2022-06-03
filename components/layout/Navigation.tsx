@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
 import { useRouter } from 'next/router';
 
-import { Colors } from '../../variables';
+import { Colors, Transition } from '../../variables';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
@@ -29,7 +29,7 @@ const Container = styled.nav<ContainerProps>`
         background: ${({ theme }) => theme.lineLight};
         /* margin-top: 0.8125rem; */
         margin-top: 0.5rem;
-        transition: all 0.2s ease-in-out;
+        transition: ${Transition.fast};
     }
 `
 
@@ -54,17 +54,17 @@ const NavigationList = styled.ul<NavigationListProps>`
             justify-content: center;
             /* align-items: center; */
             position: relative;
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             z-index: 2;
             
             svg {
                 margin-right: auto;
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
                 margin-left: 0.15rem;
             }
 
             span {
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
                 /* font-size: 1.25rem; */
                 font-size: 1rem;
                 font-weight: 500;

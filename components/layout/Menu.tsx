@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
+import { Transition } from '../../variables'
 import { Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
@@ -23,7 +24,7 @@ const Container = styled.div<ContainerProps>`
     width: ${(ContainerProps) => ContainerProps.isOpen ? "17.5rem" : "5rem"};
     display: flex;
     flex-direction: column;
-    transition: all 0.2s ease-out;
+    transition: ${Transition.fast};
     height: 100vh;
     position: fixed;
     z-index: 2;
@@ -41,7 +42,7 @@ interface ImageContainerProps {
 const ImageContainer = styled.a<ImageContainerProps>`
     height: 2.5rem;
     padding: ${(ImageContainerProps) => ImageContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
 `
 
 interface ProfileContainerProps {
@@ -58,7 +59,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     justify-content: flex-start;
     margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0" : "0.2rem" };
     margin-bottom: 1.625rem;
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
     border-radius: 6px;
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
     position: relative;
@@ -72,11 +73,11 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         height: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
         border-radius: 8px;
         overflow: hidden;
-        transition: all 0.2s ease-in-out;
+        transition: ${Transition.fast};
     }
 
     div:last-of-type {
-        transition: all 0.2s ease-in-out;
+        transition: ${Transition.fast};
         margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "1.25rem" : "0" };
         position: absolute;
         left: 4.375rem;
@@ -84,7 +85,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         white-space: nowrap;
         
         p {
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             
             &:first-of-type {
                 font-size: 1.125rem;

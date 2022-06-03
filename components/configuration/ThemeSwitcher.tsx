@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
 import { accentColors } from '../../ThemeConfig'
+import { Transition } from '../../variables'
 import ThemeItem from './ThemeItem'
 
 interface ThemeSwitcherProps {
@@ -24,7 +25,7 @@ const ThemeContainer = styled.label<ThemeContainerProps>`
         appearance: none;
 
         &:checked + div {
-            transition: all 0.3s ease-in-out;
+            transition: ${Transition.fast};
             box-shadow: 0 3px 10px ${({ accent }: any ) => accent.color + "80"};
             border: 2px solid ${({ accent }: any ) => accent.color};
         }

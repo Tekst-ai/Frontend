@@ -4,7 +4,7 @@ import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-i
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Colors } from '../../variables'
+import { Transition } from '../../variables'
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ const Container = styled.div<ContainerProps>`
     display: flex;
     justify-content: space-between;
     padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0"};
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
     position: relative;
 `
 
@@ -41,7 +41,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
 
         a {
             display: flex;
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
             justify-content: flex-start;
             align-items: center;
@@ -51,7 +51,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
             /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
             
             svg {
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
     
                 path {
                     /* stroke-width: 50px */
@@ -63,7 +63,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
                 /* font-size: 1.125rem; */
                 font-size: 1rem;
                 font-weight: 500;
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
                 opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
                 position: absolute;
                 left: 2.25rem
@@ -93,12 +93,17 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
 interface LinkTextProps {
     pathName: string,
     accent: any,
-    theme: any
+    theme: any,
+    open: boolean,
 }
 
 const LinkText = styled.a<LinkTextProps>`
     color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec};
     
+    span {
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
+    }
+
     &:hover {
         color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
     }
@@ -111,7 +116,7 @@ interface CollapseProps {
 
 const Collapse = styled.button<CollapseProps>`
     margin-top: auto;
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
     display: flex;
     padding: 0.34375rem 0;
     border-radius: 5px;
@@ -125,7 +130,7 @@ const Collapse = styled.button<CollapseProps>`
     }
     
     svg {
-        transition: all 0.2s ease-in-out;
+        transition: ${Transition.fast};
 
         path {
             stroke-width: 70px;
@@ -165,7 +170,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             <NavigationContainer isOpen={isOpen}>
                 <li>
                     <Link href={"/login"} passHref>
-                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                             {/* <IoPowerOutline fontSize={18}/> */}
                             <IoPowerOutline fontSize={16}/>
 
@@ -178,7 +183,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
 
                 <li>
                     <Link href={"/configuration"} passHref>
-                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                             {/* <IoSettingsOutline fontSize={18}/> */}
                             <IoSettingsOutline fontSize={16}/>
                             

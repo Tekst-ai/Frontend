@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
+import { Colors, Transition } from '../../variables'
 
 interface HelpCardProps {
     icon: React.ReactNode,
@@ -41,7 +41,7 @@ const LinkContent = styled.a<LinkContentProps>`
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     
     p {
         font-weight: 500;
@@ -67,7 +67,7 @@ const ButtonContent = styled.button<ButtonContentProps>`
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
     width: 15rem;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     color: ${({ theme }) => theme.text};
 
     p {

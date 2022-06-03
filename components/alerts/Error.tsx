@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { FiAlertTriangle, FiChevronDown } from 'react-icons/fi'
 import themes, { Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
+import { Colors, Transition } from '../../variables'
 import useStore from '../../store'
 
 interface ErrorProps {
@@ -60,7 +60,7 @@ const SubContainer = styled.div<SubContainerProps>`
         align-items: center;
 
         svg {
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             margin-left: 0.2rem;
             transform: ${({ open }) => !open ? "rotate(0)" : "rotate(180deg)"};
         }

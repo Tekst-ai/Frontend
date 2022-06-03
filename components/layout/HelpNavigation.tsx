@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
+import { Transition } from '../../variables';
 
 interface HelpNavigationProps {
     isOpen: boolean
@@ -22,7 +23,7 @@ const Container = styled.div<HelpNavigationListProps>`
     padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0"};
     /* margin-top: 1.25rem; */
     margin-top: 1rem;
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
 
     div:first-child {
         position: relative;
@@ -31,7 +32,7 @@ const Container = styled.div<HelpNavigationListProps>`
         a {
             display: flex;
             align-items: center;
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             position: relative;
             margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.85rem"};
             z-index: 2;
@@ -41,7 +42,7 @@ const Container = styled.div<HelpNavigationListProps>`
                 font-size: 1rem;
                 font-weight: 500;
                 position: absolute;
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
                 left: 2.25rem;
                 /* left: 2rem; */
                 opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
@@ -49,7 +50,7 @@ const Container = styled.div<HelpNavigationListProps>`
             
             /* svg:last-of-type {
                 position: absolute;
-                transition: all 0.2s ease-in-out;
+                transition: ${Transition.fast};
                 right: 0;
                 opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
     
@@ -66,12 +67,17 @@ interface LinkTextProps {
     pathName: string,
     accent: any,
     theme: any
+    open: boolean
 }
 
 const LinkText = styled.a<LinkTextProps>`
     /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text}; */
     /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec}; */
     color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent.color : pathName.includes("/help-center") ? ({ theme }) => theme.text : ({ theme }) => theme.textSec};
+
+    span {
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
+    }
 
     &:hover {
         /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text}; */
@@ -89,7 +95,7 @@ const SubNavigation = styled.ul<SubNavigationProps>`
     margin-top: 1.2rem;
     margin-left: ${({ isOpen }) => isOpen ? "2rem" : "0"};
     opacity: ${({ isOpen }) => isOpen ? "1" : "0"};
-    transition: all 0.2s ease-in-out;
+    transition: ${Transition.fast};
     position: absolute;
     width: 100%;
     
@@ -127,7 +133,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
         <Container isOpen={isOpen} theme={themes[theme]}>
             <div>
                 <Link href={"/help-center"} passHref>
-                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                         {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
                         <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
@@ -145,7 +151,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
                 <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                     <li>
                         <Link href={"/help-center/getting-started"} passHref>
-                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                                 {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
                                 <IoRocket fontSize={14} strokeWidth={2.25}/>
 
@@ -156,7 +162,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
                     <li>
                         <Link href={"/help-center/faq"} passHref>
-                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
                                 {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
                                 <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 
