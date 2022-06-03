@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Colors } from '../../variables';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
+import { Tooltip } from '../helpers';
 
 interface NavigationProps {
     isOpen: boolean,
@@ -39,8 +40,9 @@ interface NavigationListProps {
 const NavigationList = styled.ul<NavigationListProps>`
     li {
         /* margin-bottom: 0.375rem; */
-        /* margin-bottom: 0.25rem; */
+        margin-bottom: 0.25rem;
         display: flex;
+        position: relative;
         
         a {
             width: 100%;
@@ -53,6 +55,7 @@ const NavigationList = styled.ul<NavigationListProps>`
             /* align-items: center; */
             position: relative;
             transition: all 0.2s ease-in-out;
+            z-index: 2;
             
             svg {
                 margin-right: auto;
@@ -92,7 +95,7 @@ interface LinkTextProps {
 
 const LinkText = styled.a<LinkTextProps>`
     /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : "transparent"}; */
-    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : "transparent"};
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
     /* box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 1px " + LinkTextProps.theme.boxShadow : "0 1px 1px " + LinkTextProps.theme.background}; */
 
     & span {
@@ -100,6 +103,7 @@ const LinkText = styled.a<LinkTextProps>`
         color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.text : ({theme}) => theme.textSec};
         opacity: ${(LinkTextProps) => LinkTextProps.open ? 1 : 0};
         position: absolute;
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
     }
     
     & svg {
@@ -109,6 +113,7 @@ const LinkText = styled.a<LinkTextProps>`
 
     &:hover {
         /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight}; */
+        background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.lineLight};
         
         span {
             color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.text : ({ theme }) => theme.text};
@@ -135,8 +140,11 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                             <FiHome fontSize={18} strokeWidth={2.5}/>
 
                             <span>Dashboard</span>
+
                         </LinkText>
                     </Link>
+                    
+                    <Tooltip title="Dashboard"/>
                 </li>
 
                 <li>
@@ -148,6 +156,8 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                             <span>Statistieken</span>
                         </LinkText>
                     </Link>
+                    
+                    <Tooltip title="Statistieken"/>
                 </li>
 
                 <li>
@@ -159,6 +169,8 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                             <span>Categorieën</span>
                         </LinkText>
                     </Link>
+                    
+                    <Tooltip title="Categorieën"/>
                 </li>
             </NavigationList>
         </Container>

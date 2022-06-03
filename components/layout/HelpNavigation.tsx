@@ -7,6 +7,7 @@ import { IoChevronDownOutline, IoRocket, IoChatbubbles } from 'react-icons/io5'
 import { useRouter } from 'next/router';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
+import { Tooltip } from '../helpers';
 
 interface HelpNavigationProps {
     isOpen: boolean
@@ -14,43 +15,51 @@ interface HelpNavigationProps {
 
 interface HelpNavigationListProps {
     isOpen: boolean,
+    theme: any
 }
 
 const Container = styled.div<HelpNavigationListProps>`
-    padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0 0.5rem"};
+    padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0"};
     /* margin-top: 1.25rem; */
     margin-top: 1rem;
     transition: all 0.2s ease-in-out;
-    
-    a {
-        display: flex;
-        align-items: center;
-        transition: all 0.2s ease-in-out;
-        position: relative;
-        margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.35rem"};
-        
-        span {
-            /* font-size: 1.125rem; */
-            font-size: 1rem;
-            font-weight: 500;
-            position: absolute;
-            transition: all 0.2s ease-in-out;
-            left: 2.25rem;
-            /* left: 2rem; */
-            opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
-        }
-        
-        /* svg:last-of-type {
-            position: absolute;
-            transition: all 0.2s ease-in-out;
-            right: 0;
-            opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
 
-            path {
-                stroke-width: 70px;
+    div:first-child {
+        position: relative;
+        z-index: 2;
+
+        a {
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.85rem"};
+            z-index: 2;
+            
+            span {
+                /* font-size: 1.125rem; */
+                font-size: 1rem;
+                font-weight: 500;
+                position: absolute;
+                transition: all 0.2s ease-in-out;
+                left: 2.25rem;
+                /* left: 2rem; */
+                opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
             }
-        } */
+            
+            /* svg:last-of-type {
+                position: absolute;
+                transition: all 0.2s ease-in-out;
+                right: 0;
+                opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
+    
+                path {
+                    stroke-width: 70px;
+                }
+            } */
+        }
     }
+    
 `
 
 interface LinkTextProps {
@@ -115,18 +124,21 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
-        <Container isOpen={isOpen}>
-            <Link href={"/help-center"} passHref>
-                <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                    {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
-                    <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
+        <Container isOpen={isOpen} theme={themes[theme]}>
+            <div>
+                <Link href={"/help-center"} passHref>
+                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                        {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
+                        <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
-                    <span>Helpcentrum</span>
+                        <span>Helpcentrum</span>
 
-                    {/* <IoChevronDownOutline fontSize={16}/> */}
-                </LinkText>
-
-            </Link>
+                        {/* <IoChevronDownOutline fontSize={16}/> */}
+                    </LinkText>
+                </Link>
+                
+                <Tooltip title="Helpcentrum"/>
+            </div>
 
             {
                 router.pathname.includes("/help-center") &&

@@ -74,7 +74,7 @@ const BigChartDonut: NextPage = () => {
                 color.color + 80,
                 Colors.secondaryDark
             ],
-            hoverOffset: 10
+            hoverOffset: 15
         }]
     }
 

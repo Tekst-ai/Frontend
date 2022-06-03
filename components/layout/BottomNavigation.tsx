@@ -8,6 +8,7 @@ import { Colors } from '../../variables'
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
+import { Tooltip } from '../helpers'
 
 interface BottomNavigationProps {
     isOpen: boolean,
@@ -22,7 +23,7 @@ const Container = styled.div<ContainerProps>`
     margin-top: auto;
     display: flex;
     justify-content: space-between;
-    padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
+    padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0"};
     transition: all 0.2s ease-in-out;
     position: relative;
 `
@@ -31,43 +32,53 @@ interface NavigationContainerProps {
     isOpen: boolean
 }
 
-const NavigationContainer = styled.div<NavigationContainerProps>`
-    a {
-        display: flex;
-        transition: all 0.2s ease-in-out;
-        /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
-        justify-content: flex-start;
-        align-items: center;
-        /* margin-bottom: 1.25rem; */
+const NavigationContainer = styled.ul<NavigationContainerProps>`
+    li {
         margin-bottom: 1.2rem;
-        margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.45rem"};
         position: relative;
-        /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
-        
-        svg {
-            transition: all 0.2s ease-in-out;
+        z-index: 2;
+        display: flex;
 
-            path {
-                /* stroke-width: 50px */
-                stroke-width: 45px
+        a {
+            display: flex;
+            transition: all 0.2s ease-in-out;
+            /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
+            justify-content: flex-start;
+            align-items: center;
+            /* margin-bottom: 1.25rem; */
+            margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.95rem"};
+            position: relative;
+            /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
+            
+            svg {
+                transition: all 0.2s ease-in-out;
+    
+                path {
+                    /* stroke-width: 50px */
+                    stroke-width: 45px
+                }
             }
-        }
-
-        span {
-            /* font-size: 1.125rem; */
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.2s ease-in-out;
-            opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
-            position: absolute;
-            left: 2.25rem
+    
+            span {
+                /* font-size: 1.125rem; */
+                font-size: 1rem;
+                font-weight: 500;
+                transition: all 0.2s ease-in-out;
+                opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
+                position: absolute;
+                left: 2.25rem
+            }
+    
+            
         }
 
         &:first-of-type {
-            svg {
-                path{
-                    /* stroke-width: 65px; */
-                    stroke-width: 60px;
+            a {
+                svg {
+                    path{
+                        /* stroke-width: 65px; */
+                        stroke-width: 60px;
+                    }
                 }
             }
         }
@@ -152,23 +163,31 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     return (
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
-                <Link href={"/login"} passHref>
-                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        {/* <IoPowerOutline fontSize={18}/> */}
-                        <IoPowerOutline fontSize={16}/>
+                <li>
+                    <Link href={"/login"} passHref>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            {/* <IoPowerOutline fontSize={18}/> */}
+                            <IoPowerOutline fontSize={16}/>
 
-                        <span>Afmelden</span>
-                    </LinkText>
-                </Link>
+                            <span>Afmelden</span>
+                        </LinkText>
+                    </Link>
 
-                <Link href={"/configuration"} passHref>
-                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        {/* <IoSettingsOutline fontSize={18}/> */}
-                        <IoSettingsOutline fontSize={16}/>
-                        
-                        <span>Configuratie</span>
-                    </LinkText>
-                </Link>
+                    <Tooltip title="Afmelden"/>
+                </li>
+
+                <li>
+                    <Link href={"/configuration"} passHref>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                            {/* <IoSettingsOutline fontSize={18}/> */}
+                            <IoSettingsOutline fontSize={16}/>
+                            
+                            <span>Configuratie</span>
+                        </LinkText>
+                    </Link>
+
+                    <Tooltip title="Configuratie"/>
+                </li>
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
