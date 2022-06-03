@@ -18,28 +18,31 @@ interface HelpNavigationListProps {
 
 const Container = styled.div<HelpNavigationListProps>`
     padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    margin-top: 1.25rem;
-    transition: all 0.3s ease-in-out;
+    /* margin-top: 1.25rem; */
+    margin-top: 1rem;
+    transition: all 0.2s ease-in-out;
     
     a {
         display: flex;
         align-items: center;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
         position: relative;
         margin-left: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? 0 : "0.35rem"};
         
         span {
-            font-size: 1.125rem;
+            /* font-size: 1.125rem; */
+            font-size: 1rem;
             font-weight: 500;
             position: absolute;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
             left: 2.25rem;
+            /* left: 2rem; */
             opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
         }
         
         /* svg:last-of-type {
             position: absolute;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
             right: 0;
             opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
 
@@ -57,10 +60,13 @@ interface LinkTextProps {
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
+    /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text}; */
+    /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec}; */
+    color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent.color : pathName.includes("/help-center") ? ({ theme }) => theme.text : ({ theme }) => theme.textSec};
 
     &:hover {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ accent }) => accent.color};
+        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text}; */
+        color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent.color : pathName.includes("/help-center") ? ({ accent }) => accent.color : ({ theme }) => theme.text};
     }
 `
 
@@ -72,7 +78,7 @@ interface SubNavigationProps {
 
 const SubNavigation = styled.ul<SubNavigationProps>`
     margin-top: 1.2rem;
-    margin-left: ${({ isOpen }) => isOpen ? "2.25rem" : "0"};
+    margin-left: ${({ isOpen }) => isOpen ? "2rem" : "0"};
     opacity: ${({ isOpen }) => isOpen ? "1" : "0"};
     transition: all 0.2s ease-in-out;
     position: absolute;
@@ -81,13 +87,16 @@ const SubNavigation = styled.ul<SubNavigationProps>`
     li {
         a {
             span {
-                font-size: 1rem;
+                /* font-size: 1rem; */
+                font-size: 0.875rem;
                 left: 1.75rem;
+                /* left: 1.5rem; */
             }   
         }
 
         &:first-of-type {
-            margin-bottom: 1.2rem;
+            /* margin-bottom: 1.2rem; */
+            margin-bottom: 1rem;
         }
     }
 `
@@ -109,7 +118,8 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
         <Container isOpen={isOpen}>
             <Link href={"/help-center"} passHref>
                 <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                    <FiHelpCircle fontSize={22} strokeWidth={2.25}/>
+                    {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
+                    <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
                     <span>Helpcentrum</span>
 
@@ -118,27 +128,33 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
             </Link>
 
-            <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                <li>
-                    <Link href={"/help-center/getting-started"} passHref>
-                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                            <IoRocket fontSize={16} strokeWidth={2.25}/>
+            {
+                router.pathname.includes("/help-center") &&
+                <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                    <li>
+                        <Link href={"/help-center/getting-started"} passHref>
+                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                                {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
+                                <IoRocket fontSize={14} strokeWidth={2.25}/>
 
-                            <span>Aan de slag</span>
-                        </LinkTextAlt>
-                    </Link>
-                </li>
+                                <span>Aan de slag</span>
+                            </LinkTextAlt>
+                        </Link>
+                    </li>
 
-                <li>
-                    <Link href={"/help-center/faq"} passHref>
-                        <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                            <IoChatbubbles fontSize={16} strokeWidth={2.25}/>
+                    <li>
+                        <Link href={"/help-center/faq"} passHref>
+                            <LinkTextAlt pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                                {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
+                                <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 
-                            <span>Veelgestelde vragen</span>
-                        </LinkTextAlt>
-                    </Link>
-                </li>
-            </SubNavigation>
+                                <span>Veelgestelde vragen</span>
+                            </LinkTextAlt>
+                        </Link>
+                    </li>
+                </SubNavigation>
+            }
+
         </Container>
     )
 }

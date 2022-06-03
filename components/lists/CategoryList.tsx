@@ -14,7 +14,7 @@ const Container = styled.div<ContainerProps>`
     width: 100%;
     background: ${({ theme }) => theme.background};
     border-radius: 10px;
-    box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     padding: 1rem 1.25rem;
 `
 
@@ -23,7 +23,6 @@ const Table = styled.table<ContainerProps>`
     border-collapse: collapse;
 
     th {
-        // TODO accent color
         text-align: left;
         color: ${({ accent }) => accent.color};
         font-weight: 500;

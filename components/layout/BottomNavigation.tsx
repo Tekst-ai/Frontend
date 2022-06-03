@@ -23,7 +23,7 @@ const Container = styled.div<ContainerProps>`
     display: flex;
     justify-content: space-between;
     padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     position: relative;
 `
 
@@ -34,27 +34,30 @@ interface NavigationContainerProps {
 const NavigationContainer = styled.div<NavigationContainerProps>`
     a {
         display: flex;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
         /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
         justify-content: flex-start;
         align-items: center;
-        margin-bottom: 1.25rem;
+        /* margin-bottom: 1.25rem; */
+        margin-bottom: 1.2rem;
         margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.45rem"};
         position: relative;
         /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
         
         svg {
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
 
             path {
-                stroke-width: 50px
+                /* stroke-width: 50px */
+                stroke-width: 45px
             }
         }
 
         span {
-            font-size: 1.125rem;
+            /* font-size: 1.125rem; */
+            font-size: 1rem;
             font-weight: 500;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
             opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
             position: absolute;
             left: 2.25rem
@@ -63,13 +66,15 @@ const NavigationContainer = styled.div<NavigationContainerProps>`
         &:first-of-type {
             svg {
                 path{
-                    stroke-width: 65px;
+                    /* stroke-width: 65px; */
+                    stroke-width: 60px;
                 }
             }
         }
 
         &:last-of-type {
-            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"};
+            /* margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"}; */
+            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.35rem"};
         }
     }
 `
@@ -95,7 +100,7 @@ interface CollapseProps {
 
 const Collapse = styled.button<CollapseProps>`
     margin-top: auto;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     display: flex;
     padding: 0.34375rem 0;
     border-radius: 5px;
@@ -109,7 +114,7 @@ const Collapse = styled.button<CollapseProps>`
     }
     
     svg {
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         path {
             stroke-width: 70px;
@@ -149,7 +154,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             <NavigationContainer isOpen={isOpen}>
                 <Link href={"/login"} passHref>
                     <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        <IoPowerOutline fontSize={18}/>
+                        {/* <IoPowerOutline fontSize={18}/> */}
+                        <IoPowerOutline fontSize={16}/>
 
                         <span>Afmelden</span>
                     </LinkText>
@@ -157,7 +163,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
 
                 <Link href={"/configuration"} passHref>
                     <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        <IoSettingsOutline fontSize={18}/>
+                        {/* <IoSettingsOutline fontSize={18}/> */}
+                        <IoSettingsOutline fontSize={16}/>
                         
                         <span>Configuratie</span>
                     </LinkText>

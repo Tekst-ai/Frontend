@@ -45,7 +45,7 @@ const themes: Theme = {
         backgroundAlt: Colors.whiteSec,
         text: Colors.blackPri,
         textSec: Colors.textGreyBlack,
-        boxShadow: `${Colors.blackPri}26`,
+        boxShadow: `${Colors.blackPri}33`,
         lineDark: Colors.whitePri,
         lineLight: Colors.whitePriDarker,
     },

@@ -19,10 +19,10 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
     padding-bottom: calc(2rem - 0.34375rem);
-    width: ${(ContainerProps) => ContainerProps.isOpen ? "20rem" : "5rem"};
+    width: ${(ContainerProps) => ContainerProps.isOpen ? "17.5rem" : "5rem"};
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease-out;
+    transition: all 0.2s ease-out;
     height: 100vh;
     position: fixed;
 `
@@ -34,7 +34,7 @@ interface ImageContainerProps {
 const ImageContainer = styled.a<ImageContainerProps>`
     height: 2.5rem;
     padding: ${(ImageContainerProps) => ImageContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 `
 
 interface ProfileContainerProps {
@@ -51,25 +51,25 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     justify-content: flex-start;
     margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "0" : "0.2rem" };
     margin-bottom: 1.625rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border-radius: 6px;
-    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : 'transparent'};
+    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
     position: relative;
     
-    &:hover {
+    /* &:hover {
         background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ({ theme }) => theme.lineLight};
-    }
+    } */
 
     div:first-of-type {
         width: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
         height: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
         border-radius: 8px;
         overflow: hidden;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     div:last-of-type {
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
         margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "1.25rem" : "0" };
         position: absolute;
         left: 4.375rem;
@@ -77,13 +77,13 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         white-space: nowrap;
         
         p {
-            transition: all 0.3s ease-in-out;
-            color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.text : 'inherit'};
+            transition: all 0.2s ease-in-out;
             
             &:first-of-type {
                 font-size: 1.125rem;
                 font-weight: 700;
                 margin-bottom: 0.5rem;
+                color: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent.color : ({ accent }) => accent.color};
             }
         }
     }
@@ -111,10 +111,10 @@ const Menu: NextPage = () => {
             <Link href={"/"} passHref>
                 <ImageContainer isOpen={isOpen}>
                     <Image
-                        // src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
-                        src={"/static/images/logo-no-text.png"} 
-                        // width={isOpen ? 75 : 31}
-                        width={31}
+                        src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
+                        // src={"/static/images/logo-no-text.png"} 
+                        width={isOpen ? 75 : 31}
+                        // width={31}
                         height={41}
                         alt="Logo of Tekst.ai"/>
                 </ImageContainer>
@@ -127,7 +127,7 @@ const Menu: NextPage = () => {
                     </div>
 
                     <div>
-                        <p>Janine jacobs</p>
+                        <p>Janine</p>
 
                         <p>Vals Bedrijf</p>
                     </div>
