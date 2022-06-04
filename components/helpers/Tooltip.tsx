@@ -36,7 +36,8 @@ const Container = styled.div<ContainerProps>`
         font-weight: 700;
     }
 
-    a:hover + & {
+    a:hover + &,
+    button:hover + & {
         left: calc(4rem + 7px);
         opacity: 1;
     }

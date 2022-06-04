@@ -66,7 +66,7 @@ const ButtonContent = styled.button<ButtonContentProps>`
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
-    width: 15rem;
+    width: 18rem;
     transition: ${Transition.fast};
     color: ${({ theme }) => theme.text};
 

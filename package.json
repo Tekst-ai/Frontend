@@ -14,6 +14,7 @@
     "@types/styled-components": "^5.1.25",
     "apollo-client": "^2.6.10",
     "chart.js": "^3.8.0",
+    "dotenv": "^16.0.1",
     "graphql": "^16.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",

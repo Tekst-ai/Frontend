@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu } from '../components/layout';
-import { Transition } from '../variables';
+import { Colors, Transition } from '../variables';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -18,8 +18,8 @@ const GlobalStyle = createGlobalStyle`
     transition: ${Transition.fast};
 
     & ::selection {
-        color: ${({ accent }) => accent.text};
-        background: ${({ accent }) => accent.color};
+        color: ${Colors.textWhite};
+        background: ${({ accent }) => accent};
     }
   }
 `;
@@ -79,7 +79,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 
     return (
         <>
-            <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}/>
+            <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
 
             <Container>
                 <Menu/>

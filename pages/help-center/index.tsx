@@ -5,6 +5,7 @@ import { IoRocket, IoChatbubbles, IoHelpBuoy } from "react-icons/io5"
 import { HelpCard, SupportCard } from '../../components/helpCenter'
 import { Colors } from '../../variables'
 import { IconAbstract } from '../../components/helpers'
+import { Routes } from '../../constants'
 
 const Container = styled.div`
     /* background-image: url("/static/images/logo_abstract.svg"); */
@@ -22,8 +23,8 @@ const Container = styled.div`
 `
 
 const Title = styled.div`
-    padding-top: 8rem;
-    padding-bottom: 4rem;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
     text-align: center;
     color: ${Colors.textWhite};
 
@@ -33,7 +34,7 @@ const Title = styled.div`
 
     p {
         margin-top: 1rem;
-        font-size: 1.375rem;
+        font-size: 1.25rem;
     }
 `
 
@@ -58,8 +59,8 @@ const HelpCenter: NextPage = () => {
                 </Title>
 
                 <CardList>
-                    <HelpCard icon={<IoRocket fontSize={50}/>} title={"Aan de slag"} link={"/help-center/getting-started"} type="link"/>
-                    <HelpCard icon={<IoChatbubbles fontSize={50}/>} title={"Veelgestelde vragen"} link={"/help-center/faq"} type="link"/>
+                    <HelpCard icon={<IoRocket fontSize={50}/>} title={"Aan de slag"} link={Routes.GETTINGSTARTED} type="link"/>
+                    <HelpCard icon={<IoChatbubbles fontSize={50}/>} title={"Veelgestelde vragen"} link={Routes.FAQ} type="link"/>
                     <HelpCard icon={<IoHelpBuoy fontSize={50}/>} title={"Support"} link={"#support"} type="button"/>
                 </CardList>
 

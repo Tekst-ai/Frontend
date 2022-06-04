@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styled from 'styled-components'
+import { Routes } from '../../constants'
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
@@ -112,7 +113,7 @@ const Menu: NextPage = () => {
 
     return (
         <Container isOpen={isOpen}>
-            <Link href={"/"} passHref>
+            <Link href={Routes.DASHBOARD} passHref>
                 <ImageContainer isOpen={isOpen}>
                     <Image
                         src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
@@ -125,7 +126,7 @@ const Menu: NextPage = () => {
             </Link>
 
             <TooltipContainer>
-                <Link href={"/account"} passHref>
+                <Link href={Routes.PROFILE} passHref>
                     <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                         <div>
                             <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />

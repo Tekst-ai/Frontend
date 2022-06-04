@@ -46,7 +46,7 @@ const LinkContent = styled.a<LinkContentProps>`
     color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? Colors.textWhite : ({ theme }) => theme.text};
 
     p {
-        margin-top: 1.25rem;
+        margin-top: 0.75rem;
         font-weight: 500;
         font-size: 1.25rem;
     }
@@ -72,7 +72,7 @@ const ButtonContent = styled.button<ButtonContentProps>`
     color: ${({ theme }) => theme.text};
 
     p {
-        margin-top: 1.25rem;
+        margin-top: 0.75rem;
         font-weight: 500;
         font-size: 1.25rem;
     }

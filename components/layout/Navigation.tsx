@@ -8,6 +8,7 @@ import { Colors, Transition } from '../../variables';
 import useStore, { useAccent } from '../../store';
 import themes, { accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
+import { Routes } from '../../constants';
 
 interface NavigationProps {
     isOpen: boolean,
@@ -134,7 +135,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
         <Container theme={themes[theme]}>
             <NavigationList isOpen={isOpen}>
                 <li>
-                    <Link href={"/"} passHref>
+                    <Link href={Routes.DASHBOARD} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
                             {/* <FiHome fontSize={18} strokeWidth={2.5}/> */}
                             <FiHome fontSize={18} strokeWidth={2.5}/>
@@ -148,7 +149,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 </li>
 
                 <li>
-                    <Link href={"/statistics"} passHref>
+                    <Link href={Routes.STATISTICS} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
                             {/* <FiBarChart2 fontSize={20} strokeWidth={3}/> */}
                             <FiBarChart2 fontSize={18} strokeWidth={3}/>
@@ -161,7 +162,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 </li>
 
                 <li>
-                    <Link href={"/categories"} passHref>
+                    <Link href={Routes.CATEGORIES} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
                             {/* <FiGrid fontSize={20} strokeWidth={2.25}/> */}
                             <FiGrid fontSize={18} strokeWidth={2.25}/>

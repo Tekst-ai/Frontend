@@ -5,10 +5,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Transition } from '../../variables'
-import useStore, { useAccent, useMenu } from '../../store'
+import useStore, { useAccent, useAuth, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 import { Tooltip } from '../helpers'
+import { Routes } from '../../constants'
 
 interface BottomNavigationProps {
     isOpen: boolean,
@@ -39,7 +40,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         z-index: 2;
         display: flex;
 
-        a {
+        a, button {
             display: flex;
             transition: ${Transition.fast};
             /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
@@ -73,7 +74,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         }
 
         &:first-of-type {
-            a {
+            button {
                 svg {
                     path{
                         /* stroke-width: 65px; */
@@ -106,6 +107,24 @@ const LinkText = styled.a<LinkTextProps>`
 
     &:hover {
         color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.text};
+    }
+`
+
+interface LinkButtonProps {
+    accent: string,
+    theme: any,
+    open: boolean,
+}
+
+const LinkButton = styled.button<LinkButtonProps>`
+    color: ${({ theme }) => theme.textSec};
+
+    span {
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
+    }
+
+    &:hover {
+        color: ${({ theme }) => theme.text};
     }
 `
 
@@ -165,28 +184,31 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
         onOpen(!open)
     }, [open, onOpen])
 
+    const setAuth = useAuth((s: any) => s.setAuth)
+    const handleAuth = () => {
+        setAuth(false)
+    }
+
     return (
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
                 <li>
-                    <Link href={"/login"} passHref>
-                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
-                            {/* <IoPowerOutline fontSize={18}/> */}
-                            <IoPowerOutline fontSize={16}/>
-
-                            <span>Afmelden</span>
-                        </LinkText>
-                    </Link>
+                    <LinkButton onClick={handleAuth} open={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                        {/* <IoSettingsOutline fontSize={18}/> */}
+                        <IoPowerOutline fontSize={16}/>
+                        
+                        <span>Afmelden</span>
+                    </LinkButton>
 
                     <Tooltip title="Afmelden"/>
                 </li>
 
                 <li>
-                    <Link href={"/configuration"} passHref>
+                    <Link href={Routes.CONFIGURATION} passHref>
                         <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
-                            {/* <IoSettingsOutline fontSize={18}/> */}
+                            {/* <IoPowerOutline fontSize={18}/> */}
                             <IoSettingsOutline fontSize={16}/>
-                            
+
                             <span>Configuratie</span>
                         </LinkText>
                     </Link>

@@ -12,7 +12,7 @@ const Container = styled.div<ContainerProps>`
     background: linear-gradient(90deg, ${({ accent }) => accent} 0%, ${Colors.secondary} 100%);
     /* background: linear-gradient(90deg, ${Colors.secondary}CC 0%, ${({ accent }) => accent + "CC"} 100%); */
     position: absolute;
-    top: -2rem;
+    top: -3rem;
     left: -3rem;
     border-radius: 10px 10px 0 0;
     width: calc(100% + 6rem);
