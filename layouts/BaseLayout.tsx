@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${({ theme }: any ) => theme.background};
     color: ${({ theme }: any) => theme.text};
-    transition: ${Transition.fast};
+    /* transition: ${Transition.fast}; */
 
     & ::selection {
         color: ${Colors.textWhite};
@@ -68,7 +68,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
         const rememberedAccent = localStorage.getItem('accent');
-        // const rememberedMenu = localStorage.getItem('open menu');
+        // const rememberedMenu = localStorage.getItem('menu');
         if (rememberedTheme && rememberedAccent) {
             setTheme(rememberedTheme);
             setAccent(rememberedAccent);

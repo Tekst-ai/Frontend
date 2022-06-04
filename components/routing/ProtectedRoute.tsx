@@ -2,7 +2,6 @@ import React from "react";
 import type { NextPage } from "next";
 
 import { Routes } from "../../constants";
-import { useAuth } from "../../store";
 
 //check if you are on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
@@ -12,10 +11,14 @@ interface ProtectedRouteProps {
     children: React.ReactElement,
 }
 
+
 const ProtectedRoute: NextPage<ProtectedRouteProps> = ({ router, children }) => {
     //Identify authenticated user
-    const auth = useAuth((s: any) => s.auth);
-    const isAuthenticated = auth;
+    let auth;
+    if (isBrowser()) {
+        auth = localStorage.getItem("auth");
+    }
+    const isAuthenticated = auth === "true";
 
     let unprotectedRoutes = [
         Routes.LOGIN,

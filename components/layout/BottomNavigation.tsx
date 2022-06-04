@@ -175,18 +175,20 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const [open, setOpen] = useState(false)
 
     const handleClick = () => {
-        setOpen(!open)
-        localStorage.setItem("open menu", open.toString())
-        setMenu(!menu)
+        setOpen(!open);
+        localStorage.setItem("menu", open.toString());
+        setMenu(!menu);
     }
 
     useEffect(() => {
-        onOpen(!open)
+        onOpen(!open);
     }, [open, onOpen])
-
+    
     const setAuth = useAuth((s: any) => s.setAuth)
     const handleAuth = () => {
         setAuth(false)
+        localStorage.setItem("auth", String(false))
+        router.push(Routes.LOGIN)
     }
 
     return (

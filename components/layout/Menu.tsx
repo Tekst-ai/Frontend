@@ -6,7 +6,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Routes } from '../../constants'
 
-import useStore, { useAccent } from '../../store'
+import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { Transition } from '../../variables'
 import { Tooltip } from '../helpers'
@@ -104,8 +104,9 @@ const Menu: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
     const router = useRouter();
+    const menu = useMenu((s: any) => s.menu);
     
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(menu)
 
     const handleOpen = (open: boolean) => {
         setIsOpen(open)

@@ -11,7 +11,7 @@ export const useMenu = create(set => ({
 }));
 
 export const useAuth = create(set => ({
-    auth: true,
+    auth: "false",
     setAuth: (auth: boolean) => set({ auth }),
 }))
 
