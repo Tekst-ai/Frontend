@@ -53,6 +53,7 @@ export const Shadow = {
 }
 
 export const Transition = {
+    superFast: "all 0.1s ease-in-out",
     fast: "all 0.2s ease-in-out",
     default: "all 0.3s ease-in-out",
     slow: "all 0.4s ease-in-out",

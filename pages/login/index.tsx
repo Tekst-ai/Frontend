@@ -14,21 +14,24 @@ import { PrimaryButton } from '../../components/buttons'
 import { TitleFormat } from '../../services/title'
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: ${({ theme }: any ) => theme.background};
-    color: ${({ theme }: any) => theme.text};
-    transition: ${Transition.fast};
-
-    & ::selection {
-        color: ${Colors.textWhite};
-        background: ${({ accent }) => accent};
+    html, body {
+        /* background: ${({ theme }: any ) => theme.background}; */
+        /* color: ${({ theme }: any) => theme.text}; */
+        /* transition: ${Transition.fast}; */
+        
+        & ::selection {
+            color: ${Colors.textWhite};
+            background: ${({ accent }) => accent};
+        }
     }
-  }
 `;
 
 const Container = styled.div`
     min-height: 100vh;
     display: flex;
+    background: ${({ theme }: any) => theme.background};
+    color: ${({ theme }: any) => theme.text};
+    transition: ${Transition.fast};
 `
 
 const LeftContainer = styled.div`
@@ -92,7 +95,7 @@ const Login: NextPageWithLayout = () => {
                 </title>
             </Head>
 
-            <Container>
+            <Container theme={themes[theme]}>
                 <LeftContainer>
                     <ImageContainer>
                         <Image

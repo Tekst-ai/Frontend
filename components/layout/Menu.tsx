@@ -63,7 +63,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     margin-bottom: 1.625rem;
     transition: ${Transition.fast};
     border-radius: 6px;
-    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
+    background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : "transparent"};
     position: relative;
     z-index: 3;
     
@@ -80,7 +80,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     }
 
     div:last-of-type {
-        transition: ${Transition.fast};
+        transition: ${Transition.superFast};
         margin-left: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "1.25rem" : "0" };
         position: absolute;
         left: 4.375rem;

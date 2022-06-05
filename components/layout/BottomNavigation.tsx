@@ -39,6 +39,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         position: relative;
         z-index: 2;
         display: flex;
+        transition: ${Transition.fast};
 
         a, button {
             display: flex;
@@ -64,7 +65,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
                 /* font-size: 1.125rem; */
                 font-size: 1rem;
                 font-weight: 500;
-                transition: ${Transition.fast};
+                transition: ${Transition.superFast};
                 opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
                 position: absolute;
                 left: 2.25rem
