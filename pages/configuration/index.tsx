@@ -3,14 +3,20 @@ import styled from 'styled-components'
 
 import { Colors } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
+import themes, { Theme } from '../../ThemeConfig'
+import useStore from '../../store'
 
-export const TitleContainer = styled.div`
+interface TitleContainerProps {
+    theme: keyof Theme
+}
+
+export const TitleContainer = styled.div<TitleContainerProps>`
     margin-bottom: 2rem;
     /* width: 100%; */
 
     p {
         margin-top: 0.625rem;
-        color: ${Colors.textGrey};
+        color: ${({ theme }) => theme.textSec};
     }
 `
 
@@ -31,9 +37,11 @@ const SubContainer = styled.div`
 `
 
 const Configuration: NextPage = () => {
+    const theme: keyof Theme = useStore((s: any) => s.theme)
+
     return (
         <div>
-            <TitleContainer>
+            <TitleContainer theme={themes[theme]}>
                 <h1>Configuratie</h1>
 
                 <p>Kies een accent kleur of verander het thema</p>

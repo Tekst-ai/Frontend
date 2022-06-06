@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Head from 'next/head'
 
@@ -8,10 +7,9 @@ import { NextPageWithLayout } from '../_app'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent, useAuth } from '../../store'
 import { Colors, Transition } from '../../variables'
-import { Routes } from '../../constants'
 import { TitleContainer } from '../configuration'
-import { PrimaryButton } from '../../components/buttons'
 import { TitleFormat } from '../../services/title'
+import LoginForm from '../../components/forms/LoginForm'
 
 const GlobalStyle = createGlobalStyle`
     html, body {
@@ -51,16 +49,21 @@ const ImageContainer = styled.div`
 
 const ContentContainer = styled.div`
     margin: auto;
+    width: 24rem;
+
+    button {
+        margin-left: auto;
+    }
 `
 
 const RightContainer = styled.div`
     width: 55%;
-    /* height: 100%; */
-    /* background: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const Login: NextPageWithLayout = () => {
-    const router = useRouter()
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent = useAccent((s: any) => s.accent);
     const setTheme = useStore((s: any) => s.setTheme);
@@ -78,12 +81,6 @@ const Login: NextPageWithLayout = () => {
         }
 
     }, [setTheme, setAccent, setAuth]);
-    
-    const handleClick = () => {
-        setAuth("true");
-        localStorage.setItem("auth", "true");
-        router.push(Routes.DASHBOARD)
-    }
 
     return (
         <>
@@ -106,7 +103,6 @@ const Login: NextPageWithLayout = () => {
                         />
                     </ImageContainer>
 
-
                     <ContentContainer>
                         <TitleContainer theme={themes[theme]}>
                             <h1>Welkom bij Tekst.ai</h1>
@@ -114,13 +110,14 @@ const Login: NextPageWithLayout = () => {
                             <p>Meldt u aan en begin tijd te besparen!</p>
                         </TitleContainer>
 
-                        <PrimaryButton type="button" onClick={handleClick}>
-                            Aanmelden 
-                        </PrimaryButton>
+                        <div>
+                            <LoginForm/>
+                        </div>
                     </ContentContainer>
                 </LeftContainer>
 
                 <RightContainer>
+                    <h1>Placeholder</h1>
                 </RightContainer>
             </Container>
         </>

@@ -20,6 +20,7 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>`
+    display: block;
     background: ${({ accent }) => accent};
     color: ${Colors.textWhite};
     border-radius: 6px;
