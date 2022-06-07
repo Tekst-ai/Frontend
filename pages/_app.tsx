@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     if (Component.getLayout) {
         return Component.getLayout(<Component {...pageProps}/>)
     }
-
+    
     return (
         <ProtectedRoute>
             <BaseLayout>

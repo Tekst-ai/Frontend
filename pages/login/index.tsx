@@ -10,6 +10,7 @@ import { Colors, Transition } from '../../variables'
 import { TitleContainer } from '../configuration'
 import { TitleFormat } from '../../services/title'
 import LoginForm from '../../components/forms/LoginForm'
+import { Carousel } from '../../components/carousel'
 
 const GlobalStyle = createGlobalStyle`
     html, body {
@@ -27,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
     min-height: 100vh;
     display: flex;
-    background: ${({ theme }: any) => theme.background};
+    background: ${({ theme }: any) => theme.backgroundAlt};
     color: ${({ theme }: any) => theme.text};
     transition: ${Transition.fast};
 `
@@ -117,7 +118,7 @@ const Login: NextPageWithLayout = () => {
                 </LeftContainer>
 
                 <RightContainer>
-                    <h1>Placeholder</h1>
+                    <Carousel/>
                 </RightContainer>
             </Container>
         </>

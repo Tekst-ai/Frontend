@@ -57,4 +57,5 @@ export const Transition = {
     fast: "all 0.2s ease-in-out",
     default: "all 0.3s ease-in-out",
     slow: "all 0.4s ease-in-out",
+    superSlow: "all 1s ease-in-out",
 }

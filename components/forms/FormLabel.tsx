@@ -31,10 +31,10 @@ const StyledLabel = styled.label<StyledLabelProps>`
         font-size: 1rem;
         margin-top: 0.5rem;
         padding-bottom: 0.1rem;
-        background: ${({ theme }) => theme.background};
+        background: ${({ theme }) => theme.backgroundAlt};
         padding: 0.5rem 1rem;
         border-radius: 6px;
-        box-shadow: 0 3px 8px ${({ theme }) => theme.background};
+        box-shadow: 0 2px 6px ${({ theme }) => theme.backgroundAlt};
         /* border: 1.5px solid ${({ theme }) => theme.textSec + "66"}; */
         border: 1.5px solid ${({ accent }) => accent + "66"};
         transition: ${Transition.fast};
@@ -42,7 +42,7 @@ const StyledLabel = styled.label<StyledLabelProps>`
         font-family: "Cake", sans-serif;
 
         &:focus {
-            box-shadow: 0 3px 8px ${({ accent }) => accent + "33"};
+            box-shadow: 0 2px 6px ${({ accent }) => accent + "33"};
             border-color: ${({ accent }) => accent + 99};
             color: ${({ theme }) => theme.text};
         }
