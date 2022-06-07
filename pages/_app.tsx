@@ -16,23 +16,23 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout
 }
 
-function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     if (Component.getLayout) {
         return Component.getLayout(<Component {...pageProps}/>)
     }
-
+    
     return (
-        <BaseLayout>
-            <Head>
-                <title>
-                    { TitleFormat(Component.name) }
-                </title>
-            </Head>
-
-            <ProtectedRoute router={router}>
-                <Component {...pageProps} />
-            </ProtectedRoute>
-        </BaseLayout>
+        <ProtectedRoute>
+            <BaseLayout>
+                <Head>
+                    <title>
+                        { TitleFormat(Component.name) }
+                    </title>
+                </Head>
+                    
+                    <Component {...pageProps} />
+            </BaseLayout>
+        </ProtectedRoute>
     )
 }
 

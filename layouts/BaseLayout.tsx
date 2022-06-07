@@ -12,21 +12,24 @@ interface LayoutProps {
 }
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: ${({ theme }: any ) => theme.background};
-    color: ${({ theme }: any) => theme.text};
-    transition: ${Transition.fast};
+    body {
+        /* background: ${({ theme }: any ) => theme.background}; */
+        /* color: ${({ theme }: any) => theme.text}; */
+        /* transition: ${Transition.fast}; */
 
-    & ::selection {
-        color: ${Colors.textWhite};
-        background: ${({ accent }) => accent};
+        & ::selection {
+            color: ${Colors.textWhite};
+            background: ${({ accent }) => accent};
+        }
     }
-  }
 `;
 
 const Container = styled.div`
     display: flex;
     position: relative;
+    background: ${({ theme }: any) => theme.background};
+    color: ${({ theme }: any) => theme.text};
+    transition: ${Transition.fast};
 `
 
 interface MainProps {
@@ -68,7 +71,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
         const rememberedAccent = localStorage.getItem('accent');
-        // const rememberedMenu = localStorage.getItem('open menu');
+        // const rememberedMenu = localStorage.getItem('menu');
         if (rememberedTheme && rememberedAccent) {
             setTheme(rememberedTheme);
             setAccent(rememberedAccent);
@@ -81,7 +84,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
         <>
             <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
 
-            <Container>
+            <Container theme={themes[theme]}>
                 <Menu/>
 
                 <Main menu={menu} theme={themes[theme]}>

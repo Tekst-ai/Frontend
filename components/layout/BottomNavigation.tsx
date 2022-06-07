@@ -39,6 +39,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         position: relative;
         z-index: 2;
         display: flex;
+        transition: ${Transition.fast};
 
         a, button {
             display: flex;
@@ -64,7 +65,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
                 /* font-size: 1.125rem; */
                 font-size: 1rem;
                 font-weight: 500;
-                transition: ${Transition.fast};
+                transition: ${Transition.superFast};
                 opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
                 position: absolute;
                 left: 2.25rem
@@ -175,18 +176,20 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const [open, setOpen] = useState(false)
 
     const handleClick = () => {
-        setOpen(!open)
-        localStorage.setItem("open menu", open.toString())
-        setMenu(!menu)
+        setOpen(!open);
+        localStorage.setItem("menu", open.toString());
+        setMenu(!menu);
     }
 
     useEffect(() => {
-        onOpen(!open)
+        onOpen(!open);
     }, [open, onOpen])
-
+    
     const setAuth = useAuth((s: any) => s.setAuth)
     const handleAuth = () => {
         setAuth(false)
+        localStorage.setItem("auth", String(false))
+        router.push(Routes.LOGIN)
     }
 
     return (

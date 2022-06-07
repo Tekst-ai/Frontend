@@ -65,7 +65,7 @@ const NavigationList = styled.ul<NavigationListProps>`
             }
 
             span {
-                transition: ${Transition.fast};
+                transition: ${Transition.superFast};
                 /* font-size: 1.25rem; */
                 font-size: 1rem;
                 font-weight: 500;
@@ -96,7 +96,7 @@ interface LinkTextProps {
 
 const LinkText = styled.a<LinkTextProps>`
     /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "transparent"}; */
-    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.background};
+    background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : "transparent"};
     /* box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 1px " + LinkTextProps.theme.boxShadow : "0 1px 1px " + LinkTextProps.theme.background}; */
 
     & span {

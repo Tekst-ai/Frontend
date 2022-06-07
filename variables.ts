@@ -29,7 +29,7 @@ export const Colors = {
     accentDefault: '#EF1E6E',
     accentDefaultDark: '#A71652',
     accentYellow: '#FDBA2C',
-    accentYellowDark: '#E59F03 ',
+    accentYellowDark: '#E59F03',
     accentOrange: '#FF7F00',
     accentOrangeDark: '#D5481A',
     accentRed: '#FF2700',
@@ -53,7 +53,9 @@ export const Shadow = {
 }
 
 export const Transition = {
+    superFast: "all 0.1s ease-in-out",
     fast: "all 0.2s ease-in-out",
     default: "all 0.3s ease-in-out",
     slow: "all 0.4s ease-in-out",
+    superSlow: "all 1s ease-in-out",
 }

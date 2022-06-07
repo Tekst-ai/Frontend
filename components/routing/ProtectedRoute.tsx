@@ -1,33 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { Routes } from "../../constants";
-import { useAuth } from "../../store";
+import { FullPageLoader } from "../layout";
 
 //check if you are on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
 
 interface ProtectedRouteProps {
-    router: any,
     children: React.ReactElement,
 }
 
-const ProtectedRoute: NextPage<ProtectedRouteProps> = ({ router, children }) => {
-    //Identify authenticated user
-    const auth = useAuth((s: any) => s.auth);
-    const isAuthenticated = auth;
+const ProtectedRoute: NextPage<ProtectedRouteProps> = ({ children }) => {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
 
-    let unprotectedRoutes = [
-        Routes.LOGIN,
+    const handleAuth = () => {
+        let auth;
+        if (isBrowser()) {
+            auth = localStorage.getItem("auth");
+        }
+        return auth === "true";
+    }
+    
+    let protectedRoutes = [
+        Routes.DASHBOARD,
+        Routes.STATISTICS,
+        Routes.CATEGORIES,
+        Routes.PROFILE,
+        Routes.CONFIGURATION,
+        Routes.HELPCENTER,
+        Routes.GETTINGSTARTED,
+        Routes.FAQ
     ];
+    
+    let pathIsProtected = protectedRoutes.indexOf(router.pathname) !== -1;
 
-    /**
-     * @var pathIsProtected Checks if path exists in the unprotectedRoutes routes array
-     */
-    let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
-
-    if (isBrowser() && !isAuthenticated && pathIsProtected) {
-        router.push(Routes.LOGIN);
+    useEffect(() => {
+        handleAuth();
+        setIsLoading(false)
+        if (!isLoading && isBrowser() && !handleAuth() && pathIsProtected) {
+            router.push(Routes.LOGIN);
+        }
+    }, [pathIsProtected, router, isLoading]);
+    
+    if ((isLoading || !handleAuth()) && pathIsProtected) {
+        return <FullPageLoader/>
     }
 
     return children;
