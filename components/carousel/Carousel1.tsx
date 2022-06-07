@@ -15,7 +15,7 @@ const Container = styled.div`
 const Carousel1: NextPage = () => {
     return (
         <Container>
-            <IconContainerCarousel vector={<Emails/>}/>
+            <IconContainerCarousel vector={<Emails/>} title="Online illustrations by Storyset"/>
                 
             <TextContainerCarousel bottom="13%" title="Smart Email Routing" text="Tekst.ai voorziet slimme email routing. Elke vraag, email ontvangen gaat automatisch naar de juiste persoon / departement."/>
         </Container>

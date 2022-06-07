@@ -3,7 +3,8 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface IconContainerCarouselProps {
-    vector: ReactNode
+    vector: ReactNode,
+    title: string
 }
 
 const Container = styled.div`
@@ -21,9 +22,9 @@ const Container = styled.div`
     }
 `
 
-const IconContainerCarousel: NextPage<IconContainerCarouselProps> = ({ vector }) => {
+const IconContainerCarousel: NextPage<IconContainerCarouselProps> = ({ vector, title }) => {
     return (
-        <Container>
+        <Container title={title}>
             { vector }    
         </Container>
     )

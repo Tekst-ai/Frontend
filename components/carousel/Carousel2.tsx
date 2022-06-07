@@ -15,7 +15,7 @@ const Container = styled.div`
 const Carousel2: NextPage = () => {
     return (
         <Container>
-            <IconContainerCarousel vector={<Analysis/>}/>
+            <IconContainerCarousel vector={<Analysis/>} title="Work illustrations by Storyset"/>
                 
             <TextContainerCarousel left="auto" right="10%" bottom="8%" title="Extra inzichten" text="Krijg meer inzicht in hoe je uw mails behandelt. Leer meer over welke type emails je ontvangt en hoe snel je deze behandelt."/>
         </Container>
