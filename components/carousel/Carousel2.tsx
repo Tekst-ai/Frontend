@@ -17,7 +17,7 @@ const Carousel2: NextPage = () => {
         <Container>
             <IconContainerCarousel vector={<Analysis/>}/>
                 
-            <TextContainerCarousel left="auto" right="10%" bottom="10%" title="Analysis" text="Tekst.ai voorziet slimme email routing. Elke vraag, email ontvangen gaat automatisch naar de juiste persoon / departement."/>
+            <TextContainerCarousel left="auto" right="10%" bottom="8%" title="Extra inzichten" text="Krijg meer inzicht in hoe je uw mails behandelt. Leer meer over welke type emails je ontvangt en hoe snel je deze behandelt."/>
         </Container>
     )
 }

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { Time } from '../dynamicIcons';
+import { Growth } from '../dynamicIcons';
 import IconContainerCarousel from './IconContainerCarousel';
 import TextContainerCarousel from './TextContainerCarousel';
 
@@ -15,9 +15,9 @@ const Container = styled.div`
 const Carousel5: NextPage = () => {
     return (
         <Container>
-            <IconContainerCarousel vector={<Time/>}/>
+            <IconContainerCarousel vector={<Growth/>}/>
                 
-            <TextContainerCarousel top="" title="Amount of emails" text="Tekst.ai voorziet slimme email routing. Elke vraag, email ontvangen gaat automatisch naar de juiste persoon / departement."/>
+            <TextContainerCarousel bottom="7%" left="auto" right="8%" title="91 235" text="Zoveel e-mails heeft de software van Tekst.ai al verwerkt. En dit is nog maar het begin!"/>
         </Container>
     )
 }

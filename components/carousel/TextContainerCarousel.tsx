@@ -37,7 +37,7 @@ const Container = styled.div<ContainerProps>`
     p {
         &:first-of-type {
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 0.375rem;
         }

@@ -59,6 +59,7 @@ const ContentContainer = styled.div`
 
 const RightContainer = styled.div`
     width: 55%;
+    height: 100%auto;
     display: flex;
     align-items: center;
     justify-content: center;

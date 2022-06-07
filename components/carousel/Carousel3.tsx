@@ -6,10 +6,9 @@ import IconContainerCarousel from './IconContainerCarousel';
 import TextContainerCarousel from './TextContainerCarousel';
 
 const Container = styled.div`
-    position: relative;
     width: 100%;
     height: 100%;
-    display: inline-block;
+    position: relative;
 `
 
 const Carousel3: NextPage = () => {
@@ -17,7 +16,7 @@ const Carousel3: NextPage = () => {
         <Container>
             <IconContainerCarousel vector={<Busy/>}/>
                 
-            <TextContainerCarousel top="5%" left="3%" bottom="auto" title="Busy" text="Tekst.ai voorziet slimme email routing. Elke vraag, email ontvangen gaat automatisch naar de juiste persoon / departement."/>
+            <TextContainerCarousel top="8%" left="3%" bottom="auto" title="153 minuten" text="Ofwel 32%, dat is hoeveel tijd je dagelijks spendeert aan e-mails."/>
         </Container>
     )
 }
