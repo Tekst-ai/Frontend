@@ -10,6 +10,7 @@ import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 import { Tooltip } from '../helpers'
 import { Routes } from '../../constants'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 interface BottomNavigationProps {
     isOpen: boolean,
@@ -174,16 +175,31 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const setMenu = useMenu((s: any) => s.setMenu)
 
     const [open, setOpen] = useState(false)
-
+    
     const handleClick = () => {
         setOpen(!open);
         localStorage.setItem("menu", open.toString());
         setMenu(!menu);
     }
+    
+    const { width } = useWindowDimensions()
+
+    // useEffect(() => {
+    //     if (width < 992) {
+    //         // setOpen(false)
+    //         // localStorage.setItem("menu", open.toString());
+    //         // setMenu(false);
+    //         onOpen(false);
+    //     }  
+    // }, [open, width, setMenu, onOpen])
 
     useEffect(() => {
-        onOpen(!open);
-    }, [open, onOpen])
+        if (width < 992) {
+            onOpen(false)
+        } else {
+            onOpen(!open);
+        }
+    }, [open, onOpen, width])
     
     const setAuth = useAuth((s: any) => s.setAuth)
     const handleAuth = () => {

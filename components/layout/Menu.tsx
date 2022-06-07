@@ -2,13 +2,14 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Routes } from '../../constants'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
-import { Transition } from '../../variables'
+import { Breakpoint, Transition } from '../../variables'
 import { Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
@@ -23,12 +24,16 @@ const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
     padding-bottom: calc(2rem - 0.34375rem);
     width: ${(ContainerProps) => ContainerProps.isOpen ? "17.5rem" : "5rem"};
-    display: flex;
     flex-direction: column;
     transition: ${Transition.fast};
     height: 100vh;
     position: fixed;
     z-index: 2;
+    display: none;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        display: flex;
+    }
 `
 
 const TooltipContainer = styled.div`
@@ -107,6 +112,7 @@ const Menu: NextPage = () => {
     const menu = useMenu((s: any) => s.menu);
     
     const [isOpen, setIsOpen] = useState(menu)
+    const { width } = useWindowDimensions()
 
     const handleOpen = (open: boolean) => {
         setIsOpen(open)

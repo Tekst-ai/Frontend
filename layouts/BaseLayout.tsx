@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
 
 import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu } from '../components/layout';
-import { Colors, Transition } from '../variables';
+import { Breakpoint, Colors, Transition } from '../variables';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -34,17 +35,26 @@ const Container = styled.div`
 
 interface MainProps {
     theme: any,
-    menu: boolean
+    menu: boolean,
+    windowWidth: number
 }
 
 const Main = styled.main<MainProps>`
     background: ${({ theme }) =>theme.background};
     padding: 1.25rem;
-    padding-left: 0;
     width: 100%;
     transition: ${Transition.fast};
     z-index: 1;
-    margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
+    margin-left: ${({ windowWidth }) => windowWidth < 992 && windowWidth > 768 ? "5rem" : "0"};
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding-left: 0;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
+    }
+
 `
 
 interface SubContainerProps {
@@ -78,7 +88,10 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             // setMenu(rememberedMenu)
         }
 
-    }, [setTheme, setAccent, setMenu]);
+    }, [setTheme, setAccent, setMenu]);  
+
+    const { width } = useWindowDimensions()
+    console.log(width)
 
     return (
         <>
@@ -87,7 +100,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             <Container theme={themes[theme]}>
                 <Menu/>
 
-                <Main menu={menu} theme={themes[theme]}>
+                <Main menu={menu} windowWidth={width} theme={themes[theme]}>
                     <SubContainer theme={themes[theme]}>
                         {children}
                     </SubContainer>

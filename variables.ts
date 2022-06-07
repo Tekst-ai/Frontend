@@ -59,3 +59,11 @@ export const Transition = {
     slow: "all 0.4s ease-in-out",
     superSlow: "all 1s ease-in-out",
 }
+
+export const Breakpoint = {
+    mobileSmall: '400px',
+    mobile: '768px',
+    tablet: '992px',
+    desktop: '1200px',
+    deskTopLarge: '1400px',
+}
