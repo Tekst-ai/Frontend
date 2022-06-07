@@ -4,7 +4,7 @@ import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-i
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Transition } from '../../variables'
+import { Breakpoint, Transition } from '../../variables'
 import useStore, { useAccent, useAuth, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
@@ -145,9 +145,16 @@ const Collapse = styled.button<CollapseProps>`
     position: absolute;
     right: ${(CollapseProps) => CollapseProps.isOpen ? 0 : "0.45rem"};
     bottom: -4px;
+    cursor: default;
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        cursor: pointer;
+    }
 
     &:hover {
-        background: ${({ theme }) => theme.lineLight};
+        @media (min-width: ${Breakpoint.tablet}) {
+            background: ${({ theme }) => theme.lineLight};
+        }
     }
     
     svg {
@@ -173,25 +180,18 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const menu = useMenu((s: any) => s.menu)
     const setMenu = useMenu((s: any) => s.setMenu)
+    const { width } = useWindowDimensions()
 
     const [open, setOpen] = useState(false)
     
     const handleClick = () => {
-        setOpen(!open);
-        localStorage.setItem("menu", open.toString());
-        setMenu(!menu);
+        if (width > 992) {
+            setOpen(!open);
+            localStorage.setItem("menu", open.toString());
+            setMenu(!menu);
+        }
     }
     
-    const { width } = useWindowDimensions()
-
-    // useEffect(() => {
-    //     if (width < 992) {
-    //         // setOpen(false)
-    //         // localStorage.setItem("menu", open.toString());
-    //         // setMenu(false);
-    //         onOpen(false);
-    //     }  
-    // }, [open, width, setMenu, onOpen])
 
     useEffect(() => {
         if (width < 992) {
@@ -237,8 +237,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].backgroundSec}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].backgroundSec}/>
             </Collapse>
         </Container>
     )

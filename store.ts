@@ -15,11 +15,6 @@ export const useAuth = create(set => ({
     setAuth: (auth: boolean) => set({ auth }),
 }))
 
-export const useWidth = create(set => ({
-    width: 0,
-    setWidth: (width: number) => set({ width }),
-}))
-
 export default create(set => ({
     theme: 'dark',
     setTheme: (theme: string) => set({ theme }),

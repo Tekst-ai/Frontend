@@ -2,10 +2,9 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Routes } from '../../constants'
-import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
@@ -112,7 +111,6 @@ const Menu: NextPage = () => {
     const menu = useMenu((s: any) => s.menu);
     
     const [isOpen, setIsOpen] = useState(menu)
-    const { width } = useWindowDimensions()
 
     const handleOpen = (open: boolean) => {
         setIsOpen(open)

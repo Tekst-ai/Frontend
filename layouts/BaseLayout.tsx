@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
 
 import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
-import { Menu } from '../components/layout';
+import { Menu, MobileMenu } from '../components/layout';
 import { Breakpoint, Colors, Transition } from '../variables';
-import useWindowDimensions from '../hooks/useWindowDimensions';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -31,12 +30,17 @@ const Container = styled.div`
     background: ${({ theme }: any) => theme.background};
     color: ${({ theme }: any) => theme.text};
     transition: ${Transition.fast};
+    flex-direction: column;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        flex-direction: row;
+    }
 `
 
 interface MainProps {
     theme: any,
     menu: boolean,
-    windowWidth: number
+    height: number,
 }
 
 const Main = styled.main<MainProps>`
@@ -45,10 +49,12 @@ const Main = styled.main<MainProps>`
     width: 100%;
     transition: ${Transition.fast};
     z-index: 1;
-    margin-left: ${({ windowWidth }) => windowWidth < 992 && windowWidth > 768 ? "5rem" : "0"};
+    margin-bottom: ${({ height }) => height}px;
     
     @media (min-width: ${Breakpoint.mobile}) {
         padding-left: 0;
+        margin-bottom: 0;
+        margin-left: 5rem;
     }
 
     @media (min-width: ${Breakpoint.tablet}) {
@@ -58,16 +64,21 @@ const Main = styled.main<MainProps>`
 `
 
 interface SubContainerProps {
-    theme: any
+    theme: any,
+    height: number,
 }
 
 const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
     padding: 2rem 3rem;
     border-radius: 15px;
-    min-height: calc(100vh - 2.5rem);
+    min-height: calc(100vh - 2.5rem - ${({ height }) => height}px);
     height: 100%;
     transition: ${Transition.fast};
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        min-height: calc(100vh - 2.5rem);
+    }
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
@@ -90,8 +101,12 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 
     }, [setTheme, setAccent, setMenu]);  
 
-    const { width } = useWindowDimensions()
-    console.log(width)
+    const [height, setHeight] = useState(0)
+    const mobileContainer = useCallback((node: any) => {
+        if (node !== null) {
+            setHeight(node.children[0].clientHeight);
+        }
+    }, [])
 
     return (
         <>
@@ -100,11 +115,15 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             <Container theme={themes[theme]}>
                 <Menu/>
 
-                <Main menu={menu} windowWidth={width} theme={themes[theme]}>
-                    <SubContainer theme={themes[theme]}>
+                <Main menu={menu} theme={themes[theme]} height={height}>
+                    <SubContainer theme={themes[theme]} height={height}>
                         {children}
                     </SubContainer>
                 </Main>
+
+                <div ref={mobileContainer}>
+                    <MobileMenu/>
+                </div>
             </Container>
         </>
     )
