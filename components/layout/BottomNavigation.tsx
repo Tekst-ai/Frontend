@@ -185,14 +185,11 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const [open, setOpen] = useState(false)
     
     const handleClick = () => {
-        if (width > 992) {
-            setOpen(!open);
-            localStorage.setItem("menu", open.toString());
-            setMenu(!menu);
-        }
+        setOpen(!open);
+        localStorage.setItem("menu", open.toString());
+        setMenu(!menu);
     }
     
-
     useEffect(() => {
         if (width < 992) {
             onOpen(false)
@@ -236,7 +233,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
                 </li>
             </NavigationContainer>
 
-            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
+            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]} disabled={width > 992 ? false : true}>
                 <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].backgroundSec}/>
                 <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].backgroundSec}/>
             </Collapse>
