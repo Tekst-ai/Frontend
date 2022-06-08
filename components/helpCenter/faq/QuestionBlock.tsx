@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../../store'
 import themes, { accentColors, Theme } from '../../../ThemeConfig'
-import { Transition } from '../../../variables'
+import { Breakpoint, Transition } from '../../../variables'
 
 interface QuestionBlockProps {
     question: string,
@@ -31,9 +31,15 @@ interface QuestionProps {
 
 const Question = styled.button<QuestionProps>`
     width: 100%;
-    padding: 1rem 1.2rem;
+    padding: 0.75rem 1rem;
     border-radius: 5px;
     transition: ${Transition.fast};
+    margin-bottom: 0.25rem;
+    background: ${({ open }) => open ? ({ theme }) => theme.background : ({ theme }) => theme.backgroundSec};
+
+    &:hover {
+        background: ${({ theme }) => theme.background};
+    }
     
     div:first-of-type {
         display: flex;
@@ -41,9 +47,20 @@ const Question = styled.button<QuestionProps>`
         justify-content: space-between;
         
         p {
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 700;
             color: ${({ theme }) => theme.text};
+            padding-right: 0.75rem;
+            text-align: left;
+            width: 90%;
+            
+            @media (min-width: ${Breakpoint.mobileSmall}) {
+                font-size: 1.125rem;
+            }
+
+            @media (min-width: ${Breakpoint.mobile}) {
+                font-size: 1.25rem;
+            }
         }
     }
 `
@@ -55,12 +72,32 @@ interface AnswerProps {
 
 const Answer = styled.button<AnswerProps>`
     color: ${({ theme }) => theme.textSec};
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0.75rem;
+    padding-bottom: 1rem;
+    padding-right: 1.375rem;
     transition: ${Transition.fast};
     display: ${({ open }) => open ? 'block' : 'none'};
     text-align: left;
-    font-size: 1.125rem;
-    padding-bottom: 1.5rem;
+    font-size: 1rem;
+    
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        padding: 0.5rem 1rem;
+        padding-bottom: 1rem;
+        padding-right: 1.755rem;
+    }
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        font-size: 1.125rem;
+        padding: 0.5rem 1.5rem;
+        padding-bottom: 1.25rem;
+        padding-right: 2.155rem;
+    }
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        padding: 0.5rem 2rem;
+        padding-bottom: 1.25rem;
+        padding-right: 2.555rem;
+    }
 `
 
 const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {

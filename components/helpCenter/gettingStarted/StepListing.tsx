@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { Breakpoint } from '../../../variables'
 import ListingStep from './ListingStep'
 
 interface StepListingProps {
@@ -8,16 +9,29 @@ interface StepListingProps {
 }
 
 const Container = styled.div`
-    padding-left: 3rem;
-    padding-right: 3rem;
     margin-bottom: 6rem;
     max-width: 60rem;
     margin-left: auto;
     margin-right: auto;
-
+    
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+    
     h2 {
-        font-size: 1.75rem;
         margin-bottom: 2.5rem;
+        font-size: 1.75rem;
     }
 `
 

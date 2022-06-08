@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useStore, { useAccent } from '../../../store'
 import themes, { accentColors, Theme } from '../../../ThemeConfig'
-import { Colors } from '../../../variables'
+import { Breakpoint, Colors } from '../../../variables'
 
 interface ListingStepProps {
     step: number,
@@ -30,13 +30,16 @@ interface ContainerContentProps {
 }
 
 const ContainerContent = styled.div<ContainerContentProps>`
-    margin-left: 4rem;
+    margin-left: 2rem;
     width: calc(100% - 1.75rem);
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-left: 3rem;
+    }
 
     h3 {
         margin-top: 0;
         margin-bottom: 0.5rem;
-
     }
 
     p {
@@ -55,33 +58,46 @@ const Step = styled.div<StepProps>`
     div {
         background: ${({ accent }) => accent};
         color: ${Colors.textWhite};
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 1.5rem;
+        height: 1.5rem;
         position: relative;
         border-radius: 50%;
         box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
-
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+        
         span {
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             color: ${Colors.textWhite};
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                font-size: 1.125rem;
+            }
         }
     }
 
     &::after {
         content: '';
-        width: 4px;
+        width: 3px;
         background: ${({ accent }) => accent + "66"};
         position: absolute;
-        top: calc(1.75rem + 8px);
+        top: calc(1.5rem + 8px);
         bottom: calc((3rem * -1) + 8px);
         left: 50%;
         right: 0;
         transform: translateX(-50%);
         box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            top: calc(1.75rem + 8px);
+        }
     }
 `
 

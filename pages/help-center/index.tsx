@@ -60,7 +60,7 @@ const HelpCenter: NextPage = () => {
 
                 <CardList>
                     <HelpCard icon={<IoRocket fontSize={50}/>} title={"Aan de slag"} link={Routes.GETTINGSTARTED} type="link"/>
-                    <HelpCard icon={<IoChatbubbles fontSize={50}/>} title={"Veelgestelde vragen"} link={Routes.FAQ} type="link"/>
+                    <HelpCard icon={<IoChatbubbles fontSize={50}/>} title={"FAQ"} link={Routes.FAQ} type="link"/>
                     <HelpCard icon={<IoHelpBuoy fontSize={50}/>} title={"Support"} link={"#support"} type="button"/>
                 </CardList>
 

@@ -167,7 +167,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
                                 {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
                                 <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 
-                                <span>Veelgestelde vragen</span>
+                                <span>FAQ</span>
                             </LinkTextAlt>
                         </Link>
                     </li>
