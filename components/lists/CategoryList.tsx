@@ -1,8 +1,10 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
+import { Breakpoint } from '../../variables'
 import CategoryListItem from './CategoryListItem'
 
 interface ContainerProps {
@@ -15,6 +17,7 @@ const Container = styled.div<ContainerProps>`
     border-radius: 10px;
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     padding: 1rem 1.25rem;
+    padding-bottom: 0.25rem;
 `
 
 interface TableProps {
@@ -30,15 +33,36 @@ const Table = styled.table<TableProps>`
         color: ${({ accent }) => accent};
         font-weight: 500;
         text-transform: uppercase;
-        font-size: 0.875rem;
-        width: 20%;
-        padding-bottom: 0.75rem;
-
+        font-size: 0.75rem;
+        width: 30%;
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            width: 25%;
+            font-size: 0.875rem;
+            padding-bottom: 0.75rem;
+        }
+        
         &:first-of-type {
-            width: 70%;
+            width: 80%;
+            
+            @media (min-width: ${Breakpoint.mobileSmall}) {
+                width: 50%;
+            }
+
+            @media (min-width: ${Breakpoint.mobile}) {
+                width: 65%;
+            }
         }
         &:last-of-type {
-            width: 10%;
+            width: 20%;
+            
+            @media (min-width: ${Breakpoint.mobileSmall}) {
+                width: 15%;
+            }
+
+            @media (min-width: ${Breakpoint.mobile}) {
+                width: 10%;
+            }
         }
     }
 `
@@ -47,13 +71,18 @@ const CategoryList: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const accent = useAccent((s: any) => s.accent)
 
+    const { width } = useWindowDimensions();
+
     return (
         <Container theme={themes[theme]}>
             <Table accent={accentColors[accent as keyof typeof accentColors][theme]}>
                 <thead>
                     <tr>
                         <th scope="col">Naam</th>
-                        <th scope="col">Laatste e-mail</th>
+                        {
+                            width > 550 &&
+                            <th scope="col">Activiteit</th>
+                        }
                         <th scope="col">Aandeel</th>
                     </tr>
                 </thead>

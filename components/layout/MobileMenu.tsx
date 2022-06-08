@@ -75,6 +75,8 @@ const MobileMenu: NextPage = () => {
     useEffect(() => {
         if (router.pathname === Routes.PROFILE || router.pathname === Routes.CONFIGURATION) {
             setSubNav(true);
+        } else {
+            setSubNav(false);
         }
     }, [router.pathname])
 
