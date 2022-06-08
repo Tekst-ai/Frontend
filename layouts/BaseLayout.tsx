@@ -45,13 +45,15 @@ interface MainProps {
 
 const Main = styled.main<MainProps>`
     background: ${({ theme }) =>theme.background};
-    padding: 1.25rem;
+    padding: 0.75rem;
+    padding-bottom: 0;
     width: 100%;
     transition: ${Transition.fast};
     z-index: 1;
-    margin-bottom: ${({ height }) => height}px;
+    margin-bottom: calc(${({ height }) => height}px);
     
     @media (min-width: ${Breakpoint.mobile}) {
+        padding: 1.25rem;
         padding-left: 0;
         margin-bottom: 0;
         margin-left: 5rem;
@@ -71,12 +73,14 @@ interface SubContainerProps {
 const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
     padding: 2rem 3rem;
+    /* border-radius: 10px; */
     border-radius: 15px;
-    min-height: calc(100vh - 2.5rem - ${({ height }) => height}px);
+    min-height: calc(100vh - ${({ height }) => height}px - 0.75rem);
     height: 100%;
     transition: ${Transition.fast};
     
     @media (min-width: ${Breakpoint.mobile}) {
+        /* border-radius: 15px; */
         min-height: calc(100vh - 2.5rem);
     }
 `

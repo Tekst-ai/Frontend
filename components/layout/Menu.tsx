@@ -134,7 +134,7 @@ const Menu: NextPage = () => {
                 <Link href={Routes.PROFILE} passHref>
                     <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                         <div>
-                            <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                            <Image src="/static/images/profile.jpg" alt="Janine Jacobs" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
                         </div>
 
                         <div>
