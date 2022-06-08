@@ -78,6 +78,7 @@ const SubContainer = styled.div<SubContainerProps>`
     min-height: calc(100vh - ${({ height }) => height}px - 0.75rem);
     height: 100%;
     transition: ${Transition.fast};
+    /* box-shadow: 0 1px 4px ${({ theme }) => theme.boxShadow}; */
     
     @media (min-width: ${Breakpoint.mobile}) {
         padding: 2rem 3rem;

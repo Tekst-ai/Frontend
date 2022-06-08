@@ -145,6 +145,7 @@ const Collapse = styled.button<CollapseProps>`
     position: absolute;
     right: ${(CollapseProps) => CollapseProps.isOpen ? 0 : "0.45rem"};
     bottom: -4px;
+    box-shadow: 0 1px 4px ${({ theme }) => theme.background};
     cursor: default;
     
     @media (min-width: ${Breakpoint.tablet}) {
@@ -153,7 +154,8 @@ const Collapse = styled.button<CollapseProps>`
 
     &:hover {
         @media (min-width: ${Breakpoint.tablet}) {
-            background: ${({ theme }) => theme.lineLight};
+            background: ${({ theme }) => theme.backgroundSec};
+            box-shadow: 0 1px 4px ${({ theme }) => theme.boxShadow};
         }
     }
     

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 import { Routes } from "../../constants";
 import themes, { accentColors, Theme } from "../../ThemeConfig";
-import { Transition } from "../../variables";
+import { Colors, Transition } from "../../variables";
 import useStore, { useAccent } from "../../store";
 
 interface LinkTextProps {

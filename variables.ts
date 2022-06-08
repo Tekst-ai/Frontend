@@ -61,7 +61,7 @@ export const Transition = {
 }
 
 export const Breakpoint = {
-    mobileSmall: '400px',
+    mobileSmall: '550px',
     mobile: '768px',
     tablet: '992px',
     desktop: '1200px',

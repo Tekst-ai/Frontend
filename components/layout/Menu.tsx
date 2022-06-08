@@ -70,6 +70,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : "transparent"};
     position: relative;
     z-index: 3;
+    box-shadow: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href ? "0 1px 4px " + ProfileContainerProps.theme.boxShadow : "0 1px 4px " + ProfileContainerProps.theme.background};
     
     /* &:hover {
         background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent : ({ theme }) => theme.lineLight};

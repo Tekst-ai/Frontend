@@ -97,7 +97,7 @@ interface LinkTextProps {
 const LinkText = styled.a<LinkTextProps>`
     /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "transparent"}; */
     background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : "transparent"};
-    /* box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 1px " + LinkTextProps.theme.boxShadow : "0 1px 1px " + LinkTextProps.theme.background}; */
+    box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 4px " + LinkTextProps.theme.boxShadow : "0 1px 4px " + LinkTextProps.theme.background};
 
     & span {
         /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "inherit"}; */

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import useStore from '../../store';
 import themes, { Theme } from '../../ThemeConfig';
-import { Breakpoint, Transition } from '../../variables';
+import { Breakpoint, Colors, Transition } from '../../variables';
 import MobileNavigation from './MobileNavigation';
 import MobileSubNavigation from './MobileSubNavigation';
 import { useRouter } from 'next/router';
@@ -27,7 +27,7 @@ const Container = styled.div<ContainerProps>`
     padding-top: 0.75rem;
 
     @media (min-width: ${Breakpoint.mobile}) {
-        display: none;
+        visibility: hidden;
     }
 `
 
