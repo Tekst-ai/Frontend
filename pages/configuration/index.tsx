@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
-import { Colors } from '../../variables'
+import { Breakpoint, Colors } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 import themes, { Theme } from '../../ThemeConfig'
 import useStore from '../../store'
@@ -11,9 +11,12 @@ interface TitleContainerProps {
 }
 
 export const TitleContainer = styled.div<TitleContainerProps>`
-    margin-bottom: 2rem;
-    /* width: 100%; */
-
+    margin-bottom: 1.75rem;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-bottom: 2rem;
+    }
+    
     p {
         margin-top: 0.625rem;
         color: ${({ theme }) => theme.textSec};
@@ -21,14 +24,22 @@ export const TitleContainer = styled.div<TitleContainerProps>`
 `
 
 const SubContainer = styled.div`
-    margin-bottom: 2.5rem;
-
+    margin-bottom: 1.5rem;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-bottom: 2.5rem;
+    }
+    
     &:last-of-type {
         margin-bottom: 0;
     }
     
     h2 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+
+        @media (min-width: ${Breakpoint.mobile}) {
+            margin-bottom: 1.5rem;
+        }
     }
 
     form {

@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import type { ReactNode, ReactElement } from 'react'
 import type { AppProps } from 'next/app'
 import { BaseLayout } from '../layouts'

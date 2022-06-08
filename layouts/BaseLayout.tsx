@@ -72,7 +72,7 @@ interface SubContainerProps {
 
 const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
-    padding: 2rem 3rem;
+    padding: 2rem;
     /* border-radius: 10px; */
     border-radius: 15px;
     min-height: calc(100vh - ${({ height }) => height}px - 0.75rem);
@@ -80,6 +80,7 @@ const SubContainer = styled.div<SubContainerProps>`
     transition: ${Transition.fast};
     
     @media (min-width: ${Breakpoint.mobile}) {
+        padding: 2rem 3rem;
         /* border-radius: 15px; */
         min-height: calc(100vh - 2.5rem);
     }
