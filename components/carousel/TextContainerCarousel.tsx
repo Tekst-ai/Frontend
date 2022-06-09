@@ -27,7 +27,7 @@ const Container = styled.div<ContainerProps>`
     bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
-    background: ${({ theme }) => theme.backgroundSec};
+    background: ${({ theme }) => theme.backgroundAlt};
     padding: 1rem 2.5rem;
     border-radius: 8px;
     white-space: normal;
@@ -36,6 +36,7 @@ const Container = styled.div<ContainerProps>`
     @media (min-width: ${Breakpoint.mobile}) {
         padding: 1rem 1.5rem;
         bottom: 6rem;
+        background: ${({ theme }) => theme.backgroundSec};
     }
     
     @media (min-width: ${Breakpoint.tablet}) {

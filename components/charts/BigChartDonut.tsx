@@ -29,7 +29,8 @@ ChartJS.register(
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig';
-import { Colors } from '../../variables';
+import { Breakpoint, Colors } from '../../variables';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 
 const Container = styled.div`
@@ -38,17 +39,20 @@ const Container = styled.div`
     position: relative;
 
     canvas {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @media (min-width: ${Breakpoint.mobile}) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 `
 
 const BigChartDonut: NextPage = () => {
     const accent = useAccent((s: any) => s.accent);
-    const color = accentColors[accent as keyof typeof accentColors]
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const color = accentColors[accent as keyof typeof accentColors];
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const { width } = useWindowDimensions();
 
     const data = {
         labels: [
@@ -74,7 +78,16 @@ const BigChartDonut: NextPage = () => {
     const options = {
         plugins: {
             legend: {
-                display: false,
+                position: width < 450 ? "bottom" : "left",
+                display: width < 768 ? true : false,
+                labels: {
+                    color: themes[theme].textSec,
+                    font: {
+                        size: 12,
+                        weight: "500",
+                        family: "Cake",
+                    },
+                },
             },
             tooltip: {
                 enabled: true,

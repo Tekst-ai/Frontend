@@ -9,6 +9,8 @@ import useWindowDimensions from '../hooks/useWindowDimensions'
 import { useMenu } from '../store'
 import { Info } from '../components/alerts'
 import { Breakpoint } from '../variables'
+import themes, { Theme } from '../ThemeConfig'
+import useStore from '../store'
 
 interface ContainerProps {
     height: number
@@ -23,8 +25,10 @@ interface StatsContainerProps {
 }
 
 const StatsContainer = styled.div<StatsContainerProps>`
-    /* Full height container - height title container */
-    height: calc(${({ height }) => height}px - 40px - 64px  - 32px);
+    @media (min-width: ${Breakpoint.mobile}) {
+        /* Full height container - height title container */
+        height: calc(${({ height }) => height}px - 40px - 64px  - 32px);
+    }
 `
 
 const TopContainer = styled.div`
@@ -42,24 +46,28 @@ interface BottomContainerProps {
 
 const BottomContainer = styled.div<BottomContainerProps>`
     width: 100%;
-    height: calc(100% - 1rem - ${({ height }) => height}px);
-    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     
     @media (min-width: 500px) {
-        height: calc(100% - 1.25rem - ${({ height }) => height}px);
         margin-top: 1.25rem;
     }
-
+    
     @media (min-height: 575px) {
         align-items: flex-start;
         justify-content: flex-start;
     }
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        height: calc(100% - 1.25rem - ${({ height }) => height}px);
+        flex-wrap: nowrap;
+    }
 `
 
 const Dashboard: NextPage = () => {
+    const theme: keyof Theme = useStore((s: any) => s.theme);
     const [height, setHeight] = useState(0);
     const [chartHeight, setChartHeight] = useState(0);
     const menu = useMenu((s: any) => s.menu);
@@ -84,7 +92,7 @@ const Dashboard: NextPage = () => {
 
     return (
         <Container height={windowMeasures.height}>
-            <TitleContainer ref={refContainer}>
+            <TitleContainer ref={refContainer} theme={themes[theme]}>
                 <h1>Goedemiddag, Janine!</h1>
 
                 <p>Cijfers van de afgelopen 7 dagen</p>
@@ -103,7 +111,7 @@ const Dashboard: NextPage = () => {
                     {
                         windowMeasures.height > 575 ?
                         <>
-                            <BigChartNoText marginRight={true} title="E-mail overzicht"/>
+                            <BigChartNoText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} title="E-mail overzicht"/>
 
                             <BigDonutChartContainer title="Top 5 categoriëen"/>
                         </>

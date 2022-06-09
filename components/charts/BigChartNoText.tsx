@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import useStore from "../../store";
 import themes, { Theme } from "../../ThemeConfig";
+import { Breakpoint } from "../../variables";
 import BigLineChart from "./BigLineChart";
 
 interface BigChartProps {
@@ -20,13 +21,26 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
     background: ${({ theme }) => theme.background};
-    padding: 1.25rem;
-    width: 66.666%;
+    padding: 1rem;
+    width: 100%;
     height: 100%;
     border-radius: 10px;
-    margin-right: ${({ marginRight }) => marginRight ? '1.25rem' : '0'};
-    margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
+    margin-right: ${({ marginRight }) => marginRight ? '1rem' : '0'};
+    margin-bottom: ${({ marginBottom }) => marginBottom ? '1rem' : '0'};
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
+    
+    @media (min-width: 500px) {
+        margin-right: ${({ marginRight }) => marginRight ? '1.25rem' : '0'};
+        margin-bottom: ${({ marginBottom }) => marginBottom ? '1.25rem' : '0'};
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 66.666%;
+    }
+    
+    @media (min-width: ${Breakpoint.desktopSmall}) {
+        padding: 1.25rem;
+    }
 `
 
 interface TitleContainerProps {
@@ -34,10 +48,15 @@ interface TitleContainerProps {
 }
 
 const TitleContainer = styled.div<TitleContainerProps>`
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     text-transform: uppercase;
     color: ${({ theme }) => theme.textSec};
     margin-bottom: 0.5rem;
+    font-weight: 500;
+    
+    @media (min-width: ${Breakpoint.desktopSmall}) {
+        font-size: 0.75rem;
+    }
 `
 
 interface ChartContainerProps {
@@ -45,8 +64,19 @@ interface ChartContainerProps {
 }
 
 const ChartContainer = styled.div<ChartContainerProps>`
-    width: 100%;
-    height: calc(100% - 0.5rem - ${({ height }) => height}px);
+    width: calc(100% + 1.5rem);
+    transform: translateX(-0.75rem) translateY(0.5rem);
+    height: 12rem;
+    
+    @media (min-width: 500px) {
+        height: 15rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 100%;
+        transform: none;
+        height: calc(100% - 0.5rem - ${({ height }) => height}px + 0.5rem);
+    }
 `
 
 const BigChartNoText: NextPage<BigChartProps> = ({ marginRight = false, title, marginBottom = false }) => {

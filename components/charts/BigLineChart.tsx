@@ -26,7 +26,7 @@ ChartJS.register(
 import themes, { accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
 import { last7Days } from "../../services/date";
-import { Colors } from "../../variables";
+import { Breakpoint, Colors } from "../../variables";
 
 const Container = styled.div`
     position: relative;
@@ -34,7 +34,9 @@ const Container = styled.div`
     height: 100%;
 
     canvas {
-        position: absolute;
+        @media (min-width: ${Breakpoint.mobile}) {
+            position: absolute;
+        }
     }
 `
 
