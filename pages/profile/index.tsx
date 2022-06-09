@@ -72,6 +72,10 @@ const BottomContainer = styled.div<TopContainerProps>`
 
         li {
             margin-bottom: 1.5rem;
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                margin-bottom: 0;
+            }
 
             & > p {
                 color: ${({ theme }) => theme.textSec};
