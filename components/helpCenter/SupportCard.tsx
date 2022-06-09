@@ -36,7 +36,7 @@ const SubContainer = styled.div<SubContainerProps>`
     border-radius: 10px;
     width: 100%;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
-    
+
     @media (min-width: ${Breakpoint.mobileSmall}) {
         padding: 2rem 1.5rem;
         padding-bottom: 1.5rem;
@@ -92,8 +92,12 @@ interface SupportListProps {
 
 const SupportList = styled.ul<SupportListProps>`
     display: flex;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        margin-top: 2rem;
+    }
+
     @media (min-width: ${Breakpoint.mobile}) {
         margin-top: 2.5rem;
     }
@@ -104,35 +108,59 @@ const SupportList = styled.ul<SupportListProps>`
         border-radius: 10px;
         
         &:first-of-type {
-            margin-right: 1rem;
+            margin-right: 0.5rem;
             
+            @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+                margin-right: 1rem;
+            }
+
             @media (min-width: ${Breakpoint.mobile}) {
                 margin-right: 1.5rem;
+            }
+        }
+
+        svg {
+            font-size: 1.25rem;
+
+            @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+                font-size: 1.5rem;
+            }
+
+            @media (min-width: ${Breakpoint.mobileMedium}) {
+                font-size: 1.875rem;
             }
         }
         
         a {
             border-radius: 10px;
             width: 100%;
-            padding: 1.5rem 0 1rem 0;
+            padding: 1rem 0.5rem;
             text-align: center;
             color: ${({ theme }) => theme.text};
             transition: ${Transition.fast};
             
+            @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+                padding: 1.5rem 0.5rem 1rem 0.5rem;
+            }
+            
             @media (min-width: ${Breakpoint.mobile}) {
-                padding: 2rem 0 1.5rem 0;
+                padding: 2rem 0.5rem 1.5rem 0.5rem;
             }
 
             @media (min-width: ${Breakpoint.tablet}) {
-                padding: 2.5rem 0 2rem 0;
+                padding: 2.5rem 0.5rem 2rem 0.5rem;
             }
             
             span {
                 display: block;
-                font-size: 1rem;
+                font-size: 0.875rem;
                 font-weight: 500;
                 margin-top: 0.75rem;
                 
+                @media (min-width: ${Breakpoint.mobileSmall}) {
+                    font-size: 1rem;
+                }
+
                 @media (min-width: ${Breakpoint.mobile}) {
                     margin-top: 1rem;
                     font-size: 1.25rem;
@@ -145,7 +173,7 @@ const SupportList = styled.ul<SupportListProps>`
             }
 
             &:hover {
-                background: ${({ theme }) => theme.backgroundSec};
+                background: ${({ theme }) => theme.backgroundAltSec};
             }
         }
     }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
+import { Breakpoint, Colors } from '../../variables'
 
 interface IconProps {
     theme: any
@@ -13,9 +13,28 @@ const Icon = styled.svg<IconProps>`
     position: absolute;
     top: 0;
     left: 50%;
-    width: 75rem;
-    transform: translate(calc(-50% + 3rem), -12rem);
-    z-index: -1;
+    transform: translate(calc(-50% + 3rem), -30rem);
+    width: 35rem;
+    
+    @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+        transform: translate(calc(-50% + 3rem), -26rem);
+        width: 45rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        transform: translate(calc(-50% + 3rem), -20rem);
+        width: 55rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        transform: translate(calc(-50% + 3rem), -16rem);
+        width: 65rem;
+    }
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        transform: translate(calc(-50% + 3rem), -12rem);
+        width: 75rem;
+    }
     
     /* path {
         filter: drop-shadow(0 7px 20px #07071D66);

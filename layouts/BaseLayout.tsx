@@ -6,6 +6,8 @@ import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu, MobileMenu } from '../components/layout';
 import { Breakpoint, Colors, Transition } from '../variables';
+import { useRouter } from 'next/router';
+import { Routes } from '../constants';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -31,6 +33,7 @@ const Container = styled.div`
     color: ${({ theme }: any) => theme.text};
     transition: ${Transition.fast};
     flex-direction: column;
+    overflow: hidden;
 
     @media (min-width: ${Breakpoint.mobile}) {
         flex-direction: row;
@@ -68,22 +71,27 @@ const Main = styled.main<MainProps>`
 interface SubContainerProps {
     theme: any,
     height: number,
+    pathName: string
 }
 
 const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
-    padding: 2rem;
+    padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem"};
     /* border-radius: 10px; */
     border-radius: 15px;
-    min-height: calc(100vh - ${({ height }) => height}px - 0.75rem);
-    height: 100%;
+    min-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem);
+    /* max-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem); */
+    max-height: 100%;
     transition: ${Transition.fast};
-    /* box-shadow: 0 1px 4px ${({ theme }) => theme.boxShadow}; */
+    /* box-shadow: 0 0 1px ${({ theme }) => theme.boxShadow}; */
+    /* overflow-y: auto; */
     
     @media (min-width: ${Breakpoint.mobile}) {
-        padding: 2rem 3rem;
+        padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem 3rem"};
         /* border-radius: 15px; */
         min-height: calc(100vh - 2.5rem);
+        max-height: 100%;
+        /* overflow: auto; */
     }
 `
 
@@ -94,6 +102,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
     const menu = useMenu((s: any) => s.menu);
+    const router = useRouter();
 
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
@@ -122,7 +131,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                 <Menu/>
 
                 <Main menu={menu} theme={themes[theme]} height={height}>
-                    <SubContainer theme={themes[theme]} height={height}>
+                    <SubContainer theme={themes[theme]} height={height} pathName={router.pathname}>
                         {children}
                     </SubContainer>
                 </Main>

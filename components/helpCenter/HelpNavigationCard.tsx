@@ -20,15 +20,13 @@ const Container = styled.li`
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
     z-index: 2;
     
     @media (min-width: ${Breakpoint.mobile}) {
-        margin-right: 1.5rem;
-    }
-    
-    &:last-of-type {
-        margin-right: 0;
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
     }
 `
 
@@ -44,11 +42,11 @@ const LinkContent = styled.a<LinkContentProps>`
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
-    width: 8rem;
+    width: 9rem;
     transition: ${Transition.fast};
     transform: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? "translateY(-5px)" : "" };
     color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? Colors.textWhite : ({ theme }) => theme.text};
-    
+
     &:first-of-type {
         margin-bottom: 1rem;
     }
@@ -56,14 +54,9 @@ const LinkContent = styled.a<LinkContentProps>`
     svg {
         font-size: 1.5rem;
     }
-    
-    @media (min-width: ${Breakpoint.mobileMedium}) {
-        padding: 1.25rem 0.5rem 1rem 0.5rem;
-        width: 10rem;
 
-        svg {
-            font-size: 1.5rem;
-        }
+    @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+        width: 10rem;
     }
 
     @media (min-width: ${Breakpoint.mobile}) {
@@ -120,7 +113,7 @@ const ButtonContent = styled.button<ButtonContentProps>`
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
-    width: 8rem;
+    width: 9rem;
     transition: ${Transition.fast};
     color: ${({ theme }) => theme.text};
     margin-bottom: 1rem;
@@ -129,13 +122,8 @@ const ButtonContent = styled.button<ButtonContentProps>`
         font-size: 1.5rem;
     }
 
-    @media (min-width: ${Breakpoint.mobileMedium}) {
+    @media (min-width: ${Breakpoint.mobileSuperSmall}) {
         width: 10rem;
-        padding: 1.25rem 0.5rem 1rem 0.5rem;
-
-        svg {
-            font-size: 1.5rem;
-        }
     }
 
     @media (min-width: ${Breakpoint.mobile}) {
