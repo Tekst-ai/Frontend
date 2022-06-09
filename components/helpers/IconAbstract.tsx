@@ -15,6 +15,7 @@ const Icon = styled.svg<IconProps>`
     left: 50%;
     transform: translate(calc(-50% + 3rem), -30rem);
     width: 35rem;
+    transition: none;
     
     @media (min-width: ${Breakpoint.mobileSuperSmall}) {
         transform: translate(calc(-50% + 3rem), -26rem);

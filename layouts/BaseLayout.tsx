@@ -82,7 +82,7 @@ const SubContainer = styled.div<SubContainerProps>`
     min-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem);
     /* max-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem); */
     max-height: 100%;
-    transition: ${Transition.fast};
+    transition: ${({ pathName }) => pathName.includes(Routes.HELPCENTER) ? "none" : Transition.fast};
     /* box-shadow: 0 0 1px ${({ theme }) => theme.boxShadow}; */
     /* overflow-y: auto; */
     

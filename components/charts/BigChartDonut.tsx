@@ -78,7 +78,6 @@ const BigChartDonut: NextPage = () => {
     const options = {
         plugins: {
             legend: {
-                position: width < 450 ? "bottom" : "left",
                 display: width < 768 ? true : false,
                 labels: {
                     color: themes[theme].textSec,
@@ -88,6 +87,7 @@ const BigChartDonut: NextPage = () => {
                         family: "Cake",
                     },
                 },
+                position: width < 450 ? "bottom" as "bottom" : "left" as "left",
             },
             tooltip: {
                 enabled: true,

@@ -176,7 +176,9 @@ const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, tit
     const accent = useAccent((s: any) => s.accent)
    
     const handleClick = () => {
-        window.scrollTo(0, document.body.scrollHeight);
+        if (typeof window !== "undefined") {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
     }
 
     return (
