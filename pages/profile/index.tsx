@@ -3,75 +3,112 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import { FiCheckCircle } from 'react-icons/fi'
 
-import { TitleContainer } from '../configuration'
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
+import { Breakpoint, Colors } from '../../variables'
 
 const Container = styled.div`
     display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
-interface LeftContainerProps {
-    theme: any
+interface TopContainerProps {
+    theme: keyof Theme
 }
 
-const LeftContainer = styled.div<LeftContainerProps>`
-    margin-right: 3rem;
+const TopContainer = styled.div<TopContainerProps>`
+    margin: 0 auto;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    div:first-of-type {
-        border-radius: 8px;
+    div {
+        border-radius: 50%;
         overflow: hidden;
-        width: 12rem;
-        height: 12rem;
+        width: 10rem;
+        height: 10rem;
         box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
+        
+        @media (min-width: ${Breakpoint.mobileSmall}) {
+            width: 12rem;
+            height: 12rem;
+        }
     }
 
-    div:last-of-type {
+    p:first-of-type {
         margin-top: 1.25rem;
-
-        p {
-            display: flex;
-            align-items: center;
-
-            span {
-                margin-left: 0.625rem;
-                color: ${({ theme }) => theme.textSec};
-            }
+        font-size: 2rem;
+        font-weight: 700;
+        
+        @media (min-width: ${Breakpoint.mobileSmall}) {
+            font-size: 3rem;
+        }
+    }
+    
+    p:last-of-type {
+        margin-top: 0.5rem;
+        color: ${({ theme }) => theme.textSec};
+        font-size: 1;
+        
+        @media (min-width: ${Breakpoint.mobileSmall}) {
+            margin-top: 1rem;
+            font-size: 1.125rem;
         }
     }
 `
 
-interface RightContainerProps {
-    theme: any
-}
+const BottomContainer = styled.div<TopContainerProps>`
+    margin-top: 3rem;
+    
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        margin-top: 4rem;
+    }
 
-const RightContainer = styled.ul<RightContainerProps>`
-    li {
-        margin-bottom: 1.25rem;
+    ul {
+        display: flex;
+        flex-wrap: wrap;
 
-        &:not(:last-of-type):after {
-            content: '';
-            width: calc(100% + 0.5rem + 1.5rem);
-            height: 2px;
-            transform: translateX(-0.25rem);
-            background: ${({ theme }) => theme.lineDark};
-            display: block;
-        }
+        li {
+            margin-bottom: 1.5rem;
 
-        p {
-            &:first-of-type {
+            & > p {
                 color: ${({ theme }) => theme.textSec};
-                margin-bottom: 0.625rem;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                /* margin-left: 0.375rem; */
             }
-            
+
+            div {
+                margin-top: 0.5rem;
+                /* background: ${({ theme }) => theme.background}; */
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
+                padding-left: 0.5rem;
+                /* box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "1px 4px"} ${({ theme }) => theme.boxShadow}; */
+
+                p {
+                    font-weight: 500;
+                    font-size: 1.25rem;
+                }
+            }
+
+            &:first-of-type {
+                margin-right: 1.5rem;
+            }
+
             &:last-of-type {
-                font-weight: 700;
-                font-size: 1.5rem;
-                margin-bottom: 1.25rem;
+                div {
+                    p {
+                        display: flex;
+                        align-items: center;
+
+                        span {
+                            margin-left: 0.625rem;
+                        }
+                    }
+                }
             }
         }
     }
@@ -82,12 +119,8 @@ const Account: NextPage = () => {
 
     return (
         <div>
-            <TitleContainer>
-                <h1>Profiel</h1>
-            </TitleContainer>
-
             <Container>
-                <LeftContainer theme={themes[theme]}>
+                <TopContainer theme={themes[theme]}>
                     <div>
                         <Image
                             src="/static/images/profile.jpg"
@@ -98,34 +131,34 @@ const Account: NextPage = () => {
                             objectFit={'cover'} />
                     </div>
 
-                    <div>
-                        <p>
-                            <FiCheckCircle fontSize={16} color={Colors.accentGreen} strokeWidth={2.5}/>
+                    <p>Janine Jacobs</p>
 
-                            <span>Synced</span>
-                        </p>
-                    </div>
-                </LeftContainer>
+                    <p>Vals bedijf</p>
+                </TopContainer>
 
-                <RightContainer theme={themes[theme]}>
-                    <li>
-                        <p>Volledige naam</p>
+                <BottomContainer theme={themes[theme]}>
+                    <ul>
+                        <li>
+                            <p>e-mailadres</p>
 
-                        <p>Janine Jacobs</p>
-                    </li>
+                            <div>
+                                <p>janine_jacobs@outlook.com</p>
+                            </div>
+                        </li>
 
-                    <li>
-                        <p>Email</p>
+                        <li>
+                            <p>status</p>
 
-                        <p>janine_jacobs@outlook.com</p>
-                    </li>
+                            <div>
+                                <p>
+                                    <FiCheckCircle fontSize={16} color={Colors.accentGreen} strokeWidth={2.5}/>
 
-                    <li>
-                        <p>Bedrijf</p>
-
-                        <p>Vals bedrijf</p>
-                    </li>
-                </RightContainer>
+                                    <span>Synced</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </BottomContainer>
             </Container>
         </div>
     )

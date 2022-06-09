@@ -8,7 +8,6 @@ import HelpTitle from '../../components/helpCenter/HelpTitle'
 import { GET_FAQ_ITEMS } from '../../graphql/faqItems'
 import client from '../../helpers/apollo-client'
 
-
 const Container = styled.div`
     position: relative;
 `
@@ -26,7 +25,7 @@ const Faq: NextPage<FaqProps> = ({ data, error }) => {
             <HelpNavigation/>
 
             <HelpTitle
-                title="Veelgestelde vragen"
+                title="FAQ"
                 text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
             />
 

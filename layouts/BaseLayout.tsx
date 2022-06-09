@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
 
 import themes, { accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
-import { Menu } from '../components/layout';
-import { Colors, Transition } from '../variables';
+import { Menu, MobileMenu } from '../components/layout';
+import { Breakpoint, Colors, Transition } from '../variables';
+import { useRouter } from 'next/router';
+import { Routes } from '../constants';
 
 interface LayoutProps {
     children: React.ReactNode
@@ -30,34 +32,67 @@ const Container = styled.div`
     background: ${({ theme }: any) => theme.background};
     color: ${({ theme }: any) => theme.text};
     transition: ${Transition.fast};
+    flex-direction: column;
+    overflow: hidden;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        flex-direction: row;
+    }
 `
 
 interface MainProps {
     theme: any,
-    menu: boolean
+    menu: boolean,
+    height: number,
 }
 
 const Main = styled.main<MainProps>`
     background: ${({ theme }) =>theme.background};
-    padding: 1.25rem;
-    padding-left: 0;
+    padding: 0.75rem;
+    padding-bottom: 0;
     width: 100%;
     transition: ${Transition.fast};
     z-index: 1;
-    margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
+    margin-bottom: calc(${({ height }) => height}px);
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: 1.25rem;
+        padding-left: 0;
+        margin-bottom: 0;
+        margin-left: 5rem;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        margin-left: ${(MainProps) => MainProps.menu ? "17.5rem" : "5rem"};
+    }
+
 `
 
 interface SubContainerProps {
-    theme: any
+    theme: any,
+    height: number,
+    pathName: string
 }
 
 const SubContainer = styled.div<SubContainerProps>`
     background: ${({ theme }) => theme.backgroundSec};
-    padding: 2rem 3rem;
+    padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem"};
+    /* border-radius: 10px; */
     border-radius: 15px;
-    min-height: calc(100vh - 2.5rem);
-    height: 100%;
+    min-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem);
+    /* max-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem); */
+    max-height: 100%;
     transition: ${Transition.fast};
+    /* box-shadow: 0 0 1px ${({ theme }) => theme.boxShadow}; */
+    /* overflow-y: auto; */
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem 3rem"};
+        /* border-radius: 15px; */
+        min-height: calc(100vh - 2.5rem);
+        max-height: 100%;
+        /* overflow: auto; */
+    }
 `
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
@@ -67,6 +102,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
     const menu = useMenu((s: any) => s.menu);
+    const router = useRouter();
 
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
@@ -78,7 +114,14 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             // setMenu(rememberedMenu)
         }
 
-    }, [setTheme, setAccent, setMenu]);
+    }, [setTheme, setAccent, setMenu]);  
+
+    const [height, setHeight] = useState(0)
+    const mobileContainer = useCallback((node: any) => {
+        if (node !== null) {
+            setHeight(node.children[0].clientHeight);
+        }
+    }, [])
 
     return (
         <>
@@ -87,11 +130,15 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             <Container theme={themes[theme]}>
                 <Menu/>
 
-                <Main menu={menu} theme={themes[theme]}>
-                    <SubContainer theme={themes[theme]}>
+                <Main menu={menu} theme={themes[theme]} height={height}>
+                    <SubContainer theme={themes[theme]} height={height} pathName={router.pathname}>
                         {children}
                     </SubContainer>
                 </Main>
+
+                <div ref={mobileContainer}>
+                    <MobileMenu/>
+                </div>
             </Container>
         </>
     )

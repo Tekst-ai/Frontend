@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { FiTrendingDown, FiTrendingUp, FiMinus } from 'react-icons/fi'
 import styled from 'styled-components';
 
-import { Colors } from '../../variables';
+import { Breakpoint, Colors } from '../../variables';
 
 interface PercentageEvolutionProps {
     percentage: number,
@@ -14,12 +14,20 @@ interface ContainerProps {
 
 const Container = styled.span<ContainerProps>`
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     color: ${({ color }) => color};
-    font-size: 0.75rem;
-
+    font-size: 0.625rem;
+    
+    @media (min-width: ${Breakpoint.desktopSmall}) {
+        font-size: 0.75rem;
+    }
+    
     svg {
-        margin-right: 0.35rem;
+        margin-right: 0.25rem;
+        
+        @media (min-width: ${Breakpoint.desktopSmall}) {
+            margin-right: 0.35rem;
+        }
     }
 
 `

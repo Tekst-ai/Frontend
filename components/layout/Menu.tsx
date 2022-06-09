@@ -8,7 +8,7 @@ import { Routes } from '../../constants'
 
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
-import { Transition } from '../../variables'
+import { Breakpoint, Transition } from '../../variables'
 import { Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
@@ -23,12 +23,16 @@ const Container = styled.div<ContainerProps>`
     padding: 2rem 1rem;
     padding-bottom: calc(2rem - 0.34375rem);
     width: ${(ContainerProps) => ContainerProps.isOpen ? "17.5rem" : "5rem"};
-    display: flex;
     flex-direction: column;
     transition: ${Transition.fast};
     height: 100vh;
     position: fixed;
     z-index: 2;
+    display: none;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        display: flex;
+    }
 `
 
 const TooltipContainer = styled.div`
@@ -66,6 +70,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ theme }) => theme.backgroundSec : "transparent"};
     position: relative;
     z-index: 3;
+    box-shadow: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href ? "0 1px 4px " + ProfileContainerProps.theme.boxShadow : "0 1px 4px " + ProfileContainerProps.theme.background};
     
     /* &:hover {
         background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent : ({ theme }) => theme.lineLight};
@@ -130,7 +135,7 @@ const Menu: NextPage = () => {
                 <Link href={Routes.PROFILE} passHref>
                     <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                         <div>
-                            <Image src="/static/images/profile.jpg" alt="Placeholder name" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                            <Image src="/static/images/profile.jpg" alt="Janine Jacobs" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
                         </div>
 
                         <div>

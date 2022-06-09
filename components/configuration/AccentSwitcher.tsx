@@ -4,12 +4,17 @@ import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
 import { accentColors, Theme } from "../../ThemeConfig";
-import { Colors, Transition } from "../../variables";
+import { Breakpoint, Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
     display: flex;
     align-items: center;
     min-height: 3.5rem;
+    flex-wrap: wrap;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+
+    }
 `
 
 interface ColorListItemProps {
@@ -17,8 +22,11 @@ interface ColorListItemProps {
 }
 
 const ColorListItem = styled.label<ColorListItemProps>`
-    margin-right: 1.25rem;
+    /* margin-right: 1.25rem; */
+    width: 4rem;
+    height: 3.5rem;
     cursor: pointer;
+    position: relative;
 
     input {
         appearance: none;
@@ -34,11 +42,15 @@ const ColorListItem = styled.label<ColorListItemProps>`
             }
         }
     }
-
+    
     div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         transition: ${Transition.fast};
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.75rem;
+        height: 1.75rem;
         background: ${({ color }) => color};
         border-radius: 50%;
         display: flex;

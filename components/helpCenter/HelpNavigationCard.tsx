@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
 import themes, { accentColors, Theme } from "../../ThemeConfig";
-import { Colors, Transition } from "../../variables";
+import { Breakpoint, Colors, Transition } from "../../variables";
 
 interface HelpNavigationCardProps {
     link: string,
@@ -20,11 +20,13 @@ const Container = styled.li`
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    margin-right: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
     z-index: 2;
     
-    &:last-of-type {
-        margin-right: 0;
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
     }
 `
 
@@ -36,19 +38,63 @@ interface LinkContentProps {
 
 const LinkContent = styled.a<LinkContentProps>`
     background: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? ({ accent }) => accent : ({ theme }) => theme.backgroundAlt};
-    padding: 2rem 0 1.5rem 0;
+    padding: 1.25rem 0.5rem 1rem 0.5rem;
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
-    width: 15rem;
+    width: 9rem;
     transition: ${Transition.fast};
     transform: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? "translateY(-5px)" : "" };
     color: ${(LinkContentProps) => LinkContentProps.pathName === LinkContentProps.href ? Colors.textWhite : ({ theme }) => theme.text};
 
+    &:first-of-type {
+        margin-bottom: 1rem;
+    }
+
+    svg {
+        font-size: 1.5rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+        width: 10rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: 1.5rem 0.5rem 1.25rem 0.5rem;
+        width: 12rem;
+
+        svg {
+            font-size: 2rem;
+        }
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        padding: 2rem 0.5rem 1.5rem 0.5rem;
+        width: 15rem;
+
+        svg {
+            font-size: 2.5rem;
+        }
+    }
+    
     p {
-        margin-top: 0.75rem;
+        margin-top: 0.375rem;
         font-weight: 500;
-        font-size: 1.25rem;
+        font-size: 1rem;
+        
+        @media (min-width: ${Breakpoint.mobileMedium}) {
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: ${Breakpoint.mobile}) {
+            margin-top: 0.625rem;
+            font-size: 1.125rem;
+        }
+
+        @media (min-width: ${Breakpoint.tablet}) {
+            margin-top: 0.75rem;
+            font-size: 1.25rem;
+        }
     }
 
     &:hover {
@@ -63,18 +109,59 @@ interface ButtonContentProps {
 
 const ButtonContent = styled.button<ButtonContentProps>`
     background: ${({ theme }) => theme.backgroundAlt};
-    padding: 2rem 0 1.5rem 0;
+    padding: 1.25rem 0.5rem 1rem 0.5rem;
     border-radius: 10px;
     box-shadow: 0px 3px 12px ${({ theme }) => theme.boxShadow};
     text-align: center;
-    width: 15rem;
+    width: 9rem;
     transition: ${Transition.fast};
     color: ${({ theme }) => theme.text};
+    margin-bottom: 1rem;
+    
+    svg {
+        font-size: 1.5rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobileSuperSmall}) {
+        width: 10rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 12rem;
+        padding: 1.5rem 0.5rem 1rem 0.5rem;
+
+        svg {
+            font-size: 2rem;
+        }
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        width: 15rem;
+        padding: 2rem 0.5rem 1.5rem 0.5rem;
+
+        svg {
+            font-size: 2.5rem;
+        }
+    }
 
     p {
-        margin-top: 0.75rem;
+        margin-top: 0.375rem;
         font-weight: 500;
-        font-size: 1.25rem;
+        font-size: 1rem;
+        
+        @media (min-width: ${Breakpoint.mobileMedium}) {
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: ${Breakpoint.mobile}) {
+            margin-top: 0.625rem;
+            font-size: 1.125rem;
+        }
+
+        @media (min-width: ${Breakpoint.tablet}) {
+            margin-top: 0.75rem;
+            font-size: 1.25rem;
+        }
     }
 
     &:hover {

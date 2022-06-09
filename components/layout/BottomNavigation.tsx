@@ -4,12 +4,13 @@ import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-i
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Transition } from '../../variables'
+import { Breakpoint, Transition } from '../../variables'
 import useStore, { useAccent, useAuth, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 import { Tooltip } from '../helpers'
 import { Routes } from '../../constants'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 interface BottomNavigationProps {
     isOpen: boolean,
@@ -144,9 +145,18 @@ const Collapse = styled.button<CollapseProps>`
     position: absolute;
     right: ${(CollapseProps) => CollapseProps.isOpen ? 0 : "0.45rem"};
     bottom: -4px;
+    box-shadow: 0 1px 4px ${({ theme }) => theme.background};
+    cursor: default;
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        cursor: pointer;
+    }
 
     &:hover {
-        background: ${({ theme }) => theme.lineLight};
+        @media (min-width: ${Breakpoint.tablet}) {
+            background: ${({ theme }) => theme.backgroundSec};
+            box-shadow: 0 1px 4px ${({ theme }) => theme.boxShadow};
+        }
     }
     
     svg {
@@ -172,18 +182,23 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const menu = useMenu((s: any) => s.menu)
     const setMenu = useMenu((s: any) => s.setMenu)
+    const { width } = useWindowDimensions()
 
     const [open, setOpen] = useState(false)
-
+    
     const handleClick = () => {
         setOpen(!open);
         localStorage.setItem("menu", open.toString());
         setMenu(!menu);
     }
-
+    
     useEffect(() => {
-        onOpen(!open);
-    }, [open, onOpen])
+        if (width < 992) {
+            onOpen(false)
+        } else {
+            onOpen(!open);
+        }
+    }, [open, onOpen, width])
     
     const setAuth = useAuth((s: any) => s.setAuth)
     const handleAuth = () => {
@@ -220,9 +235,9 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
                 </li>
             </NavigationContainer>
 
-            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors][theme]}/>
+            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]} disabled={width > 992 ? false : true}>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].textSec + "4D"}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].textSec + "4D"}/>
             </Collapse>
         </Container>
     )
