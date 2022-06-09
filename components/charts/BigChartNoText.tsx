@@ -25,7 +25,6 @@ const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    margin-right: ${({ marginRight }) => marginRight ? '1rem' : '0'};
     margin-bottom: ${({ marginBottom }) => marginBottom ? '1rem' : '0'};
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     
@@ -35,7 +34,7 @@ const Container = styled.div<ContainerProps>`
     }
 
     @media (min-width: ${Breakpoint.mobile}) {
-        width: 66.666%;
+        width: calc(66.666% - 1.25rem);
     }
     
     @media (min-width: ${Breakpoint.desktopSmall}) {
