@@ -6,11 +6,14 @@ import Head from 'next/head'
 import { NextPageWithLayout } from '../_app'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent, useAuth } from '../../store'
-import { Colors, Transition } from '../../variables'
+import { Breakpoint, Colors, Transition } from '../../variables'
 import { TitleContainer } from '../configuration'
 import { TitleFormat } from '../../services/title'
 import LoginForm from '../../components/forms/LoginForm'
 import { Carousel } from '../../components/carousel'
+import { TernaryButton } from '../../components/buttons'
+import { FiChevronDown } from 'react-icons/fi'
+import { ButtonContainer } from '../categories'
 
 const GlobalStyle = createGlobalStyle`
     html, body {
@@ -31,15 +34,65 @@ const Container = styled.div`
     background: ${({ theme }: any) => theme.backgroundAlt};
     color: ${({ theme }: any) => theme.text};
     transition: ${Transition.fast};
+    flex-direction: column;
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        flex-direction: row;
+    }
 `
 
-const LeftContainer = styled.div`
-    width: 45%;
+interface LeftContainerProps {
+    theme: keyof Theme,
+    accent: string
+}
+
+const LeftContainer = styled.div<LeftContainerProps>`
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: relative;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 55%;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        width: 45%;
+    }
+
+    div:nth-of-type(3) {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @media (min-width: ${Breakpoint.mobile}) {
+            display: none;
+        }
+
+        button {
+            flex-direction: column;
+            align-items: center;
+            background: ${({ theme }) => theme.backgroundAlt};
+
+            svg {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                transition: ${Transition.fast};
+            }
+
+            &:hover {
+                color: ${({ accent }) => accent};
+                background: ${({ theme }) => theme.backgroundAlt};
+
+                svg {
+                    transform: translateY(5px);
+                }
+            }
+        }
+    }
 `
 
 const ImageContainer = styled.div`
@@ -51,6 +104,7 @@ const ImageContainer = styled.div`
 const ContentContainer = styled.div`
     margin: auto;
     width: 24rem;
+    padding: 0 1.5rem;
 
     button {
         margin-left: auto;
@@ -58,11 +112,19 @@ const ContentContainer = styled.div`
 `
 
 const RightContainer = styled.div`
-    width: 55%;
-    height: 100%auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100vh;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 45%;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        width: 55%;
+    }
 `
 
 const Login: NextPageWithLayout = () => {
@@ -84,6 +146,10 @@ const Login: NextPageWithLayout = () => {
 
     }, [setTheme, setAccent, setAuth]);
 
+    const handleClick = () => {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
     return (
         <>
             <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
@@ -95,7 +161,7 @@ const Login: NextPageWithLayout = () => {
             </Head>
 
             <Container theme={themes[theme]}>
-                <LeftContainer>
+                <LeftContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                     <ImageContainer>
                         <Image
                             src={theme === "dark" ? "/static/images/logo-white.png" : "/static/images/logo-black.png"} 
@@ -116,6 +182,14 @@ const Login: NextPageWithLayout = () => {
                             <LoginForm/>
                         </div>
                     </ContentContainer>
+
+                    <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                        <TernaryButton type="button" onClick={handleClick}>
+                            Ontdek hoe Tekst.ai u kan helpen
+
+                            <FiChevronDown fontSize={18} strokeWidth={2.75}/>
+                        </TernaryButton>
+                    </ButtonContainer>
                 </LeftContainer>
 
                 <RightContainer>

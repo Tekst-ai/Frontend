@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import useStore from '../../store';
 import themes, { Theme } from '../../ThemeConfig';
+import { Breakpoint } from '../../variables';
 
 interface TextContainerCarouselProps {
     title: string,
@@ -23,16 +24,31 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
     position: absolute;
-    top: ${({ top }) => top};
-    bottom: ${({ bottom }) => bottom};
-    left: ${({ left }) => left};
-    right: ${({ right }) => right};
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
     background: ${({ theme }) => theme.backgroundSec};
-    padding: 1.375rem;
+    padding: 1rem 2.5rem;
     border-radius: 8px;
-    box-shadow: 0 ${({ theme }) => theme === "dark" ? "3px 12px " : "3px 8px "} ${({ theme }) => theme.boxShadow};
-    max-width: 22rem;
     white-space: normal;
+    width: 100%;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: 1rem 1.5rem;
+        bottom: 6rem;
+    }
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        transform: none;
+        width: auto;
+        box-shadow: 0 ${({ theme }) => theme === "dark" ? "3px 12px " : "3px 8px "} ${({ theme }) => theme.boxShadow};
+        padding: 1.375rem;
+        max-width: 22rem;
+        top: ${({ top }) => top};
+        bottom: ${({ bottom }) => bottom};
+        left: ${({ left }) => left};
+        right: ${({ right }) => right};
+    }
 
     p {
         &:first-of-type {
@@ -41,7 +57,7 @@ const Container = styled.div<ContainerProps>`
             text-transform: uppercase;
             margin-bottom: 0.375rem;
         }
-
+        
         &:last-of-type {
             color: ${({ theme }) => theme.textSec};
             font-size: 0.875rem;

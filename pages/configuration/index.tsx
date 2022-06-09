@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
-import { Breakpoint, Colors } from '../../variables'
+import { Breakpoint } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 import themes, { Theme } from '../../ThemeConfig'
 import useStore from '../../store'
@@ -19,7 +19,7 @@ export const TitleContainer = styled.div<TitleContainerProps>`
     
     p {
         margin-top: 0.625rem;
-        color: ${({ theme }) => theme.textSec};
+        color: ${({ theme }) => theme.textSec}!important;
     }
 `
 

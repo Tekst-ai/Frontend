@@ -6,9 +6,16 @@ import { BigChartNoText, MediumChartText, BigDonutChartContainer } from '../comp
 import { TitleContainer } from './configuration'
 import { CategoryListSmall } from '../components/lists'
 import { useCallback, useState } from 'react'
+import useWindowDimensions from '../hooks/useWindowDimensions'
+import { useMenu } from '../store'
 
-const Container = styled.div`
+interface ContainerProps {
+    height: number
+}
+
+const Container = styled.div<ContainerProps>`
     height: 100%;
+    background: red;
 `
 
 interface StatsContainerProps {
@@ -16,12 +23,15 @@ interface StatsContainerProps {
 }
 
 const StatsContainer = styled.div<StatsContainerProps>`
-    height: calc(100% - 2rem - ${({ height }) => height}px);
+    /* height: calc(${({ height }) => height}px - 3rem - 4rem - 2rem - 1.25rem); */
+
+    /* Full height container - height title container */
+    height: calc(${({ height }) => height}px - 40px - 64px  - 32px);
+    background: yellow;
 `
 
 const TopContainer = styled.div`
     display: flex;
-    /* height: 37%; */
 `
 
 interface BottomContainerProps {
@@ -30,36 +40,44 @@ interface BottomContainerProps {
 
 const BottomContainer = styled.div<BottomContainerProps>`
     width: 100%;
+    /* height: calc(${({ height }) => height}px - 3rem - 4rem - 2rem - 1.25rem); */
+    /* height: 493px; */
     height: calc(100% - 1.25rem - ${({ height }) => height}px);
     margin-top: 1.25rem;
     display: flex;
+    background: blue;
 `
 
 const Dashboard: NextPage = () => {
-    const [height, setHeight] = useState(0)
-    const [chartHeight, setChartHeight] = useState(0)
+    const [height, setHeight] = useState(0);
+    const [chartHeight, setChartHeight] = useState(0);
+    const menu = useMenu((s: any) => s.menu);
 
+    const windowMeasures = useWindowDimensions();
+    const [winWidth, setWinWidth] = useState(windowMeasures.width)
+    
     const refContainer = useCallback((node: any) => {
         if (node !== null) {
-            setHeight(node.clientHeight)
+           setHeight(node.clientHeight);
         }
     }, [])
 
     const chartContainer = useCallback((node: any) => {
-        if (node !== null) {
-            setChartHeight(node.clientHeight)
+        if (node !== null && winWidth !== windowMeasures.width) {
+            setChartHeight(node.clientHeight);
+            setWinWidth(node.clientWidth);
         }
-    }, [])
+    }, [winWidth, windowMeasures.width])
 
     return (
-        <Container>
+        <Container height={windowMeasures.height}>
             <TitleContainer ref={refContainer}>
                 <h1>Goedemiddag, Janine!</h1>
 
                 <p>Cijfers van de afgelopen 7 dagen</p>
             </TitleContainer>
 
-            <StatsContainer height={height}>
+            <StatsContainer height={windowMeasures.height - height}>
                 <TopContainer ref={chartContainer}>
                     <MediumChartText marginRight={true} icon={<IoMailOpen fontSize={26}/>} data={5462} oldData={4987} title={"E-mails"}/>
                     

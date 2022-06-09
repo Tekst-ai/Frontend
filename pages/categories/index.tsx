@@ -14,7 +14,9 @@ interface ButtonContainerProps {
     accent: string
 }
 
-const ButtonContainer = styled.div<ButtonContainerProps>`
+export const ButtonContainer = styled.div<ButtonContainerProps>`
+    width: 100%;
+    
     button {
         margin-top: 1rem;
         padding: 0.5rem 1.25rem;

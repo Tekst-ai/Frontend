@@ -20,7 +20,7 @@ const StyledLabel = styled.label<StyledLabelProps>`
     display: flex;
     flex-direction: column;
     font-size: 0.875rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     font-weight: 500;
     color: ${({ theme }) => theme.textSec};
     
