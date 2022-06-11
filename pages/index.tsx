@@ -4,13 +4,16 @@ import { IoMailOpen, IoGrid } from 'react-icons/io5'
 
 import { BigChartNoText, MediumChartText, BigDonutChartContainer } from '../components/charts'
 import { TitleContainer } from './configuration'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions'
 import { useMenu } from '../store'
 import { Info } from '../components/alerts'
 import { Breakpoint } from '../variables'
 import themes, { Theme } from '../ThemeConfig'
 import useStore from '../store'
+import { useData } from '../hooks/useData'
+import { CheckEnv } from '../services/checks'
+import _ from 'lodash'
 
 interface ContainerProps {
     height: number
@@ -89,36 +92,40 @@ const Dashboard: NextPage = () => {
             setWinHeight(node.clientHeight);
         }
     }, [winWidth, windowMeasures.width, winHeight, windowMeasures.height])
+        
+    const user = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
+    const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_DASHBOARD_ENDPOINT));
 
     return (
         <Container height={windowMeasures.height}>
             <TitleContainer ref={refContainer} theme={themes[theme]}>
-                <h1>Goedemiddag, Janine!</h1>
-
-                <p>Cijfers van de afgelopen 7 dagen</p>
+                <h1>Goedemiddag, { (!user.isLoading && !user.isError) && user.data.firstName }!</h1>
             </TitleContainer>
 
-            <StatsContainer height={windowMeasures.height - height}>
-                <TopContainer ref={chartContainer}>
-                    <MediumChartText marginRight={true} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoMailOpen fontSize={26}/>} data={54620} oldData={4987} title={"E-mails"}/>
-                    
-                    <MediumChartText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoGrid fontSize={26}/>} data={12} oldData={16} title={"Categorieën"}/>
-                    
-                    <MediumChartText marginRight={false} fullWidth={true} showIcon={false} showProgress={false} data={"Inbox - Notifications"} dataRight={2951} title={"Top categorie"}/>
-                </TopContainer>
+            {
+                (!isLoading && !isError) &&
+                <StatsContainer height={windowMeasures.height - height}>
+                    <TopContainer ref={chartContainer}>
+                        <MediumChartText marginRight={true} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoMailOpen fontSize={26}/>} data={_.sumBy(data.days, 'totalEmails')} oldData={data.totalEmailsOld} title={"E-mails"}/>
+                        
+                        <MediumChartText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoGrid fontSize={26}/>} data={data.totalCategories} oldData={data.totalCategoriesOld} title={"Categorieën"}/>
+                        
+                        <MediumChartText marginRight={false} fullWidth={true} showIcon={false} showProgress={false} data={data.topCategory.name} dataRight={data.topCategory.totalEmails} title={"Top categorie"}/>
+                    </TopContainer>
 
-                <BottomContainer height={chartHeight}>
-                    {
-                        windowMeasures.height > 575 ?
-                        <>
-                            <BigChartNoText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} title="E-mail overzicht"/>
+                    <BottomContainer height={chartHeight}>
+                        {
+                            windowMeasures.height > 575 ?
+                            <>
+                                <BigChartNoText data={data.days} marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} title="E-mail overzicht"/>
 
-                            <BigDonutChartContainer title="Top 5 categoriëen"/>
-                        </>
-                        : (windowMeasures.height > 400 && windowMeasures.height < 575) && <Info message="Venster of scherm is niet hoog genoeg om grafieken op af te beelden!"/>
-                    }
-                </BottomContainer>
-            </StatsContainer>
+                                <BigDonutChartContainer data={data.categories} title="Top 5 categoriëen"/>
+                            </>
+                            : (windowMeasures.height > 400 && windowMeasures.height < 575) && <Info message="Venster of scherm is niet hoog genoeg om grafieken op af te beelden!"/>
+                        }
+                    </BottomContainer>
+                </StatsContainer>
+            }
         </Container>
   )
 }

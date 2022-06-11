@@ -22,11 +22,17 @@ ChartJS.register(
     Legend,
     Filler
 )
+import moment from "moment";
+import 'moment/locale/nl-be';
 
 import themes, { accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
-import { last7Days } from "../../services/date";
 import { Breakpoint, Colors } from "../../variables";
+import _ from "lodash";
+
+interface BigLineChartProps {
+    data: any
+}
 
 const Container = styled.div`
     position: relative;
@@ -40,17 +46,26 @@ const Container = styled.div`
     }
 `
 
-const BigLineChart: NextPage = () => {
+const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
     const accent = useAccent((s: any) => s.accent);
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const color = accentColors[accent as keyof typeof accentColors][theme]
 
-    const data = {
-        labels: last7Days().reverse(),
+    const FormatDateLabels = (dateArray: any) => {
+        let formattedDateArray: any = [];
+        dateArray.map((date: string) => {
+            moment().locale('nl-be');
+            formattedDateArray.push(moment(date).format('D MMMM'));
+        })
+        return formattedDateArray.reverse()
+    }
+
+    const dataChart = {
+        labels: FormatDateLabels(_.map(data, "date")),
         datasets: [
             {
                 label: "Aantal e-mails",
-                data: [154, 124, 54, 120, 32, 10, 23],
+                data: _.map(data, "totalEmails").reverse(),
                 pointRadius: [5, 5, 5, 5, 5, 5, 5]
             }
         ]
@@ -147,7 +162,7 @@ const BigLineChart: NextPage = () => {
 
     return (
         <Container>
-            <Line id="canvas" data={data} options={options}/>
+            <Line id="canvas" data={dataChart} options={options}/>
         </Container>
     )
 }
