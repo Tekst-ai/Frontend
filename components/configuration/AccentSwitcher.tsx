@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
+
 import { useData } from "../../hooks/useData";
 import { CheckEnv } from "../../services/checks";
-
 import useStore, { useAccent } from "../../store";
-import { accentColors, Theme } from "../../ThemeConfig";
+import themes, { accentColors, Theme } from "../../ThemeConfig";
 import { Breakpoint, Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
@@ -21,6 +22,8 @@ const ColorList = styled.form`
 
 interface ColorListItemProps {
     color: string,
+    theme: keyof Theme,
+    isCompanyColor: boolean,
 }
 
 const ColorListItem = styled.label<ColorListItemProps>`
@@ -64,6 +67,24 @@ const ColorListItem = styled.label<ColorListItemProps>`
             transform: scale(0) rotate(-30deg);
         }
     }
+
+    ${({ isCompanyColor, theme }) => isCompanyColor && `
+        &:first-of-type {
+            margin-right: 20px;
+
+            &::after {
+                content: "";
+                width: 3px;
+                height: 2.5rem;
+                position: absolute;
+                top: 50%;
+                right: -11.5px;
+                transform: translateY(-50%);
+                border-radius: 3px;
+                background: ${theme.background + 80};
+            }
+        }
+    `}
 `
 
 const AccentSwitcher: NextPage = () => {
@@ -79,6 +100,7 @@ const AccentSwitcher: NextPage = () => {
     }
 
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
+    const [isCompanyColor, setIsCompanyColor] = useState(false);
 
     const accentColorList = [];
     let color: keyof typeof accentColors;
@@ -94,11 +116,17 @@ const AccentSwitcher: NextPage = () => {
         }
     }
 
+    useEffect(() => {
+        if (!isLoading && !isError && data.companyColor !== "" && data.companyColor !== undefined) {
+            setIsCompanyColor(true)
+        }
+    }, [data?.companyColor, isLoading, isError])
+
     return (
         <ColorList>
             {
                 accentColorList.map((color: any, index: number) => (
-                    <ColorListItem color={color.colors[theme]} key={index} htmlFor={color.name}>
+                    <ColorListItem color={color.colors[theme]} key={index} htmlFor={color.name} theme={themes[theme]} isCompanyColor={isCompanyColor}>
                         <input type="radio" id={color.name} value={color.name} name="AccentSelector" checked={color.name === accentColor ? true : false} onChange={handleChange}/>
                         
                         <div>

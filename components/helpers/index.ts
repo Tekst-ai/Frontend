@@ -3,6 +3,7 @@ import PercentageEvolution from "./PercentageEvolution";
 import Tooltip from "./Tooltip";
 import CheckStatus from "./CheckStatus";
 import Loading from "./Loading";
+import TextLoading from "./TextLoading";
 
 export {
     IconAbstract,
@@ -10,4 +11,5 @@ export {
     Tooltip,
     CheckStatus,
     Loading,
+    TextLoading
 }

@@ -14,7 +14,7 @@ import themes, { Theme } from '../ThemeConfig'
 import useStore from '../store'
 import { useData } from '../hooks/useData'
 import { CheckEnv } from '../services/checks'
-import { Loading } from '../components/helpers'
+import { Loading, TextLoading } from '../components/helpers'
 
 interface ContainerProps {
     height: number
@@ -100,7 +100,7 @@ const Dashboard: NextPage = () => {
     return (
         <Container height={windowMeasures.height}>
             <TitleContainer ref={refContainer} theme={themes[theme]}>
-                <h1>Goedemiddag, { (!user.isLoading && !user.isError) && user.data.firstName }!</h1>
+                <h1>{ user.isLoading ? <TextLoading width={50} height={2.5}/> : (!user.isLoading && !user.isError) && `Goedemiddag, ${user.data.firstName}!` }</h1>
             </TitleContainer>
 
             {

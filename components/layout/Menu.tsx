@@ -11,7 +11,7 @@ import { CheckEnv } from '../../services/checks'
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Transition } from '../../variables'
-import { Tooltip } from '../helpers'
+import { TextLoading, Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
 import Navigation from './Navigation'
@@ -92,6 +92,8 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         left: 4.375rem;
         opacity: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? 1 : 0 };
         white-space: nowrap;
+        height: 100%;
+        width: 100%;
         
         p {
             transition: ${Transition.fast};
@@ -142,9 +144,9 @@ const Menu: NextPage = () => {
                         </div>
 
                         <div>
-                            <p>{ (!isLoading && !isError) && data.firstName }</p>
+                            <p>{ isLoading ? <TextLoading width={60} height={1.4125}/> : (!isLoading && !isError) && data.firstName }</p>
 
-                            <p>{ (!isLoading && !isError) && data.company }</p>
+                            <p>{ isLoading ? <TextLoading width={40} height={1.4125}/> : (!isLoading && !isError) && data.company }</p>
                         </div>
                     </ProfileContainer>
                 </Link>
