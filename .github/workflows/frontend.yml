@@ -31,4 +31,4 @@ jobs:
           yarn
       - name: Deploy
         run: |
-          echo test
+          yarn build
