@@ -75,6 +75,7 @@ interface SubContainerProps {
 }
 
 const SubContainer = styled.div<SubContainerProps>`
+    position: relative;
     background: ${({ theme }) => theme.backgroundSec};
     padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem"};
     /* border-radius: 10px; */

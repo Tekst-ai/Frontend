@@ -8,7 +8,7 @@ import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint, Colors } from '../../variables'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
-import { CheckStatus } from '../../components/helpers'
+import { CheckStatus, Loading } from '../../components/helpers'
 
 const Container = styled.div`
     display: flex;
@@ -129,45 +129,48 @@ const Account: NextPage = () => {
 
     return (
         <div>
-            <Container>
-                <TopContainer theme={themes[theme]}>
-                    <div>
-                        <Image
-                            src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
-                            alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
-                            layout='intrinsic'
-                            width={192}
-                            height={192}
-                            objectFit={'cover'} />
-                    </div>
+            {
+                isLoading ? <Loading/> : (!isLoading && !isError) && 
+                <Container>
+                    <TopContainer theme={themes[theme]}>
+                        <div>
+                            <Image
+                                src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
+                                alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
+                                layout='intrinsic'
+                                width={192}
+                                height={192}
+                                objectFit={'cover'} />
+                        </div>
 
-                    <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>
+                        <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>
 
-                    <p>{ (!isLoading && !isError) && data.company }</p>
-                </TopContainer>
+                        <p>{ (!isLoading && !isError) && data.company }</p>
+                    </TopContainer>
 
-                <BottomContainer theme={themes[theme]}>
-                    <ul>
-                        <li>
-                            <p>e-mailadres</p>
+                    <BottomContainer theme={themes[theme]}>
+                        <ul>
+                            <li>
+                                <p>e-mailadres</p>
 
-                            <div>
-                                <p>{ (!isLoading && !isError) && data.email }</p>
-                            </div>
-                        </li>
+                                <div>
+                                    <p>{ (!isLoading && !isError) && data.email }</p>
+                                </div>
+                            </li>
 
-                        <li>
-                            <p>status</p>
+                            <li>
+                                <p>status</p>
 
-                            <div>
-                                <p>
-                                    <CheckStatus status={(!isLoading && !isError) && data.status}/>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </BottomContainer>
-            </Container>
+                                <div>
+                                    <p>
+                                        <CheckStatus status={(!isLoading && !isError) && data.status}/>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </BottomContainer>
+                </Container>
+            }
         </div>
     )
   }

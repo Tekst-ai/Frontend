@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { IoMailOpen, IoGrid } from 'react-icons/io5'
+import _ from 'lodash'
 
 import { BigChartNoText, MediumChartText, BigDonutChartContainer } from '../components/charts'
 import { TitleContainer } from './configuration'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions'
 import { useMenu } from '../store'
 import { Info } from '../components/alerts'
@@ -13,7 +14,7 @@ import themes, { Theme } from '../ThemeConfig'
 import useStore from '../store'
 import { useData } from '../hooks/useData'
 import { CheckEnv } from '../services/checks'
-import _ from 'lodash'
+import { Loading } from '../components/helpers'
 
 interface ContainerProps {
     height: number
@@ -103,7 +104,7 @@ const Dashboard: NextPage = () => {
             </TitleContainer>
 
             {
-                (!isLoading && !isError) &&
+                isLoading ? <Loading/> : (!isLoading && !isError) &&
                 <StatsContainer height={windowMeasures.height - height}>
                     <TopContainer ref={chartContainer}>
                         <MediumChartText marginRight={true} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoMailOpen fontSize={26}/>} data={_.sumBy(data.days, 'totalEmails')} oldData={data.totalEmailsOld} title={"E-mails"}/>
