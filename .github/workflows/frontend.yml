@@ -29,6 +29,9 @@ jobs:
       - name: Install
         run: |
           yarn
-      - name: Deploy
+      - name: Build
         run: |
           yarn build
+      - name: Deploy
+        run: |
+          aws s3 sync ./out s3://app.tekst.dev
