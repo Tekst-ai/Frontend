@@ -6,6 +6,9 @@ import { FiCheckCircle } from 'react-icons/fi'
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint, Colors } from '../../variables'
+import { useData } from '../../hooks/useData'
+import { CheckEnv } from '../../services/checks'
+import { CheckStatus } from '../../components/helpers'
 
 const Container = styled.div`
     display: flex;
@@ -43,7 +46,7 @@ const TopContainer = styled.div<TopContainerProps>`
         font-weight: 700;
         
         @media (min-width: ${Breakpoint.mobileSmall}) {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
     }
     
@@ -110,6 +113,7 @@ const BottomContainer = styled.div<TopContainerProps>`
 
                         span {
                             margin-left: 0.625rem;
+                            text-transform: capitalize;
                         }
                     }
                 }
@@ -121,23 +125,25 @@ const BottomContainer = styled.div<TopContainerProps>`
 const Account: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
+    const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
+
     return (
         <div>
             <Container>
                 <TopContainer theme={themes[theme]}>
                     <div>
                         <Image
-                            src="/static/images/profile.jpg"
-                            alt="Placeholder name"
+                            src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
+                            alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
                             layout='intrinsic'
                             width={192}
                             height={192}
                             objectFit={'cover'} />
                     </div>
 
-                    <p>Janine Jacobs</p>
+                    <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>
 
-                    <p>Vals bedijf</p>
+                    <p>{ (!isLoading && !isError) && data.company }</p>
                 </TopContainer>
 
                 <BottomContainer theme={themes[theme]}>
@@ -146,7 +152,7 @@ const Account: NextPage = () => {
                             <p>e-mailadres</p>
 
                             <div>
-                                <p>janine_jacobs@outlook.com</p>
+                                <p>{ (!isLoading && !isError) && data.email }</p>
                             </div>
                         </li>
 
@@ -155,9 +161,7 @@ const Account: NextPage = () => {
 
                             <div>
                                 <p>
-                                    <FiCheckCircle fontSize={16} color={Colors.accentGreen} strokeWidth={2.5}/>
-
-                                    <span>Synced</span>
+                                    <CheckStatus status={(!isLoading && !isError) && data.status}/>
                                 </p>
                             </div>
                         </li>

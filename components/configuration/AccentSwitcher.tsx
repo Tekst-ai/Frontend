@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
+import { useData } from "../../hooks/useData";
+import { CheckEnv } from "../../services/checks";
 
 import useStore, { useAccent } from "../../store";
 import { accentColors, Theme } from "../../ThemeConfig";
@@ -76,11 +78,20 @@ const AccentSwitcher: NextPage = () => {
         }
     }
 
+    const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
+
     const accentColorList = [];
     let color: keyof typeof accentColors;
     for (color in accentColors) {
-        const accentColorObject = { name: color, colors: accentColors[color] };
-        accentColorList.push(accentColorObject);
+        if (color === "company") {
+            if (!isLoading && !isError && data.companyColor !== "" && data.companyColor !== undefined) {
+                const accentColorObject = { name: color, colors: accentColors[color] };
+                accentColorList.push(accentColorObject);
+            }
+        } else {
+            const accentColorObject = { name: color, colors: accentColors[color] };
+            accentColorList.push(accentColorObject);
+        }
     }
 
     return (

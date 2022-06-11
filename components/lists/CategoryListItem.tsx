@@ -1,10 +1,16 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { PercentageOfTotal } from '../../services/calculations'
+import { FormatDate } from '../../services/date'
 
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
+
+interface CategoryListItemProps {
+    data: any,
+}
 
 interface ContainerProps {
     theme: any
@@ -29,19 +35,21 @@ const Container = styled.tr<ContainerProps>`
     }
 `
 
-const CategoryListItem: NextPage = () => {
+const CategoryListItem: NextPage<CategoryListItemProps> = ({ data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     const { width } = useWindowDimensions();
 
+    // ! rest is 55 when I want to add extra categories
+
     return (
         <Container theme={themes[theme]}>
-            <td>Categorie 1</td>
+            <td>{ data.name }</td>
             {
                 width > 550 &&
-                <td>2 minutes ago</td>
+                <td>{ FormatDate(data.lastActivity) }</td>
             }
-            <td>45%</td>
+            <td>{ PercentageOfTotal(data.amount, data.total) }%</td>
         </Container>
     )
 }

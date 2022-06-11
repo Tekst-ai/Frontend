@@ -11,6 +11,7 @@ interface BigChartProps {
     title: string,
     marginRight?: boolean,
     marginBottom?: boolean,
+    data: any
 }
 
 interface ContainerProps {
@@ -80,7 +81,7 @@ const ChartContainer = styled.div<ChartContainerProps>`
     }
 `
 
-const BigDonutChartContainer: NextPage<BigChartProps> = ({ marginRight = false, title, marginBottom = false }) => {
+const BigDonutChartContainer: NextPage<BigChartProps> = ({ marginRight = false, title, marginBottom = false, data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
     const [height, setHeight] = useState(0)
@@ -98,7 +99,7 @@ const BigDonutChartContainer: NextPage<BigChartProps> = ({ marginRight = false, 
             </TitleContainer>
 
             <ChartContainer height={height}>
-                <BigChartDonut/>
+                <BigChartDonut data={data}/>
             </ChartContainer>
         </Container>
     )

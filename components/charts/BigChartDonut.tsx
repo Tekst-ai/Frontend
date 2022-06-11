@@ -31,7 +31,11 @@ import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig';
 import { Breakpoint, Colors } from '../../variables';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import _ from 'lodash';
 
+interface BigChartDonutProps {
+    data: any
+}
 
 const Container = styled.div`
     width: 100%;
@@ -48,22 +52,18 @@ const Container = styled.div`
     }
 `
 
-const BigChartDonut: NextPage = () => {
+const BigChartDonut: NextPage<BigChartDonutProps> = ({ data }) => {
     const accent = useAccent((s: any) => s.accent);
     const color = accentColors[accent as keyof typeof accentColors];
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const { width } = useWindowDimensions();
 
-    const data = {
-        labels: [
-            'Inbox',
-            'Notificaties',
-            'Klanten',
-            'Projecten',
-            'Offertes',
-        ],
+    const sortedData = _.orderBy(data, ['totalEmails'], ['desc'])
+
+    const chartData = {
+        labels: _.map(sortedData, "name"),
         datasets: [{
-            data: [200,  150, 100, 60, 120],
+            data: _.map(sortedData, "totalEmails"),
             backgroundColor: [
                 color[theme],
                 Colors.secondary,
@@ -121,7 +121,7 @@ const BigChartDonut: NextPage = () => {
 
     return (
         <Container>
-            <Pie options={options}  data={data}/>
+            <Pie options={options}  data={chartData}/>
         </Container>
     )
 }

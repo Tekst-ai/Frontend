@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { Routes } from '../constants';
 
 interface LayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode,
 }
 
 const GlobalStyle = createGlobalStyle`
@@ -143,5 +143,5 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
         </>
     )
   }
-  
-  export default Layout
+
+export default Layout

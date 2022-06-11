@@ -13,3 +13,9 @@ export const last7Days = () => {
 
     return result;
 }
+
+export const FormatDate = (date: string) => {
+    moment().locale('nl-be')
+    const formattedDate = moment(date).fromNow();
+    return formattedDate;
+}
