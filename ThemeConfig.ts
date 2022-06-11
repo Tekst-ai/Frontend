@@ -137,6 +137,12 @@ export const accentColors = {
         dark: Colors.accentGreen,
         light: Colors.accentGreenDark,
     },
+    company: {
+        color: "",
+        text: "",
+        dark: "",
+        light: "",
+    },
 }
 
 export default themes;

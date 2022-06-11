@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Routes } from '../../constants'
+import { useData } from '../../hooks/useData'
+import { CheckEnv } from '../../services/checks'
 
 import useStore, { useAccent, useMenu } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
@@ -12,11 +14,10 @@ import { Breakpoint, Transition } from '../../variables'
 import { Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
 import HelpNavigation from './HelpNavigation'
-
 import Navigation from './Navigation'
 
 interface ContainerProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 const Container = styled.div<ContainerProps>`
@@ -117,6 +118,8 @@ const Menu: NextPage = () => {
         setIsOpen(open)
     }
 
+    const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
+
     return (
         <Container isOpen={isOpen}>
             <Link href={Routes.DASHBOARD} passHref>
@@ -135,13 +138,13 @@ const Menu: NextPage = () => {
                 <Link href={Routes.PROFILE} passHref>
                     <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
                         <div>
-                            <Image src="/static/images/profile.jpg" alt="Janine Jacobs" layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                            <Image src={ (!isLoading && !isError) ? data.img : '/static/images/profile.jpg' } alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" } layout='intrinsic' width={50} height={50} objectFit={'cover'} />
                         </div>
 
                         <div>
-                            <p>Janine</p>
+                            <p>{ (!isLoading && !isError) && data.firstName }</p>
 
-                            <p>Vals Bedrijf</p>
+                            <p>{ (!isLoading && !isError) && data.company }</p>
                         </div>
                     </ProfileContainer>
                 </Link>

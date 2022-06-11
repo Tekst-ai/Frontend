@@ -8,6 +8,9 @@ import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { TitleContainer } from '../configuration'
 import useStore, { useAccent } from '../../store'
 import { Colors, Transition } from '../../variables'
+import { useData } from '../../hooks/useData'
+import { CheckEnv } from '../../services/checks'
+import { useState } from 'react'
 
 interface ButtonContainerProps {
     theme: any,
@@ -47,16 +50,24 @@ const Categories: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const accent = useAccent((s: any) => s.accent)
 
+    const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_CATEGORIES_ENDPOINT));
+
+    const [load, setLoad] = useState(10);
+    const handleClick = () => setLoad(load + 10)
+
     return (
         <div>
             <TitleContainer>
                 <h1>Categorieën</h1>
             </TitleContainer>
 
-            <CategoryList/>
+            {
+                !isLoading && !isError && 
+                <CategoryList data={data.slice(0, load)}/>
+            }
 
             <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
-                <TernaryButton type="button">
+                <TernaryButton type="button" onClick={handleClick}>
                     Meer
 
                     <FiChevronDown fontSize={18} strokeWidth={2.75}/>

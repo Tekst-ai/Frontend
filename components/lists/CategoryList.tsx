@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
@@ -6,6 +7,10 @@ import useStore, { useAccent } from '../../store'
 import themes, { accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
 import CategoryListItem from './CategoryListItem'
+
+interface CategoryListProps {
+    data: any,
+}
 
 interface ContainerProps {
     theme: any,
@@ -67,11 +72,13 @@ const Table = styled.table<TableProps>`
     }
 `
 
-const CategoryList: NextPage = () => {
+const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const accent = useAccent((s: any) => s.accent)
 
     const { width } = useWindowDimensions();
+
+    const sortedData = _.orderBy(data, ['amount'], ['desc'])
 
     return (
         <Container theme={themes[theme]}>
@@ -88,21 +95,11 @@ const CategoryList: NextPage = () => {
                 </thead>
 
                 <tbody>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
-                    <CategoryListItem/>
+                    {
+                        sortedData.map((category: any) => (
+                            <CategoryListItem key={category.id} data={category}/>
+                        ))
+                    }
                 </tbody>
             </Table>
         </Container>
