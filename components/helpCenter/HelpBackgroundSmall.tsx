@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useStore, { useAccent } from '../../store'
-import { accentColors, Theme } from '../../ThemeConfig'
+import { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Colors } from '../../variables'
 
 interface ContainerProps {
@@ -26,11 +26,11 @@ const Container = styled.div<ContainerProps>`
 `
 
 const HelpBackgroundSmall: NextPage = () => {
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container accent={accentColors[accent as keyof typeof accentColors][theme]}/>
+        <Container accent={accentColors[accent][theme]}/>
     )
 }
 

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { TernaryButton } from '../../components/buttons'
 import { CategoryList } from '../../components/lists'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { TitleContainer } from '../configuration'
 import useStore, { useAccent } from '../../store'
 import { Colors, Transition } from '../../variables'
@@ -48,7 +48,7 @@ export const ButtonContainer = styled.div<ButtonContainerProps>`
 
 const Categories: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
 
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_CATEGORIES_ENDPOINT));
 
@@ -66,7 +66,7 @@ const Categories: NextPage = () => {
                 <CategoryList data={data.slice(0, load)}/>
             }
 
-            <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+            <ButtonContainer theme={themes[theme]} accent={accentColors[accent][theme]}>
                 <TernaryButton type="button" onClick={handleClick}>
                     Meer
 

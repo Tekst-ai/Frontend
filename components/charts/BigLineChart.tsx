@@ -25,7 +25,7 @@ ChartJS.register(
 import moment from "moment";
 import 'moment/locale/nl-be';
 
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
 import { Breakpoint, Colors } from "../../variables";
 import _ from "lodash";
@@ -47,9 +47,9 @@ const Container = styled.div`
 `
 
 const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const theme: keyof Theme = useStore((s: any) => s.theme)
-    const color = accentColors[accent as keyof typeof accentColors][theme]
+    const color = accentColors[accent][theme]
 
     const FormatDateLabels = (dateArray: any) => {
         let formattedDateArray: any = [];

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { PercentageCalculator } from '../../services/calculations'
 import { PercentageEvolution } from '../helpers'
@@ -177,7 +177,7 @@ const NumberContainer = styled.div<NumberContainerProps>`
 
 const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, dataRight, showProgress = true, showIcon = true, marginRight = false, marginBottom = false, icon, data, oldData = 0, title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const [height, setHeight] = useState(0)
         
@@ -197,12 +197,12 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, da
             <HeaderContainer ref={refContainer}>
                 {
                     showIcon &&
-                    <IconContainer accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                    <IconContainer accent={accentColors[accent][theme]}>
                         { icon }
                     </IconContainer>
                 }
 
-                <NumberContainer theme={themes[theme]} showIcon={showIcon} dataRight={dataRight} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                <NumberContainer theme={themes[theme]} showIcon={showIcon} dataRight={dataRight} accent={accentColors[accent][theme]}>
                     <div>
                         <span>{ title }</span>
 

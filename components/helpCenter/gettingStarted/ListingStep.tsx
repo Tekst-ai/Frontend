@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useStore, { useAccent } from '../../../store'
-import themes, { accentColors, Theme } from '../../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
 import { Breakpoint, Colors } from '../../../variables'
 
 interface ListingStepProps {
@@ -102,12 +102,12 @@ const Step = styled.div<StepProps>`
 `
 
 const ListingStep: NextPage<ListingStepProps> = ({ step, title, text }) => {
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
         <Container>
-            <Step theme={themes[theme]} accent={accentColors[accent as  keyof typeof accentColors][theme]}>
+            <Step theme={themes[theme]} accent={accentColors[accent][theme]}>
                 <div>
                     <span>{step}</span>
                 </div>

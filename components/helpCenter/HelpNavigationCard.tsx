@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import useStore, { useAccent } from "../../store";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Breakpoint, Colors, Transition } from "../../variables";
 
 interface HelpNavigationCardProps {
@@ -172,8 +172,8 @@ const ButtonContent = styled.button<ButtonContentProps>`
 
 const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, title, type }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const router = useRouter();
-    const accent = useAccent((s: any) => s.accent)
    
     const handleClick = () => {
         if (typeof window !== "undefined") {
@@ -185,7 +185,7 @@ const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, tit
         <Container>
             {type === "link" ? 
             <Link href={ link } passHref>
-                <LinkContent pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                <LinkContent pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
                     { icon }
 
                     <p>{ title }</p>

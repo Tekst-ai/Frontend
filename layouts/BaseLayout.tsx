@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
 
-import themes, { accentColors, Theme } from '../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu, MobileMenu } from '../components/layout';
 import { Breakpoint, Colors, Transition } from '../variables';
@@ -98,7 +98,7 @@ const SubContainer = styled.div<SubContainerProps>`
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const setTheme = useStore((s: any) => s.setTheme);
     const setAccent = useAccent((s: any) => s.setAccent);
     const setMenu = useMenu((s: any) => s.setMenu);
@@ -126,7 +126,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 
     return (
         <>
-            <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
+            <GlobalStyle theme={themes[theme]} accent={accentColors[accent][theme]}/>
 
             <Container theme={themes[theme]}>
                 <Menu/>

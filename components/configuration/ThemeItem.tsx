@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { FiCheck } from 'react-icons/fi'
 
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { Breakpoint, Colors, Transition } from '../../variables'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
@@ -162,13 +162,13 @@ const IconContainer = styled.div<IconContainerProps>`
 
 const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
     const store: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const { width } = useWindowDimensions();
 
     return (
         <ThemeItemContainer theme={theme} store={themes[store]}>
-            <NavigationList theme={theme} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+            <NavigationList theme={theme} accent={accentColors[accent][theme]}>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -185,7 +185,7 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
                 <span></span>
             </Content>
 
-            <IconContainer accent={accentColors[accent as keyof typeof accentColors][store]}>
+            <IconContainer accent={accentColors[accent][store]}>
                 <FiCheck strokeWidth={3} fontSize={14} color={Colors.textWhite}/>
             </IconContainer>
         </ThemeItemContainer>

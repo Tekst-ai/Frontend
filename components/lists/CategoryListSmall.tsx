@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 
 interface ContainerProps {
     theme: any,
@@ -67,12 +67,12 @@ const Table = styled.table<TableProps>`
 `
 
 const CategoryListSmall: NextPage = () => {
-    const accent = useAccent((s: any)  => s.accent)
+    const accent: keyof Accent = useAccent((s: any)  => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
         <Container theme={themes[theme]}>
-            <Table theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+            <Table theme={themes[theme]} accent={accentColors[accent][theme]}>
                 <thead>
                     <tr>
                         <th colSpan={2}>

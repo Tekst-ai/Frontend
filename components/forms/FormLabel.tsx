@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
 
-import themes, { accentColors, Theme } from '../../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import useStore, { useAccent } from '../../store';
 import { Transition } from '../../variables';
 
@@ -51,10 +51,10 @@ const StyledLabel = styled.label<StyledLabelProps>`
 
 const FormLabel: NextPage<FormLabelProps> = ({ children, label }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     return (
-        <StyledLabel theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+        <StyledLabel theme={themes[theme]} accent={accentColors[accent][theme]}>
             {label}
 
             {children}

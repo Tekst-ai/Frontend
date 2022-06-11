@@ -76,7 +76,76 @@ const themes: Theme = {
     // },
 };
 
-export const accentColors = {
+export interface Accent {
+    company: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    default: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    yellow: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    orange: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    red: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    pink: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    purple: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    darkBlue: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    lightBlue: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    teal: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+    green: {
+        color: string,
+        text: string,
+        dark: string,
+        light: string,
+    },
+}
+
+export const accentColors: Accent = {
     company: {
         color: "",
         text: "",

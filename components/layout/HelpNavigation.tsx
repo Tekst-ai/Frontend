@@ -6,7 +6,7 @@ import { IoRocket, IoChatbubbles } from 'react-icons/io5'
 
 import { useRouter } from 'next/router';
 import useStore, { useAccent } from '../../store';
-import themes, { accentColors, Theme } from '../../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
 import { Transition } from '../../variables';
 import { Routes } from '../../constants';
@@ -127,14 +127,14 @@ const LinkTextAlt = styled(LinkText)`
 
 const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
     const router = useRouter();
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container isOpen={isOpen} theme={themes[theme]}>
             <div>
                 <Link href={Routes.HELPCENTER} passHref>
-                    <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                    <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
                         {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
                         <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
@@ -149,10 +149,10 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
             {
                 router.pathname.includes(Routes.HELPCENTER) &&
-                <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
+                <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent]}>
                     <li>
                         <Link href={Routes.GETTINGSTARTED} passHref>
-                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
                                 {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
                                 <IoRocket fontSize={14} strokeWidth={2.25}/>
 
@@ -163,7 +163,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
                     <li>
                         <Link href={Routes.FAQ} passHref>
-                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                            <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
                                 {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
                                 <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 

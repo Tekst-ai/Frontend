@@ -24,7 +24,7 @@ ChartJS.register(
     
 import styled from "styled-components";
 import useStore, { useAccent } from "../../store";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Colors } from "../../variables";
 import { useCallback, useRef, useState } from "react";
 
@@ -52,9 +52,9 @@ const Fade = styled.div<FadeProps>`
 `
 
 const MediumLineChart: NextPage = () => {
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const theme: keyof Theme = useStore((s: any) => s.theme)
-    const color = accentColors[accent as keyof typeof accentColors][theme]
+    const color = accentColors[accent][theme]
 
     // const ctx: any = useRef(null)
 

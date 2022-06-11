@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 import useStore, { useAccent } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
 import CategoryListItem from './CategoryListItem'
 
@@ -74,7 +74,7 @@ const Table = styled.table<TableProps>`
 
 const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
 
     const { width } = useWindowDimensions();
 
@@ -82,7 +82,7 @@ const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
 
     return (
         <Container theme={themes[theme]}>
-            <Table accent={accentColors[accent as keyof typeof accentColors][theme]}>
+            <Table accent={accentColors[accent][theme]}>
                 <thead>
                     <tr>
                         <th scope="col">Naam</th>

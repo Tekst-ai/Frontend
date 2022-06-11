@@ -28,7 +28,7 @@ ChartJS.register(
 )
 
 import useStore, { useAccent } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Breakpoint, Colors } from '../../variables';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import _ from 'lodash';
@@ -53,8 +53,8 @@ const Container = styled.div`
 `
 
 const BigChartDonut: NextPage<BigChartDonutProps> = ({ data }) => {
-    const accent = useAccent((s: any) => s.accent);
-    const color = accentColors[accent as keyof typeof accentColors];
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const color = accentColors[accent];
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const { width } = useWindowDimensions();
 

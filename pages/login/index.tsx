@@ -1,10 +1,9 @@
 import React, { ReactElement, useEffect } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import Image from 'next/image'
 import Head from 'next/head'
 
 import { NextPageWithLayout } from '../_app'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent, useAuth } from '../../store'
 import { Breakpoint, Colors, Transition } from '../../variables'
 import { TitleContainer } from '../configuration'
@@ -127,9 +126,10 @@ const RightContainer = styled.div`
     }
 `
 
+/* eslint-disable @next/next/no-img-element */
 const Login: NextPageWithLayout = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const setTheme = useStore((s: any) => s.setTheme);
     const setAccent = useAccent((s: any) => s.setAccent);
     const setAuth = useAuth((s: any) => s.setAuth);
@@ -154,7 +154,7 @@ const Login: NextPageWithLayout = () => {
 
     return (
         <>
-            <GlobalStyle theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
+            <GlobalStyle theme={themes[theme]} accent={accentColors[accent][theme]}/>
 
             <Head>
                 <title>
@@ -163,13 +163,13 @@ const Login: NextPageWithLayout = () => {
             </Head>
 
             <Container theme={themes[theme]}>
-                <LeftContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                <LeftContainer theme={themes[theme]} accent={accentColors[accent][theme]}>
                     <ImageContainer>
-                        <Image
+                        <img
+                            alt="Logo of Tekst.ai"
                             src={theme === "dark" ? "/static/images/logo-white.png" : "/static/images/logo-black.png"} 
                             width={75}
                             height={41}
-                            alt="Logo of Tekst.ai"
                         />
                     </ImageContainer>
 
@@ -185,7 +185,7 @@ const Login: NextPageWithLayout = () => {
                         </div>
                     </ContentContainer>
 
-                    <ButtonContainer theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                    <ButtonContainer theme={themes[theme]} accent={accentColors[accent][theme]}>
                         <TernaryButton type="button" onClick={handleClick}>
                             Ontdek hoe Tekst.ai u kan helpen
 

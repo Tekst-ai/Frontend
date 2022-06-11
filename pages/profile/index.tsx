@@ -1,11 +1,9 @@
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import styled from 'styled-components'
-import { FiCheckCircle } from 'react-icons/fi'
 
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
-import { Breakpoint, Colors } from '../../variables'
+import { Breakpoint } from '../../variables'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
 import { CheckStatus, Loading } from '../../components/helpers'
@@ -37,6 +35,12 @@ const TopContainer = styled.div<TopContainerProps>`
         @media (min-width: ${Breakpoint.mobileSmall}) {
             width: 12rem;
             height: 12rem;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 
@@ -122,6 +126,7 @@ const BottomContainer = styled.div<TopContainerProps>`
     }
 `
 
+/* eslint-disable @next/next/no-img-element */
 const Account: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
@@ -134,13 +139,12 @@ const Account: NextPage = () => {
                 <Container>
                     <TopContainer theme={themes[theme]}>
                         <div>
-                            <Image
+                            <img
                                 src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
                                 alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
-                                layout='intrinsic'
                                 width={192}
                                 height={192}
-                                objectFit={'cover'} />
+                            />
                         </div>
 
                         <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 import { Breakpoint, Transition } from '../../variables'
 import useStore, { useAccent, useAuth, useMenu } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
 import { Tooltip } from '../helpers'
 import { Routes } from '../../constants'
@@ -178,7 +178,7 @@ const Collapse = styled.button<CollapseProps>`
 
 const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) => {
     const router = useRouter()
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const menu = useMenu((s: any) => s.menu)
     const setMenu = useMenu((s: any) => s.setMenu)
@@ -211,7 +211,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
                 <li>
-                    <LinkButton onClick={handleAuth} open={isOpen} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                    <LinkButton onClick={handleAuth} open={isOpen} theme={themes[theme]} accent={accentColors[accent][theme]}>
                         {/* <IoSettingsOutline fontSize={18}/> */}
                         <IoPowerOutline fontSize={16}/>
                         
@@ -223,7 +223,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
 
                 <li>
                     <Link href={Routes.CONFIGURATION} passHref>
-                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
                             {/* <IoPowerOutline fontSize={18}/> */}
                             <IoSettingsOutline fontSize={16}/>
 
@@ -236,8 +236,8 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             </NavigationContainer>
 
             <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]} disabled={width > 992 ? false : true}>
-                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].textSec + "4D"}/>
-                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent as keyof typeof accentColors][theme] : themes[theme].textSec + "4D"}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent][theme] : themes[theme].textSec + "4D"}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent][theme] : themes[theme].textSec + "4D"}/>
             </Collapse>
         </Container>
     )

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 
 import useStore, { useAccent, useMenu } from '../../store';
-import themes, { accentColors, Theme } from '../../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Colors, Transition } from '../../variables';
 
 interface TooltipProps {
@@ -55,11 +55,11 @@ const Container = styled.div<ContainerProps>`
 
 const Tooltip: NextPage<TooltipProps> = ({ title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const menu = useMenu((s: any) => s.menu);
 
     return (
-        <Container theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} isOpen={menu}>
+        <Container theme={themes[theme]} accent={accentColors[accent][theme]} isOpen={menu}>
             <p>{ title }</p>
         </Container>
     )

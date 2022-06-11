@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 
 import useStore, { useAccent } from '../../store';
-import { accentColors, Theme } from '../../ThemeConfig';
+import { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Colors } from '../../variables';
 
 const Container = styled.div`
@@ -77,8 +77,8 @@ const AnimationSubContainer = styled.div<SubContainerProps>`
 
 const Loading: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
-    const color = accentColors[accent as keyof typeof accentColors][theme];
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const color = accentColors[accent][theme];
 
     return (
         <Container>

@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { Routes } from "../../constants";
 import useStore, { useAccent, useAuth } from "../../store";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Transition } from "../../variables";
 import { LinkText } from "./MobileNavigation";
 
@@ -70,8 +70,8 @@ const LinkButton = styled.button<LinkButtonProps>`
 
 const MobileSubNavigation: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
-    const accentColor = accentColors[accent as keyof typeof accentColors][theme];
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const accentColor = accentColors[accent][theme];
     const router = useRouter();
 
     const setAuth = useAuth((s: any) => s.setAuth)

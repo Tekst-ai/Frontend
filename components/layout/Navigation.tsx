@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import { Colors, Transition } from '../../variables';
 import useStore, { useAccent } from '../../store';
-import themes, { accentColors, Theme } from '../../ThemeConfig';
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
 import { Routes } from '../../constants';
 
@@ -128,7 +128,7 @@ const LinkText = styled.a<LinkTextProps>`
 
 const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
     const router = useRouter();
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
@@ -136,7 +136,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
             <NavigationList isOpen={isOpen}>
                 <li>
                     <Link href={Routes.DASHBOARD} passHref>
-                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
                             {/* <FiHome fontSize={18} strokeWidth={2.5}/> */}
                             <FiHome fontSize={18} strokeWidth={2.5}/>
 
@@ -150,7 +150,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={Routes.STATISTICS} passHref>
-                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
                             {/* <FiBarChart2 fontSize={20} strokeWidth={3}/> */}
                             <FiBarChart2 fontSize={18} strokeWidth={3}/>
 
@@ -163,7 +163,7 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
 
                 <li>
                     <Link href={Routes.CATEGORIES} passHref>
-                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]} open={isOpen}>
+                        <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
                             {/* <FiGrid fontSize={20} strokeWidth={2.25}/> */}
                             <FiGrid fontSize={18} strokeWidth={2.25}/>
 

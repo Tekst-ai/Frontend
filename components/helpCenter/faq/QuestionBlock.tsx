@@ -4,7 +4,7 @@ import { FiPlus, FiMinus } from 'react-icons/fi'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../../store'
-import themes, { accentColors, Theme } from '../../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
 import { Breakpoint, Transition } from '../../../variables'
 
 interface QuestionBlockProps {
@@ -102,7 +102,7 @@ const Answer = styled.button<AnswerProps>`
 
 const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
 
     const [open, setOpen] = useState(false)
 
@@ -117,8 +117,8 @@ const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {
                     <p>{ question }</p>
 
                     { open ?
-                        <FiMinus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors][theme]}/>:
-                        <FiPlus fontSize={22} strokeWidth={2.5} color={accentColors[accent as keyof typeof accentColors][theme]}/>
+                        <FiMinus fontSize={22} strokeWidth={2.5} color={accentColors[accent][theme]}/>:
+                        <FiPlus fontSize={22} strokeWidth={2.5} color={accentColors[accent][theme]}/>
                     }
                 </div>
 

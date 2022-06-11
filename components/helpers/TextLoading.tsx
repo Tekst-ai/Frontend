@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 
 interface TextLoadingProps {
     width: number,
@@ -45,10 +45,10 @@ const Container = styled.span<ContainerProps>`
 
 const TextLoading: NextPage<TextLoadingProps> = ({ width, height }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     return (
-        <Container width={width} height={height} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors][theme]}/>
+        <Container width={width} height={height} theme={themes[theme]} accent={accentColors[accent][theme]}/>
     )
 }
 

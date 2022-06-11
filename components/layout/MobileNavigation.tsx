@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import { Routes } from "../../constants";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Colors, Transition } from "../../variables";
 import useStore, { useAccent } from "../../store";
 
@@ -48,8 +48,8 @@ const LinkTextHelp = styled(LinkText)`
 
 const MobileNavigation: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
-    const accentColor = accentColors[accent as keyof typeof accentColors][theme];
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const accentColor = accentColors[accent][theme];
     const router = useRouter();
     
     return (

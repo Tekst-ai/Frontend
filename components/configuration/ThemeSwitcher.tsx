@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
-import { accentColors, Theme } from '../../ThemeConfig'
+import { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Transition } from '../../variables'
 import ThemeItem from './ThemeItem'
 
@@ -43,7 +43,7 @@ const ThemeContainer = styled.label<ThemeContainerProps>`
 const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const store = useStore((s: any) => s.setTheme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
@@ -53,7 +53,7 @@ const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     }
 
     return (
-        <ThemeContainer htmlFor={id} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+        <ThemeContainer htmlFor={id} accent={accentColors[accent][theme]}>
             <input type="radio" id={id} value={id} name="modeSelector" checked={theme === id ? true : false} onChange={handleChange}/>
 
             <ThemeItem theme={id}/>

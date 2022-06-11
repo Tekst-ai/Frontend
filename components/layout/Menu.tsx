@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -9,7 +8,7 @@ import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
 
 import useStore, { useAccent, useMenu } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Transition } from '../../variables'
 import { TextLoading, Tooltip } from '../helpers'
 import BottomNavigation from './BottomNavigation'
@@ -83,6 +82,12 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         border-radius: 8px;
         overflow: hidden;
         transition: ${Transition.fast};
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     div:last-of-type {
@@ -107,10 +112,10 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         }
     }
 `
-
+/* eslint-disable @next/next/no-img-element */
 const Menu: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const router = useRouter();
     const menu = useMenu((s: any) => s.menu);
     
@@ -126,21 +131,25 @@ const Menu: NextPage = () => {
         <Container isOpen={isOpen}>
             <Link href={Routes.DASHBOARD} passHref>
                 <ImageContainer isOpen={isOpen}>
-                    <Image
-                        src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
-                        // src={"/static/images/logo-no-text.png"} 
-                        width={isOpen ? 75 : 31}
-                        // width={31}
-                        height={41}
-                        alt="Logo of Tekst.ai"/>
+                        <img
+                            src={theme === "dark" && isOpen ? "/static/images/logo-white.png" : theme === "light" && isOpen ? "/static/images/logo-black.png" : "/static/images/logo-no-text.png"} 
+                            alt="Logo of Tekst.ai"
+                            width={isOpen ? 75 : 31}
+                            height={41}
+                        />
                 </ImageContainer>
             </Link>
 
             <TooltipContainer>
                 <Link href={Routes.PROFILE} passHref>
-                    <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent as keyof typeof accentColors][theme]}>
+                    <ProfileContainer pathName={router.pathname} theme={themes[theme]} isOpen={isOpen} accent={accentColors[accent][theme]}>
                         <div>
-                            <Image src={ (!isLoading && !isError) ? data.img : '/static/images/profile.jpg' } alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" } layout='intrinsic' width={50} height={50} objectFit={'cover'} />
+                            <img
+                                src={ (!isLoading && !isError) ? data.img : '/static/images/profile.jpg' }
+                                alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
+                                width={50}
+                                height={50}
+                            />
                         </div>
 
                         <div>
