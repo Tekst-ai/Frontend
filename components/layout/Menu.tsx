@@ -98,7 +98,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         opacity: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? 1 : 0 };
         white-space: nowrap;
         height: 100%;
-        width: 100%;
+        width: 8rem;
         
         p {
             transition: ${Transition.fast};
@@ -153,9 +153,9 @@ const Menu: NextPage = () => {
                         </div>
 
                         <div>
-                            <p>{ isLoading ? <TextLoading width={60} height={1.4125}/> : (!isLoading && !isError) && data.firstName }</p>
+                            <p>{ isLoading ? <TextLoading width={80} height={1.4125}/> : (!isLoading && !isError) && data.firstName }</p>
 
-                            <p>{ isLoading ? <TextLoading width={40} height={1.4125}/> : (!isLoading && !isError) && data.company }</p>
+                            <p>{ isLoading ? <TextLoading width={60} height={1.4125}/> : (!isLoading && !isError) && data.company }</p>
                         </div>
                     </ProfileContainer>
                 </Link>

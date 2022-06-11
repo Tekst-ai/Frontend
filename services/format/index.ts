@@ -7,10 +7,8 @@ export const BigNumberFormat = (number: number) => {
     return newFormat;
 }
 
-// export const truncateString = (str: string, num: number) => {
-//     if (str.length <= num) {
-//         return str
-//     }
-
-//     return str.slice(0, num) + "..."
-// }
+export const BigNumberFormatLong = (number: number) => {
+    const format = new Intl.NumberFormat('en-US').format(number);
+    const newFormat = format.replace(",", " ");
+    return newFormat;
+}
