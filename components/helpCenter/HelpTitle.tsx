@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
+import { Breakpoint } from '../../variables'
 
 interface HelpTitleProps {
     title: string,
@@ -14,16 +15,33 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-    padding-left: 3rem;
-    padding-right: 3rem;
     margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;
     max-width: 60rem;
+    
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         margin-bottom: 0.625rem;
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            font-size: 2.5rem;
+        }
     }
 
     p {

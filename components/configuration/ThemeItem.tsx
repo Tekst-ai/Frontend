@@ -2,11 +2,13 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { FiCheck } from 'react-icons/fi'
 
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
+import { Breakpoint, Colors, Transition } from '../../variables'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 interface ThemeItemProps {
-    theme: string,
+    theme: keyof Theme,
 }
 
 interface ThemeItemContainerProps {
@@ -17,35 +19,49 @@ interface ThemeItemContainerProps {
 const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
     background: ${({ theme }) => themes[theme as keyof typeof themes].background};
     border: 2px solid ${({ store }) => store.backgroundSec};
-    width: 8rem;
+    width: 4.5rem;
     height: 8rem;
     border-radius: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     position: relative;
     display: flex;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        width: 8rem;
+    }
 `
 
 interface NavigationList {
     theme: string,
-    accent: any
+    accent: string
 }
 
 const NavigationList = styled.ul<NavigationList>`
-    padding: 1rem 0.5rem;
     display: flex;
     flex-direction: column;
     width: auto;
 
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: 1rem 0.5rem;
+    }
+    
     li {
-        width: 1.8rem;
-        height: 0.375rem;
-        background: ${({ theme }) => themes[theme as keyof typeof themes].text};
+        background: ${({ theme }) => themes[theme as keyof typeof themes].textSec};
         margin-bottom: 0.5rem;
         border-radius: 2px;
-        transition: all 0.3s ease-in-out;
-
+        transition: ${Transition.fast};
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            width: 0.375rem;
+            height: 0.375rem;
+        }
+        
+        @media (min-width: ${Breakpoint.tablet}) {
+            width: 1.8rem;
+        }
+        
         &:first-of-type {
-            background: ${({ accent }) => accent.color};
+            background: ${({ accent }) => accent};
         }
     }
 `
@@ -58,12 +74,18 @@ const Content = styled.div<ContentProps>`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100% - 1rem);
     background: ${({ theme }) => themes[theme as keyof typeof themes].backgroundSec};
-    margin: 0.5rem 0.5rem 0.5rem 0;
+    margin: 0.375rem;
     border-radius: 5px;
-    padding: 0.625rem 0.75rem;
-
+    padding: 0.5rem;
+    margin-bottom: 0.875rem;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding: 0.625rem 0.75rem;
+        margin: 0.5rem;
+        margin-left: 0;
+    }
+    
     span {
         background: ${({ theme }) => themes[theme as keyof typeof themes].background};
         border-radius: 5px;
@@ -72,17 +94,25 @@ const Content = styled.div<ContentProps>`
             width: 100%;
             height: 40%;
             margin: 0;
-            margin-bottom: 0.625rem;
+            margin-bottom: 0.5rem;
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                margin-bottom: 0.625rem;
+            }
         }
         
         &:last-of-type {
             width: 100%;
             height: 20%;
             margin: 0;
-            margin-top: 0.625rem;
+            margin-top: 0.5rem;
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                margin-top: 0.625rem;
+            }
         }
     }
-
+    
     div {
         width: 100%;
         height: 40%;
@@ -92,7 +122,11 @@ const Content = styled.div<ContentProps>`
             width: 60%;
             height: 100%;
             margin: 0;
-            margin-right: 0.625rem;
+            margin-right: 0.5rem;
+
+            @media (min-width: ${Breakpoint.mobile}) {
+                margin-right: 0.625rem;
+            }
         }
 
         span:last-of-type {
@@ -104,11 +138,11 @@ const Content = styled.div<ContentProps>`
 `
 
 interface IconContainerProps {
-    accent: any
+    accent: string
 }
 
 const IconContainer = styled.div<IconContainerProps>`
-    background: ${({ accent }) => accent.color};
+    background: ${({ accent }) => accent};
     position: absolute;
     width: 1.25rem;
     height: 1.25rem;
@@ -118,7 +152,7 @@ const IconContainer = styled.div<IconContainerProps>`
     border-radius: 50%;
     bottom: 10px;
     left: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     opacity: 0;
     
     input:checked + div & {
@@ -128,11 +162,13 @@ const IconContainer = styled.div<IconContainerProps>`
 
 const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
     const store: keyof Theme = useStore((s: any) => s.theme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+
+    const { width } = useWindowDimensions();
 
     return (
         <ThemeItemContainer theme={theme} store={themes[store]}>
-            <NavigationList theme={theme} accent={accentColors[accent as keyof typeof accentColors]}>
+            <NavigationList theme={theme} accent={accentColors[accent][theme]}>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -149,8 +185,8 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
                 <span></span>
             </Content>
 
-            <IconContainer accent={accentColors[accent as keyof typeof accentColors]}>
-                <FiCheck strokeWidth={3} fontSize={14} color={accentColors[accent as keyof typeof accentColors].text}/>
+            <IconContainer accent={accentColors[accent][store]}>
+                <FiCheck strokeWidth={3} fontSize={14} color={Colors.textWhite}/>
             </IconContainer>
         </ThemeItemContainer>
     )

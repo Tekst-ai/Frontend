@@ -2,16 +2,17 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 
 import useStore, { useAccent } from '../../store'
-import { accentColors } from '../../ThemeConfig'
+import { Accent, accentColors, Theme } from '../../ThemeConfig'
+import { Transition } from '../../variables'
 import ThemeItem from './ThemeItem'
 
 interface ThemeSwitcherProps {
-    id: string,
+    id: keyof Theme,
     value: string
 }
 
 interface ThemeContainerProps {
-    accent: any
+    accent: string
 }
 
 const ThemeContainer = styled.label<ThemeContainerProps>`
@@ -24,9 +25,9 @@ const ThemeContainer = styled.label<ThemeContainerProps>`
         appearance: none;
 
         &:checked + div {
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 3px 10px ${({ accent }: any ) => accent.color + "80"};
-            border: 2px solid ${({ accent }: any ) => accent.color};
+            transition: ${Transition.fast};
+            box-shadow: 0 3px 10px ${({ accent }: any ) => accent + "80"};
+            border: 2px solid ${({ accent }: any ) => accent};
         }
     }
 
@@ -40,9 +41,9 @@ const ThemeContainer = styled.label<ThemeContainerProps>`
 `
 
 const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
-    const theme = useStore((s: any) => s.theme);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
     const store = useStore((s: any) => s.setTheme);
-    const accent = useAccent((s: any) => s.accent);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const handleChange = (e: any) => {
         if (e.currentTarget.value) {
@@ -52,7 +53,7 @@ const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     }
 
     return (
-        <ThemeContainer htmlFor={id} accent={accentColors[accent as keyof typeof accentColors]}>
+        <ThemeContainer htmlFor={id} accent={accentColors[accent][theme]}>
             <input type="radio" id={id} value={id} name="modeSelector" checked={theme === id ? true : false} onChange={handleChange}/>
 
             <ThemeItem theme={id}/>

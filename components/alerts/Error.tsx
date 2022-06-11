@@ -2,8 +2,9 @@ import type { NextPage } from 'next'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { FiAlertTriangle, FiChevronDown } from 'react-icons/fi'
+
 import themes, { Theme } from '../../ThemeConfig'
-import { Colors } from '../../variables'
+import { Breakpoint, Colors, Transition } from '../../variables'
 import useStore from '../../store'
 
 interface ErrorProps {
@@ -16,11 +17,24 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-    padding-left: ${({ padding }) => padding}rem;
-    padding-right: ${({ padding }) => padding}rem;
     max-width: 60rem;
     margin-left: auto;
     margin-right: auto;
+    
+    @media (min-width: ${Breakpoint.mobileSmall}) {
+        padding-left: ${({ padding }) => padding}rem;
+        padding-right: ${({ padding }) => padding}rem;
+    }
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        padding-left: ${({ padding }) => padding * 2}rem;
+        padding-right: ${({ padding }) => padding * 2}rem;
+    }
+
+    @media (min-width: ${Breakpoint.tablet}) {
+        padding-left: ${({ padding }) => padding * 3}rem;
+        padding-right: ${({ padding }) => padding * 3}rem;
+    }
 `
 
 interface SubContainerProps {
@@ -42,25 +56,40 @@ const SubContainer = styled.div<SubContainerProps>`
         align-items: center;
         width: 100%;
 
-        p {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-left: 1.5rem;
+        & > svg {
+            font-size: 1.375rem;
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                font-size: 1.75rem;
+            }
         }
-
+        
+        p {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-left: 1.25rem;
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                font-size: 1.125rem;
+            }
+        }
     }
     
     button {
-        margin-top: 0.5rem;
-        margin-left: 1.5rem;
+        margin-top: 0.375rem;
+        margin-left: 1.25rem;
         color: ${Colors.error};
         font-weight: 500;
         font-size: 0.75rem;
         display: flex;
         align-items: center;
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            margin-top: 0.5rem;
+        }
 
         svg {
-            transition: all 0.2s ease-in-out;
+            transition: ${Transition.fast};
             margin-left: 0.2rem;
             transform: ${({ open }) => !open ? "rotate(0)" : "rotate(180deg)"};
         }

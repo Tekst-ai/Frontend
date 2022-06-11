@@ -4,10 +4,13 @@ import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-i
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Colors } from '../../variables'
-import useStore, { useAccent, useMenu } from '../../store'
-import themes, { accentColors, Theme } from '../../ThemeConfig'
+import { Breakpoint, Transition } from '../../variables'
+import useStore, { useAccent, useAuth, useMenu } from '../../store'
+import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { useEffect, useState } from 'react'
+import { Tooltip } from '../helpers'
+import { Routes } from '../../constants'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 interface BottomNavigationProps {
     isOpen: boolean,
@@ -22,8 +25,8 @@ const Container = styled.div<ContainerProps>`
     margin-top: auto;
     display: flex;
     justify-content: space-between;
-    padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0 0.5rem"};
-    transition: all 0.3s ease-in-out;
+    padding: ${(ContainerProps) => ContainerProps.isOpen ? "0 1rem" : "0"};
+    transition: ${Transition.fast};
     position: relative;
 `
 
@@ -31,60 +34,99 @@ interface NavigationContainerProps {
     isOpen: boolean
 }
 
-const NavigationContainer = styled.div<NavigationContainerProps>`
-    a {
-        display: flex;
-        transition: all 0.3s ease-in-out;
-        /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 1.25rem;
-        margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.45rem"};
+const NavigationContainer = styled.ul<NavigationContainerProps>`
+    li {
+        margin-bottom: 1.2rem;
         position: relative;
-        /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
-        
-        svg {
-            transition: all 0.3s ease-in-out;
+        z-index: 2;
+        display: flex;
+        transition: ${Transition.fast};
 
-            path {
-                stroke-width: 50px
+        a, button {
+            display: flex;
+            transition: ${Transition.fast};
+            /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
+            justify-content: flex-start;
+            align-items: center;
+            /* margin-bottom: 1.25rem; */
+            margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.95rem"};
+            position: relative;
+            /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
+            z-index: 3;
+
+            svg {
+                transition: ${Transition.fast};
+    
+                path {
+                    stroke-width: 50px
+                }
             }
-        }
-
-        span {
-            font-size: 1.125rem;
-            font-weight: 500;
-            transition: all 0.3s ease-in-out;
-            opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
-            position: absolute;
-            left: 2.25rem
+    
+            span {
+                /* font-size: 1.125rem; */
+                font-size: 1rem;
+                font-weight: 500;
+                transition: ${Transition.superFast};
+                opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
+                position: absolute;
+                left: 2.25rem
+            }
+    
+            
         }
 
         &:first-of-type {
-            svg {
-                path{
-                    stroke-width: 65px;
+            button {
+                svg {
+                    path{
+                        /* stroke-width: 65px; */
+                        stroke-width: 60px;
+                    }
                 }
             }
         }
 
         &:last-of-type {
-            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"};
+            /* margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"}; */
+            margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.35rem"};
         }
     }
 `
 
 interface LinkTextProps {
     pathName: string,
-    accent: any,
-    theme: any
+    accent: string,
+    theme: any,
+    open: boolean,
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.textSec};
+    color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.textSec};
     
+    span {
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
+    }
+
     &:hover {
-        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent.color : ({ theme }) => theme.text};
+        color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.text};
+    }
+`
+
+interface LinkButtonProps {
+    accent: string,
+    theme: any,
+    open: boolean,
+}
+
+const LinkButton = styled.button<LinkButtonProps>`
+    color: ${({ theme }) => theme.textSec};
+
+    span {
+        pointer-events: ${(LinkTextProps) => LinkTextProps.open ? "auto" : "none"};
+    }
+
+    &:hover {
+        color: ${({ theme }) => theme.text};
     }
 `
 
@@ -95,7 +137,7 @@ interface CollapseProps {
 
 const Collapse = styled.button<CollapseProps>`
     margin-top: auto;
-    transition: all 0.3s ease-in-out;
+    transition: ${Transition.fast};
     display: flex;
     padding: 0.34375rem 0;
     border-radius: 5px;
@@ -103,13 +145,22 @@ const Collapse = styled.button<CollapseProps>`
     position: absolute;
     right: ${(CollapseProps) => CollapseProps.isOpen ? 0 : "0.45rem"};
     bottom: -4px;
+    box-shadow: 0 1px 4px ${({ theme }) => theme.background};
+    cursor: default;
+    
+    @media (min-width: ${Breakpoint.tablet}) {
+        cursor: pointer;
+    }
 
     &:hover {
-        background: ${({ theme }) => theme.lineLight};
+        @media (min-width: ${Breakpoint.tablet}) {
+            background: ${({ theme }) => theme.backgroundSec};
+            box-shadow: 0 1px 4px ${({ theme }) => theme.boxShadow};
+        }
     }
     
     svg {
-        transition: all 0.3s ease-in-out;
+        transition: ${Transition.fast};
 
         path {
             stroke-width: 70px;
@@ -127,46 +178,66 @@ const Collapse = styled.button<CollapseProps>`
 
 const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) => {
     const router = useRouter()
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
     const menu = useMenu((s: any) => s.menu)
     const setMenu = useMenu((s: any) => s.setMenu)
+    const { width } = useWindowDimensions()
 
     const [open, setOpen] = useState(false)
-
+    
     const handleClick = () => {
-        setOpen(!open)
-        localStorage.setItem("open menu", open.toString())
-        setMenu(!menu)
+        setOpen(!open);
+        localStorage.setItem("menu", open.toString());
+        setMenu(!menu);
     }
-
+    
     useEffect(() => {
-        onOpen(!open)
-    }, [open, onOpen])
+        if (width < 992) {
+            onOpen(false)
+        } else {
+            onOpen(!open);
+        }
+    }, [open, onOpen, width])
+    
+    const setAuth = useAuth((s: any) => s.setAuth)
+    const handleAuth = () => {
+        setAuth(false)
+        localStorage.setItem("auth", String(false))
+        router.push(Routes.LOGIN)
+    }
 
     return (
         <Container isOpen={isOpen}>
             <NavigationContainer isOpen={isOpen}>
-                <Link href={"/login"} passHref>
-                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        <IoPowerOutline fontSize={18}/>
-
-                        <span>Afmelden</span>
-                    </LinkText>
-                </Link>
-
-                <Link href={"/configuration"} passHref>
-                    <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent as keyof typeof accentColors]}>
-                        <IoSettingsOutline fontSize={18}/>
+                <li>
+                    <LinkButton onClick={handleAuth} open={isOpen} theme={themes[theme]} accent={accentColors[accent][theme]}>
+                        {/* <IoSettingsOutline fontSize={18}/> */}
+                        <IoPowerOutline fontSize={16}/>
                         
-                        <span>Configuratie</span>
-                    </LinkText>
-                </Link>
+                        <span>Afmelden</span>
+                    </LinkButton>
+
+                    <Tooltip title="Afmelden"/>
+                </li>
+
+                <li>
+                    <Link href={Routes.CONFIGURATION} passHref>
+                        <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
+                            {/* <IoPowerOutline fontSize={18}/> */}
+                            <IoSettingsOutline fontSize={16}/>
+
+                            <span>Configuratie</span>
+                        </LinkText>
+                    </Link>
+
+                    <Tooltip title="Configuratie"/>
+                </li>
             </NavigationContainer>
 
-            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]}>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
-                <IoChevronBackOutline fontSize={16} color={accentColors[accent as keyof typeof accentColors].color}/>
+            <Collapse isOpen={isOpen} onClick={handleClick} theme={themes[theme]} disabled={width > 992 ? false : true}>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent][theme] : themes[theme].textSec + "4D"}/>
+                <IoChevronBackOutline fontSize={16} color={width > 992 ? accentColors[accent][theme] : themes[theme].textSec + "4D"}/>
             </Collapse>
         </Container>
     )

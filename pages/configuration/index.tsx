@@ -1,27 +1,45 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
-import { Colors } from '../../variables'
+import { Breakpoint } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
+import themes, { Theme } from '../../ThemeConfig'
+import useStore from '../../store'
 
-export const TitleContainer = styled.div`
-    margin-bottom: 2.5rem;
+interface TitleContainerProps {
+    theme: keyof Theme
+}
 
+export const TitleContainer = styled.div<TitleContainerProps>`
+    margin-bottom: 1.75rem;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-bottom: 2rem;
+    }
+    
     p {
         margin-top: 0.625rem;
-        color: ${Colors.textGrey};
+        color: ${({ theme }) => theme.textSec}!important;
     }
 `
 
 const SubContainer = styled.div`
-    margin-bottom: 2.5rem;
-
+    margin-bottom: 1.5rem;
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-bottom: 2.5rem;
+    }
+    
     &:last-of-type {
         margin-bottom: 0;
     }
     
     h2 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+
+        @media (min-width: ${Breakpoint.mobile}) {
+            margin-bottom: 1.5rem;
+        }
     }
 
     form {
@@ -30,9 +48,11 @@ const SubContainer = styled.div`
 `
 
 const Configuration: NextPage = () => {
+    const theme: keyof Theme = useStore((s: any) => s.theme)
+
     return (
         <div>
-            <TitleContainer>
+            <TitleContainer theme={themes[theme]}>
                 <h1>Configuratie</h1>
 
                 <p>Kies een accent kleur of verander het thema</p>
@@ -52,7 +72,7 @@ const Configuration: NextPage = () => {
 
                     <ThemeSwitcher id="light" value="licht"/>
 
-                    <ThemeSwitcher id="auto" value="automatisch"/>
+                    {/* <ThemeSwitcher id="auto" value="automatisch"/> */}
                 </form>
             </SubContainer>
         </div>

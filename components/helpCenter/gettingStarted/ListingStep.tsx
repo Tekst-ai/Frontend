@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useStore, { useAccent } from '../../../store'
-import themes, { accentColors, Theme } from '../../../ThemeConfig'
+import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
+import { Breakpoint, Colors } from '../../../variables'
 
 interface ListingStepProps {
     step: number,
@@ -9,12 +10,7 @@ interface ListingStepProps {
     text: string
 }
 
-interface ContainerProps {
-    accent: any,
-    theme: any
-}
-
-const Container = styled.li<ContainerProps>`
+const Container = styled.li`
     display: flex;
     position: relative;
     margin-bottom: 3rem;
@@ -34,13 +30,16 @@ interface ContainerContentProps {
 }
 
 const ContainerContent = styled.div<ContainerContentProps>`
-    margin-left: 4rem;
+    margin-left: 2rem;
     width: calc(100% - 1.75rem);
+    
+    @media (min-width: ${Breakpoint.mobile}) {
+        margin-left: 3rem;
+    }
 
     h3 {
         margin-top: 0;
         margin-bottom: 0.5rem;
-
     }
 
     p {
@@ -50,52 +49,65 @@ const ContainerContent = styled.div<ContainerContentProps>`
 
 interface StepProps {
     theme: any,
-    accent: any,
+    accent: string,
 }
 
 const Step = styled.div<StepProps>`
     position: relative;
 
     div {
-        background: ${({ accent }) => accent.color};
-        color: ${({ accent }) => accent.text};
-        width: 1.75rem;
-        height: 1.75rem;
+        background: ${({ accent }) => accent};
+        color: ${Colors.textWhite};
+        width: 1.5rem;
+        height: 1.5rem;
         position: relative;
         border-radius: 50%;
         box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
-
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+        
         span {
-            font-size: 1.125rem;
-            color: ${({ accent }) => accent.text};
+            font-size: 0.875rem;
+            color: ${Colors.textWhite};
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            
+            @media (min-width: ${Breakpoint.mobile}) {
+                font-size: 1.125rem;
+            }
         }
     }
 
     &::after {
         content: '';
-        width: 4px;
-        background: ${({ accent }) => accent.color + "66"};
+        width: 3px;
+        background: ${({ accent }) => accent + "66"};
         position: absolute;
-        top: calc(1.75rem + 8px);
+        top: calc(1.5rem + 8px);
         bottom: calc((3rem * -1) + 8px);
         left: 50%;
         right: 0;
         transform: translateX(-50%);
         box-shadow: 0 3px 6px ${({ theme }) => theme.boxShadow};
+        
+        @media (min-width: ${Breakpoint.mobile}) {
+            top: calc(1.75rem + 8px);
+        }
     }
 `
 
 const ListingStep: NextPage<ListingStepProps> = ({ step, title, text }) => {
-    const accent = useAccent((s: any) => s.accent)
+    const accent: keyof Accent = useAccent((s: any) => s.accent)
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     return (
-        <Container theme={themes[theme]} accent={accentColors[accent as  keyof typeof accentColors]}>
-            <Step theme={themes[theme]} accent={accentColors[accent as  keyof typeof accentColors]}>
+        <Container>
+            <Step theme={themes[theme]} accent={accentColors[accent][theme]}>
                 <div>
                     <span>{step}</span>
                 </div>
