@@ -5,12 +5,9 @@ import { Breakpoint } from '../../variables'
 import { AccentSwitcher, ThemeSwitcher } from '../../components/configuration'
 import themes, { Theme } from '../../ThemeConfig'
 import useStore from '../../store'
+import { ThemeStylingProps } from '../../interfaces/Styling'
 
-interface TitleContainerProps {
-    theme: keyof Theme
-}
-
-export const TitleContainer = styled.div<TitleContainerProps>`
+export const TitleContainer = styled.div<ThemeStylingProps>`
     margin-bottom: 1.75rem;
     
     @media (min-width: ${Breakpoint.mobile}) {

@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 
+import { AccentStylingProps, ThemeStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
@@ -12,11 +13,7 @@ interface CategoryListProps {
     data: any,
 }
 
-interface ContainerProps {
-    theme: any,
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<ThemeStylingProps>`
     width: 100%;
     background: ${({ theme }) => theme.background};
     border-radius: 10px;
@@ -25,11 +22,7 @@ const Container = styled.div<ContainerProps>`
     padding-bottom: 0.25rem;
 `
 
-interface TableProps {
-    accent: string
-}
-
-const Table = styled.table<TableProps>`
+const Table = styled.table<AccentStylingProps>`
     width: 100%;
     border-collapse: collapse;
 

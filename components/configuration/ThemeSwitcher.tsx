@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { AccentStylingProps } from '../../interfaces/Styling'
 
 import useStore, { useAccent } from '../../store'
 import { Accent, accentColors, Theme } from '../../ThemeConfig'
@@ -11,11 +12,7 @@ interface ThemeSwitcherProps {
     value: string
 }
 
-interface ThemeContainerProps {
-    accent: string
-}
-
-const ThemeContainer = styled.label<ThemeContainerProps>`
+const ThemeContainer = styled.label<AccentStylingProps>`
     display: flex;
     flex-direction: column;
     margin-right: 1.5rem;

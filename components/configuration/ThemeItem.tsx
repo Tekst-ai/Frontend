@@ -6,6 +6,7 @@ import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { Breakpoint, Colors, Transition } from '../../variables'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { AccentStylingProps } from '../../interfaces/Styling'
 
 interface ThemeItemProps {
     theme: keyof Theme,
@@ -137,11 +138,7 @@ const Content = styled.div<ContentProps>`
     }
 `
 
-interface IconContainerProps {
-    accent: string
-}
-
-const IconContainer = styled.div<IconContainerProps>`
+const IconContainer = styled.div<AccentStylingProps>`
     background: ${({ accent }) => accent};
     position: absolute;
     width: 1.25rem;

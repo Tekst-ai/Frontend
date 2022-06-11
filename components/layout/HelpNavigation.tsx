@@ -17,7 +17,7 @@ interface HelpNavigationProps {
 
 interface HelpNavigationListProps {
     isOpen: boolean,
-    theme: any
+    theme: keyof Theme
 }
 
 const Container = styled.div<HelpNavigationListProps>`
@@ -67,7 +67,7 @@ const Container = styled.div<HelpNavigationListProps>`
 interface LinkTextProps {
     pathName: string,
     accent: string,
-    theme: any
+    theme: keyof Theme
     open: boolean
 }
 
@@ -88,8 +88,6 @@ const LinkText = styled.a<LinkTextProps>`
 
 interface SubNavigationProps {
     isOpen: boolean,
-    accent: any,
-    theme: any
 }
 
 const SubNavigation = styled.ul<SubNavigationProps>`
@@ -149,7 +147,7 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
 
             {
                 router.pathname.includes(Routes.HELPCENTER) &&
-                <SubNavigation isOpen={isOpen} theme={themes[theme]} accent={accentColors[accent]}>
+                <SubNavigation isOpen={isOpen}>
                     <li>
                         <Link href={Routes.GETTINGSTARTED} passHref>
                             <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>

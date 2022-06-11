@@ -10,12 +10,9 @@ import MobileNavigation from './MobileNavigation';
 import MobileSubNavigation from './MobileSubNavigation';
 import { useRouter } from 'next/router';
 import { Routes } from '../../constants';
+import { ThemeStylingProps } from '../../interfaces/Styling';
 
-interface ContainerProps {
-    theme: keyof Theme
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<ThemeStylingProps>`
     display: block;
     width: 100%;
     position: fixed;
@@ -45,11 +42,7 @@ const NavigationList = styled.ul`
     }
 `
 
-interface SubNavButtonProps {
-    theme: keyof Theme,
-}
-
-const SubNavButton = styled.button<SubNavButtonProps>`
+const SubNavButton = styled.button<ThemeStylingProps>`
     width: 100%;
     display: flex;
     justify-content: center;

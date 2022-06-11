@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
+import { ThemeStylingProps } from '../../interfaces/Styling'
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 
@@ -8,11 +9,7 @@ interface InfoProps {
     message: string
 }
 
-interface ContainerProps {
-    theme: keyof Theme
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<ThemeStylingProps>`
     width: 100%;
     text-align: center;
     margin-top: 2rem;

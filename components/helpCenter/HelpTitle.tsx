@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
+import { ThemeStylingProps } from '../../interfaces/Styling'
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
@@ -10,11 +11,7 @@ interface HelpTitleProps {
     text: string
 }
 
-interface ContainerProps {
-    theme: any
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<ThemeStylingProps>`
     margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;

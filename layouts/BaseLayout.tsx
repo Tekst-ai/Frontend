@@ -41,7 +41,7 @@ const Container = styled.div`
 `
 
 interface MainProps {
-    theme: any,
+    theme: keyof Theme,
     menu: boolean,
     height: number,
 }
@@ -69,7 +69,7 @@ const Main = styled.main<MainProps>`
 `
 
 interface SubContainerProps {
-    theme: any,
+    theme: keyof Theme,
     height: number,
     pathName: string
 }

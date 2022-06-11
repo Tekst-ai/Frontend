@@ -1,14 +1,11 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { AccentStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Colors } from '../../variables'
 
-interface ContainerProps {
-    accent: string,
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<AccentStylingProps>`
     background: linear-gradient(90deg, ${({ accent }) => accent} 0%, ${Colors.secondary} 100%);
     position: absolute;
     top: -3.5rem;

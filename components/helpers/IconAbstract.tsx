@@ -1,15 +1,12 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
+import { ThemeStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Colors } from '../../variables'
 
-interface IconProps {
-    theme: any
-}
-
-const Icon = styled.svg<IconProps>`
+const Icon = styled.svg<ThemeStylingProps>`
     position: absolute;
     top: 0;
     left: 50%;

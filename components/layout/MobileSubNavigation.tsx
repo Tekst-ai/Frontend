@@ -5,6 +5,7 @@ import { IoPowerOutline, IoSettingsOutline } from 'react-icons/io5'
 import styled from "styled-components";
 
 import { Routes } from "../../constants";
+import { ThemeStylingProps } from "../../interfaces/Styling";
 import useStore, { useAccent, useAuth } from "../../store";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Transition } from "../../variables";
@@ -39,11 +40,7 @@ const LinkTextSub = styled(LinkText)`
     }
 `
 
-interface LinkButtonProps {
-    theme: keyof Theme
-}
-
-const LinkButton = styled.button<LinkButtonProps>`
+const LinkButton = styled.button<ThemeStylingProps>`
     width: 100%;
     display: flex;
     justify-content: center;

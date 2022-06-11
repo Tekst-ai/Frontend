@@ -13,6 +13,7 @@ import { Carousel } from '../../components/carousel'
 import { TernaryButton } from '../../components/buttons'
 import { FiChevronDown } from 'react-icons/fi'
 import { ButtonContainer } from '../categories'
+import { ThemeAccentStylingProps } from '../../interfaces/Styling'
 
 const GlobalStyle = createGlobalStyle`
     html, body {
@@ -40,12 +41,7 @@ const Container = styled.div`
     }
 `
 
-interface LeftContainerProps {
-    theme: keyof Theme,
-    accent: string
-}
-
-const LeftContainer = styled.div<LeftContainerProps>`
+const LeftContainer = styled.div<ThemeAccentStylingProps>`
     width: 100%;
     height: 100vh;
     display: flex;

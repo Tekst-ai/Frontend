@@ -5,6 +5,7 @@ import { IoCall, IoMail } from "react-icons/io5";
 import themes, { Theme } from "../../ThemeConfig";
 import useStore from "../../store";
 import { Breakpoint, Transition } from "../../variables";
+import { ThemeStylingProps } from "../../interfaces/Styling";
 
 interface SupportCardProps {
     small?: boolean
@@ -24,11 +25,7 @@ const Container = styled.div<ContainerProps>`
     }
 `
 
-interface SubContainerProps {
-    theme: any
-}
-
-const SubContainer = styled.div<SubContainerProps>`
+const SubContainer = styled.div<ThemeStylingProps>`
     background: ${({ theme }) => theme.backgroundAlt};
     text-align: center;
     padding: 1.5rem 1rem;
@@ -86,11 +83,7 @@ const SubContainer = styled.div<SubContainerProps>`
     }
 `
 
-interface SupportListProps {
-    theme: any
-}
-
-const SupportList = styled.ul<SupportListProps>`
+const SupportList = styled.ul<ThemeStylingProps>`
     display: flex;
     margin-top: 1.5rem;
     

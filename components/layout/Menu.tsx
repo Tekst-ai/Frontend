@@ -54,7 +54,7 @@ interface ProfileContainerProps {
     pathName: string,
     isOpen: boolean,
     accent: string,
-    theme: any
+    theme: keyof Theme
 }
 
 const ProfileContainer = styled.a<ProfileContainerProps>`

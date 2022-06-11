@@ -9,6 +9,7 @@ import { BigNumberFormat } from '../../services/format'
 import MediumLineChart from './MediumLineChart'
 import { useCallback, useState } from 'react'
 import { Breakpoint, Colors } from '../../variables'
+import { AccentStylingProps } from '../../interfaces/Styling'
 
 interface MediumChartTextProps {
     marginRight?: boolean,
@@ -24,7 +25,7 @@ interface MediumChartTextProps {
 }
 
 interface ContainerProps {
-    theme: any,
+    theme: keyof Theme,
     marginRight: boolean,
     marginBottom: boolean,
     fullWidth: boolean,
@@ -61,11 +62,7 @@ const HeaderContainer = styled.div`
     /* margin-bottom: 0.5rem; */
 `
 
-interface IconContainerProps {
-    accent: string,
-}
-
-const IconContainer = styled.div<IconContainerProps>`
+const IconContainer = styled.div<AccentStylingProps>`
     background: ${({ accent }) => accent};
     color: ${Colors.textWhite};
     position: relative;
@@ -92,7 +89,7 @@ const IconContainer = styled.div<IconContainerProps>`
 `
 
 interface NumberContainerProps {
-    theme: any,
+    theme: keyof Theme,
     showIcon: boolean,
     dataRight?: number,
     accent: string,

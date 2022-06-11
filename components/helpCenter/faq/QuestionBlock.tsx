@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import styled from 'styled-components'
+import { ThemeStylingProps } from '../../../interfaces/Styling'
 
 import useStore, { useAccent } from '../../../store'
 import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
@@ -12,11 +13,7 @@ interface QuestionBlockProps {
     answer: string,
 }
 
-interface ContainerProps {
-    theme: any
-}
-
-const Container = styled.li<ContainerProps>`
+const Container = styled.li<ThemeStylingProps>`
     div:last-child {
         div:last-of-type {
             padding-bottom: 0.5rem;
@@ -25,7 +22,7 @@ const Container = styled.li<ContainerProps>`
 `
 
 interface QuestionProps {
-    theme: any,
+    theme: keyof Theme,
     open: boolean
 }
 
@@ -66,7 +63,7 @@ const Question = styled.button<QuestionProps>`
 `
 
 interface AnswerProps {
-    theme: any,
+    theme: keyof Theme,
     open: boolean
 }
 
