@@ -13,7 +13,7 @@ jobs:
       NEXT_PUBLIC_PROFILE_ENDPOINT: /static/data/user.json
       NEXT_PUBLIC_CATEGORIES_ENDPOINT: /static/data/categoryList.json
       NEXT_PUBLIC_DASHBOARD_ENDPOINT: /static/data/dashboard.json
-      NEXT_PUBLIC_CMS_ENDPOINT: http://localhost:1337/graphql
+      NEXT_PUBLIC_CMS_ENDPOINT: https://tekstai-cms.herokuapp.com/graphql
     steps:
       - uses: actions/checkout@v3
       - uses: aws-actions/configure-aws-credentials@v1
