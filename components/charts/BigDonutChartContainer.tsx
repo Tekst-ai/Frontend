@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
+import { ThemeStylingProps } from "../../interfaces/Styling";
 
 import useStore from "../../store";
 import themes, { Theme } from "../../ThemeConfig";
@@ -15,7 +16,7 @@ interface BigChartProps {
 }
 
 interface ContainerProps {
-    theme: any;
+    theme: keyof Theme;
     marginRight: boolean;
     marginBottom: boolean;
 }
@@ -44,11 +45,7 @@ const Container = styled.div<ContainerProps>`
     }
 `
 
-interface TitleContainerProps {
-    theme: any;
-}
-
-const TitleContainer = styled.div<TitleContainerProps>`
+const TitleContainer = styled.div<ThemeStylingProps>`
     font-size: 0.625rem;
     text-transform: uppercase;
     color: ${({ theme }) => theme.textSec};

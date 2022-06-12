@@ -96,7 +96,7 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
 interface LinkTextProps {
     pathName: string,
     accent: string,
-    theme: any,
+    theme: keyof Theme,
     open: boolean,
 }
 
@@ -114,7 +114,7 @@ const LinkText = styled.a<LinkTextProps>`
 
 interface LinkButtonProps {
     accent: string,
-    theme: any,
+    theme: keyof Theme,
     open: boolean,
 }
 
@@ -132,7 +132,7 @@ const LinkButton = styled.button<LinkButtonProps>`
 
 interface CollapseProps {
     isOpen: boolean,
-    theme: any
+    theme: keyof Theme
 }
 
 const Collapse = styled.button<CollapseProps>`

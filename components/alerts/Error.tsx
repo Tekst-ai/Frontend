@@ -38,7 +38,7 @@ const Container = styled.div<ContainerProps>`
 `
 
 interface SubContainerProps {
-    theme: any
+    theme: keyof Theme
     open: boolean
 }
 
@@ -97,7 +97,7 @@ const SubContainer = styled.div<SubContainerProps>`
 `
 
 interface MessageProps {
-    theme: any,
+    theme: keyof Theme,
     open: boolean
 }
 

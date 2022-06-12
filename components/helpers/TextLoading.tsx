@@ -21,7 +21,7 @@ const Container = styled.span<ContainerProps>`
     height: ${({ height }) => height}rem;
     display: block;
     border-radius: 7px;
-    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
+    box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "1px 4px"} ${({ theme }) => theme.boxShadow};
     animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;

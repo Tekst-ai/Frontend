@@ -6,12 +6,14 @@ export const GET_STEP_ITEMS = gql`
             data {
                 id
                 attributes {
-                    title
-                    step {
-                        id
-                        title
-                        content
-                    } 
+                    stepContainer {
+                        Title
+                        Steps {
+                            id
+                            title
+                            content
+                        }
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import React from 'react'
 import styled from 'styled-components'
 
+import { ThemeAccentStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Colors, Transition } from '../../variables'
@@ -14,12 +15,7 @@ interface PrimaryButtonProps {
     className?: string
 }
 
-interface ButtonProps {
-    accent: string,
-    theme: keyof Theme
-}
-
-const Button = styled.button<ButtonProps>`
+const Button = styled.button<ThemeAccentStylingProps>`
     display: block;
     background: ${({ accent }) => accent};
     color: ${Colors.textWhite};

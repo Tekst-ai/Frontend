@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+
+import { ThemeAccentStylingProps, ThemeStylingProps } from '../../../interfaces/Styling'
 import useStore, { useAccent } from '../../../store'
 import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
 import { Breakpoint, Colors } from '../../../variables'
@@ -25,11 +27,7 @@ const Container = styled.li`
     }
 `
 
-interface ContainerContentProps {
-    theme: any
-}
-
-const ContainerContent = styled.div<ContainerContentProps>`
+const ContainerContent = styled.div<ThemeStylingProps>`
     margin-left: 2rem;
     width: calc(100% - 1.75rem);
     
@@ -47,12 +45,7 @@ const ContainerContent = styled.div<ContainerContentProps>`
     }
 `
 
-interface StepProps {
-    theme: any,
-    accent: string,
-}
-
-const Step = styled.div<StepProps>`
+const Step = styled.div<ThemeAccentStylingProps>`
     position: relative;
 
     div {

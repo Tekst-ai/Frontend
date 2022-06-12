@@ -36,7 +36,7 @@ const QuestionList: NextPage<QuestionListProps> = ({ data, error }) => {
         <Container>
             { data !== undefined && data !== null? 
                 data.map((item: any) => (
-                    <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.answer}/>
+                    <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.Answer}/>
                 )):
                 <Error message={error} padding={0.4}/>
             }

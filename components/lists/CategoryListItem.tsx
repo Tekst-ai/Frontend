@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { ThemeStylingProps } from '../../interfaces/Styling'
 import { PercentageOfTotal } from '../../services/calculations'
 import { FormatDate } from '../../services/date'
-
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
@@ -12,11 +13,7 @@ interface CategoryListItemProps {
     data: any,
 }
 
-interface ContainerProps {
-    theme: any
-}
-
-const Container = styled.tr<ContainerProps>`
+const Container = styled.tr<ThemeStylingProps>`
     td {
         border-bottom: 1.5px solid ${({ theme }) => theme.lineLight};
         padding: 0.75rem 0.25rem;

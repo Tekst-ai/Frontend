@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { FiChevronDown } from 'react-icons/fi'
 import styled from 'styled-components'
+import { useState } from 'react'
 
 import { TernaryButton } from '../../components/buttons'
 import { CategoryList } from '../../components/lists'
@@ -10,14 +11,9 @@ import useStore, { useAccent } from '../../store'
 import { Colors, Transition } from '../../variables'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
-import { useState } from 'react'
+import { ThemeAccentStylingProps } from '../../interfaces/Styling'
 
-interface ButtonContainerProps {
-    theme: any,
-    accent: string
-}
-
-export const ButtonContainer = styled.div<ButtonContainerProps>`
+export const ButtonContainer = styled.div<ThemeAccentStylingProps>`
     width: 100%;
     
     button {

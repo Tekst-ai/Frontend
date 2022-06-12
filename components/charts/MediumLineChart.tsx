@@ -27,6 +27,7 @@ import useStore, { useAccent } from "../../store";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Colors } from "../../variables";
 import { useCallback, useRef, useState } from "react";
+import { ThemeStylingProps } from "../../interfaces/Styling";
 
 const Container = styled.div`
     position: relative;
@@ -40,11 +41,7 @@ const Container = styled.div`
     }
 `
 
-interface FadeProps {
-    theme: any,
-}
-
-const Fade = styled.div<FadeProps>`
+const Fade = styled.div<ThemeStylingProps>`
     position: absolute;
     background: linear-gradient(90deg, ${({ theme }) => theme.background} 0%, ${({ theme }) => theme.background} 30%, ${({ theme }) => theme.background}00 100%);
     width: 10%;

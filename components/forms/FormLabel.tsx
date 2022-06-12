@@ -4,18 +4,14 @@ import styled from 'styled-components';
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import useStore, { useAccent } from '../../store';
 import { Transition } from '../../variables';
+import { ThemeAccentStylingProps } from '../../interfaces/Styling';
 
 interface FormLabelProps {
   children: React.ReactNode;
   label?: string;
 }
 
-interface StyledLabelProps {
-    theme: keyof Theme,
-    accent: string
-}
-
-const StyledLabel = styled.label<StyledLabelProps>`
+const StyledLabel = styled.label<ThemeAccentStylingProps>`
     position: relative;
     display: flex;
     flex-direction: column;

@@ -1,14 +1,11 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 
+import { ThemeAccentStylingProps, ThemeStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 
-interface ContainerProps {
-    theme: any,
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<ThemeStylingProps>`
     width: 33.333%;
     padding: 1rem 1.25rem;
     background: ${({ theme }) => theme.background};
@@ -16,12 +13,7 @@ const Container = styled.div<ContainerProps>`
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
 `
 
-interface TableProps {
-    theme: any,
-    accent: string
-}
-
-const Table = styled.table<TableProps>`
+const Table = styled.table<ThemeAccentStylingProps>`
     width: 100%;
     text-align: left;
     border-collapse: collapse;
@@ -86,14 +78,6 @@ const CategoryListSmall: NextPage = () => {
                         <td>Notificaties</td>
                         <td>2951</td>
                     </tr>
-                    {/* <tr>
-                        <td>Categorie 1</td>
-                        <td>2951</td>
-                    </tr>
-                    <tr>
-                        <td>Categorie 1</td>
-                        <td>2951</td>
-                    </tr> */}
                 </tbody>
             </Table>
         </Container>

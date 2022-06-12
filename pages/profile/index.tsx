@@ -7,6 +7,7 @@ import { Breakpoint } from '../../variables'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
 import { CheckStatus, Loading } from '../../components/helpers'
+import { ThemeStylingProps } from '../../interfaces/Styling'
 
 const Container = styled.div`
     display: flex;
@@ -14,11 +15,7 @@ const Container = styled.div`
     align-items: center;
 `
 
-interface TopContainerProps {
-    theme: keyof Theme
-}
-
-const TopContainer = styled.div<TopContainerProps>`
+const TopContainer = styled.div<ThemeStylingProps>`
     margin: 0 auto;
     margin-top: 2rem;
     display: flex;
@@ -66,7 +63,7 @@ const TopContainer = styled.div<TopContainerProps>`
     }
 `
 
-const BottomContainer = styled.div<TopContainerProps>`
+const BottomContainer = styled.div<ThemeStylingProps>`
     margin-top: 3rem;
     
     @media (min-width: ${Breakpoint.mobileSmall}) {

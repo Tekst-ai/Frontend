@@ -9,16 +9,13 @@ import useStore, { useAccent } from '../../store';
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
 import { Routes } from '../../constants';
+import { ThemeStylingProps } from '../../interfaces/Styling';
 
 interface NavigationProps {
     isOpen: boolean,
 }
 
-interface ContainerProps {
-    theme: any
-}
-
-const Container = styled.nav<ContainerProps>`
+const Container = styled.nav<ThemeStylingProps>`
     display: flex;
     flex-direction: column;
 
@@ -91,7 +88,7 @@ interface LinkTextProps {
     pathName: string,
     accent: string,
     open: boolean,
-    theme: any
+    theme: keyof Theme
 }
 
 const LinkText = styled.a<LinkTextProps>`

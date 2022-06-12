@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
+import { AccentStylingProps } from '../../interfaces/Styling';
 
 import useStore, { useAccent } from '../../store';
 import { Accent, accentColors, Theme } from '../../ThemeConfig';
@@ -24,11 +25,7 @@ const AnimationContainer = styled.div`
     background: none;
 `
 
-interface SubContainerProps {
-    accent: string
-}
-
-const AnimationSubContainer = styled.div<SubContainerProps>`
+const AnimationSubContainer = styled.div<AccentStylingProps>`
     @keyframes ldio-xjni4o04qv-o {
         0%    { opacity: 1; transform: translate(0 0) }
     49.99% { opacity: 1; transform: translate(3.5rem,0) }

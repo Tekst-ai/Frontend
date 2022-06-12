@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { ThemeStylingProps } from "../../interfaces/Styling";
 
 import useStore, { useAccent } from "../../store";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
@@ -31,7 +32,7 @@ const Container = styled.li`
 `
 
 interface LinkContentProps {
-    theme: any,
+    theme: keyof Theme,
     pathName: string,
     accent: string
 }
@@ -103,11 +104,7 @@ const LinkContent = styled.a<LinkContentProps>`
     }
 `
 
-interface ButtonContentProps {
-    theme: any,
-}
-
-const ButtonContent = styled.button<ButtonContentProps>`
+const ButtonContent = styled.button<ThemeStylingProps>`
     background: ${({ theme }) => theme.backgroundAlt};
     padding: 1.25rem 0.5rem 1rem 0.5rem;
     border-radius: 10px;

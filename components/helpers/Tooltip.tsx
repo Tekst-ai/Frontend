@@ -10,7 +10,7 @@ interface TooltipProps {
 }
 
 interface ContainerProps {
-    theme: any,
+    theme: keyof Theme,
     accent: string,
     isOpen: boolean,
 }

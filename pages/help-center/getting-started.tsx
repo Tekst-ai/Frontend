@@ -18,7 +18,7 @@ const Container = styled.div`
     position: relative;
 `
 
-const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {    
+const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {  
     return (
         <Container>
             <HelpBackgroundSmall/>
@@ -31,8 +31,8 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {
             />
 
             { data !== undefined && data !== null ?
-                data.map((item: any) => (
-                    <StepListing key={item.id} title={item.attributes.title} steps={item.attributes.step}/>
+                data[0].attributes.stepContainer.map((item: any, index: number) => (
+                    <StepListing key={index} title={item.Title} steps={item.Steps}/>
                 )):
                 <Error message={error} padding={1}/>
             }
