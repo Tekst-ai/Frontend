@@ -7,7 +7,7 @@ export const GET_FAQ_ITEMS = gql`
                 id
                 attributes {
                     question
-                    answer 
+                    Answer 
                 }
             }
         }
