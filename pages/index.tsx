@@ -102,7 +102,7 @@ const Dashboard: NextPage = () => {
         <>
             <Head>
                 <title>
-                    { TitleFormat("Statistieken") }
+                    { TitleFormat("Dashboard") }
                 </title>
             </Head>
             <Container height={windowMeasures.height}>
