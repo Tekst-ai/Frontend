@@ -96,20 +96,18 @@ const SubNavigation = styled.ul<SubNavigationProps>`
     opacity: ${({ isOpen }) => isOpen ? "1" : "0"};
     transition: ${Transition.fast};
     position: absolute;
-    width: 100%;
+    width: 8rem;
+    pointer-events: ${({ isOpen }) => isOpen ? "auto" : "none"};
     
     li {
         a {
             span {
-                /* font-size: 1rem; */
                 font-size: 0.875rem;
                 left: 1.75rem;
-                /* left: 1.5rem; */
             }   
         }
 
         &:first-of-type {
-            /* margin-bottom: 1.2rem; */
             margin-bottom: 1rem;
         }
     }
@@ -133,12 +131,10 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
             <div>
                 <Link href={Routes.HELPCENTER} passHref>
                     <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
-                        {/* <FiHelpCircle fontSize={22} strokeWidth={2.25}/> */}
                         <FiHelpCircle fontSize={20} strokeWidth={2.25}/>
 
                         <span>Helpcentrum</span>
 
-                        {/* <IoChevronDownOutline fontSize={16}/> */}
                     </LinkText>
                 </Link>
                 

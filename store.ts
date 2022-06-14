@@ -1,25 +1,4 @@
 import create from 'zustand';
-// import { Accent } from './ThemeConfig';
-
-
-// export enum Colors {
-//     company,
-//     default,
-//     yellow,
-//     orange,
-//     red,
-//     pink,
-//     purple,
-//     darkBlue,
-//     lightBlue,
-//     teal,
-//     green,
-// }
-
-// interface AccentType {
-//     accent: string,
-//     setAccent: (accent: string) => void
-// }
 
 export const useAccent = create(set => ({
     accent: 'default',

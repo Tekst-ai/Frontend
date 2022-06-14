@@ -1,12 +1,13 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { FaqItem } from '../../../interfaces/Data'
 import { Breakpoint } from '../../../variables'
 import { Error } from '../../alerts'
 
 import QuestionBlock from './QuestionBlock'
 
 interface QuestionListProps {
-    data: any,
+    data: [FaqItem],
     error: string
 }
 
@@ -35,7 +36,7 @@ const QuestionList: NextPage<QuestionListProps> = ({ data, error }) => {
     return (
         <Container>
             { data !== undefined && data !== null? 
-                data.map((item: any) => (
+                data.map((item: FaqItem) => (
                     <QuestionBlock key={item.id} question={item.attributes.question} answer={item.attributes.Answer}/>
                 )):
                 <Error message={error} padding={0.4}/>

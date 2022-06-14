@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 import { HelpNavigation, SupportCard } from '../../components/helpCenter'
 import { StepListing } from '../../components/helpCenter/gettingStarted'
@@ -8,9 +9,11 @@ import HelpTitle from '../../components/helpCenter/HelpTitle'
 import { GET_STEP_ITEMS } from '../../graphql/stepItems'
 import client from '../../helpers/apollo-client'
 import { Error } from '../../components/alerts'
+import { TitleFormat } from '../../services/title'
+import { StepItem } from '../../interfaces/Data'
 
 interface GettingStartedProps {
-    data: any,
+    data: [StepItem],
     error: string
 }
 
@@ -18,27 +21,34 @@ const Container = styled.div`
     position: relative;
 `
 
-const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {  
+const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {
     return (
-        <Container>
-            <HelpBackgroundSmall/>
+        <>
+            <Head>
+                <title>
+                    { TitleFormat("Aan de slag") }
+                </title>
+            </Head>
+            <Container>
+                <HelpBackgroundSmall/>
 
-            <HelpNavigation/>
+                <HelpNavigation/>
 
-            <HelpTitle
-                title="Aan de slag"
-                text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
-            />
+                <HelpTitle
+                    title="Aan de slag"
+                    text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
+                />
 
-            { data[0] !== undefined && data !== null ?
-                data[0].attributes.stepContainer.map((item: any, index: number) => (
-                    <StepListing key={index} title={item.Title} steps={item.Steps}/>
-                )):
-                <Error message={error} padding={1}/>
-            }
+                { data && data[0] !== undefined && data[0] !== null ?
+                    data[0].attributes.stepContainer.map((item: any, index: number) => (
+                        <StepListing key={index} title={item.Title} steps={item.Steps}/>
+                    )):
+                    <Error message={error} padding={1}/>
+                }
 
-            <SupportCard/>
-        </Container>
+                <SupportCard/>
+            </Container>
+        </>
     )
 }
 

@@ -8,17 +8,14 @@ import { Menu, MobileMenu } from '../components/layout';
 import { Breakpoint, Colors, Transition } from '../variables';
 import { useRouter } from 'next/router';
 import { Routes } from '../constants';
+import { ThemeAccentStylingProps } from '../interfaces/Styling';
 
 interface LayoutProps {
     children: React.ReactNode,
 }
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<ThemeAccentStylingProps>`
     body {
-        /* background: ${({ theme }: any ) => theme.background}; */
-        /* color: ${({ theme }: any) => theme.text}; */
-        /* transition: ${Transition.fast}; */
-
         & ::selection {
             color: ${Colors.textWhite};
             background: ${({ accent }) => accent};
@@ -26,14 +23,18 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-const Container = styled.div`
+const Container = styled.div<ThemeAccentStylingProps>`
     display: flex;
     position: relative;
-    background: ${({ theme }: any) => theme.background};
-    color: ${({ theme }: any) => theme.text};
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
     transition: ${Transition.fast};
     flex-direction: column;
     overflow: hidden;
+
+    a:focus, button:focus, input:focus {
+        outline: none;
+    }
 
     @media (min-width: ${Breakpoint.mobile}) {
         flex-direction: row;
@@ -78,21 +79,15 @@ const SubContainer = styled.div<SubContainerProps>`
     position: relative;
     background: ${({ theme }) => theme.backgroundSec};
     padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem"};
-    /* border-radius: 10px; */
     border-radius: 15px;
     min-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem);
-    /* max-height: calc(100vh - ${({ height }) => height}px - 0.75rem - 0.25rem); */
     max-height: 100%;
     transition: background 0.2s ease-in-out;
-    /* box-shadow: 0 0 1px ${({ theme }) => theme.boxShadow}; */
-    /* overflow-y: auto; */
     
     @media (min-width: ${Breakpoint.mobile}) {
         padding: ${({ pathName }) => pathName === Routes.HELPCENTER ? 0 : "2rem 3rem"};
-        /* border-radius: 15px; */
         min-height: calc(100vh - 2.5rem);
         max-height: 100%;
-        /* overflow: auto; */
     }
 `
 
@@ -126,7 +121,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
         <>
             <GlobalStyle theme={themes[theme]} accent={accentColors[accent][theme]}/>
 
-            <Container theme={themes[theme]}>
+            <Container theme={themes[theme]} accent={accentColors[accent][theme]}>
                 <Menu/>
 
                 <Main menu={menu} theme={themes[theme]} height={height}>

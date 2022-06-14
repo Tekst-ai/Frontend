@@ -26,6 +26,13 @@ const Button = styled.button<ThemeAccentStylingProps>`
     transition: ${Transition.fast};
     padding: 0.5rem 1.25rem;
     box-shadow: 0 3px 12px ${({ accent }) => accent + "4D"};
+    border: 2px solid ${({ accent }) => accent};
+    outline: none;
+
+    &:hover {
+        background: ${({ theme }) => theme.backgroundAlt};
+        color: ${({ accent }) => accent};
+    }
 `
 
 const PrimaryButton: NextPage<PrimaryButtonProps> = ({ children, type, disabled = false, onClick, className }) => {

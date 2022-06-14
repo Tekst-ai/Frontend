@@ -1,13 +1,14 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { IoRocket, IoChatbubbles, IoHelpBuoy } from "react-icons/io5"
+import Head from 'next/head'
 
 import { SupportCard } from '../../components/helpCenter'
 import { Breakpoint, Colors } from '../../variables'
 import { IconAbstract } from '../../components/helpers'
 import { Routes } from '../../constants'
 import HelpNavigationCard from '../../components/helpCenter/HelpNavigationCard'
-import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { TitleFormat } from '../../services/title'
 
 const Container = styled.div`
     border-radius: 15px;
@@ -67,6 +68,12 @@ const SupportCardContainer = styled.div`
 const HelpCenter: NextPage = () => {
     return (
         <>
+            <Head>
+                <title>
+                    { TitleFormat("Helpcentrum") }
+                </title>
+            </Head>
+
             <Container>
                 <Title>
                     <h1>Helpcentrum</h1>

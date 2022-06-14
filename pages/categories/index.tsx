@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { FiChevronDown } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useState } from 'react'
+import Head from 'next/head'
 
 import { TernaryButton } from '../../components/buttons'
 import { CategoryList } from '../../components/lists'
@@ -12,6 +13,7 @@ import { Colors, Transition } from '../../variables'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
 import { ThemeAccentStylingProps } from '../../interfaces/Styling'
+import { TitleFormat } from '../../services/title'
 
 export const ButtonContainer = styled.div<ThemeAccentStylingProps>`
     width: 100%;
@@ -52,24 +54,31 @@ const Categories: NextPage = () => {
     const handleClick = () => setLoad(load + 10)
 
     return (
-        <div>
-            <TitleContainer>
-                <h1>Categorieën</h1>
-            </TitleContainer>
+        <>
+            <Head>
+                <title>
+                    { TitleFormat("Categorieën") }
+                </title>
+            </Head>
+            <div>
+                <TitleContainer>
+                    <h1>Categorieën</h1>
+                </TitleContainer>
 
-            {
-                !isLoading && !isError && 
-                <CategoryList data={data.slice(0, load)}/>
-            }
+                {
+                    !isLoading && !isError && 
+                    <CategoryList data={data.slice(0, load)}/>
+                }
 
-            <ButtonContainer theme={themes[theme]} accent={accentColors[accent][theme]}>
-                <TernaryButton type="button" onClick={handleClick}>
-                    Meer
+                <ButtonContainer theme={themes[theme]} accent={accentColors[accent][theme]}>
+                    <TernaryButton type="button" onClick={handleClick}>
+                        Meer
 
-                    <FiChevronDown fontSize={18} strokeWidth={2.75}/>
-                </TernaryButton>
-            </ButtonContainer>
-        </div>
+                        <FiChevronDown fontSize={18} strokeWidth={2.75}/>
+                    </TernaryButton>
+                </ButtonContainer>
+            </div>
+        </>
     )
 }
   

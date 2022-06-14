@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useData } from "../../hooks/useData";
 import { CheckEnv } from "../../services/checks";
 import useStore, { useAccent } from "../../store";
-import themes, { accentColors, Theme } from "../../ThemeConfig";
+import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Breakpoint, Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
@@ -88,7 +88,7 @@ const ColorListItem = styled.label<ColorListItemProps>`
 `
 
 const AccentSwitcher: NextPage = () => {
-    const accentColor: any = useAccent((s: any) => s.accent);
+    const accentColor: keyof Accent = useAccent((s: any) => s.accent);
     const store: any = useAccent((s: any) => s.setAccent);
     const theme: keyof Theme = useStore((s: any) => s.theme);
 

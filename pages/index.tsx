@@ -2,10 +2,11 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 import { IoMailOpen, IoGrid } from 'react-icons/io5'
 import _ from 'lodash'
+import Head from 'next/head'
+import { useCallback, useState } from 'react'
 
 import { BigChartNoText, MediumChartText, BigDonutChartContainer } from '../components/charts'
 import { TitleContainer } from './configuration'
-import { useCallback, useState } from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions'
 import { useMenu } from '../store'
 import { Info } from '../components/alerts'
@@ -15,6 +16,7 @@ import useStore from '../store'
 import { useData } from '../hooks/useData'
 import { CheckEnv } from '../services/checks'
 import { Loading, TextLoading } from '../components/helpers'
+import { TitleFormat } from '../services/title'
 
 interface ContainerProps {
     height: number
@@ -30,7 +32,6 @@ interface StatsContainerProps {
 
 const StatsContainer = styled.div<StatsContainerProps>`
     @media (min-width: ${Breakpoint.mobile}) {
-        /* Full height container - height title container */
         height: calc(${({ height }) => height}px - 40px - 64px  - 32px);
     }
 `
@@ -98,36 +99,43 @@ const Dashboard: NextPage = () => {
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_DASHBOARD_ENDPOINT));
 
     return (
-        <Container height={windowMeasures.height}>
-            <TitleContainer ref={refContainer} theme={themes[theme]}>
-                <h1>{ user.isLoading ? <TextLoading width={50} height={2.5}/> : (!user.isLoading && !user.isError) && `Goedemiddag, ${user.data.firstName}!` }</h1>
-            </TitleContainer>
+        <>
+            <Head>
+                <title>
+                    { TitleFormat("Statistieken") }
+                </title>
+            </Head>
+            <Container height={windowMeasures.height}>
+                <TitleContainer ref={refContainer} theme={themes[theme]}>
+                    <h1>{ user.isLoading ? <TextLoading width={50} height={2.5}/> : (!user.isLoading && !user.isError) && `Goedemiddag, ${user.data.firstName}!` }</h1>
+                </TitleContainer>
 
-            {
-                isLoading ? <Loading/> : (!isLoading && !isError) &&
-                <StatsContainer height={windowMeasures.height - height}>
-                    <TopContainer ref={chartContainer}>
-                        <MediumChartText marginRight={true} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoMailOpen fontSize={26}/>} data={_.sumBy(data.days, 'totalEmails')} oldData={data.totalEmailsOld} title={"E-mails"}/>
-                        
-                        <MediumChartText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoGrid fontSize={26}/>} data={data.totalCategories} oldData={data.totalCategoriesOld} title={"Categorieën"}/>
-                        
-                        <MediumChartText marginRight={false} fullWidth={true} showIcon={false} showProgress={false} data={data.topCategory.name} dataRight={data.topCategory.totalEmails} title={"Top categorie"}/>
-                    </TopContainer>
+                {
+                    isLoading ? <Loading/> : (!isLoading && !isError) &&
+                    <StatsContainer height={windowMeasures.height - height}>
+                        <TopContainer ref={chartContainer}>
+                            <MediumChartText marginRight={true} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoMailOpen fontSize={26}/>} data={_.sumBy(data.days, 'totalEmails')} oldData={data.totalEmailsOld} title={"E-mails"}/>
+                            
+                            <MediumChartText marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} icon={<IoGrid fontSize={26}/>} data={data.totalCategories} oldData={data.totalCategoriesOld} title={"Categorieën"}/>
+                            
+                            <MediumChartText marginRight={false} fullWidth={true} showIcon={false} showProgress={false} data={data.topCategory.name} dataRight={data.topCategory.totalEmails} title={"Top categorie"}/>
+                        </TopContainer>
 
-                    <BottomContainer height={chartHeight}>
-                        {
-                            windowMeasures.height > 575 ?
-                            <>
-                                <BigChartNoText data={data.days} marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} title="E-mail overzicht"/>
+                        <BottomContainer height={chartHeight}>
+                            {
+                                windowMeasures.height > 575 ?
+                                <>
+                                    <BigChartNoText data={data.days} marginRight={windowMeasures.width > 768 ? true : false} marginBottom={windowMeasures.width > 768 ? false : true} title="E-mail overzicht"/>
 
-                                <BigDonutChartContainer data={data.categories} title="Top 5 categoriëen"/>
-                            </>
-                            : (windowMeasures.height > 400 && windowMeasures.height < 575) && <Info message="Venster of scherm is niet hoog genoeg om grafieken op af te beelden!"/>
-                        }
-                    </BottomContainer>
-                </StatsContainer>
-            }
-        </Container>
+                                    <BigDonutChartContainer data={data.categories} title="Top 5 categoriëen"/>
+                                </>
+                                : (windowMeasures.height > 400 && windowMeasures.height < 575) && <Info message="Venster of scherm is niet hoog genoeg om grafieken op af te beelden!"/>
+                            }
+                        </BottomContainer>
+                    </StatsContainer>
+                }
+            </Container>
+        </>
   )
 }
 

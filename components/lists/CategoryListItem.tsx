@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import styled from 'styled-components'
 
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { Categories } from '../../interfaces/Data'
 import { ThemeStylingProps } from '../../interfaces/Styling'
 import { PercentageOfTotal } from '../../services/calculations'
 import { FormatDate } from '../../services/date'
@@ -10,7 +11,7 @@ import themes, { Theme } from '../../ThemeConfig'
 import { Breakpoint } from '../../variables'
 
 interface CategoryListItemProps {
-    data: any,
+    data: Categories,
 }
 
 const Container = styled.tr<ThemeStylingProps>`
@@ -36,8 +37,6 @@ const CategoryListItem: NextPage<CategoryListItemProps> = ({ data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme)
 
     const { width } = useWindowDimensions();
-
-    // ! rest is 55 when I want to add extra categories
 
     return (
         <Container theme={themes[theme]}>

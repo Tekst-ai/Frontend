@@ -9,64 +9,71 @@
     {
         "id": "79068b58-960f-44fd-8a48-b20ebc97e0ef",
         "name": "Notifications - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-06-10T00:00:00.000Z",
         "amount": 73,
         "total": 439
     },
     {
         "id": "c26e66ab-e0dc-4c86-9ce3-050d18556afc",
         "name": "Marketing - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-06-01T05:00:00.000Z",
         "amount": 47,
         "total": 439
     },
     {
         "id": "a3c1c45a-b758-403d-b7d7-1b46d365b2a1",
         "name": "HR - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-06-01T00:00:00.000Z",
         "amount": 42,
         "total": 439
     },
     {
         "id": "4c320dd2-81ae-4a26-86d8-a2d8888053c2",
         "name": "Projects - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-30T00:00:00.000Z",
         "amount": 32,
         "total": 439
     },
     {
         "id": "87e05d9a-394d-47ff-87e3-7858418b2859",
         "name": "Customers - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-29T00:00:00.000Z",
         "amount": 30,
         "total": 439
     },
     {
         "id": "5a979a9c-1cf8-4c9b-a450-7ad240ea1cd8",
         "name": "Sales - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-27T00:00:00.000Z",
         "amount": 27,
         "total": 439
     },
     {
         "id": "c480d15d-62ee-4169-89b2-6832a79f28ed",
         "name": "Newsletters - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-24T00:00:00.000Z",
         "amount": 24,
         "total": 439
     },
     {
         "id": "2577de5b-d9c6-4209-91df-39d2037a0fb3",
         "name": "E-commerce - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-20T00:00:00.000Z",
         "amount": 15,
         "total": 439
     },
     {
         "id": "05af7bee-3704-41d8-8a18-258c31ef90e6",
         "name": "Planning - Tekst.ai",
-        "lastActivity": "2019-01-01T00:00:00.000Z",
+        "lastActivity": "2022-05-20T00:00:00.000Z",
         "amount": 9,
+        "total":439
+    },
+    {
+        "id": "05af7bee-3704-41d8-8a18-258c31ef90e6",
+        "name": "Varia - Tekst.ai",
+        "lastActivity": "2022-05-18T00:00:00.000Z",
+        "amount": 6,
         "total":439
     }
 ]

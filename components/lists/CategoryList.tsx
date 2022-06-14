@@ -2,6 +2,7 @@ import _ from 'lodash'
 import type { NextPage } from 'next'
 import styled from 'styled-components'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { Categories } from '../../interfaces/Data'
 
 import { AccentStylingProps, ThemeStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
@@ -10,7 +11,7 @@ import { Breakpoint } from '../../variables'
 import CategoryListItem from './CategoryListItem'
 
 interface CategoryListProps {
-    data: any,
+    data: [Categories],
 }
 
 const Container = styled.div<ThemeStylingProps>`
@@ -89,7 +90,7 @@ const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
 
                 <tbody>
                     {
-                        sortedData.map((category: any) => (
+                        sortedData.map((category: Categories) => (
                             <CategoryListItem key={category.id} data={category}/>
                         ))
                     }

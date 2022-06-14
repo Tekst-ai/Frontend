@@ -71,10 +71,6 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
     position: relative;
     z-index: 3;
     box-shadow: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href ? "0 1px 4px " + ProfileContainerProps.theme.boxShadow : "0 1px 4px " + ProfileContainerProps.theme.background};
-    
-    /* &:hover {
-        background: ${(ProfileContainerProps) => ProfileContainerProps.pathName === ProfileContainerProps.href && ProfileContainerProps.isOpen ? ({ accent }) => accent : ({ theme }) => theme.lineLight};
-    } */
 
     div:first-of-type {
         width: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "3.125rem" : "2.5rem" };
@@ -99,6 +95,7 @@ const ProfileContainer = styled.a<ProfileContainerProps>`
         white-space: nowrap;
         height: 100%;
         width: 8rem;
+        pointer-events: ${(ProfileContainerProps) => ProfileContainerProps.isOpen ? "auto" : "none"};
         
         p {
             transition: ${Transition.fast};

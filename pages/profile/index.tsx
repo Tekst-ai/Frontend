@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
@@ -8,6 +9,7 @@ import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
 import { CheckStatus, Loading } from '../../components/helpers'
 import { ThemeStylingProps } from '../../interfaces/Styling'
+import { TitleFormat } from '../../services/title'
 
 const Container = styled.div`
     display: flex;
@@ -45,6 +47,7 @@ const TopContainer = styled.div<ThemeStylingProps>`
         margin-top: 1.25rem;
         font-size: 2rem;
         font-weight: 700;
+        text-align: center;
         
         @media (min-width: ${Breakpoint.mobileSmall}) {
             font-size: 2.5rem;
@@ -55,6 +58,7 @@ const TopContainer = styled.div<ThemeStylingProps>`
         margin-top: 0.5rem;
         color: ${({ theme }) => theme.textSec};
         font-size: 1;
+        text-align: center;
         
         @media (min-width: ${Breakpoint.mobileSmall}) {
             margin-top: 1rem;
@@ -130,49 +134,56 @@ const Account: NextPage = () => {
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
 
     return (
-        <div>
-            {
-                isLoading ? <Loading/> : (!isLoading && !isError) && 
-                <Container>
-                    <TopContainer theme={themes[theme]}>
-                        <div>
-                            <img
-                                src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
-                                alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
-                                width={192}
-                                height={192}
-                            />
-                        </div>
+        <>
+            <Head>
+                <title>
+                    { TitleFormat("Profiel") }
+                </title>
+            </Head>
+            <div>
+                {
+                    isLoading ? <Loading/> : (!isLoading && !isError) && 
+                    <Container>
+                        <TopContainer theme={themes[theme]}>
+                            <div>
+                                <img
+                                    src={ (!isLoading && !isError) ? data.img : "/static/img/profile.jpg" }
+                                    alt={ (!isLoading && !isError) ? `${data.firstName} ${data.lastName}` : "Profile picture" }
+                                    width={192}
+                                    height={192}
+                                />
+                            </div>
 
-                        <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>
+                            <p>{ (!isLoading && !isError) && `${data.firstName} ${data.lastName}` }</p>
 
-                        <p>{ (!isLoading && !isError) && data.company }</p>
-                    </TopContainer>
+                            <p>{ (!isLoading && !isError) && data.company }</p>
+                        </TopContainer>
 
-                    <BottomContainer theme={themes[theme]}>
-                        <ul>
-                            <li>
-                                <p>e-mailadres</p>
+                        <BottomContainer theme={themes[theme]}>
+                            <ul>
+                                <li>
+                                    <p>e-mailadres</p>
 
-                                <div>
-                                    <p>{ (!isLoading && !isError) && data.email }</p>
-                                </div>
-                            </li>
+                                    <div>
+                                        <p>{ (!isLoading && !isError) && data.email }</p>
+                                    </div>
+                                </li>
 
-                            <li>
-                                <p>status</p>
+                                <li>
+                                    <p>status</p>
 
-                                <div>
-                                    <p>
-                                        <CheckStatus status={(!isLoading && !isError) && data.status}/>
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                    </BottomContainer>
-                </Container>
-            }
-        </div>
+                                    <div>
+                                        <p>
+                                            <CheckStatus status={(!isLoading && !isError) && data.status}/>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </BottomContainer>
+                    </Container>
+                }
+            </div>
+        </>
     )
   }
   
