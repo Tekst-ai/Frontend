@@ -8,11 +8,11 @@ import { Breakpoint, Transition } from "../../variables";
 import { ThemeStylingProps } from "../../interfaces/Styling";
 
 interface SupportCardProps {
-    small?: boolean
+    small?: boolean,
 }
 
 interface ContainerProps {
-    small: boolean
+    small: boolean,
 }
 
 const Container = styled.div<ContainerProps>`
@@ -173,7 +173,7 @@ const SupportList = styled.ul<ThemeStylingProps>`
 `
 
 const SupportCard: NextPage<SupportCardProps> = ({ small = false }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container small={small}>
@@ -203,4 +203,4 @@ const SupportCard: NextPage<SupportCardProps> = ({ small = false }) => {
     )
 }
 
-export default SupportCard
+export default SupportCard;

@@ -33,15 +33,11 @@ const Icon = styled.svg<ThemeStylingProps>`
         transform: translate(calc(-50% + 3rem), -12rem);
         width: 75rem;
     }
-    
-    /* path {
-        filter: drop-shadow(0 7px 20px #07071D66);
-    } */
 `
 
 const IconAbstract: NextPage = () => {
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Icon theme={themes[theme]} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="1087.326" height="1754.777" viewBox="-65 0 1250.326 1754.777">
@@ -58,4 +54,4 @@ const IconAbstract: NextPage = () => {
     )
 }
 
-export default IconAbstract
+export default IconAbstract;

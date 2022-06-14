@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Head from 'next/head'
+import { FiChevronDown } from 'react-icons/fi'
 
 import { NextPageWithLayout } from '../_app'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
@@ -11,7 +12,6 @@ import { TitleFormat } from '../../services/title'
 import LoginForm from '../../components/forms/LoginForm'
 import { Carousel } from '../../components/carousel'
 import { TernaryButton } from '../../components/buttons'
-import { FiChevronDown } from 'react-icons/fi'
 import { ButtonContainer } from '../categories'
 import { ThemeAccentStylingProps } from '../../interfaces/Styling'
 
@@ -194,7 +194,7 @@ const Login: NextPageWithLayout = () => {
     )
 }
 
-export default Login
+export default Login;
 
 Login.getLayout = function PageLayout(page: ReactElement) {
     return page

@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 import { Categories } from '../../interfaces/Data'
-
 import { AccentStylingProps, ThemeStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
@@ -67,12 +67,12 @@ const Table = styled.table<AccentStylingProps>`
 `
 
 const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const { width } = useWindowDimensions();
 
-    const sortedData = _.orderBy(data, ['amount'], ['desc'])
+    const sortedData = _.orderBy(data, ['amount'], ['desc']);
 
     return (
         <Container theme={themes[theme]}>
@@ -100,4 +100,4 @@ const CategoryList: NextPage<CategoryListProps> = ({ data }) => {
     )
 }
 
-export default CategoryList
+export default CategoryList;

@@ -20,4 +20,4 @@ const Form: NextPage<StyledFormProps> = ({ children, onSubmit, className }) => {
     )
 }
 
-export default Form
+export default Form;

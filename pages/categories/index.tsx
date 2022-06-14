@@ -45,13 +45,13 @@ export const ButtonContainer = styled.div<ThemeAccentStylingProps>`
 `
 
 const Categories: NextPage = () => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_CATEGORIES_ENDPOINT));
 
     const [load, setLoad] = useState(10);
-    const handleClick = () => setLoad(load + 10)
+    const handleClick = () => setLoad(load + 10);
 
     return (
         <>
@@ -82,4 +82,4 @@ const Categories: NextPage = () => {
     )
 }
   
-export default Categories
+export default Categories;

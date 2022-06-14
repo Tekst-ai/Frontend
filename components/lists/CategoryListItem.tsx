@@ -34,7 +34,7 @@ const Container = styled.tr<ThemeStylingProps>`
 `
 
 const CategoryListItem: NextPage<CategoryListItemProps> = ({ data }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     const { width } = useWindowDimensions();
 
@@ -50,4 +50,4 @@ const CategoryListItem: NextPage<CategoryListItemProps> = ({ data }) => {
     )
 }
 
-export default CategoryListItem
+export default CategoryListItem;

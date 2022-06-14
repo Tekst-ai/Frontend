@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+
 import { Breakpoint } from '../../variables';
 
 interface IconContainerCarouselProps {
     vector: ReactNode,
-    title: string
+    title: string,
 }
 
 const Container = styled.div`

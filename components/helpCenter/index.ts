@@ -3,5 +3,5 @@ import HelpNavigation from './HelpNavigation'
 
 export {
     SupportCard,
-    HelpNavigation
+    HelpNavigation,
 }

@@ -99,4 +99,4 @@ const HelpCenter: NextPage = () => {
     )
   }
   
-  export default HelpCenter
+  export default HelpCenter;

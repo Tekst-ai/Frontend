@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
-import { AccentStylingProps } from '../../interfaces/Styling'
 
+import { AccentStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Transition } from '../../variables'
@@ -9,7 +9,7 @@ import ThemeItem from './ThemeItem'
 
 interface ThemeSwitcherProps {
     id: keyof Theme,
-    value: string
+    value: string,
 }
 
 const ThemeContainer = styled.label<AccentStylingProps>`
@@ -60,4 +60,4 @@ const ThemeSwitcher: NextPage<ThemeSwitcherProps> = ({ id, value }) => {
     )
 }
 
-export default ThemeSwitcher
+export default ThemeSwitcher;

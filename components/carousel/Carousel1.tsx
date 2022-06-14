@@ -22,4 +22,4 @@ const Carousel1: NextPage = () => {
     )
 }
 
-export default Carousel1
+export default Carousel1;

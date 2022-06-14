@@ -11,5 +11,5 @@ export {
     Tooltip,
     CheckStatus,
     Loading,
-    TextLoading
+    TextLoading,
 }

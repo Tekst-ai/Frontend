@@ -29,7 +29,6 @@ const Container = styled.span<ContainerProps>`
             margin-right: 0.35rem;
         }
     }
-
 `
 
 const PercentageEvolution: NextPage<PercentageEvolutionProps> = ({ percentage }) => {
@@ -46,4 +45,4 @@ const PercentageEvolution: NextPage<PercentageEvolutionProps> = ({ percentage })
     return percentageComponent;
 }
 
-export default PercentageEvolution
+export default PercentageEvolution;

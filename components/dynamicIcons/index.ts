@@ -9,5 +9,5 @@ export {
     Analysis,
     Time,
     Busy,
-    Growth
+    Growth,
 }

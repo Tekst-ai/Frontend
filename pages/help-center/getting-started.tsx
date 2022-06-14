@@ -14,7 +14,7 @@ import { StepItem } from '../../interfaces/Data'
 
 interface GettingStartedProps {
     data: [StepItem],
-    error: string
+    error: string,
 }
 
 const Container = styled.div`
@@ -61,4 +61,4 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {
         }
     }
   
-  export default GettingStarted
+  export default GettingStarted;

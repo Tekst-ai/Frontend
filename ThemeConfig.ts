@@ -25,17 +25,6 @@ export interface Theme {
         lineDark: string,
         lineLight: string,
     }
-    // auto: {
-    //     name: string,
-    //     background: string,
-    //     backgroundSec: string,
-    //     backgroundAlt: string,
-    //     text: string,
-    //     textSec: string,
-    //     boxShadow: string,
-    //     lineDark: string,
-    //     lineLight: string,
-    // }
 }
 
 const themes: Theme = {
@@ -63,17 +52,6 @@ const themes: Theme = {
         lineDark: Colors.blackPri,
         lineLight: Colors.blackSec,
     },
-    // auto: {
-    //     name: 'auto',
-    //     background: Colors.blackPri,
-    //     backgroundSec: Colors.blackSec,
-    //     backgroundAlt: Colors.blackPri,
-    //     text: Colors.textWhite,
-    //     textSec: Colors.textGrey,
-    //     boxShadow: `${Colors.blackPri}66`,
-    //     lineDark: Colors.blackPri,
-    //     lineLight: Colors.blackSec,
-    // },
 };
 
 export interface Accent {

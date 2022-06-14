@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 import * as Yup from 'yup';
 import { Formik, Field } from 'formik';
 
@@ -14,7 +13,7 @@ import TextField from './TextField';
 
 const LoginForm: NextPage = () => {
     const setAuth = useAuth((s: any) => s.setAuth);
-    const router = useRouter()
+    const router = useRouter();
 
     const labels = {
         email: 'E-mail',
@@ -55,4 +54,4 @@ const LoginForm: NextPage = () => {
     )
 }
 
-export default LoginForm
+export default LoginForm;

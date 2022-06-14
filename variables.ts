@@ -1,14 +1,9 @@
 export const Colors = {
     blackPri: '#07071D',
-    // blackSec: '#2A2B3B',
-    // blackSec: '#161636',
-    // blackSec: '#252540',
     blackSec: '#1F1F3D',
 
     textWhite: '#FDFDFF',
     textGrey: '#8688A7',
-    // textGreyBlack: '#68697C',
-    // textGreyBlack: '#434454',
     textGreyBlack: '#595A72',
     textBlack: '#07071D',
 

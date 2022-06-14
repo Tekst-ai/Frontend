@@ -18,4 +18,4 @@ const Statistics: NextPage = () => {
     )
   }
   
-  export default Statistics
+  export default Statistics;

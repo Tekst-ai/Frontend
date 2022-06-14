@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { ThemeStylingProps } from "../../interfaces/Styling";
 
+import { ThemeStylingProps } from "../../interfaces/Styling";
 import useStore, { useAccent } from "../../store";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import { Breakpoint, Colors, Transition } from "../../variables";
@@ -12,7 +12,7 @@ interface HelpNavigationCardProps {
     link: string,
     icon: React.ReactNode,
     title: string,
-    type: "link" | "button"
+    type: "link" | "button",
 }
 
 const Container = styled.li`
@@ -34,7 +34,7 @@ const Container = styled.li`
 interface LinkContentProps {
     theme: keyof Theme,
     pathName: string,
-    accent: string
+    accent: string,
 }
 
 const LinkContent = styled.a<LinkContentProps>`
@@ -168,8 +168,8 @@ const ButtonContent = styled.button<ThemeStylingProps>`
 `
 
 const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, title, type }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
     const router = useRouter();
    
     const handleClick = () => {
@@ -199,4 +199,4 @@ const HelpNavigationCard: NextPage<HelpNavigationCardProps> = ({ link, icon, tit
     )
 }
 
-export default HelpNavigationCard
+export default HelpNavigationCard;

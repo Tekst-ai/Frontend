@@ -28,7 +28,6 @@ const Table = styled.table<ThemeAccentStylingProps>`
 
     td {
         padding: 0.375rem 0.125rem;
-        /* font-size: 1.125rem; */
         border-bottom: 1px solid ${({ theme }) => theme.lineLight};
 
         &:first-of-type {
@@ -59,8 +58,8 @@ const Table = styled.table<ThemeAccentStylingProps>`
 `
 
 const CategoryListSmall: NextPage = () => {
-    const accent: keyof Accent = useAccent((s: any)  => s.accent)
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const accent: keyof Accent = useAccent((s: any)  => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container theme={themes[theme]}>
@@ -84,4 +83,4 @@ const CategoryListSmall: NextPage = () => {
     )
 }
 
-export default CategoryListSmall
+export default CategoryListSmall;

@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { IoRocket, IoChatbubbles, IoHelpBuoy } from "react-icons/io5"
 import styled from "styled-components";
+
 import { Routes } from "../../constants";
 import { Breakpoint } from "../../variables";
-
 import HelpNavigationCard from "./HelpNavigationCard";
 
 const Container = styled.ul`
@@ -34,4 +34,4 @@ const HelpNavigation: NextPage = () => {
     )
 }
 
-export default HelpNavigation
+export default HelpNavigation;

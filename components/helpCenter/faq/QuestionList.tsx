@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+
 import { FaqItem } from '../../../interfaces/Data'
 import { Breakpoint } from '../../../variables'
 import { Error } from '../../alerts'
-
 import QuestionBlock from './QuestionBlock'
 
 interface QuestionListProps {
     data: [FaqItem],
-    error: string
+    error: string,
 }
 
 const Container = styled.ul`
@@ -45,4 +45,4 @@ const QuestionList: NextPage<QuestionListProps> = ({ data, error }) => {
     )
 }
 
-export default QuestionList
+export default QuestionList;

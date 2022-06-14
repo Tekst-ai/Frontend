@@ -8,7 +8,7 @@ import { Breakpoint } from '../../variables'
 
 interface HelpTitleProps {
     title: string,
-    text: string
+    text: string,
 }
 
 const Container = styled.div<ThemeStylingProps>`
@@ -48,7 +48,7 @@ const Container = styled.div<ThemeStylingProps>`
 `
 
 const HelpTitle: NextPage<HelpTitleProps> = ({ title, text }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
     
     return (
         <Container theme={themes[theme]}>
@@ -59,4 +59,4 @@ const HelpTitle: NextPage<HelpTitleProps> = ({ title, text }) => {
     )
 }
 
-export default HelpTitle
+export default HelpTitle;

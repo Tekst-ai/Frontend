@@ -12,7 +12,7 @@ interface TextFieldProps {
 }
 
 const TextField: NextPage<TextFieldProps> = ({ ...props }) => {
-    const [field, meta] = useField(props)
+    const [field, meta] = useField(props);
     const errorText = meta.error && meta.touched ? meta.error : '';
 
     return (
@@ -28,4 +28,4 @@ const TextField: NextPage<TextFieldProps> = ({ ...props }) => {
     )
 }
 
-export default TextField
+export default TextField;

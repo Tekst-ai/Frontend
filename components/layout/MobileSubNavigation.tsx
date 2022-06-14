@@ -65,17 +65,18 @@ const LinkButton = styled.button<ThemeStylingProps>`
     }
 `
 
+/* eslint-disable @next/next/no-img-element */
 const MobileSubNavigation: NextPage = () => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent: keyof Accent = useAccent((s: any) => s.accent);
     const accentColor = accentColors[accent][theme];
     const router = useRouter();
 
-    const setAuth = useAuth((s: any) => s.setAuth)
+    const setAuth = useAuth((s: any) => s.setAuth);
     const handleAuth = () => {
-        setAuth(false)
-        localStorage.setItem("auth", String(false))
-        router.push(Routes.LOGIN)
+        setAuth(false);
+        localStorage.setItem("auth", String(false));
+        router.push(Routes.LOGIN);
     }
 
     return (

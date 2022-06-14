@@ -12,7 +12,7 @@ interface PrimaryButtonProps {
     type: "button" | "submit" | "reset",
     disabled?: boolean,
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    className?: string
+    className?: string,
 }
 
 const Button = styled.button<ThemeAccentStylingProps>`
@@ -46,4 +46,4 @@ const PrimaryButton: NextPage<PrimaryButtonProps> = ({ children, type, disabled 
     )
 }
 
-export default PrimaryButton
+export default PrimaryButton;

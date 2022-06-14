@@ -52,4 +52,4 @@ const TextLoading: NextPage<TextLoadingProps> = ({ width, height }) => {
     )
 }
 
-export default TextLoading
+export default TextLoading;

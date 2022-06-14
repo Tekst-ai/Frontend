@@ -17,7 +17,7 @@ const Container = styled.div`
 
 interface FaqProps {
     data: [FaqItem],
-    error: string
+    error: string,
 }
 
 const Faq: NextPage<FaqProps> = ({ data, error }) => {
@@ -55,4 +55,4 @@ export async function getStaticProps() {
     }
 }
   
-export default Faq
+export default Faq;

@@ -2,10 +2,8 @@ import '../styles/globals.scss'
 import type { ReactNode, ReactElement } from 'react'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
-import Head from 'next/head'
 
 import { BaseLayout } from '../layouts'
-import { TitleFormat } from '../services/title'
 import { ProtectedRoute } from '../components/routing'
 import { useData } from '../hooks/useData'
 import { CheckEnv } from '../services/checks'
@@ -44,4 +42,4 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     )
 }
 
-export default MyApp
+export default MyApp;

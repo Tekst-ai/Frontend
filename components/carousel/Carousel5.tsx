@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
+
 import { useData } from '../../hooks/useData';
 import { CheckEnv } from '../../services/checks';
 import { BigNumberFormatLong } from '../../services/format';
-
 import { Growth } from '../dynamicIcons';
 import IconContainerCarousel from './IconContainerCarousel';
 import TextContainerCarousel from './TextContainerCarousel';
@@ -27,4 +27,4 @@ const Carousel5: NextPage = () => {
     )
 }
 
-export default Carousel5
+export default Carousel5;

@@ -6,7 +6,7 @@ import useStore from '../../store'
 import themes, { Theme } from '../../ThemeConfig'
 
 interface InfoProps {
-    message: string
+    message: string,
 }
 
 const Container = styled.div<ThemeStylingProps>`
@@ -18,7 +18,7 @@ const Container = styled.div<ThemeStylingProps>`
 `
 
 const Info: NextPage<InfoProps> = ({ message }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container theme={themes[theme]}>
@@ -27,4 +27,4 @@ const Info: NextPage<InfoProps> = ({ message }) => {
     )
 }
 
-export default Info
+export default Info;

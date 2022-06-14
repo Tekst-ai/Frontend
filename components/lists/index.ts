@@ -3,5 +3,5 @@ import CategoryListSmall from "./CategoryListSmall";
 
 export {
     CategoryList,
-    CategoryListSmall
+    CategoryListSmall,
 }

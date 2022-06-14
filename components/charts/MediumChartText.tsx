@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { useCallback, useState } from 'react'
 
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { PercentageCalculator } from '../../services/calculations'
 import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
-import { useCallback, useState } from 'react'
 import { Breakpoint, Colors } from '../../variables'
 import { AccentStylingProps } from '../../interfaces/Styling'
 
@@ -36,7 +36,6 @@ const Container = styled.div<ContainerProps>`
     margin-bottom: 1rem;
     border-radius: 10px;
     padding: 1rem;
-    /* padding-bottom: 0.5rem; */
     box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "2px 4px"} ${({ theme }) => theme.boxShadow};
     
     @media (min-width: 500px) {
@@ -58,7 +57,6 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: flex-start;
     height: 100%;
-    /* margin-bottom: 0.5rem; */
 `
 
 const IconContainer = styled.div<AccentStylingProps>`
@@ -159,14 +157,13 @@ const NumberContainer = styled.div<NumberContainerProps>`
             color: ${({ accent }) => accent};
         }
     }
-
 `
 
 const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, dataRight, showProgress = true, showIcon = true, marginRight = false, marginBottom = false, icon, data, oldData = 0, title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const accent: keyof Accent = useAccent((s: any) => s.accent);
 
-    const [height, setHeight] = useState(0)
+    const [height, setHeight] = useState(0);
         
     const refContainer = useCallback((node: any) => {
         if (node !== null) {
@@ -210,4 +207,4 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, da
     )
 }
 
-export default MediumChartText
+export default MediumChartText;
