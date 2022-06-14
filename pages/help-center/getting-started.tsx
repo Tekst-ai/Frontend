@@ -30,7 +30,7 @@ const GettingStarted: NextPage<GettingStartedProps> = ({ data, error }) => {
                 text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
             />
 
-            { data !== undefined && data !== null ?
+            { data[0] !== undefined && data !== null ?
                 data[0].attributes.stepContainer.map((item: any, index: number) => (
                     <StepListing key={index} title={item.Title} steps={item.Steps}/>
                 )):

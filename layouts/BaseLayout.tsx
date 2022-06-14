@@ -108,11 +108,9 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     useEffect(() => {
         const rememberedTheme = localStorage.getItem('theme');
         const rememberedAccent = localStorage.getItem('accent');
-        // const rememberedMenu = localStorage.getItem('menu');
         if (rememberedTheme && rememberedAccent) {
             setTheme(rememberedTheme);
             setAccent(rememberedAccent);
-            // setMenu(rememberedMenu)
         }
 
     }, [setTheme, setAccent, setMenu]);  
