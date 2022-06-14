@@ -21,4 +21,4 @@ const Carousel3: NextPage = () => {
     )
 }
 
-export default Carousel3
+export default Carousel3;

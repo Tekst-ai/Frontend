@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import styled, { createGlobalStyle } from 'styled-components';
+import { useRouter } from 'next/router';
 
 import themes, { Accent, accentColors, Theme } from '../ThemeConfig';
 import useStore, { useAccent, useMenu } from '../store';
 import { Menu, MobileMenu } from '../components/layout';
 import { Breakpoint, Colors, Transition } from '../variables';
-import { useRouter } from 'next/router';
 import { Routes } from '../constants';
 import { ThemeAccentStylingProps } from '../interfaces/Styling';
 
@@ -72,7 +72,7 @@ const Main = styled.main<MainProps>`
 interface SubContainerProps {
     theme: keyof Theme,
     height: number,
-    pathName: string
+    pathName: string,
 }
 
 const SubContainer = styled.div<SubContainerProps>`
@@ -138,4 +138,4 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
     )
   }
 
-export default Layout
+export default Layout;

@@ -89,16 +89,13 @@ const BottomContainer = styled.div<ThemeStylingProps>`
                 color: ${({ theme }) => theme.textSec};
                 text-transform: uppercase;
                 font-size: 0.75rem;
-                /* margin-left: 0.375rem; */
             }
 
             div {
                 margin-top: 0.5rem;
-                /* background: ${({ theme }) => theme.background}; */
                 padding: 0.75rem 1.5rem;
                 border-radius: 8px;
                 padding-left: 0.5rem;
-                /* box-shadow: 0 ${({ theme }) => theme.name === "dark" ? "3px 12px" : "1px 4px"} ${({ theme }) => theme.boxShadow}; */
 
                 p {
                     font-weight: 500;
@@ -185,6 +182,6 @@ const Account: NextPage = () => {
             </div>
         </>
     )
-  }
+}
   
-  export default Account
+  export default Account;

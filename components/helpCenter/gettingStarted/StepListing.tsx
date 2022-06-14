@@ -6,7 +6,7 @@ import ListingStep from './ListingStep'
 
 interface StepListingProps {
     title: string,
-    steps: [StepItem]
+    steps: [StepItem],
 }
 
 const Container = styled.div`
@@ -50,4 +50,4 @@ const StepListing: NextPage<StepListingProps> = ({ title, steps }) => {
     )
 }
 
-export default StepListing
+export default StepListing;

@@ -2,13 +2,13 @@ import type { NextPage } from 'next';
 import styled from 'styled-components';
 import { FiMoreHorizontal, FiCornerDownLeft } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import useStore from '../../store';
 import themes, { Theme } from '../../ThemeConfig';
-import { Breakpoint, Colors, Transition } from '../../variables';
+import { Breakpoint, Transition } from '../../variables';
 import MobileNavigation from './MobileNavigation';
 import MobileSubNavigation from './MobileSubNavigation';
-import { useRouter } from 'next/router';
 import { Routes } from '../../constants';
 import { ThemeStylingProps } from '../../interfaces/Styling';
 
@@ -96,4 +96,4 @@ const MobileMenu: NextPage = () => {
     )
 }
 
-export default MobileMenu
+export default MobileMenu;

@@ -1,9 +1,10 @@
 import type { NextPage } from "next"
 import { FiAlertCircle, FiCheckCircle, FiXCircle } from "react-icons/fi"
+
 import { Colors } from "../../variables"
 
 interface CheckStatusProps {
-    status: any
+    status: any,
 }
 
 const CheckStatus: NextPage<CheckStatusProps> = ({ status }) => {
@@ -34,4 +35,4 @@ const CheckStatus: NextPage<CheckStatusProps> = ({ status }) => {
     }
 }
 
-export default CheckStatus
+export default CheckStatus;

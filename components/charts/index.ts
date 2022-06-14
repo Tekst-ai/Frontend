@@ -5,5 +5,5 @@ import BigDonutChartContainer from "./BigDonutChartContainer";
 export {
     MediumChartText,
     BigChartNoText,
-    BigDonutChartContainer
+    BigDonutChartContainer,
 }

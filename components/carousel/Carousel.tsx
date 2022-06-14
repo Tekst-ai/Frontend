@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Transition } from '../../variables';
 
+import { Transition } from '../../variables';
 import Carousel1 from './Carousel1';
 import Carousel2 from './Carousel2';
 import Carousel3 from './Carousel3';
@@ -31,9 +31,9 @@ const Carousel: NextPage = () => {
         let timer = setTimeout(
             () => {
                 let firstSlide = slides[0];
-                slides.shift()
-                slides.push(firstSlide)
-                setCarouselItem(slides[0])
+                slides.shift();
+                slides.push(firstSlide);
+                setCarouselItem(slides[0]);
             },
             delay
         );
@@ -51,4 +51,4 @@ const Carousel: NextPage = () => {
     )
 }
 
-export default Carousel
+export default Carousel;

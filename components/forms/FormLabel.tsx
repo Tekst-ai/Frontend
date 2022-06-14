@@ -7,8 +7,8 @@ import { Transition } from '../../variables';
 import { ThemeAccentStylingProps } from '../../interfaces/Styling';
 
 interface FormLabelProps {
-  children: React.ReactNode;
-  label?: string;
+  children: React.ReactNode,
+  label?: string,
 }
 
 const StyledLabel = styled.label<ThemeAccentStylingProps>`
@@ -58,4 +58,4 @@ const FormLabel: NextPage<FormLabelProps> = ({ children, label }) => {
     )
 }
 
-export default FormLabel
+export default FormLabel;

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
-import { AccentStylingProps } from '../../interfaces/Styling';
 
+import { AccentStylingProps } from '../../interfaces/Styling';
 import useStore, { useAccent } from '../../store';
 import { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Colors } from '../../variables';
@@ -28,14 +28,14 @@ const AnimationContainer = styled.div`
 const AnimationSubContainer = styled.div<AccentStylingProps>`
     @keyframes ldio-xjni4o04qv-o {
         0%    { opacity: 1; transform: translate(0 0) }
-    49.99% { opacity: 1; transform: translate(3.5rem,0) }
-    50%    { opacity: 0; transform: translate(3.5rem,0) }
-    100%    { opacity: 0; transform: translate(0,0) }
+        49.99% { opacity: 1; transform: translate(3.5rem,0) }
+        50%    { opacity: 0; transform: translate(3.5rem,0) }
+        100%    { opacity: 0; transform: translate(0,0) }
     }
     @keyframes ldio-xjni4o04qv {
         0% { transform: translate(0,0) }
-    50% { transform: translate(3.5rem,0) }
-    100% { transform: translate(0,0) }
+        50% { transform: translate(3.5rem,0) }
+        100% { transform: translate(0,0) }
     }
 
     width: 100%;

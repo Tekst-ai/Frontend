@@ -12,17 +12,16 @@ import { Transition } from '../../variables';
 import { Routes } from '../../constants';
 
 interface HelpNavigationProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 interface HelpNavigationListProps {
     isOpen: boolean,
-    theme: keyof Theme
+    theme: keyof Theme,
 }
 
 const Container = styled.div<HelpNavigationListProps>`
     padding: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "0 1rem" : "0"};
-    /* margin-top: 1.25rem; */
     margin-top: 1rem;
     transition: ${Transition.fast};
 
@@ -40,28 +39,14 @@ const Container = styled.div<HelpNavigationListProps>`
         z-index: 2;
         
         span {
-            /* font-size: 1.125rem; */
             font-size: 1rem;
             font-weight: 500;
             position: absolute;
             transition: ${Transition.fast};
             left: 2.25rem;
-            /* left: 2rem; */
             opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
         }
-        
-        /* svg:last-of-type {
-            position: absolute;
-            transition: ${Transition.fast};
-            right: 0;
-            opacity: ${(HelpNavigationListProps) => HelpNavigationListProps.isOpen ? "1" : "0"};
-
-            path {
-                stroke-width: 70px;
-            }
-        } */
     }
-    
 `
 
 interface LinkTextProps {
@@ -72,8 +57,6 @@ interface LinkTextProps {
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.text}; */
-    /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.textSec}; */
     color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent : pathName.includes(Routes.HELPCENTER) ? ({ theme }) => theme.text : ({ theme }) => theme.textSec};
 
     span {
@@ -81,7 +64,6 @@ const LinkText = styled.a<LinkTextProps>`
     }
 
     &:hover {
-        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.text}; */
         color: ${({ pathName, href }) => pathName === href ? ({ accent }) => accent : pathName.includes(Routes.HELPCENTER) ? ({ accent }) => accent : ({ theme }) => theme.text};
     }
 `
@@ -147,7 +129,6 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
                     <li>
                         <Link href={Routes.GETTINGSTARTED} passHref>
                             <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
-                                {/* <IoRocket fontSize={16} strokeWidth={2.25}/> */}
                                 <IoRocket fontSize={14} strokeWidth={2.25}/>
 
                                 <span>Aan de slag</span>
@@ -158,7 +139,6 @@ const HelpNavigation: NextPage<HelpNavigationProps> = ({ isOpen }) => {
                     <li>
                         <Link href={Routes.FAQ} passHref>
                             <LinkTextAlt open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
-                                {/* <IoChatbubbles fontSize={16} strokeWidth={2.25}/> */}
                                 <IoChatbubbles fontSize={14} strokeWidth={2.25}/>
 
                                 <span>FAQ</span>

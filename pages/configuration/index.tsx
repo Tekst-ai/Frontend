@@ -47,7 +47,7 @@ const SubContainer = styled.div`
 `
 
 const Configuration: NextPage = () => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <>
@@ -83,4 +83,4 @@ const Configuration: NextPage = () => {
     )
   }
   
-  export default Configuration
+  export default Configuration;

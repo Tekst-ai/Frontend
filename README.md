@@ -38,6 +38,10 @@ To experience the performance and to test the build locally, you can run ```yarn
 
 All the necessary commands and variables are in the render.yaml file. A push to the main will trigger a build and a deploy.
 
+## Live site
+
+The website is deployed on [http://app.tekst.dev.s3-website-eu-west-1.amazonaws.com/](http://app.tekst.dev.s3-website-eu-west-1.amazonaws.com/).
+
 ## Login
 
 At the moment the login is not implemented so you cas use whatever email you want. As long as it is formatted correctly, it will work.

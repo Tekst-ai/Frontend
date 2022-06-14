@@ -22,4 +22,4 @@ const FullPageLoader: NextPage = () => {
     )
 }
 
-export default FullPageLoader
+export default FullPageLoader;

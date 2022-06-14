@@ -3,5 +3,5 @@ import AccentSwitcher from "./AccentSwitcher";
 
 export {
     ThemeSwitcher,
-    AccentSwitcher
+    AccentSwitcher,
 }

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FiHome, FiBarChart2, FiGrid } from 'react-icons/fi'
 import { useRouter } from 'next/router';
 
-import { Colors, Transition } from '../../variables';
+import { Transition } from '../../variables';
 import useStore, { useAccent } from '../../store';
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Tooltip } from '../helpers';
@@ -22,10 +22,8 @@ const Container = styled.nav<ThemeStylingProps>`
     &:after {
         content: '';
         width: 100%;
-        /* transform: translateX(8px); */
         height: 2px;
         background: ${({ theme }) => theme.lineLight};
-        /* margin-top: 0.8125rem; */
         margin-top: 0.5rem;
         transition: ${Transition.fast};
     }
@@ -37,7 +35,6 @@ interface NavigationListProps {
 
 const NavigationList = styled.ul<NavigationListProps>`
     li {
-        /* margin-bottom: 0.375rem; */
         margin-bottom: 0.25rem;
         display: flex;
         position: relative;
@@ -45,12 +42,10 @@ const NavigationList = styled.ul<NavigationListProps>`
         a {
             width: 100%;
             height: auto;
-            /* padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.75rem 1rem" : "0.75rem"}; */
             padding: ${(NavigationListProps) => NavigationListProps.isOpen ? "0.875rem 1rem" : "0.75rem"};
             border-radius: 6px;
             display: flex;
             justify-content: center;
-            /* align-items: center; */
             position: relative;
             transition: ${Transition.fast};
             z-index: 2;
@@ -63,11 +58,9 @@ const NavigationList = styled.ul<NavigationListProps>`
 
             span {
                 transition: ${Transition.superFast};
-                /* font-size: 1.25rem; */
                 font-size: 1rem;
                 font-weight: 500;
                 margin-left: 1rem;
-                /* margin-left: 0.75rem; */
                 left: 2.25rem
             }
         }
@@ -88,16 +81,14 @@ interface LinkTextProps {
     pathName: string,
     accent: string,
     open: boolean,
-    theme: keyof Theme
+    theme: keyof Theme,
 }
 
 const LinkText = styled.a<LinkTextProps>`
-    /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "transparent"}; */
     background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : "transparent"};
     box-shadow: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "0 1px 4px " + LinkTextProps.theme.boxShadow : "0 1px 4px " + LinkTextProps.theme.background};
 
     & span {
-        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "inherit"}; */
         color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.text : ({theme}) => theme.textSec};
         opacity: ${(LinkTextProps) => LinkTextProps.open ? 1 : 0};
         position: absolute;
@@ -105,12 +96,10 @@ const LinkText = styled.a<LinkTextProps>`
     }
     
     & svg {
-        /* color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : "inherit"}; */
         color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({theme}) => theme.textSec};
     }
 
     &:hover {
-        /* background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({ theme }) => theme.lineLight}; */
         background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : ({ theme }) => theme.lineLight};
         
         span {
@@ -134,7 +123,6 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={Routes.DASHBOARD} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
-                            {/* <FiHome fontSize={18} strokeWidth={2.5}/> */}
                             <FiHome fontSize={18} strokeWidth={2.5}/>
 
                             <span>Dashboard</span>
@@ -148,7 +136,6 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={Routes.STATISTICS} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
-                            {/* <FiBarChart2 fontSize={20} strokeWidth={3}/> */}
                             <FiBarChart2 fontSize={18} strokeWidth={3}/>
 
                             <span>Statistieken</span>
@@ -161,7 +148,6 @@ const Navigation: NextPage<NavigationProps> = ({ isOpen }) => {
                 <li>
                     <Link href={Routes.CATEGORIES} passHref>
                         <LinkText pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]} open={isOpen}>
-                            {/* <FiGrid fontSize={20} strokeWidth={2.25}/> */}
                             <FiGrid fontSize={18} strokeWidth={2.25}/>
 
                             <span>Categorieën</span>

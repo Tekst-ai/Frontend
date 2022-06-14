@@ -6,7 +6,7 @@ interface TernaryButtonProps {
     type: "button" | "submit" | "reset",
     disabled?: boolean,
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-    className?: string
+    className?: string,
 }
 
 const TernaryButton: NextPage<TernaryButtonProps> = ({ children, type, disabled = false, onClick, className }) => {
@@ -17,4 +17,4 @@ const TernaryButton: NextPage<TernaryButtonProps> = ({ children, type, disabled 
     )
 }
 
-export default TernaryButton
+export default TernaryButton;

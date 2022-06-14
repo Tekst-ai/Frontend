@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import { useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import styled from 'styled-components'
-import { ThemeStylingProps } from '../../../interfaces/Styling'
 
+import { ThemeStylingProps } from '../../../interfaces/Styling'
 import useStore, { useAccent } from '../../../store'
 import themes, { Accent, accentColors, Theme } from '../../../ThemeConfig'
 import { Breakpoint, Transition } from '../../../variables'
@@ -64,7 +64,7 @@ const Question = styled.button<QuestionProps>`
 
 interface AnswerProps {
     theme: keyof Theme,
-    open: boolean
+    open: boolean,
 }
 
 const Answer = styled.button<AnswerProps>`
@@ -98,10 +98,10 @@ const Answer = styled.button<AnswerProps>`
 `
 
 const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     const handleClick = () => {
         setOpen(!open)
@@ -129,4 +129,4 @@ const QuestionBlock: NextPage<QuestionBlockProps> = ({ question, answer }) => {
     )
 }
 
-export default QuestionBlock
+export default QuestionBlock;

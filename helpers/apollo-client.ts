@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+
 import { CheckEnv } from '../services/checks';
 
 const client = new ApolloClient({

@@ -38,8 +38,8 @@ const Container = styled.div<ContainerProps>`
 `
 
 interface SubContainerProps {
-    theme: keyof Theme
-    open: boolean
+    theme: keyof Theme,
+    open: boolean,
 }
 
 const SubContainer = styled.div<SubContainerProps>`
@@ -98,7 +98,7 @@ const SubContainer = styled.div<SubContainerProps>`
 
 interface MessageProps {
     theme: keyof Theme,
-    open: boolean
+    open: boolean,
 }
 
 const Message = styled.p<MessageProps>`
@@ -110,12 +110,12 @@ const Message = styled.p<MessageProps>`
 `
 
 const Error: NextPage<ErrorProps> = ({ message, padding }) => {
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     const handleClick = () => {
-        setOpen(!open)
+        setOpen(!open);
     }
 
     return (
@@ -135,11 +135,10 @@ const Error: NextPage<ErrorProps> = ({ message, padding }) => {
                     </div>
                 </div>
 
-                    
                 <Message open={open} theme={themes[theme]}>{message}</Message>
             </SubContainer>
         </Container>
     )
 }
 
-export default Error
+export default Error;

@@ -47,8 +47,8 @@ const Fade = styled.div<ThemeStylingProps>`
 
 const MediumLineChart: NextPage = () => {
     const accent: keyof Accent = useAccent((s: any) => s.accent);
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const color = accentColors[accent][theme]
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const color = accentColors[accent][theme];
 
     const data = {
         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],

@@ -17,9 +17,9 @@ interface BigChartProps {
 }
 
 interface ContainerProps {
-    theme: keyof Theme;
-    marginRight: boolean;
-    marginBottom: boolean;
+    theme: keyof Theme,
+    marginRight: boolean,
+    marginBottom: boolean,
 }
 
 const Container = styled.div<ContainerProps>`
@@ -58,7 +58,7 @@ const TitleContainer = styled.div<ThemeStylingProps>`
 `
 
 interface ChartContainerProps {
-    height: number
+    height: number,
 }
 
 const ChartContainer = styled.div<ChartContainerProps>`
@@ -80,7 +80,7 @@ const ChartContainer = styled.div<ChartContainerProps>`
 const BigChartNoText: NextPage<BigChartProps> = ({ marginRight = false, title, marginBottom = false, data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
 
-    const [height, setHeight] = useState(0)
+    const [height, setHeight] = useState(0);
 
     const refContainer = useCallback((node: any) => {
         if (node !== null) {

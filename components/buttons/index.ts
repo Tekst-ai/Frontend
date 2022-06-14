@@ -3,5 +3,5 @@ import TernaryButton from "./TernaryButton";
 
 export {
     PrimaryButton,
-    TernaryButton
+    TernaryButton,
 }

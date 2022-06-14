@@ -32,10 +32,9 @@ ChartJS.register(
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Breakpoint, Colors } from '../../variables';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { DonutData } from '../../interfaces/Data';
 
 interface BigChartDonutProps {
-    data: [DonutData]
+    data: any,
 }
 
 const Container = styled.div`
@@ -59,7 +58,7 @@ const BigChartDonut: NextPage<BigChartDonutProps> = ({ data }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);
     const { width } = useWindowDimensions();
 
-    const sortedData = _.orderBy(data, ['totalEmails'], ['desc'])
+    const sortedData = _.orderBy(data, ['totalEmails'], ['desc']);
 
     const chartData = {
         labels: _.map(sortedData, "name"),
@@ -127,4 +126,4 @@ const BigChartDonut: NextPage<BigChartDonutProps> = ({ data }) => {
     )
 }
 
-export default BigChartDonut
+export default BigChartDonut;

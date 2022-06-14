@@ -9,7 +9,7 @@ import { Breakpoint, Colors } from '../../../variables'
 interface ListingStepProps {
     step: number,
     title: string,
-    text: string
+    text: string,
 }
 
 const Container = styled.li`
@@ -95,8 +95,8 @@ const Step = styled.div<ThemeAccentStylingProps>`
 `
 
 const ListingStep: NextPage<ListingStepProps> = ({ step, title, text }) => {
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container>
@@ -117,4 +117,4 @@ const ListingStep: NextPage<ListingStepProps> = ({ step, title, text }) => {
     )
 }
 
-export default ListingStep
+export default ListingStep;

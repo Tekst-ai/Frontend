@@ -29,10 +29,9 @@ import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
 import { Breakpoint, Colors } from "../../variables";
 import _ from "lodash";
-import { DonutData } from "../../interfaces/Data";
 
 interface BigLineChartProps {
-    data: [DonutData]
+    data: any,
 }
 
 const Container = styled.div`
@@ -49,8 +48,8 @@ const Container = styled.div`
 
 const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
     const accent: keyof Accent = useAccent((s: any) => s.accent);
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const color = accentColors[accent][theme]
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const color = accentColors[accent][theme];
 
     const FormatDateLabels = (dateArray: any) => {
         let formattedDateArray: any = [];
@@ -58,7 +57,7 @@ const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
             moment().locale('nl-be');
             formattedDateArray.push(moment(date).format('D MMMM'));
         })
-        return formattedDateArray.reverse()
+        return formattedDateArray.reverse();
     }
 
     const dataChart = {
@@ -164,4 +163,4 @@ const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
     )
 }
 
-export default BigLineChart
+export default BigLineChart;

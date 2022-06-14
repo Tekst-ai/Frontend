@@ -18,7 +18,7 @@ interface BottomNavigationProps {
 }
 
 interface ContainerProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 const Container = styled.div<ContainerProps>`
@@ -31,7 +31,7 @@ const Container = styled.div<ContainerProps>`
 `
 
 interface NavigationContainerProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 const NavigationContainer = styled.ul<NavigationContainerProps>`
@@ -124,7 +124,7 @@ const LinkButton = styled.button<LinkButtonProps>`
 
 interface CollapseProps {
     isOpen: boolean,
-    theme: keyof Theme
+    theme: keyof Theme,
 }
 
 const Collapse = styled.button<CollapseProps>`
@@ -169,14 +169,14 @@ const Collapse = styled.button<CollapseProps>`
 `
 
 const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) => {
-    const router = useRouter()
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
-    const theme: keyof Theme = useStore((s: any) => s.theme)
-    const menu = useMenu((s: any) => s.menu)
-    const setMenu = useMenu((s: any) => s.setMenu)
-    const { width } = useWindowDimensions()
+    const router = useRouter();
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
+    const menu = useMenu((s: any) => s.menu);
+    const setMenu = useMenu((s: any) => s.setMenu);
+    const { width } = useWindowDimensions();
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     
     const handleClick = () => {
         setOpen(!open);
@@ -194,10 +194,10 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
     
     const setAuth = useAuth((s: any) => s.setAuth)
     const handleAuth = () => {
-        setAuth(false)
-        localStorage.setItem("auth", String(false))
-        router.push(Routes.LOGIN)
-        setMenu(true)
+        setAuth(false);
+        localStorage.setItem("auth", String(false));
+        router.push(Routes.LOGIN);
+        setMenu(true);
     }
 
     return (

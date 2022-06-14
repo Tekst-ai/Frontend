@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 
 import { Routes } from "../../constants";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
-import { Colors, Transition } from "../../variables";
+import { Transition } from "../../variables";
 import useStore, { useAccent } from "../../store";
 
 interface LinkTextProps {
     theme: keyof Theme,
     accent: string,
-    pathName: string
+    pathName: string,
 }
 
 export const LinkText = styled.a<LinkTextProps>`
@@ -25,15 +25,6 @@ export const LinkText = styled.a<LinkTextProps>`
     border-radius: 7px;
     color: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ accent }) => accent : ({theme}) => theme.textSec};
     background: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? ({ theme }) => theme.backgroundSec : ({theme}) => theme.background};
-    
-    /* span {
-        position: absolute;
-        font-size: 0.625rem;
-        text-transform: uppercase;
-        color: ${({ theme }) => theme.text};
-        display: ${(LinkTextProps) => LinkTextProps.pathName === LinkTextProps.href ? "block" : "none"};
-        bottom: 0;
-    } */
     
     &:hover {
         background: ${({ theme }) => theme.backgroundSec};

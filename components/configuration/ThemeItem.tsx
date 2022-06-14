@@ -5,7 +5,6 @@ import { FiCheck } from 'react-icons/fi'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import useStore, { useAccent } from '../../store'
 import { Breakpoint, Colors, Transition } from '../../variables'
-import useWindowDimensions from '../../hooks/useWindowDimensions'
 import { AccentStylingProps } from '../../interfaces/Styling'
 
 interface ThemeItemProps {
@@ -34,7 +33,7 @@ const ThemeItemContainer = styled.div<ThemeItemContainerProps>`
 
 interface NavigationList {
     theme: string,
-    accent: string
+    accent: string,
 }
 
 const NavigationList = styled.ul<NavigationList>`
@@ -68,7 +67,7 @@ const NavigationList = styled.ul<NavigationList>`
 `
 
 interface ContentProps {
-    theme: string;
+    theme: string,
 }
 
 const Content = styled.div<ContentProps>`
@@ -161,8 +160,6 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
     const store: keyof Theme = useStore((s: any) => s.theme);
     const accent: keyof Accent = useAccent((s: any) => s.accent);
 
-    const { width } = useWindowDimensions();
-
     return (
         <ThemeItemContainer theme={theme} store={themes[store]}>
             <NavigationList theme={theme} accent={accentColors[accent][theme]}>
@@ -189,4 +186,4 @@ const ThemeItem: NextPage<ThemeItemProps> = ({ theme }) => {
     )
 }
 
-export default ThemeItem
+export default ThemeItem;

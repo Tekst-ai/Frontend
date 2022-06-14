@@ -19,7 +19,7 @@ import { Loading, TextLoading } from '../components/helpers'
 import { TitleFormat } from '../services/title'
 
 interface ContainerProps {
-    height: number
+    height: number,
 }
 
 const Container = styled.div<ContainerProps>`
@@ -78,8 +78,8 @@ const Dashboard: NextPage = () => {
     const menu = useMenu((s: any) => s.menu);
 
     const windowMeasures = useWindowDimensions();
-    const [winWidth, setWinWidth] = useState(windowMeasures.width)
-    const [winHeight, setWinHeight] = useState(windowMeasures.height)
+    const [winWidth, setWinWidth] = useState(windowMeasures.width);
+    const [winHeight, setWinHeight] = useState(windowMeasures.height);
     
     const refContainer = useCallback((node: any) => {
         if (node !== null) {
@@ -139,4 +139,4 @@ const Dashboard: NextPage = () => {
   )
 }
 
-export default Dashboard
+export default Dashboard;

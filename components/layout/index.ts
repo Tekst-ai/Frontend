@@ -5,5 +5,5 @@ import MobileMenu from "./MobileMenu";
 export {
     Menu,
     FullPageLoader,
-    MobileMenu
+    MobileMenu,
 }

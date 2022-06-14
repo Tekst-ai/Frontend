@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styled from 'styled-components'
+
+import useStore, { useAccent, useMenu } from '../../store'
 import { Routes } from '../../constants'
 import { useData } from '../../hooks/useData'
 import { CheckEnv } from '../../services/checks'
-
-import useStore, { useAccent, useMenu } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
 import { Breakpoint, Transition } from '../../variables'
 import { TextLoading, Tooltip } from '../helpers'
@@ -41,7 +41,7 @@ const TooltipContainer = styled.div`
 `
 
 interface ImageContainerProps {
-    isOpen: boolean
+    isOpen: boolean,
 }
 
 const ImageContainer = styled.a<ImageContainerProps>`
@@ -54,7 +54,7 @@ interface ProfileContainerProps {
     pathName: string,
     isOpen: boolean,
     accent: string,
-    theme: keyof Theme
+    theme: keyof Theme,
 }
 
 const ProfileContainer = styled.a<ProfileContainerProps>`
@@ -116,10 +116,10 @@ const Menu: NextPage = () => {
     const router = useRouter();
     const menu = useMenu((s: any) => s.menu);
     
-    const [isOpen, setIsOpen] = useState(menu)
+    const [isOpen, setIsOpen] = useState(menu);
 
     const handleOpen = (open: boolean) => {
-        setIsOpen(open)
+        setIsOpen(open);
     }
 
     const { data, isLoading, isError } = useData(CheckEnv(process.env.NEXT_PUBLIC_PROFILE_ENDPOINT));
@@ -169,4 +169,4 @@ const Menu: NextPage = () => {
     )
 }
 
-export default Menu
+export default Menu;

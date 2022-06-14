@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+
 import { AccentStylingProps } from '../../interfaces/Styling'
 import useStore, { useAccent } from '../../store'
 import { Accent, accentColors, Theme } from '../../ThemeConfig'
@@ -23,12 +24,12 @@ const Container = styled.div<AccentStylingProps>`
 `
 
 const HelpBackgroundSmall: NextPage = () => {
-    const accent: keyof Accent = useAccent((s: any) => s.accent)
-    const theme: keyof Theme = useStore((s: any) => s.theme)
+    const accent: keyof Accent = useAccent((s: any) => s.accent);
+    const theme: keyof Theme = useStore((s: any) => s.theme);
 
     return (
         <Container accent={accentColors[accent][theme]}/>
     )
 }
 
-export default HelpBackgroundSmall
+export default HelpBackgroundSmall;

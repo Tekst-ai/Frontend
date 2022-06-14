@@ -7,17 +7,13 @@ import { useData } from "../../hooks/useData";
 import { CheckEnv } from "../../services/checks";
 import useStore, { useAccent } from "../../store";
 import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
-import { Breakpoint, Colors, Transition } from "../../variables";
+import { Colors, Transition } from "../../variables";
 
 const ColorList = styled.form`
     display: flex;
     align-items: center;
     min-height: 3.5rem;
     flex-wrap: wrap;
-
-    @media (min-width: ${Breakpoint.mobile}) {
-
-    }
 `
 
 interface ColorListItemProps {
@@ -27,7 +23,6 @@ interface ColorListItemProps {
 }
 
 const ColorListItem = styled.label<ColorListItemProps>`
-    /* margin-right: 1.25rem; */
     width: 4rem;
     height: 3.5rem;
     cursor: pointer;
@@ -139,4 +134,4 @@ const AccentSwitcher: NextPage = () => {
     )
 }
 
-export default AccentSwitcher
+export default AccentSwitcher;
