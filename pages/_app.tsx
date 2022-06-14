@@ -38,13 +38,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     return (
         <ProtectedRoute>
             <BaseLayout>
-                <Head>
-                    <title>
-                        { TitleFormat(Component.name) }
-                    </title>
-                </Head>
-                    
-                    <Component {...pageProps} />
+                <Component {...pageProps} />
             </BaseLayout>
         </ProtectedRoute>
     )

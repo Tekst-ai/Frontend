@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
-import { ThemeStylingProps } from "../../interfaces/Styling";
 
+import { ThemeStylingProps } from "../../interfaces/Styling";
+import { DonutData } from "../../interfaces/Data";
 import useStore from "../../store";
 import themes, { Theme } from "../../ThemeConfig";
 import { Breakpoint } from "../../variables";
@@ -12,7 +13,7 @@ interface BigChartProps {
     title: string,
     marginRight?: boolean,
     marginBottom?: boolean,
-    data: any,
+    data: [DonutData],
 }
 
 interface ContainerProps {

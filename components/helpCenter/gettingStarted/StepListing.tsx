@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import { StepItem } from '../../../interfaces/Data'
 import { Breakpoint } from '../../../variables'
 import ListingStep from './ListingStep'
 
 interface StepListingProps {
     title: string,
-    steps: any
+    steps: [StepItem]
 }
 
 const Container = styled.div`

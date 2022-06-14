@@ -6,7 +6,6 @@ import useStore, { useAccent } from '../../store'
 import { PercentageCalculator } from '../../services/calculations'
 import { PercentageEvolution } from '../helpers'
 import { BigNumberFormat } from '../../services/format'
-import MediumLineChart from './MediumLineChart'
 import { useCallback, useState } from 'react'
 import { Breakpoint, Colors } from '../../variables'
 import { AccentStylingProps } from '../../interfaces/Styling'
@@ -162,15 +161,6 @@ const NumberContainer = styled.div<NumberContainerProps>`
     }
 
 `
-
-// interface ChartContainerProps {
-//     height: number
-// }
-
-// const ChartContainer = styled.div<ChartContainerProps>`
-//     width: 100%;
-//     height: calc(100% - ${({ height }) => height}px);
-// `
 
 const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, dataRight, showProgress = true, showIcon = true, marginRight = false, marginBottom = false, icon, data, oldData = 0, title }) => {
     const theme: keyof Theme = useStore((s: any) => s.theme);

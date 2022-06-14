@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tekst.ai
 
-## Getting Started
+This is the front-end of the Tekst.ai service. It's a project made by [Jan Deschacht](https://github.com/pgm-jandeschacht) commissioned by Arteveldehogeschool and [Tekst.ai](https://tekst.ai) as a final project for @Work5 en the associate degree Programming.
 
-First, run the development server:
+## Technical overview
 
-```bash
-npm run dev
-# or
-yarn dev
+The website is made in [Next.js](https://nextjs.org/) and uses [TypeScript](https://www.typescriptlang.org/). It also uses [ChartJS](https://www.chartjs.org/) for the graphics and charts.
+
+## Setup and usage
+
+The app uses **yarn** to install dependencies and to run the website as well.
+
+### Install dependencies
+
+Run ```yarn install``` to install all dependencies.
+
+### Environment variables
+
+Make a file called `.env-local` in the root directory of the project and add the following lines:
+
+```
+NEXT_PUBLIC_PROFILE_ENDPOINT=/static/data/user.json
+NEXT_PUBLIC_CATEGORIES_ENDPOINT=/static/data/categoryList.json
+NEXT_PUBLIC_DASHBOARD_ENDPOINT=/static/data/dashboard.json
+NEXT_PUBLIC_TOTAL_EMAILS_ENDPOINT=https://categorize.tekst.ai:5000/count
+NEXT_PUBLIC_CMS_ENDPOINT=https://strapi-lhft.onrender.com/graphql
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run the website
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Run ```yarn dev``` to run the website locally. This will start the server and prompt you to open [localhost:3000](https://localhost:3000). Here you can access the website.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Local build
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To experience the performance and to test the build locally, you can run ```yarn build``` to build the website. This will create a folder called `build` in the root directory of the project. afterward you can run ```yarn start``` to run the website.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+All the necessary commands and variables are in the render.yaml file. A push to the main will trigger a build and a deploy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Login
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+At the moment the login is not implemented so you cas use whatever email you want. As long as it is formatted correctly, it will work.

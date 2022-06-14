@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import styled from 'styled-components'
 
 import { HelpNavigation, SupportCard } from '../../components/helpCenter'
@@ -7,32 +8,41 @@ import HelpBackgroundSmall from '../../components/helpCenter/HelpBackgroundSmall
 import HelpTitle from '../../components/helpCenter/HelpTitle'
 import { GET_FAQ_ITEMS } from '../../graphql/faqItems'
 import client from '../../helpers/apollo-client'
+import { FaqItem } from '../../interfaces/Data'
+import { TitleFormat } from '../../services/title'
 
 const Container = styled.div`
     position: relative;
 `
 
 interface FaqProps {
-    data: any,
+    data: [FaqItem],
     error: string
 }
 
 const Faq: NextPage<FaqProps> = ({ data, error }) => {
     return (
-        <Container>
-            <HelpBackgroundSmall/>
+        <>
+            <Head>
+                <title>
+                        { TitleFormat("FAQ") }
+                </title>
+            </Head>
+            <Container>
+                <HelpBackgroundSmall/>
 
-            <HelpNavigation/>
+                <HelpNavigation/>
 
-            <HelpTitle
-                title="FAQ"
-                text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
-            />
+                <HelpTitle
+                    title="FAQ"
+                    text="Tekst placeholder tekst placeholder tekst placeholder tekst placeholder tekst placeholder"
+                />
 
-            <QuestionList data={data} error={error}/>
+                <QuestionList data={data} error={error}/>
 
-            <SupportCard/>
-        </Container>
+                <SupportCard/>
+            </Container>
+        </>
     )
 }
 

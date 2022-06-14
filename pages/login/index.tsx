@@ -15,12 +15,8 @@ import { FiChevronDown } from 'react-icons/fi'
 import { ButtonContainer } from '../categories'
 import { ThemeAccentStylingProps } from '../../interfaces/Styling'
 
-const GlobalStyle = createGlobalStyle`
-    html, body {
-        /* background: ${({ theme }: any ) => theme.background}; */
-        /* color: ${({ theme }: any) => theme.text}; */
-        /* transition: ${Transition.fast}; */
-        
+const GlobalStyle = createGlobalStyle<ThemeAccentStylingProps>`
+    html, body {        
         & ::selection {
             color: ${Colors.textWhite};
             background: ${({ accent }) => accent};

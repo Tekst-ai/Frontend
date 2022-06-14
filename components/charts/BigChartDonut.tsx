@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import styled from 'styled-components'
+import useStore, { useAccent } from '../../store'
+import _ from 'lodash';
 import { Pie } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -27,14 +29,13 @@ ChartJS.register(
     RadialLinearScale,
 )
 
-import useStore, { useAccent } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig';
 import { Breakpoint, Colors } from '../../variables';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import _ from 'lodash';
+import { DonutData } from '../../interfaces/Data';
 
 interface BigChartDonutProps {
-    data: any
+    data: [DonutData]
 }
 
 const Container = styled.div`

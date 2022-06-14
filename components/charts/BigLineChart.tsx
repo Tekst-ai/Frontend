@@ -29,9 +29,10 @@ import themes, { Accent, accentColors, Theme } from "../../ThemeConfig";
 import useStore, { useAccent } from "../../store";
 import { Breakpoint, Colors } from "../../variables";
 import _ from "lodash";
+import { DonutData } from "../../interfaces/Data";
 
 interface BigLineChartProps {
-    data: any
+    data: [DonutData]
 }
 
 const Container = styled.div`
@@ -144,9 +145,6 @@ const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
                     family: "Cake",
                     maxTicksLimit: 5,
                     autoSkip: true,
-                    // callback: function(value: any, index: number) {
-                    //     return index % 2 === 1 ? value : null;
-                    // },
                 },
                 grid: {
                     color: themes[theme].lineLight,
@@ -158,7 +156,6 @@ const BigLineChart: NextPage<BigLineChartProps> = ({ data }) => {
         },
         maintainAspectRatio: false,
     }
-
 
     return (
         <Container>

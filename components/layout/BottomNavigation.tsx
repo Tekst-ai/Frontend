@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { IoPowerOutline, IoSettingsOutline, IoChevronBackOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import { Breakpoint, Transition } from '../../variables'
 import useStore, { useAccent, useAuth, useMenu } from '../../store'
 import themes, { Accent, accentColors, Theme } from '../../ThemeConfig'
-import { useEffect, useState } from 'react'
 import { Tooltip } from '../helpers'
 import { Routes } from '../../constants'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
@@ -45,13 +45,10 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         a, button {
             display: flex;
             transition: ${Transition.fast};
-            /* justify-content: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "flex-start" : "center"}; */
             justify-content: flex-start;
             align-items: center;
-            /* margin-bottom: 1.25rem; */
             margin-left: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 0 : "0.95rem"};
             position: relative;
-            /* width: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "100%" : "auto"}; */
             z-index: 3;
 
             svg {
@@ -63,23 +60,19 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
             }
     
             span {
-                /* font-size: 1.125rem; */
                 font-size: 1rem;
                 font-weight: 500;
                 transition: ${Transition.superFast};
                 opacity: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? 1 : 0};
                 position: absolute;
-                left: 2.25rem
+                left: 2.25rem;
             }
-    
-            
         }
 
         &:first-of-type {
             button {
                 svg {
                     path{
-                        /* stroke-width: 65px; */
                         stroke-width: 60px;
                     }
                 }
@@ -87,7 +80,6 @@ const NavigationContainer = styled.ul<NavigationContainerProps>`
         }
 
         &:last-of-type {
-            /* margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.4rem"}; */
             margin-bottom: ${(NavigationContainerProps) => NavigationContainerProps.isOpen ? "0" : "2.35rem"};
         }
     }
@@ -205,6 +197,7 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
         setAuth(false)
         localStorage.setItem("auth", String(false))
         router.push(Routes.LOGIN)
+        setMenu(true)
     }
 
     return (
@@ -212,7 +205,6 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
             <NavigationContainer isOpen={isOpen}>
                 <li>
                     <LinkButton onClick={handleAuth} open={isOpen} theme={themes[theme]} accent={accentColors[accent][theme]}>
-                        {/* <IoSettingsOutline fontSize={18}/> */}
                         <IoPowerOutline fontSize={16}/>
                         
                         <span>Afmelden</span>
@@ -224,7 +216,6 @@ const BottomNavigation: NextPage<BottomNavigationProps> = ({ isOpen, onOpen }) =
                 <li>
                     <Link href={Routes.CONFIGURATION} passHref>
                         <LinkText open={isOpen} pathName={router.pathname} theme={themes[theme]} accent={accentColors[accent][theme]}>
-                            {/* <IoPowerOutline fontSize={18}/> */}
                             <IoSettingsOutline fontSize={16}/>
 
                             <span>Configuratie</span>

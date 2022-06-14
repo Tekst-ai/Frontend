@@ -23,8 +23,8 @@ const ThemeContainer = styled.label<AccentStylingProps>`
 
         &:checked + div {
             transition: ${Transition.fast};
-            box-shadow: 0 3px 10px ${({ accent }: any ) => accent + "80"};
-            border: 2px solid ${({ accent }: any ) => accent};
+            box-shadow: 0 3px 10px ${({ accent } ) => accent + "80"};
+            border: 2px solid ${({ accent } ) => accent};
         }
     }
 

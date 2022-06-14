@@ -1,7 +1,7 @@
 {
-    "totalEmailsOld": "254",
-    "totalCategories": "7",
-    "totalCategoriesOld": "8",
+    "totalEmailsOld": 254,
+    "totalCategories": 7,
+    "totalCategoriesOld": 8,
     "categories": [
         {
             "name": "Inbox - Tekst.ai",
