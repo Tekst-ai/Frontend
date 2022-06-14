@@ -216,10 +216,6 @@ const MediumChartText: NextPage<MediumChartTextProps> = ({ fullWidth = false, da
                     </div>
                 </NumberContainer>
             </HeaderContainer>
-
-            {/* <ChartContainer height={height}>
-                <MediumLineChart/>
-            </ChartContainer> */}
         </Container>
     )
 }
